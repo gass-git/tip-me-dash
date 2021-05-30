@@ -1,0 +1,134 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
+use App\User;
+
+
+class EditProfileController extends Controller
+{
+    
+
+    public function show(){
+        return view('edit_profile');
+    }
+    
+    public function reset_password(Request $request){
+        
+        $request->validate([
+            'new_password' => ['required'],
+            'new_confirm_password' => ['same:new_password'],
+        ]);
+   
+        User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
+        return redirect()->route('edit_profile')->with('success','Your password has been changed successfully.');
+    }
+
+    // edit: picture, username, email, dash wallet address, about, website, location
+
+    const FIELDS = ['username', 'wallet_address', 'about', 'password', 
+    'website', 'location','favorite_crypto','desired_superpower','passionate_about'];
+
+    public function update(Request $request){
+
+        // validate every field independently
+
+        if($request->username){
+            $request->validate([
+                'username' => ['unique:users', 'regex:/^[a-zA-Z0-9_-]{0,30}+$/'],
+            ]);
+        }
+
+        if($request->email){
+            $request->validate([
+                'email' => ['string', 'email', 'max:255', 'unique:users'],
+            ]);
+        }
+
+        if($request->wallet_address){
+            $request->validate([
+                'wallet_address' => ['regex:/^[a-zA-Z0-9]{0,40}+$/'],
+            ]);
+        }
+        
+        if($request->passionate_about){
+            $request->validate([
+                'passionate_about' => ['max:30','regex:/^[a-zA-Z0-9, ]+$/'],
+            ]);
+        }
+
+        if($request->location){
+            $request->validate([
+                'location' => ['max:30','regex:/^[a-zA-Z0-9., ]+$/'],
+            ]);
+        }
+
+        if($request->website){
+            $request->validate([
+                'website' => ['max:30','regex:/^((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)$/'],
+            ]);
+        }
+
+        if($request->favorite_crypto){
+            $request->validate([
+                'favorite_crypto' => ['max:30','regex:/^[a-zA-Z0-9 ]+$/'],
+            ]);
+        }
+
+        if($request->desired_superpower){
+            $request->validate([
+                'desired_superpower' => ['max:30','regex:/^[a-zA-Z0-9 ]+$/'],
+            ]);
+        }
+
+        if($request->avatar){
+            $request->validate([
+                'avatar' => ['image','mimes:jpg,png,jpeg,gif','max:200','dimensions:min_width=100,min_height=100,max_width500,max_height=500'],
+            ]);
+        }
+
+        $user = Auth::user();
+
+        $username = $request->username;
+        // PENDING $email = $request->email; 
+
+        if($username){ 
+            $user->username = $username; 
+            $user->save();
+        }
+
+        /** upload avatar section */
+        
+        $image = $request->file('avatar');
+
+        if($image){
+
+            // note: if avatar_name variable is null it means the user has never uploaded an image..
+            // if the user has uploaded an avatar before, delete it before uploading the new one..
+            if($user->avatar_name){
+                Storage::delete('/public/profile-pics/'.$user->avatar_name);
+            }
+
+            $image_new_name = date('dmy_H_s_i').'_'.$user->id.'_'.$image->getClientOriginalName();
+            $image->storeAs('profile-pics',$image_new_name,'public');
+            $user->avatar_url = 'storage/profile-pics/'.$image_new_name;
+            $user->avatar_name = $image_new_name;
+            $user->save();
+        }
+
+        foreach (self::FIELDS as $field) {
+            if ($request->$field) {
+                $user->$field = $request->$field;
+                $user->save();
+            }
+        }
+        
+        toast('Changes saved successfully.','success');
+        return redirect()->route('edit_profile');
+    }
+
+}

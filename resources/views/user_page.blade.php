@@ -12,7 +12,7 @@
                         {{ $page_owner->username }} 
                     </div>
                     
-                    <img src="http://tipmedash.com/{{ asset($page_owner->avatar_url) }}">
+                    <img src="{{ asset($page_owner->avatar_url) }}">
                     <div class="reputation-score">{{ $page_owner->reputation_score }}</div>
                     
                     <!-- boost reputation button -->

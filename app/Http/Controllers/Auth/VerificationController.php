@@ -57,6 +57,11 @@ class VerificationController extends Controller
 
         // $request->session()->flash('success', 'Your email has been verified'); - not working
 
-        return redirect($this->redirectPath())->with('verified', true)->with(session()->flash('success', 'Your email has been verified'));
+        $request->session()->flash('alert', [
+            'status' => 'success',
+            'body' => 'Your email has been verified. Thanks!'
+        ]);
+
+        return redirect($this->redirectPath())->with('verified', true);
     }
 }

@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use App\socialProfile;
 
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 

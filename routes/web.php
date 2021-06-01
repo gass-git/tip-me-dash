@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 /* --------- general routes --------- */
-Auth::routes();
+Auth::routes(['verify' => true]);
 Route::get('/', 'Controller@show_welcome');
 Route::get('dashboard', 'DashboardController@index')->name('dashboard');
 

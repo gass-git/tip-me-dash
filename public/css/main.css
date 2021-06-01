@@ -177,6 +177,12 @@ responsiveness
     .visitor-avatar{
         display:none;
     }
+
+    /*---- newcomers ----*/
+    #newcomer-join-date{
+        display:none;
+    }
+
 }
 /*------------------
 animation css

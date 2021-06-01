@@ -55,6 +55,8 @@ class VerificationController extends Controller
         if ($user->markEmailAsVerified())
             event(new Verified($user));
 
-        return redirect($this->redirectPath())->with('verified', true)->with('success', 'Your email has been verified');
+        // $request->session()->flash('success', 'Your email has been verified'); - not working
+
+        return redirect($this->redirectPath())->with('verified', true);
     }
 }

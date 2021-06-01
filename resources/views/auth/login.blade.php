@@ -6,7 +6,7 @@
     <div class="login-form modal-dialog text-center" style="background-color:transparent;">
         <div class="col-sm-8 main-section">
         @if(session()->has('message'))
-            <div class="alert alert-success">
+            <div class="alert alert-success mb-5">
             {{ session()->get('message') }}
             </div>
         @endif

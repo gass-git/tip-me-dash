@@ -2,9 +2,14 @@
 
 @section('content')
 <body>
-@include('flash::message')
+
     <div class="login-form modal-dialog text-center" style="background-color:transparent;">
         <div class="col-sm-8 main-section">
+        @if(session()->has('message'))
+            <div class="alert alert-success">
+            {{ session()->get('message') }}
+            </div>
+        @endif
             <div class="border modal-content">
                 <div class="col-12 user-img">
                     <img src="{{ asset('images/default-profile-pic1.jpg') }}">

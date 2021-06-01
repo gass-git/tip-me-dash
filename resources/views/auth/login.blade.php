@@ -2,7 +2,7 @@
 
 @section('content')
 <body>
-
+@include('flash::message')
     <div class="login-form modal-dialog text-center" style="background-color:transparent;">
         <div class="col-sm-8 main-section">
             <div class="border modal-content">

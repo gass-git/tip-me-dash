@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Auth;
 /* --------- general routes --------- */
 Auth::routes(['verify' => true]);
 Route::get('/', 'Controller@show_welcome');
-Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+Route::get('dashboard', 'DashboardController@index')->name('dashboard')->middleware('verified');
 
 /* --------- google login ---------- */
 Route::get('login/google', 'Auth\LoginController@redirectToProvider');

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <body>
-    <section class="newcomers-activity container mt-5 mx-auto" style="width:600px;">
+    <section class="newcomers-activity container mt-5 mx-auto" style="max-width:600px;">
     
         <div class="title-1">RECENTLY REGISTERED</div>
 

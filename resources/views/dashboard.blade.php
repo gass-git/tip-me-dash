@@ -48,7 +48,7 @@
                                 <!-- wallet address pending -->
                                 @if(!Auth::user()->wallet_address)
                                 <i class="far fa-bell mr-2" style="font-size:22px;"></i>Set up your Dash wallet 
-                                        <a href="{{ route('edit_profile') }}">here</a> and start receiving tips!
+                                        <a href="{{ route('edit_profile') }}">here</a> to start receiving tips!
                                 @endif
                                 <!----------------------------->
                             </div>

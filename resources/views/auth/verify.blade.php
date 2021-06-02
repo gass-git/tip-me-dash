@@ -7,7 +7,7 @@
 
                 @if(session('resent'))
                     <div class="alert alert-success" role="alert">
-                                    {{ __('A fresh verification link has been sent to your email address.') }}
+                                    A fresh verification link has been sent to your email address.
                     </div>
                 @endif
                 
@@ -15,9 +15,9 @@
 
                     <div class="card-body">  
                     
-                        <h5 class="card-title"><i class="fas fa-at" style="color:#008de4;"></i> {{ __('Please verify your email') }}</h5>
+                        <h5 class="card-title"><i class="fas fa-at" style="color:#008de4;"></i> Please verify your email</h5>
 
-                        <p class="card-text">
+                        <p class="card-text" style="color:#c4a699;">
                             <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
                                 @csrf
                                 Before proceeding, please check your email for a verification link. If you did not receive the email

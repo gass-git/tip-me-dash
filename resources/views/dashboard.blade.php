@@ -38,7 +38,7 @@
                                 <!-- username pending -->
                                 @if(!Auth::user()->username)
                                     <p>
-                                    <i class="far fa-bell mr-2" style="font-size:22px;"></i>It seems you haven't created a username. In order
+                                    <i class="far fa-bell mr-2" style="font-size:20px;"></i>It seems you haven't created a username. In order
                                         to activate a TMD page you need to create one,  
                                         <a href="{{ route('edit_profile') }}"> you can do so by clicking here</a>.
                                     </p>
@@ -47,7 +47,7 @@
                                 
                                 <!-- wallet address pending -->
                                 @if(!Auth::user()->wallet_address)
-                                <i class="far fa-bell mr-2" style="font-size:22px;"></i>Set up your Dash wallet 
+                                <i class="far fa-bell mr-2" style="font-size:20px;"></i>Set up your Dash wallet 
                                         <a href="{{ route('edit_profile') }}">here</a> to start receiving tips!
                                 @endif
                                 <!----------------------------->

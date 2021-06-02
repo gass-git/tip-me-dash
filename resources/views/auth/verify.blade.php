@@ -15,9 +15,9 @@
 
                     <div class="card-body">  
                     
-                        <h5 class="card-title"><i class="fas fa-at" style="color:#008de4!important;"></i> Please verify your email</h5>
+                        <h5 class="card-title"><i class="fas fa-at" style="color:#008de4;"></i> Please verify your email</h5>
 
-                        <p class="card-text" style="color:#c4a699;">
+                        <p class="card-text" style="color:#c4a699!important;">
                             <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
                                 @csrf
                                 Before proceeding, please check your email for a verification link. If you did not receive the email

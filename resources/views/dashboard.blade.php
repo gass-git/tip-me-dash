@@ -8,7 +8,7 @@
                 <div class="row">
 
                     <!-- welcome to the dashboard section -->
-                    <div id="welcome" class="ml-3 pt-3">
+                    <div id="welcome" class="ml-0 pt-3">
                         
                         <!-- if it has a username -->
                         @if($username = Auth::user()->username)
@@ -17,7 +17,7 @@
                         
                         <!-- if it doesnt have a username -->
                         @else
-                            <img src="http://localhost/tipmedash/public/images/dashy-laptop-90.png">Welcome to your dashboard 
+                            Welcome to your dashboard 
                         @endif
 
                     </div>
@@ -28,31 +28,31 @@
         </div> 
 
         <!-- pending card -->
-        @if(!Auth::user()->wallet_address or !Auth::user()->username)
+        @if(!Auth::user()->wallet_address OR !Auth::user()->username)
                 
             <div class="row">
                 <div id="wrapper" class="container mx-auto">
                     <div class="row">
 
-                        <!-- username pending -->
-                        @if(!Auth::user()->username)
-                            <div class="alert alert-light border" role="alert">
-                            <i class="fas fa-glasses mr-2"></i>It seems you haven't created a username yet. 
-                                If you wish to have a TMD page you can 
-                                <a href="{{ route('edit_profile') }}"> create one here</a>.
+                            <div class="alert alert-light border" role="alert" style="width:100%;">
+                                <!-- username pending -->
+                                @if(!Auth::user()->username)
+                                    <p>
+                                    <i class="far fa-bell mr-2" style="font-size:22px;"></i>It seems you haven't created a username. In order
+                                        to activate a TMD page you need to create one,  
+                                        <a href="{{ route('edit_profile') }}"> you can do so by clicking here</a>.
+                                    </p>
+                                @endif
+                                <!---------------------->
+                                
+                                <!-- wallet address pending -->
+                                @if(!Auth::user()->wallet_address)
+                                <i class="far fa-bell mr-2" style="font-size:22px;"></i>Set up your Dash wallet 
+                                        <a href="{{ route('edit_profile') }}">here</a> and start receiving tips!
+                                @endif
+                                <!----------------------------->
                             </div>
-                        @endif
-                        <!---------------------->
 
-                        <!-- wallet address pending -->
-                        @if(!Auth::user()->wallet_address)
-                            <div class="alert alert-light border" role="alert">
-                            <i class="fas fa-glasses mr-2"></i>You haven't set up your Dash wallet address yet.
-                                If you wish to start receiving tips you can <a href="{{ route('edit_profile') }}">enter one here</a>.
-                            </div>
-                        @endif
-                        <!----------------------------->
-                        
                     </div>
                 </div>
             </div>
@@ -89,7 +89,7 @@
                                     </form>
                                 @else
                                     <p>
-                                    <i class="fas fa-exclamation mr-2"></i>Not available. You need to <a href="{{ route('edit_profile') }}" style="color:turquoise;">create a username</a> to have your own page link.
+                                    <i class="fas fa-exclamation mr-2"></i>Not available. You need to <a href="{{ route('edit_profile') }}" style="color:#FEDD00;">create a username</a> to have your own page link.
                                     </p>
                                 @endif
 

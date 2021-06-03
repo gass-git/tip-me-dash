@@ -25,7 +25,7 @@ class EditProfileController extends Controller
         ]);
    
         User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
-        toast('p\assword changed','success');
+        toast('password changed','success');
         return redirect()->route('dashboard');
     }
 

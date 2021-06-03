@@ -10,6 +10,10 @@
                     <!-- welcome to the dashboard section -->
                     <div id="welcome" class="ml-0 pt-3">
                         
+                    @if (session('status'))
+                        <p class="alert alert-success">{{ session('status') }}</p>
+                    @endif
+
                         <!-- if it has a username -->
                         @if($username = Auth::user()->username)
                             

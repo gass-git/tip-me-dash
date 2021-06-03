@@ -192,7 +192,7 @@
                     
                 <div class="title-1" style="color:white;">RECENTLY REGISTERED</div>
 
-                @foreach($newcomers->take(5) as $newcomer)
+                @foreach($newcomers->take(10) as $newcomer)
                 @if($username = $newcomer->username)
                 <a class="list-group-item list-group-item-action" href="{{ route('user_page',$username) }}" >
                     <img id="avatar" src="{{ $newcomer->avatar_url }}" style="width:25px;height:25px;border-radius:50%;"></img>
@@ -207,7 +207,7 @@
                     
                 <div class="title-1" style="color:white;">REPUTATION LEADERBOARD</div>
 
-                @foreach($ranking->take(5) as $rank)
+                @foreach($ranking->take(10) as $rank)
 
                 @if($username = $rank->username)
                 <a class="list-group-item list-group-item-action" href="{{ route('user_page',$username) }}">

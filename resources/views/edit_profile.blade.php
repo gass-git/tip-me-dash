@@ -288,7 +288,7 @@
             </h5>
           </div>
 
-          <div id="collapseFour" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+          <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
             <div class="card-body">
               
               <form class="main-form" action="{{ route('change_password') }}" method="post">
@@ -335,6 +335,29 @@
         </div>
         <!-- collapse four end -->
 
+        <!-- collapse five start -->
+        <div class="card" id="cardFive">
+          <div class="accordion-card-header" id="headingFive">
+            <h5 class="mb-0">
+              <button class="accordion-header-btn btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                Other settings
+              </button>
+            </h5>
+          </div>
+
+          <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+            
+          <div class="card-body">
+              
+            <button type="button" id="delete-acc-btns" class="btn btn-danger" data-toggle="modal" data-target="#delete-acc-modal">
+              <i class="fas fa-trash-alt mr-2"></i>Delete account
+            </button>
+
+            </div>
+          </div>
+        </div>
+        <!-- collapse four end -->                        
+
       </div>
       <!-- accordion end -->
       <script>
@@ -358,6 +381,33 @@
       </script>
 
     </div>
+
+    <!-- modal: delete account warning -->
+    <div class="modal fade" id="delete-acc-modal" tabindex="-1" role="dialog" aria-labelledby="delete-acc-ModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="delete-acc-ModalLabel"><i class="fas fa-exclamation mr-2" style="color:red;"></i>Warning</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true" style="font-size:20px;">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                  <!-- first paragraph -->
+                  Are you sure you want to delete your account? 
+                  No one can undo this not even the support team, it will be wiped off the face of the earth.
+              </div>
+              <div class="modal-footer">
+                <button type="button" id="delete-acc-btns" class="btn btn-primary" data-dismiss="modal">Nevermind</button>
+                <form action="{{ route('delete_acc') }}">
+                  @csrf
+                  <button type="submit" id="delete-acc-btns" class="btn btn-danger">Yes, delete account</button>
+                </form>
+              </div>
+          </div>
+      </div>
+    </div>
+    <!-- modal end -->
 
   </section>
 </body>

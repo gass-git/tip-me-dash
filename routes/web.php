@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EditProfileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,6 +28,7 @@ Route::get('login/google/callback', 'Auth\LoginController@handleProviderCallback
 Route::get('edit_profile', 'EditProfileController@show')->name('edit_profile')->middleware('verified');
 Route::post('update_profile', 'EditProfileController@update')->name('update_profile');
 Route::post('change_password','EditProfileController@reset_password')->name('change_password');
+route::get('delete_acc', 'EditProfileController@delete_acc')->name('delete_acc');
 
 /* --------- community activity ----- */
 Route::get('community_activity', 'CommunityActivityController@show')->name('community_activity');
@@ -41,7 +43,7 @@ Route::post('loves_it','UserPageController@loves_it')->name('loves_it');
 Route::post('delete_post', 'UserPageController@delete_post')->name('delete_post');
 Route::post('boost_reputation','UserPageController@boost_reputation')->name('boost_reputation');
 Route::post('post_message/{username}', 'UserPageController@post_message')->name('post_message');
-Route::get('{username}', 'UserPageController@show')->name('user_page')->middleware('verified');
+Route::get('{username}', 'UserPageController@show')->name('user_page');
 
 
 

@@ -471,7 +471,7 @@
                         <div class="mt-2">
                             <i class="fas fa-arrow-alt-circle-right mr-2" style="color:#008de4;"></i>In case you know absolutely nothing
                                 or don't have much time we recommend this 
-                                <a href="https://www.youtube.com/watch?v=4OvRs8sT5FM&list=PLfmi5pQYsS8OwkTZ-pAF5YCy_ljkLeihB&index=17" target="_blank">46 sec video.
+                                <a href="https://www.youtube.com/watch?v=4OvRs8sT5FM&list=PLfmi5pQYsS8OwkTZ-pAF5YCy_ljkLeihB&index=17" target="_blank">46 sec video.</a>
                         </div>
                     </div>
                     <div class="modal-footer">

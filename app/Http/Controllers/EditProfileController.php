@@ -132,4 +132,20 @@ class EditProfileController extends Controller
         return redirect()->route('edit_profile');
     }
 
+    public function delete_acc(){
+        
+        /* find user to delete */
+        $user = user::findOrFail(Auth::user()->id);
+
+        /* logout the user */
+        Auth::logout();
+
+        /* delete account */
+        $user->delete();
+
+        /* redirect the user to the welcome page and inform of success */
+        toast('Your account has been deleted','success');
+        return redirect('/');
+    }
+
 }

@@ -40,14 +40,14 @@
                     </figure>
                   </label>
                 </div>
-                @if($error = $errors->first('avatar'))
+                @error('avatar')
                 <div class="mb-2" style="text-align:center!important;">  
                 <span style="color:red; font-size:13px;">
                     <i class="fas fa-exclamation-circle"></i>
-                    {{ $error }}
+                    {{ $message }}
                   </span>
                 </div>
-                @endif
+                @enderror
                 <!-- change avatar end -->
 
                 <div class="row">
@@ -62,12 +62,12 @@
                         </div>
                         <input type="text" class="form-control" name="username" placeholder="{{ Auth::user()->username }}" aria-describedby="basic-addon3" />
                       </div>
-                      @if($error = $errors->first('username'))
+                      @error('username')
                           <span class="mt-1" style="color:red; font-size:13px;">
                             <i class="fas fa-exclamation-circle"></i>
-                            {{ $error }}
+                            {{ $message }}
                           </span>
-                        @endif
+                        @enderror
                     </div>
                   </div>
                   <!-------------------------->
@@ -78,12 +78,12 @@
                       <label for="email">Email</label>
                       <input class="form-control" type="text" name="email" placeholder="{{ Auth::user()->email }}" />
                     </div>
-                    @if($error = $errors->first('email'))
+                    @error('email')
                           <span style="color:red; font-size:13px;">
                             <i class="fas fa-exclamation-circle"></i>
-                            {{ $error }}
+                            {{ $message }}
                           </span>
-                      @endif
+                      @enderror
                   </div>
                   <!----------------------->
 
@@ -98,12 +98,12 @@
                     </div>
                     <input class="form-control" type="text" name="wallet_address" value="{{ Auth::user()->wallet_address }}"/>
                   </div>   
-                  @if($error = $errors->first('wallet_address'))
+                  @error('wallet_address')
                           <span style="color:red; font-size:13px;">
                             <i class="fas fa-exclamation-circle"></i>
-                            {{ $error }}
+                            {{ $message }}
                           </span>
-                    @endif
+                    @enderror
                 </div>
                 <!------------------------------>
 
@@ -140,12 +140,12 @@
                       <label for="passionate_about">Passionate About</label>
                       <input class="form-control" type="text" name="passionate_about" placeholder="{{ Auth::user()->passionate_about }}">
                     </div>  
-                    @if($error = $errors->first('passionate_about'))
+                    @error('passionate_about')
                           <span style="color:red; font-size:13px;">
                             <i class="fas fa-exclamation-circle"></i>
-                            {{ $error }}
+                            {{ $message }}
                           </span>
-                    @endif        
+                    @enderror        
                   </div>
                   <!------------------------->
 
@@ -155,12 +155,12 @@
                       <label for="location">Location</label>
                       <input class="form-control" type="text" name="location" placeholder="{{ Auth::user()->location }} "> 
                     </div>
-                    @if($error = $errors->first('location'))
+                    @error('location')
                           <span style="color:red; font-size:13px;">
                             <i class="fas fa-exclamation-circle"></i>
-                            {{ $error }}
+                            {{ $message }}
                           </span>
-                    @endif 
+                    @enderror 
                   </div>
                   <!-------------------------->
 
@@ -176,12 +176,12 @@
                     <label for="website">Website</label>
                     <input class="form-control" type="text" name="website" placeholder="{{ Auth::user()->website }} ">
                   </div>
-                  @if($error = $errors->first('website'))
+                  @error('website')
                           <span style="color:red; font-size:13px;">
                             <i class="fas fa-exclamation-circle"></i>
-                            {{ $error }}
+                            {{ $message }}
                           </span>
-                    @endif     
+                    @enderror     
                   <!---------------------------------->
 
                 <!-- about textarea -->
@@ -243,12 +243,12 @@
                       <label for="favorite_crypto">Favorite Cryptocurrency</label>
                       <input class="form-control" type="text" name="favorite_crypto" placeholder="{{ Auth::user()->favorite_crypto }}">
                     </div>
-                    @if($error = $errors->first('favorite_crypto'))
+                    @error('favorite_crypto')
                           <span style="color:red; font-size:13px;">
                             <i class="fas fa-exclamation-circle"></i>
-                            {{ $error }}
+                            {{ $message }}
                           </span>
-                    @endif          
+                    @enderror          
                   </div>
                   <!---------------------------->
 
@@ -258,12 +258,12 @@
                       <label for="desired_superpower">Desired Superpower</label>
                       <input class="form-control" type="text" name="desired_superpower" placeholder="{{ Auth::user()->desired_superpower }}"> 
                     </div>
-                    @if($error = $errors->first('desired_superpower'))
+                    @error('desired_superpower')
                           <span style="color:red; font-size:13px;">
                             <i class="fas fa-exclamation-circle"></i>
-                            {{ $error }}
+                            {{ $message }}
                           </span>
-                    @endif  
+                    @enderror
                   </div>
                   <!------------------------------>
 
@@ -300,6 +300,12 @@
                         <label for="password">New password</label>
                         <input id="new_password" type="password" class="form-control" name="new_password" autocomplete="current-password">
                     </div>
+                    @error('new_password')
+                          <span style="color:red; font-size:13px;">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ $message }}
+                          </span>
+                    @enderror
                   </div>
                   <!------------------------>
 
@@ -309,6 +315,12 @@
                         <label for="">Comfirm password</label>
                         <input id="new_confirm_password" type="password" class="form-control" name="new_confirm_password" autocomplete="current-password">
                     </div>
+                    @error('new_confirm_password')
+                          <span style="color:red; font-size:13px;">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ $message }}
+                          </span>
+                    @enderror
                   </div>  
                   <!---------------------------->
 

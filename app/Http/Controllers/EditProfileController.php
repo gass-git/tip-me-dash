@@ -20,12 +20,13 @@ class EditProfileController extends Controller
     public function reset_password(Request $request){
         
         $request->validate([
-            'new_password' => ['required'],
-            'new_confirm_password' => ['same:new_password'],
+            'new_password' => ['required','string','min:5'],
+            'new_confirm_password' => ['required','same:new_password'],
         ]);
    
         User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
-        return redirect()->route('edit_profile')->with('success','Your password has been changed successfully.');
+        toast('p\assword changed','success');
+        return redirect()->route('dashboard');
     }
 
     // edit: picture, username, email, dash wallet address, about, website, location
@@ -39,19 +40,19 @@ class EditProfileController extends Controller
 
         if($request->username){
             $request->validate([
-                'username' => ['unique:users', 'regex:/^[a-zA-Z0-9_-]{0,30}+$/'],
+                'username' => ['max:15','unique:users', 'regex:/^[a-zA-Z0-9_-]+$/'],
             ]);
         }
 
         if($request->email){
             $request->validate([
-                'email' => ['string', 'email', 'max:255', 'unique:users'],
+                'email' => ['string', 'email', 'max:50', 'unique:users'],
             ]);
         }
 
         if($request->wallet_address){
             $request->validate([
-                'wallet_address' => ['regex:/^[a-zA-Z0-9]{0,40}+$/'],
+                'wallet_address' => ['max:40','regex:/^[a-zA-Z0-9]+$/'],
             ]);
         }
         
@@ -127,7 +128,7 @@ class EditProfileController extends Controller
             }
         }
         
-        toast('Changes saved successfully.','success');
+        toast('changes saved','success');
         return redirect()->route('edit_profile');
     }
 

@@ -10,6 +10,7 @@ Global css
     --dash-blue:#008de4;
     --light-gray-1:#f8f8f8;
     --light-gray-2:#ecece9;
+    --text-color-1:#808080;
     --bright-yellow-1:#f8f003;
     --dark-yellow:#F6BE00;
     --banana-yellow:#FEDD00;
@@ -151,6 +152,9 @@ responsiveness
     .welcome-image{
         margin-top:20px;
     }
+    .welcome-text h1{
+        font-size:45px!important;
+    }
 
     /*--- dashboard ---*/
     #dashy-dashboard{
@@ -251,7 +255,7 @@ header section
     font-family: 'montserrat', sans-serif;
     color:var(--dash-blue);
     font-weight:700;
-    font-size:45px;
+    font-size:50px;
     margin-bottom:20px;
 }
 .welcome-text h1 span{
@@ -259,10 +263,10 @@ header section
 }
 .welcome-text p{
     font-family: 'Roboto', sans-serif;
-    font-size:18px;
+    font-size:17px;
     font-weight: 300;
     line-height: 28px;
-    color:#808080;
+    color:var(--text-color-1);
     padding-right:150px;
 }
 .header .buttons-wrapper{
@@ -290,7 +294,7 @@ header section
     color:rgb(255, 255, 255,1);
 }
 /*------------------
-catchy sections
+catchy section
 -------------------*/
 .catchy{
     padding-top:110px;
@@ -347,7 +351,7 @@ features section
     border-radius: var(--border-radius-7);
     margin:10px;
     text-align: center;
-    color: #808080;
+    color: var(--text-color-1);
 }
 .features h5{
     font-weight: 600;
@@ -375,6 +379,13 @@ get started section
 .get-started-title h1 span{
     color:#fff;
     font-weight: 700;
+}
+.get-started a{
+    color:var(--banana-yellow);
+}
+.get-started a:hover{
+    text-decoration: none;
+    color:var(--bright-yellow-1);
 }
 .how-it-works-item{
     padding:30px;
@@ -416,6 +427,7 @@ get started section
     color: #fff;
     line-height: 26px;
 }
+
 /*------------------
 catchy sections 2
 -------------------*/
@@ -447,9 +459,16 @@ catchy sections 2
     font-size:17px;
     font-weight: 300;
     line-height: 28px;
-    color:#808080;
+    color:var(--text-color-1);
     text-align: center;
     margin:0;
+}
+.catchy-2-text a{
+    font-weight:500; 
+}
+.catchy-2-text a:hover{
+    text-decoration: unset;
+    color:var(--dash-blue);
 }
 /*------------------
 community sections

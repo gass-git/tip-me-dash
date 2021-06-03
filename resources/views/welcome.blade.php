@@ -118,7 +118,7 @@
                     <div class="how-it-works-item">
                         <div class="step">1</div>
                         <h5>Sign up</h5>
-                        <p><a href="{{ route('register') }}" style="color:yellow;">Registering</a> won't take you more than a minute. You can 
+                        <p><a href="{{ route('register') }}">Registering</a> won't take you more than a minute. You can 
                     use your Google acc if you want. </p>
                     </div>
                 </div>
@@ -141,7 +141,7 @@
                         <div class="step">4</div>
                         <h5>All done!</h5>
                         <p>You can now start sharing your own TMD 
-                        url to recieve tips in Dash and <a href="{{ route('community_activity') }}" style="color:yellow;">connect with others</a>.</p>
+                        url to recieve tips in Dash and <a href="{{ route('community_activity') }}" >connect with others</a>.</p>
                     </div>
                 </div>
             </div>

@@ -21,6 +21,8 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
+    public const RESET_PASSWORD = '/edit_profile'
+    public const HOME = '/dashboard';
     public const DASHBOARD = '/dashboard';
 
     /**

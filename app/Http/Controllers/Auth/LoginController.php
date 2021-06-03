@@ -90,10 +90,11 @@ class LoginController extends Controller
 
             DB::table('users')->insert($data);
 
-            /* log in user after registering */
+            /* Find user after registering */
             $registered_user = User::where('google_id', $google_data->getId())->first();
-            auth()->login($registered_user);
         }
+
+        auth()->login($registered_user);
 
         /* Redirect to Dashboard */
         return redirect()->route('dashboard');

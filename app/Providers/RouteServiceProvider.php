@@ -17,11 +17,10 @@ class RouteServiceProvider extends ServiceProvider
     protected $namespace = 'App\Http\Controllers';
 
     /**
-     * The paths to "home","dashboard" and "reset_password" route for your application.
+     * The paths to "home" and "dashboard" route for your application.
      *
      * @var string
      */
-    public const RESET_PASSWORD = '/edit_profile';
     public const HOME = '/dashboard';
     public const DASHBOARD = '/dashboard';
 

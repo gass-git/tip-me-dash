@@ -73,9 +73,10 @@ class LoginController extends Controller
         /* Request data from Google */
         $google_data = Socialite::driver('google')->user();
 
-        /* This variable will be null if the user is not registered */
-        $registered_user = User::where('google_id', $google_data->getId())->first();
+        /* Search for user with Google id or email */
+        $registered_user = User::where('google_id', $google_data->getId())->orwhere('email',$google_data->email)->first();
 
+        /* Register user with google data if it's not registered */
         if(!$registered_user){
 
             $data = array();
@@ -89,13 +90,12 @@ class LoginController extends Controller
 
             DB::table('users')->insert($data);
 
+            /* log in user after registering */
+            $registered_user = User::where('google_id', $google_data->getId())->first();
+            auth()->login($registered_user);
         }
 
-        /* Find the user with this Google id and login */
-        $registered_user = User::where('google_id', $google_data->getId())->first();
-        auth()->login($registered_user);
-
-        /* Return to Dashboard */
+        /* Redirect to Dashboard */
         return redirect()->route('dashboard');
     }
 }

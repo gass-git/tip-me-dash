@@ -28,7 +28,8 @@ Route::get('login/google/callback', 'Auth\LoginController@handleProviderCallback
 Route::get('edit_profile', 'EditProfileController@show')->name('edit_profile')->middleware('verified');
 Route::post('update_profile', 'EditProfileController@update')->name('update_profile');
 Route::post('change_password','EditProfileController@reset_password')->name('change_password');
-route::get('delete_acc', 'EditProfileController@delete_acc')->name('delete_acc');
+Route::post('delete_acc', 'EditProfileController@delete_acc')->name('delete_acc');
+Route::post('change_email','EditProfileController@change_email')->name('change_email');
 
 /* --------- community activity ----- */
 Route::get('community_activity', 'CommunityActivityController@show')->name('community_activity');

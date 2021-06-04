@@ -18,18 +18,26 @@ class EditProfileController extends Controller
     }
     
     public function reset_password(Request $request){
-        
+
+        // Validate new password
         $request->validate([
             'new_password' => ['required','string','min:5'],
             'new_confirm_password' => ['required','same:new_password'],
         ]);
    
-        User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
-        toast('password changed','success');
-        return redirect()->route('dashboard');
-    }
+        // Check if the current password entered equals users password
+        if(password_verify($request->password,Auth::user()->password)){
 
-    // edit: picture, username, email, dash wallet address, about, website, location
+            //success
+            User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
+            toast('password changed','success');
+            return redirect()->route('dashboard');
+        }
+
+        // Fail: current password does not match
+        toast('wrong current password','error');
+        return redirect()->back();
+    }
 
     const FIELDS = ['username', 'wallet_address', 'about', 'password', 
     'website', 'location','favorite_crypto','desired_superpower','passionate_about'];
@@ -45,9 +53,11 @@ class EditProfileController extends Controller
         }
 
         if($request->email){
+            
             $request->validate([
                 'email' => ['string', 'email', 'max:50', 'unique:users'],
             ]);
+
         }
 
         if($request->wallet_address){
@@ -132,20 +142,58 @@ class EditProfileController extends Controller
         return redirect()->route('edit_profile');
     }
 
-    public function delete_acc(){
+    public function change_email(Request $request){
+
+        // Validate email
+        $request->validate([
+            'email' => ['required', 'string', 'email', 'max:40', 'unique:users'],
+            'confirm_new_email' => ['required','same:email'],
+        ]);
+
+        // Check if the current password entered equals users password
+        if(password_verify($request->password, Auth::user()->password)){
+            
+            $user = Auth::user();
+
+            $user->email = $request->email;
+            $user->email_verified_at = null;
+
+            $user->save();
+
+            /* Send verification email */
+            $user->sendEmailVerificationNotification();
+
+            toast('Email changed','success');
+            return Auth::logout();
+        }
+
+        toast('wrong password','error');
+        return redirect()->back();
+
+    }
+
+    public function delete_acc(Request $request){
         
-        /* find user to delete */
-        $user = user::findOrFail(Auth::user()->id);
+        if (password_verify($request->password, Auth::user()->password)) {
+            
+            // Success
 
-        /* logout the user */
-        Auth::logout();
+            /* find user to delete */
+            $user = user::findOrFail(Auth::user()->id);
 
-        /* delete account */
-        $user->delete();
+            /* logout the user */
+            Auth::logout();
 
-        /* redirect the user to the welcome page and inform of success */
-        toast('Your account has been deleted','success');
-        return redirect('/');
+            /* delete account */
+            $user->delete();
+
+            /* redirect the user to the welcome page and inform of success */
+            toast('Your account has been deleted','success');
+            return redirect('/');
+        }
+
+        toast('wrong password','error');
+            return redirect()->back();
     }
 
 }

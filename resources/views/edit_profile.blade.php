@@ -1,9 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <body>
-
   <section class="settings-section container">
-
     <div class="wrapper border">
       <!-- acoordion start -->
       <div id="accordion">
@@ -269,7 +267,7 @@
 
                 </div><!-- end of third row -->
 
-                <button type="submit" class="save-changes-btn shadow-none btn btn-outline-primary"><i class="far fa-save mr-2"></i>Save changes</button>
+                <button type="submit" class="save-changes-btn shadow-none btn btn-outline-primary mt-4"><i class="far fa-save mr-2"></i>Save changes</button>
               </form>
               <!-- end of second form -->
 
@@ -279,7 +277,7 @@
         <!-- collapse two end -->
 
         <!-- collapse four start -->
-        <div class="card" id="cardFour">
+        <div class="card">
           <div class="accordion-card-header" id="headingFour">
             <h5 class="mb-0">
               <button class="accordion-header-btn btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
@@ -293,6 +291,16 @@
               
               <form class="main-form" action="{{ route('change_password') }}" method="post">
               @csrf
+                
+                <div class="form-group">
+                  <div class="input-group mt-2">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text pr-3" id="basic-addon3"><i class="fas fa-key mr-2"></i>Enter current password</span>
+                    </div>
+                    <input type="password" class="form-control" name="password" style="font-size:17px;">
+                  </div>
+                </div>
+
                 <div class="row">
                   <!-- new password input -->
                   <div class="col-md-6">
@@ -312,7 +320,7 @@
                   <!-- comfirm password input -->
                   <div class="col-md-6">
                     <div class="form-group">
-                        <label for="">Comfirm password</label>
+                        <label for="">Retype new password</label>
                         <input id="new_confirm_password" type="password" class="form-control" name="new_confirm_password" autocomplete="current-password">
                     </div>
                     @error('new_confirm_password')
@@ -336,30 +344,131 @@
         <!-- collapse four end -->
 
         <!-- collapse five start -->
-        <div class="card" id="cardFive">
+        <div class="card">
+          
           <div class="accordion-card-header" id="headingFive">
             <h5 class="mb-0">
               <button class="accordion-header-btn btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                Other settings
+                Change email
               </button>
             </h5>
           </div>
 
           <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
-            
-          <div class="card-body">
+            <div class="card-body">
+
+              <!-- change email -->
+              <form action="{{ route('change_email') }}" method="post">
+              @csrf  
+                
+                <div class="row">
+                 
+                  <div class="col-md-6">
+                    <div class="form-group mb-1">
+                      <label for="new_email">New email address</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon3"><i class="far fa-envelope pr-1 pl-1"></i></span>
+                        </div>
+                        <input type="text" class="form-control" name="email"/>
+                      </div>
+                    </div>
+                    @error('email')
+                      <div class="mb-2" style="color:red; font-size:13px;">
+                        <i class="fas fa-exclamation-circle"></i>
+                        {{ $message }}
+                      </div>
+                    @enderror
+                  </div>
+                  
+                  <div class="col-md-6">
+                    <div class="form-group mb-1">
+                        <label for="confirm_new_email">Retype email</label>
+                        <input id="confirm_new_email" type="text" class="form-control" name="confirm_new_email">
+                    </div>
+                    @error('confirm_new_email')
+                    <div class="mb-2" style="color:red; font-size:13px;">
+                        <i class="fas fa-exclamation-circle"></i>
+                        {{ $message }}
+                      </div>
+                    @enderror
+                  </div>  
+
+                </div>
+
+                <div class="input-group mt-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text pr-3" id="basic-addon3"><i class="fas fa-key mr-2"></i>Enter password</span>
+                    </div>
+                    <input type="password" class="form-control" name="password">
+                </div>                
+
+                <button type="submit" class="save-changes-btn shadow-none btn btn-outline-primary mt-4">
+                  <i class="far fa-envelope mr-2"></i>Change email
+                </button>
+
+                <div class="alert alert-warning mt-3" role="alert" style="font-size:13px;">
+                  <b>Warning</b>: once the email is changed, you will be logged 
+                  out and only be able to login after you've verify the new 
+                  email address.
+                </div>
               
-            <button type="button" id="delete-acc-btns" class="btn btn-danger" data-toggle="modal" data-target="#delete-acc-modal">
-              <i class="fas fa-trash-alt mr-2"></i>Delete account
-            </button>
+              </form>
+              <!--end of change email --->
 
             </div>
           </div>
         </div>
-        <!-- collapse four end -->                        
+        <!-- collapse five end -->                        
 
+        <!-- collapse six start -->
+        <div class="card">
+          
+          <div class="accordion-card-header" id="headingSix">
+            <h5 class="mb-0">
+              <button class="accordion-header-btn btn btn-link collapsed" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                Delete account
+              </button>
+            </h5>
+          </div>
+
+          <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
+            <div class="card-body">
+
+              <!-- delete acc -->
+              <form action="{{ route('delete_acc') }}" method="post" enctype="multipart/form-data">
+              @csrf
+
+                <div class="form-group mt-0 mb-2">
+                  <label>Want to delete your account?</label>
+                  <div class="input-group mt-2">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text pr-3" id="basic-addon3"><i class="fas fa-key mr-2"></i>Enter password</span>
+                    </div>
+                    <input type="password" class="form-control" name="password" style="font-size:17px;"/>
+                  </div>
+                </div>
+               
+                <button type="submit" class="btn btn-danger mt-3" id="other-settings-btns">
+                  <i class="fas fa-trash-alt mr-2"></i>Delete account
+                </button>
+              
+                <div class="alert alert-warning mt-3" role="alert" style="font-size:13px;">
+                  <b>Warning</b>: account deletion cannot be undone.
+                </div>
+
+              </form>
+              <!---- end of delete acc ---------->      
+
+            </div>
+          </div>
+        </div>
+        <!-- collapse six end -->       
+                                
       </div>
       <!-- accordion end -->
+    
+      <!-- accordion scripts start -->
       <script>
        
         $(document).ready(function() {
@@ -379,35 +488,12 @@
         });
 
       </script>
+      <!-- accordion scripts end -------->                            
 
     </div>
+    <!-- wrapper end -->
 
-    <!-- modal: delete account warning -->
-    <div class="modal fade" id="delete-acc-modal" tabindex="-1" role="dialog" aria-labelledby="delete-acc-ModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-          <div class="modal-content">
-              <div class="modal-header">
-                  <h5 class="modal-title" id="delete-acc-ModalLabel"><i class="fas fa-exclamation mr-2" style="color:red;"></i>Warning</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true" style="font-size:20px;">&times;</span>
-                  </button>
-              </div>
-              <div class="modal-body">
-                  <!-- first paragraph -->
-                  Are you sure you want to delete your account? 
-                  No one can undo this not even the support team, it will be wiped off the face of the earth.
-              </div>
-              <div class="modal-footer">
-                <button type="button" id="delete-acc-btns" class="btn btn-primary" data-dismiss="modal">Nevermind</button>
-                <form action="{{ route('delete_acc') }}">
-                  @csrf
-                  <button type="submit" id="delete-acc-btns" class="btn btn-danger">Yes, delete account</button>
-                </form>
-              </div>
-          </div>
-      </div>
-    </div>
-    <!-- modal end -->
+                              
 
   </section>
 </body>

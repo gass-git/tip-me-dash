@@ -19,18 +19,24 @@ class EditProfileController extends Controller
     
     public function reset_password(Request $request){
 
+        $user = Auth::user();
+
         // Validate new password
         $request->validate([
             'new_password' => ['required','string','min:5'],
             'new_confirm_password' => ['required','same:new_password'],
         ]);
    
-        // Check if the current password entered equals users password
-        if(password_verify($request->password,Auth::user()->password)){
+        // Check if the current password entered equals users password or user doesn't have password
+        if(password_verify($request->password, $user->password) OR $user->password == null){
 
-            //success
+            if($user->password == null){
+                toast('Password created','success');
+            }else{
+                toast('Password changed','success');
+            }
+
             User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
-            toast('password changed','success');
             return redirect()->route('dashboard');
         }
 
@@ -157,6 +163,7 @@ class EditProfileController extends Controller
 
             $user->email = $request->email;
             $user->email_verified_at = null;
+            $user->google_id = null;
 
             $user->save();
 
@@ -164,7 +171,8 @@ class EditProfileController extends Controller
             $user->sendEmailVerificationNotification();
 
             toast('Email changed','success');
-            return Auth::logout();
+            Auth::logout();
+            return view('login');
         }
 
         toast('wrong password','error');

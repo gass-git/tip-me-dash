@@ -281,17 +281,33 @@
           <div class="accordion-card-header" id="headingFour">
             <h5 class="mb-0">
               <button class="accordion-header-btn btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                Change password
-              </button>
+                
+                @if(Auth::user()->password === null)
+                  Create password
+                @else
+                  Change password
+                @endif
+                
+              
+            </button>
             </h5>
           </div>
 
           <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
             <div class="card-body">
               
+              @if(Auth::user()->password === null)                  
+                <div class="alert alert-primary" role="alert" style="font-size:13px;">
+                <i class="fas fa-bell mr-2" style="font-size:17px;"></i> 
+                You registered with google, that means you still haven't created
+                a password for your account. 
+                </div>                  
+              @endif
+
               <form class="main-form" action="{{ route('change_password') }}" method="post">
               @csrf
                 
+              @if(Auth::user()->password != null)
                 <div class="form-group">
                   <div class="input-group mt-2">
                     <div class="input-group-prepend">
@@ -300,6 +316,7 @@
                     <input type="password" class="form-control" name="password" style="font-size:17px;">
                   </div>
                 </div>
+              @endif
 
                 <div class="row">
                   <!-- new password input -->

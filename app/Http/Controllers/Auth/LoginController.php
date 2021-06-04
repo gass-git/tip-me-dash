@@ -99,15 +99,17 @@ class LoginController extends Controller
 
             // If the user is registered with his google email but without the google_id assigned
             if($registered_user->google_id == null){
+
                 $registered_user->google_id = $google_data->getId();
+                $registered_user->save();
             }
 
             // if the user is registered with google email or id, but his email is not verified
             if($registered_user->email_verified_at == null){
-                $registered_user->email_verified_at = Carbon::now();
-            }
 
-            $registered_user->save();
+                $registered_user->email_verified_at = Carbon::now();
+                $registered_user->save();
+            }
 
         /** ------------------------------------------------------------------- */
 

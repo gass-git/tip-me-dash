@@ -107,6 +107,8 @@ class LoginController extends Controller
                 $registered_user->email_verified_at = Carbon::now();
             }
 
+            $registered_user->save();
+
         /** ------------------------------------------------------------------- */
 
 

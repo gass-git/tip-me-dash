@@ -171,8 +171,7 @@ class EditProfileController extends Controller
             $user->sendEmailVerificationNotification();
 
             toast('Email changed','success');
-            Auth::logout();
-            return view('auth/login');
+            return view('auth/verify');
         }
 
         toast('wrong password','error');

@@ -70,20 +70,21 @@
                   </div>
                   <!-------------------------->
 
-                  <!-- email input start -->
+                  <!-- location input start -->
                   <div class="col-md-6">
                     <div class="form-group mb-1">
-                      <label for="email">Email</label>
-                      <input class="form-control" type="text" name="email" placeholder="{{ Auth::user()->email }}" />
+                      <label for="location">Location</label>
+                      <input class="form-control" type="text" name="location" placeholder="{{ Auth::user()->location }} "> 
                     </div>
-                    @error('email')
+                    @error('location')
                           <span style="color:red; font-size:13px;">
                             <i class="fas fa-exclamation-circle"></i>
                             {{ $message }}
                           </span>
-                      @enderror
+                    @enderror 
                   </div>
-                  <!----------------------->
+                  <!-------------------------->
+                  
 
                 </div>
 
@@ -147,40 +148,22 @@
                   </div>
                   <!------------------------->
 
-                  <!-- location input start -->
+                  <!-- website input start -->
                   <div class="col-md-6">
                     <div class="form-group mb-1">
-                      <label for="location">Location</label>
-                      <input class="form-control" type="text" name="location" placeholder="{{ Auth::user()->location }} "> 
+                      <label for="website">Website</label>
+                      <input class="form-control" type="text" name="website" placeholder="{{ Auth::user()->website }} ">
                     </div>
-                    @error('location')
-                          <span style="color:red; font-size:13px;">
-                            <i class="fas fa-exclamation-circle"></i>
-                            {{ $message }}
-                          </span>
-                    @enderror 
-                  </div>
-                  <!-------------------------->
+                    @error('website')
+                      <span style="color:red; font-size:13px;">
+                        <i class="fas fa-exclamation-circle"></i>
+                        {{ $message }}
+                      </span>
+                    @enderror   
+                  </div>  
+                  <!---------------------------------->
 
                 </div><!-- end of first row -->
-
-                
-
-                  
-
-                <!-- website input start -->
-                  
-                  <div class="form-group mt-2 mb-1">
-                    <label for="website">Website</label>
-                    <input class="form-control" type="text" name="website" placeholder="{{ Auth::user()->website }} ">
-                  </div>
-                  @error('website')
-                          <span style="color:red; font-size:13px;">
-                            <i class="fas fa-exclamation-circle"></i>
-                            {{ $message }}
-                          </span>
-                    @enderror     
-                  <!---------------------------------->
 
                 <!-- about textarea -->
                 <div class="form-group mt-2">
@@ -425,9 +408,9 @@
                 </button>
 
                 <div class="alert alert-warning mt-3" role="alert" style="font-size:13px;">
-                  <b>Warning</b>: once the email is changed, you will be logged 
-                  out and only be able to login after you've verify the new 
-                  email address.
+                  <b>Warning</b>: once the email is changed, you won't have access 
+                  to your account until you've verified the new email address. Make
+                  sure all the information is correct, this action cannot be undone.
                 </div>
               
               </form>

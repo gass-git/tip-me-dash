@@ -172,7 +172,7 @@ class EditProfileController extends Controller
 
             toast('Email changed','success');
             Auth::logout();
-            return view('login');
+            return view('auth/login');
         }
 
         toast('wrong password','error');

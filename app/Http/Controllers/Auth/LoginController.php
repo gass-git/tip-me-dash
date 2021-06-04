@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Laravel\Socialite\Facades\Socialite;
 use Carbon\Carbon;
 use DB;
+use App\Http\Controllers\Auth;
 
 use App\User;
 use App\SocialProfile;
@@ -93,6 +94,21 @@ class LoginController extends Controller
             /* Find user after registering */
             $registered_user = User::where('google_id', $google_data->getId())->first();
         }
+
+        /** Conditions in case the user changes email and signs in with Google */
+
+            // If the user is registered with his google email but without the google_id assigned
+            if($registered_user->google_id == null){
+                $registered_user->google_id = $google_data->getId();
+            }
+
+            // if the user is registered with google email or id, but his email is not verified
+            if($registered_user->email_verified_at == null){
+                $registered_user->email_verified_at = Carbon::now();
+            }
+
+        /** ------------------------------------------------------------------- */
+
 
         auth()->login($registered_user);
 

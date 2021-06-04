@@ -104,7 +104,7 @@ class EditProfileController extends Controller
 
         if($request->avatar){
             $request->validate([
-                'avatar' => ['image','mimes:jpg,png,jpeg,gif','max:200','dimensions:min_width=100,min_height=100,max_width500,max_height=500'],
+                'avatar' => ['image','mimes:jpg,png,jpeg,gif','max:500','dimensions:min_width=100,min_height=100'],
             ]);
         }
 

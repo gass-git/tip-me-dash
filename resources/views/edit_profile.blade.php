@@ -162,7 +162,7 @@
                   <div class="col-md-6">
                     <div class="form-group mb-1">
                       <label for="passionate_about">Passionate About</label>
-                      <input class="form-control" type="text" name="passionate_about" placeholder="{{ Auth::user()->passionate_about }}">
+                      <input class="form-control" type="text" name="passionate_about" placeholder="{{ Auth::user()->passionate_about }}" value="{{ old('passionate_about') }}">
                     </div>  
                     @error('passionate_about')
                           <span style="color:red; font-size:13px;">
@@ -177,7 +177,7 @@
                   <div class="col-md-6">
                     <div class="form-group mb-1">
                       <label for="website">Website</label>
-                      <input class="form-control" type="text" name="website" placeholder="{{ Auth::user()->website }} ">
+                      <input class="form-control" type="text" name="website" placeholder="{{ Auth::user()->website }}" value="{{ old('website') }}">
                     </div>
                     @error('website')
                       <span style="color:red; font-size:13px;">
@@ -193,8 +193,18 @@
                 <!-- about textarea -->
                 <div class="form-group mt-2">
                   <label for="about">About</label>
-                  <textarea class="form-control p-2" id="about-textarea" name="about" height="100">{{ Auth::user()->about }}</textarea>
                   
+                  <!--------------------
+                  remembers last text entered in 
+                  about textarea (to avoid annoying re-typing in case of error)
+                   -------------------->
+                  @if(old('about'))
+                    <textarea class="form-control p-2" id="about-textarea" name="about" height="100">{{ old('about') }}</textarea>
+                  @else
+                    <textarea class="form-control p-2" id="about-textarea" name="about" height="100">{{ Auth::user()->about }}</textarea>
+                  @endif
+                  <!------------------->
+
                   <!-- emoji plugin -->
                   <script>
                                 $("#about-textarea").emojioneArea({
@@ -247,7 +257,7 @@
                   <div class="col-md-6">
                     <div class="form-group mb-1">
                       <label for="favorite_crypto">Favorite Cryptocurrency</label>
-                      <input class="form-control" type="text" name="favorite_crypto" placeholder="{{ Auth::user()->favorite_crypto }}">
+                      <input class="form-control" type="text" name="favorite_crypto" placeholder="{{ Auth::user()->favorite_crypto }}" value="{{ old('favorite_crypto') }}">
                     </div>
                     @error('favorite_crypto')
                           <span style="color:red; font-size:13px;">
@@ -262,7 +272,7 @@
                   <div class="col-md-6">
                     <div class="form-group mb-1">
                       <label for="desired_superpower">Desired Superpower</label>
-                      <input class="form-control" type="text" name="desired_superpower" placeholder="{{ Auth::user()->desired_superpower }}"> 
+                      <input class="form-control" type="text" name="desired_superpower" placeholder="{{ Auth::user()->desired_superpower }}" value="{{ old('desired_superpower') }}"> 
                     </div>
                     @error('desired_superpower')
                           <span style="color:red; font-size:13px;">

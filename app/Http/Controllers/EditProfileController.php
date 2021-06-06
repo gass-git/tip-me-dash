@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use App\User;
 
+use DB;
 
 class EditProfileController extends Controller
 {
@@ -41,7 +42,7 @@ class EditProfileController extends Controller
         }
 
         // Fail: current password does not match
-        toast('wrong current password','error');
+        toast('Current password is invalid','error');
         return redirect()->back();
     }
 
@@ -50,6 +51,11 @@ class EditProfileController extends Controller
 
     public function update(Request $request){
 
+        // delete wallet address if requested
+        if($request->delete_wallet_address){
+            DB::table('users')->where('id',Auth::user()->id)->update(['wallet_address' => null]);
+        }
+        
         // validate every field independently
 
         if($request->username){
@@ -144,7 +150,7 @@ class EditProfileController extends Controller
             }
         }
         
-        toast('changes saved','success');
+        toast('Changes saved','success');
         return redirect()->route('edit_profile');
     }
 
@@ -199,7 +205,7 @@ class EditProfileController extends Controller
             return redirect('/');
         }
 
-        toast('wrong password','error');
+        toast('Wrong password','error');
             return redirect()->back();
     }
 

@@ -58,7 +58,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon3">http://tipmedash.com/</span>
                         </div>
-                        <input type="text" class="form-control" name="username" placeholder="{{ Auth::user()->username }}" aria-describedby="basic-addon3" />
+                        <input type="text" class="form-control" name="username" placeholder="{{ Auth::user()->username }}" value="{{ old('username') }}" aria-describedby="basic-addon3" />
                       </div>
                       @error('username')
                           <span class="mt-1" style="color:red; font-size:13px;">
@@ -74,7 +74,7 @@
                   <div class="col-md-6">
                     <div class="form-group mb-1">
                       <label for="location">Location</label>
-                      <input class="form-control" type="text" name="location" placeholder="{{ Auth::user()->location }} "> 
+                      <input class="form-control" type="text" name="location" placeholder="{{ Auth::user()->location }}" value="{{ old('location') }}"> 
                     </div>
                     @error('location')
                           <span style="color:red; font-size:13px;">
@@ -88,27 +88,52 @@
 
                 </div>
 
-                <!-- dash wallet address input -->
+                <!--------------------- dash wallet address input ------------------------>
                 <div class="form-group">
                   <label for="wallet_address">Dash wallet address </label>
                   <div class="input-group mb-1">
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="basic-addon1"><img class="dash-icon" width="20" src="{{ asset('images/blue-dash-icon.png') }}"></span>
                     </div>
-                    <input class="form-control" type="text" name="wallet_address" value="{{ Auth::user()->wallet_address }}"/>
+
+                    <!-- If user has a wallet address ---->
+                    @if(Auth::user()->wallet_address)
+                      <input class="form-control" type="text" name="wallet_address" value="{{ Auth::user()->wallet_address }}"/>
+                    
+                        <!-------------------
+                        -- If user does not have a wallet address show the last one enetered 
+                        -- (to avoid re-typing in case of form validation error).
+                        -------------------->
+                    @else
+                      <input class="form-control" type="text" name="wallet_address" value="{{ old('wallet_address') }}"/>
+                    @endif
+                    <!----------------------------------->
+
                   </div>   
                   @error('wallet_address')
-                          <span style="color:red; font-size:13px;">
-                            <i class="fas fa-exclamation-circle"></i>
-                            {{ $message }}
-                          </span>
-                    @enderror
+                    <span style="color:red; font-size:13px;">
+                      <i class="fas fa-exclamation-circle"></i>
+                      {{ $message }}
+                    </span>
+                  @enderror
                 </div>
-                <!------------------------------>
+                <!------------------------------------------------------------------------->
+
+                <!-- Allow the user to delete wallet address if he has one-->
+                @if(Auth::user()->wallet_address) 
+                  <div class="form-group">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="delete_wallet_address">
+                      <label class="form-check-label" for="delete wallet address">
+                        Delete wallet address
+                      </label>
+                    </div>
+                  </div>
+                @endif
+                <!---------------------------------------------------------->
 
                 <button type="submit" class="save-changes-btn shadow-none btn btn-outline-primary"><i class="far fa-save mr-2"></i>Save changes</button>
               </form> 
-
             </div>
           </div>
         </div>

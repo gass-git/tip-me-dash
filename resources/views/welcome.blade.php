@@ -227,7 +227,7 @@
     <!-- sub-header section end -->
 
     <!-- footer -->
-    <section class="footer shadow">
+    <section class="footer pt-4 pb-2 shadow">
        <div class="container">
             
             <!-- start of row -->
@@ -242,8 +242,8 @@
                     <!----------------------->
 
                     <!-- footer info -->
-                    <div class="footer-info col-md-12 mt-4 " style="font-size:12px; border-top:1px solid rgb(255,255,255,0.1);">
-                        <div class="d-flex justify-content-center flex-wrap mt-3" style="color:">
+                    <div class="footer-info col-md-12 mt-3 " style="font-size:12px; border-top:1px solid rgb(255,255,255,0.1);">
+                        <div class="d-flex justify-content-center flex-wrap mt-2" style="color:">
 
                             <!-- design and build -->
                             <div id="copyright-one" class="mr-1  p-1">

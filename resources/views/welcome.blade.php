@@ -242,7 +242,7 @@
                     <!----------------------->
 
                     <!-- footer info -->
-                    <div class="footer-info col-md-12 mt-3 " style="font-size:12px; border-top:1px solid rgb(255,255,255,0.1);">
+                    <div class="footer-info col-md-12 mt-3" >
                         <div class="d-flex justify-content-center flex-wrap mt-2" style="color:">
 
                             <!-- design and build -->

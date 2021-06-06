@@ -1,6 +1,6 @@
 @extends('layouts/app')
 @section('content')
-<body class="blue-gradient">
+<body id="top" class="blue-gradient">
     <!-- header section start -->
     <section class="header d-flex align-items-center shadow">
         <div class="container mb-5">
@@ -47,7 +47,7 @@
                         <p>Experience the easiest and fastest way to say thanks in the Internet. 
                             Fans do not need to register, type credit card information or any other
                              tedious procedure. For supporters to send a tip they just need to scan 
-                             the QR code on your TMD page with their Dash app and they are done! Tips will be received by you in under a minute.
+                             the QR code on your TMD page with their Dash app and they are done! 
                         </p>
                     </div>
                 </div>
@@ -197,7 +197,7 @@
                 <a class="list-group-item list-group-item-action" href="{{ route('user_page',$username) }}" >
                     <img id="avatar" src="{{ $newcomer->avatar_url }}" style="width:25px;height:25px;border-radius:50%;"></img>
                     <span class="ml-2" style="text-transform: capitalize; color:#008de4; font-weight:600;">{{ $username }}</span>
-                    <span id="join-date" class="float-right">Joined in {{ date('F d,Y', strtotime($newcomer->created_at)) }}</span>
+                    <span id="join-date" class="float-right">Joined: {{ date('F d,Y', strtotime($newcomer->created_at)) }}</span>
                 </a>
                 @endif
                 @endforeach
@@ -213,7 +213,7 @@
                 <a class="list-group-item list-group-item-action" href="{{ route('user_page',$username) }}">
                     <img id="avatar" src="{{ $newcomer->avatar_url }}" style="width:25px;height:25px;border-radius:50%;"></img>
                     <span class="ml-2" style="text-transform: capitalize; color:#008de4; font-weight:600;">{{ $username }}</span>
-                    <span id="reputation-info" class="float-right">Reputation score: {{ $rank->reputation_score }}</span>
+                    <span id="reputation-info" class="float-right">Reputation: {{ $rank->reputation_score }}</span>
                 </a>
                 @endif
                     
@@ -228,20 +228,61 @@
 
     <!-- footer -->
     <section class="footer shadow">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="footer-content">
-                        <a href="http://www.dash.org" target="_blank"><img src="{{ asset('images/dashpowered.png') }}"></a>
-                        <p class="mt-3 mb-1">
-                        Copyright © 2021 Budapest HU | <a href="{{ url('/') }}">Tipmedash.com</a> | Developed by <a href="http://www.gabrielsalinas.codes" target="_blank">Gabriel Salinas</a> | All rights reserved.
-                        </p>
+       <div class="container">
+            
+            <!-- start of row -->
+            <div class="row">
+                    
+                    <!-- dash powered logo -->
+                    <div class="col-md-12 d-flex justify-content-center">
+                        <div class="powered">
+                            <a href="http://www.dash.org" target="_blank"><img src="{{ asset('images/dashpowered.png') }}"></a>
+                        </div>
                     </div>
-                </div>
+                    <!----------------------->
+
+                    <!-- footer info -->
+                    <div class="footer-info col-md-12 mt-4 " style="font-size:12px; border-top:1px solid rgb(255,255,255,0.1);">
+                        <div class="d-flex justify-content-center flex-wrap mt-3" style="color:">
+
+                            <!-- design and build -->
+                            <div id="copyright-one" class="mr-1  p-1">
+                                <a href="https://tipmedash.com/gass" target="_blank">
+                                    <i class="fas fa-coffee mr-2"></i>Design & Built in Budapest by Gabriel Salinas
+                                </a>    
+                            </div>
+                            <!----------------------->
+
+                            <span id="separator-one">|</span>
+
+                            <!-- tipmedash.com 2020 -->
+                            <div id="copyright-two" class="ml-1 mr-1 p-1">
+                                <a href="#top">    
+                                    <i class="far fa-copyright mr-1"></i>Tipmedash.com 2021
+                                </a>
+                            </div>
+                            <!------------------------>
+                            
+                            <span id="separator-two">|</span>
+
+                            <!-- repository link -->
+                            <div id="repository-link" class="p-1 ml-1">
+                                <a href="https://github.com/gass-git/tip-me-dash" target="_blank">
+                                    <i class="fab fa-git"></i>
+                                </a>
+                            </div>
+                            <!---------------------->
+                        
+                        </div>
+                    </div>
+                    <!-- end of footer info -->
+               
             </div>
-        </div>
+            <!-- end of row -->
+
+        </div> 
     </section>
-    <!-- sub-header section end -->
+    <!-- end of footer -->
 
     <!-- Modal HTML -->
     <div id="myModal" class="modal fade">

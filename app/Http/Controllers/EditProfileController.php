@@ -156,7 +156,7 @@ class EditProfileController extends Controller
             'confirm_new_email' => ['required','same:email'],
         ]);
 
-        // Check if the current password entered equals users password
+        // User needs to enter password to change email
         if(password_verify($request->password, Auth::user()->password)){
             
             $user = Auth::user();
@@ -174,7 +174,7 @@ class EditProfileController extends Controller
             return view('auth/verify');
         }
 
-        toast('wrong password','error');
+        toast('Wrong password','error');
         return redirect()->back();
 
     }

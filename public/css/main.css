@@ -501,6 +501,27 @@ community sections
     text-align: center;
     font-style: italic;
 }
+#join-date{
+    font-size:14px;
+}
+#reputation-info{
+    font-size:14px;
+}
+#reputation-info span{
+    color:var(--deep-blue-1);
+    font-weight:600;
+}
+.community #avatar{
+    width:25px;
+    height:25px;
+    border-radius:50%;
+}
+.community .username{
+    text-transform: capitalize; 
+    color:#008de4; 
+    font-weight:600;
+    font-size:15px;
+}
 /*------------------
 footer
 -------------------*/

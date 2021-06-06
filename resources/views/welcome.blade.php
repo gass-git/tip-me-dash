@@ -92,7 +92,7 @@
                     <div class="card border">
                         <div class="card-body">
                         <div class="icon mt-3"><img src="{{ asset('images/dashy-laptop-100.png') }}"></div>
-                            <h5 class="card-title mt-4">Trade</h5>
+                            <h5 class="card-title mt-4">Trade and Invest</h5>
                             <p class="card-text" style="font-size:14px;">Transfer your Dash to exchanges and trade for other crypto assets.</p>
                             <a href="https://www.dash.org/traders/" target="_blank" class="stretched-link"></a>
                         </div>
@@ -195,9 +195,9 @@
                 @foreach($newcomers->take(10) as $newcomer)
                 @if($username = $newcomer->username)
                 <a class="list-group-item list-group-item-action" href="{{ route('user_page',$username) }}" >
-                    <img id="avatar" src="{{ $newcomer->avatar_url }}" style="width:25px;height:25px;border-radius:50%;"></img>
-                    <span class="ml-2" style="text-transform: capitalize; color:#008de4; font-weight:600;">{{ $username }}</span>
-                    <span id="join-date" class="float-right">Joined: {{ date('F d,Y', strtotime($newcomer->created_at)) }}</span>
+                    <img id="avatar" src="{{ $newcomer->avatar_url }}"></img>
+                    <span class="username ml-2">{{ $username }}</span>
+                    <span id="join-date" class="float-right">{{ date('F d,Y', strtotime($newcomer->created_at)) }}</span>
                 </a>
                 @endif
                 @endforeach
@@ -211,9 +211,11 @@
 
                 @if($username = $rank->username)
                 <a class="list-group-item list-group-item-action" href="{{ route('user_page',$username) }}">
-                    <img id="avatar" src="{{ $newcomer->avatar_url }}" style="width:25px;height:25px;border-radius:50%;"></img>
-                    <span class="ml-2" style="text-transform: capitalize; color:#008de4; font-weight:600;">{{ $username }}</span>
-                    <span id="reputation-info" class="float-right">Reputation: {{ $rank->reputation_score }}</span>
+                    <img id="avatar" src="{{ $newcomer->avatar_url }}"></img>
+                    <span class="username ml-2">{{ $username }}</span>
+                    <span id="reputation-info" class="float-right">
+                        Reputation: <span>{{ $rank->reputation_score }}</span>
+                    </span>
                 </a>
                 @endif
                     
@@ -258,7 +260,7 @@
                             <!-- tipmedash.com 2020 -->
                             <div id="copyright-two" class="ml-1 mr-1 p-1">
                                 <a href="#top">    
-                                    <i class="far fa-copyright mr-1"></i>Tipmedash.com 2021
+                                <i class="far fa-copyright mr-2"></i>2021 - Tipmedash.com v0.6 
                                 </a>
                             </div>
                             <!------------------------>

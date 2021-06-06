@@ -50,11 +50,6 @@ class EditProfileController extends Controller
     'website', 'location','favorite_crypto','desired_superpower','passionate_about'];
 
     public function update(Request $request){
-
-        // delete wallet address if requested
-        if($request->delete_wallet_address){
-            DB::table('users')->where('id',Auth::user()->id)->update(['wallet_address' => null]);
-        }
         
         // validate every field independently
 
@@ -112,6 +107,11 @@ class EditProfileController extends Controller
             $request->validate([
                 'avatar' => ['image','mimes:jpg,png,jpeg,gif','max:500','dimensions:min_width=100,min_height=100'],
             ]);
+        }
+
+        // delete wallet address if requested
+        if($request->delete_wallet_address){
+            DB::table('users')->where('id',Auth::user()->id)->update(['wallet_address' => null]);
         }
 
         $user = Auth::user();

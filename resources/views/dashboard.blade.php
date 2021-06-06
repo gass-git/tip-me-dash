@@ -121,6 +121,7 @@
         <!------ end of summary ------->                               
 
         <!-- new commers -->
+        @if(Auth::user()->reputation > 50)
         <div class="row">
             <div id="wrapper" class="container mt-3 pl-3 pb-0 pr-3 mx-auto">
                 <div class="row">
@@ -132,6 +133,7 @@
             </div>
         </div>
         <!----------------->
+        @endif                            
 
         <div class="title-1">RECENT ACTIVITY</div>
 

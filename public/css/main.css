@@ -1072,7 +1072,7 @@ dashboard-section
 .dashboard #rep-card p{
     font-size:25px;
 }
-.dashboard #rep-card .cartitle{
+.dashboard #rep-card .card-title{
     font-family: 'montserrat', sans-serif;
     font-size:16px;
 }

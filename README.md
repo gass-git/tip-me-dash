@@ -9,8 +9,7 @@ Most of the current online donation’s systems are tedious, they require credit
 high fees that end up in hands of third parties. 
 
 This website application uses only Dash Cryptocurrency to make it simple, fast and with extremely low transaction fees. 
-The transactions are P2P tipmedash.com is never in between and by consequence it does not take any fees. The idea 
-is to finance through donations using it owns system.
+The transactions are P2P. Tipmedash.com is never in between and by consequence it does not take any fees.
 
 ### Why use TipMeDash.Com over other options? (advantages)
 
@@ -24,7 +23,7 @@ is to finance through donations using it owns system.
 ### Target
 
 *   People that are already using Dash but need a way to show their wallets to their followers.
-*   People looking for an easy system to receive tips in exchange of their creations (Photographers, Artists, Developers, and other creators)
+*   People looking for an easy system to receive tips in exchange for their creations (Photographers, Artists, Developers, and other creators)
 
 ### This project pretends:
 

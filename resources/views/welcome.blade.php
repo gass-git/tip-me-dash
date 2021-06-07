@@ -211,7 +211,7 @@
 
                 @if($username = $rank->username)
                 <a class="list-group-item list-group-item-action" href="{{ route('user_page',$username) }}">
-                    <img id="avatar" src="{{ $newcomer->avatar_url }}"></img>
+                    <img id="avatar" src="{{ $rank->avatar_url }}"></img>
                     <span class="username ml-2">{{ $username }}</span>
                     <span id="reputation-info" class="float-right">
                         Reputation: <span>{{ $rank->reputation_score }}</span>

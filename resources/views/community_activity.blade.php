@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <body>
-    <section class="community-activity container mt-5 mx-auto" style="width:800px;">
+    <section class="community-activity container mt-5 mx-auto" style="max-width:800px;">
     
         <!-- loop -->
         @foreach($community_activity as $event)

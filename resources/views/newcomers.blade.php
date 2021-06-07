@@ -11,7 +11,7 @@
                 <a class="list-group-item list-group-item-action" href="{{ route('user_page',$username) }}" >
                     <img id="avatar" src="{{ $newcomer->avatar_url }}" style="width:25px;height:25px;border-radius:50%;"></img>
                     <span class="ml-2" style="text-transform: capitalize; color:#008de4; font-weight:600;">{{ $username }}</span>
-                    <span id="newcomer-join-date" class="float-right">Joined in {{ date('F d,Y', strtotime($newcomer->created_at)) }}</span>
+                    <span id="newcomer-join-date" class="float-right">{{ date('F d,Y', strtotime($newcomer->created_at)) }}</span>
                 </a>
             @endif
 

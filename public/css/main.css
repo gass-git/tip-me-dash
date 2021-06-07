@@ -175,7 +175,7 @@ responsiveness
     }
 
     /*-- welcome page --*/
-    #reputation-info{
+    #reputation-info #label{
         display:none;
     }
     #join-date{
@@ -507,7 +507,7 @@ community sections
 #reputation-info{
     font-size:14px;
 }
-#reputation-info span{
+#reputation-info #score{
     color:var(--deep-blue-1);
     font-weight:600;
 }

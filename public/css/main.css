@@ -1106,12 +1106,17 @@ dashboard-section
     font-family: 'montserrat', sans-serif;
     font-size:16px;
 }
+.dashboard #page-link-card p{
+    font-size:15px;
+}
 .dashboard #newcomers{
     width:100%; 
     background-color:rgb(255, 243, 205,0.8);
 }
 .dashboard #no-activity{
     background-color: rgb(255, 255, 255,0.8);
+    font-size:15px;
+    color:var(--text-color-1);
 }
 .dashboard #rep-badge{
     min-width:25px;
@@ -1125,5 +1130,7 @@ dashboard-section
 }
 .dashboard #no-likes{
     background-color: rgb(255, 255, 255,0.8);
+    font-size:15px;
+    color:var(--text-color-1);
 }
 

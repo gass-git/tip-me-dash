@@ -38,21 +38,26 @@
                 <div id="wrapper" class="container mx-auto">
                     <div class="row">
 
-                            <div class="alert alert-light border" role="alert" style="width:100%;">
                                 <!-- username pending -->
                                 @if(!Auth::user()->username)
-                                    <p>
-                                    <i class="far fa-bell mr-2" style="font-size:20px;"></i>It seems you haven't created a username. In order
-                                        to activate a TMD page you need to create one,  
-                                        <a href="{{ route('edit_profile') }}"> you can do so by clicking here</a>.
-                                    </p>
+                                <div class="alert alert-primary" role="alert" style="width:100%;font-size:15px;">
+                                  
+                                    <i class="far fa-bell mr-2" style="font-size:17px;"></i>It seems you don't have a username. In order
+                                        to activate your own TMD page you need to <a href="{{ route('edit_profile') }}">create one</a>.  
+                                </div>
                                 @endif
                                 <!---------------------->
                                 
                                 <!-- wallet address pending -->
                                 @if(!Auth::user()->wallet_address)
-                                <i class="far fa-bell mr-2" style="font-size:20px;"></i>Set up your Dash wallet 
-                                        <a href="{{ route('edit_profile') }}">here</a> to start receiving tips!
+                                <div class="alert alert-primary" role="alert" style="width:100%;font-size:15px;">
+                                    <i class="far fa-bell mr-2" style="font-size:17px;"></i>Enter your Dash wallet Address
+                                    <a href="{{ route('edit_profile') }}">here</a> to start receiving tips! If you haven't 
+                                    installed the app, you can download it from 
+                                    <a href="https://play.google.com/store/apps/details?id=hashengineering.darkcoin.wallet&hl=es_CR" target="_blank">Google Play</a>
+                                    or the
+                                    <a href="https://apps.apple.com/us/app/dash-wallet/id1206647026" target="_blank">Apple Store</a>.
+                                </div>
                                 @endif
                                 <!----------------------------->
                             </div>
@@ -144,7 +149,7 @@
 
                     @if(count($recent_logs) < 1)
                         <div id="no-activity" class="alert border" role="alert">
-                           You don't have any recent activity..
+                           No recent activity..
                         </div>              
                     @else
                         @foreach($recent_logs->take(5) as $event)

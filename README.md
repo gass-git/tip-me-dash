@@ -1,6 +1,8 @@
-## About Tip Me Dash - A fast and easy way to tip online
+## Tip Me Dash - A fast and easy way to tip online
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+One of the current problems of the internet is that most of the good content is rewarded to creators by showcasing publicity to users resulting a dirty and unpleasant experience.  Sites as Pexels.com are an example of what the future of the internet could look like. A site with outstanding content and passionate photographers that are incentivize by voluntary donations from users.
+When third parties are involved the connection of the creator and the user feels more distant. When you tip with Dash you feel connected to the person because you are directly paying them. They are not showing publicity that does not interest you so they can profit, instead you can send them money directly anywhere in the world.
+
 
 - [Simple, fast routing engine](https://laravel.com/docs/routing).
 - [Powerful dependency injection container](https://laravel.com/docs/container).

@@ -1,54 +1,50 @@
 ## Tip Me Dash - A fast and easy way to tip online
 
-One of the current problems of the internet is that most of the good content is rewarded to creators by showcasing publicity to users resulting a dirty and unpleasant experience.  Sites as Pexels.com are an example of what the future of the internet could look like. A site with outstanding content and passionate photographers that are incentivize by voluntary donations from users.
-When third parties are involved the connection of the creator and the user feels more distant. When you tip with Dash you feel connected to the person because you are directly paying them. They are not showing publicity that does not interest you so they can profit, instead you can send them money directly anywhere in the world.
+One of the current problems of the internet is that most of the good content is rewarded to creators by showcasing publicity to users resulting in a dirty and unpleasant experience.  Sites as Pexels.com are an example of what the future of the internet could look like. A site with outstanding content and passionate photographers that are incentivize by voluntary donations from users.
 
+When third parties are involved the connection of the creator and the supporter feels distant and probably inexistant, by the contrary, when people tip with Dash they feel closer and more connected. Publicity badly targeted suddenly is no longer
+the best way of making money online.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Most of the current online donations systems are tedious, they require credit card information, Paypal accounts and have
+high fees that end up in hands of third parties. 
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+This website application uses only Dash Cryptocurrency to make it simple, fast and with extremely low transaction fees. 
+The transactions are P2P tipmedash.com is never in between and by consequence it does not take any fees. The idea 
+is to finance through donations using it owns system.
 
-## Learning Laravel
+### Why use TipMeDash.Com over other options? (advantages)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+*	It's easy.
+*	It's fast.
+*	Transactions are P2P without third parties involved.
+*	Dash transaction fees are almost inexistant (~ $0.01).
+*	Due to transaction fees been almost inexistant you can send any amount above 1 cent. Sometimes is not so much about money, is about showing appreciation. For the creator any tip is welcome even if they are cents. That is the magic of internet, people can send whichever amount they feel comfortable sending and at the end of the day all tips sum up.
+*	Money arrives instantly without the need to ask for permission or deposits to anyone.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Target
 
-## Laravel Sponsors
+*	People that are already using Dash but need a way to show their wallets to their followers.
+*	People looking for an easy system to receive tips in exchange of their creations (Photographers, Artists, Developers, and other creators)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### This project pretends:
 
-### Premium Partners
+*	Help grow the Dash Network.
+*	Present people a new and better option for sending tips through the internet.
+*	Educate people that are outside the crypto world about Dash.
+*	Showcase Dash Advantages over other systems of money.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
+### Why Dash?
 
-## Contributing
+Fast, easy, secure, fun, low fees and a great community.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Why a reputation system?
 
-## Code of Conduct
+* A high reputation can indicate a creator worth checking out. 
+* Incentivize users to engange with others.
+* Users can show appreciation towards others by boosting their reputation.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Examples of how people could use their tipmedash.com links:
 
-## Security Vulnerabilities
+" If my answers helped, you can tip me [Dash](http://tipmedash.com/gass) "
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+" If this guide helped you, why not tip me [Dash](http://tipmedash.com/gass) ? “

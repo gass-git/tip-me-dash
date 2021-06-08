@@ -79,7 +79,7 @@
                          onclick="copy_address()" 
                          data-toggle="tooltip" 
                          data-placement="right" 
-                         title=""    
+                         title=""
                          src="data:image/png;base64, {{ base64_encode(QrCode::color(1, 32, 96)->format('png')->errorCorrection('H')->style('round')->size(200)->merge('http://tipmedash.com/images/dash-qr-deep-blue-logo.png',0.30,true)->generate($page_owner->wallet_address)) }}">
                     
                     <a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer;">Don't know how it works?</a>
@@ -500,27 +500,34 @@
         );
         // ----------------------------   
         
+        //  -- Change Tooltip Text on mouse enter ----
         $(document).ready(function() {
-
-            // Change Tooltip Text on mouse enter
             $('#qr-box').mouseenter(function () {
                 $('#qr-box').attr('title', '{{ $page_owner->wallet_address }}').tooltip('dispose');
                 $('#qr-box').tooltip('show');
             });
         });
-
+        // --------------------------------------------
 
         // ------ Copy address --------        
         function copy_address() {
-        var address = "{{ $page_owner->wallet_address }}";
+
+        var dummy = document.createElement("textarea");
+        // to avoid breaking orgain page when copying more words
+        // cant copy when adding below this code
+        // dummy.style.display = 'none'
+        document.body.appendChild(dummy);
+        //Be careful if you use texarea. setAttribute('value', value), which works with "input" does not work with "textarea". – Eduard
+        dummy.value = '{{ $page_owner->wallet_address }}';
+        dummy.select();
         document.execCommand("copy");
+        document.body.removeChild(dummy);       
 
         $('#qr-box').attr('title', 'Copied!').tooltip('dispose');
         $('#qr-box').tooltip('show');
         }
+        // ---------------------------     
 
-        
-        // ---------------------------                    
     </script>
 
 </body>

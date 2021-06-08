@@ -121,6 +121,10 @@ input:focus::placeholder {
     font-weight:bold; 
     color:var(--dash-blue); 
 }
+.dropdown-menu{
+    font-family: 'montserrat',sans-serif;
+    font-size:14px;  
+}
 /*-----------------
 responsiveness
 -------------------*/
@@ -128,6 +132,14 @@ responsiveness
     .welcome-text p{
         padding-right:50px!important;
     }
+}
+
+@media screen and (max-width:768px){
+    
+    .dashboard #rep-col{
+        padding:25px 25px 0px 25px!important;
+    }
+    
 }
 
 @media screen and (max-width:500px){
@@ -160,11 +172,30 @@ responsiveness
     }
 
     /*--- dashboard ---*/
-    #dashy-dashboard{
-        display:none;
+    .dashboard #rep-col{
+        padding:10px 10px 0px 10px!important;
     }
-    #share-link{
-        width:50%!important;
+    .dashboard #link-col{
+        padding:10px!important;
+    }
+    .dashboard #page-link-card .card-body{
+        padding:15px 10px 15px 10px!important;
+    }
+    .dashboard #page-link-card .card-body input{
+        font-size:13px;
+        height:40px;
+        padding-left:8px;
+    }
+    .dashboard #address-col{
+        padding:0px 10px 10px 10px!important;
+    }
+    .dashboard #wallet-address-card .card-body{
+        padding:15px 10px 15px 10px!important;
+    }
+    .dashboard #wallet-address-card .card-body input{
+        font-size:13px;
+        height:40px;
+        padding-left:8px;
     }
 }
 
@@ -232,10 +263,6 @@ Navbar
     font-family:'montserrat'sans-serif;
     font-size:14px; 
     font-weight:500;  
-}
-.navbar .dropdown-menu{
-    font-family: 'montserrat',sans-serif;
-    font-size:14px;  
 }
 .navbar .user-avatar{
     width: 40px;
@@ -756,6 +783,7 @@ user page
     border:none;
     border-radius: 5px;
     background-color: white;
+    cursor:pointer;
 }
 .user-page .qr-card a{
     margin-top:15px;
@@ -771,6 +799,7 @@ user page
     color:var(--deep-blue-1);
     /*color:#f8f003; nice lemon yellow*/
 }
+
 .user-page .send-message-box{
     padding-top:1px;
     padding-left:0px;
@@ -1082,12 +1111,12 @@ dashboard-section
     color:#174093;
 }
 .dashboard #rep-col{
+    padding:25px 0px 25px 25px;
     text-align: center;
 }
 .dashboard #rep-card{
-    width:100%; 
     height:120px; 
-    min-width:150px;  
+    min-width:140px;
     background-color:#037ac4;
 }
 .dashboard #rep-card p{
@@ -1096,6 +1125,9 @@ dashboard-section
 .dashboard #rep-card .card-title{
     font-family: 'montserrat', sans-serif;
     font-size:16px;
+}
+.dashboard #link-col{
+    padding:25px;
 }
 .dashboard #page-link-card{
     width:100%; 
@@ -1108,6 +1140,24 @@ dashboard-section
 }
 .dashboard #page-link-card p{
     font-size:15px;
+}
+.dashboard #link-col input{
+    color:var(--text-color-1);
+}
+.dashboard #address-col{
+    padding:0px 25px 25px 25px;
+}
+.dashboard #address-col input{
+    color:var(--text-color-1);
+}
+.dashboard #wallet-address-card{
+    background-image:linear-gradient(to right, #037ac4, #0a51a7);
+}
+.dashboard #wallet-address-card label{
+    color:white;
+    font-family: 'montserrat', sans-serif;
+    font-size:16px;
+    font-weight: 500;
 }
 .dashboard #newcomers{
     width:100%; 
@@ -1133,4 +1183,11 @@ dashboard-section
     font-size:15px;
     color:var(--text-color-1);
 }
-
+.dashboard input{
+    outline: none!important;
+    box-shadow: none!important;
+}
+.dashboard #dropdown-btn{
+    outline: none!important;
+    box-shadow: none!important;
+}

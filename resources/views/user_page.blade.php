@@ -73,8 +73,13 @@
                     <div class="tip-msg">
                         Send <span>{{ $page_owner->username }}</span> some <img width="19" src="{{ asset('images/small-blue-dash-icon.png') }}">
                     </div>
-                    <img title="Wallet address: {{ $page_owner->wallet_address }}" 
-                         class="border qr-box" 
+                    
+                    <img id="qr-box"
+                         class="qr-box border"
+                         onclick="copy_address()" 
+                         data-toggle="tooltip" 
+                         data-placement="right" 
+                         title=""    
                          src="data:image/png;base64, {{ base64_encode(QrCode::color(1, 32, 96)->format('png')->errorCorrection('H')->style('round')->size(200)->merge('http://tipmedash.com/images/dash-qr-deep-blue-logo.png',0.30,true)->generate($page_owner->wallet_address)) }}">
                     
                     <a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer;">Don't know how it works?</a>
@@ -108,6 +113,9 @@
                                     travel_places: false,
                                     symbols: false
                                     }
+                                });
+                                $(function () {
+                                $('[data-toggle="tooltip"]').tooltip()
                                 });
                             </script>
                             <!------------------>
@@ -483,5 +491,37 @@
         <!-- modal end -->
 
     </section>
+
+    <script>
+        // -- card hover effect -------
+        $( ".qr-box" ).hover(
+            function() { $(this).addClass('shadow-sm').css('cursor', 'pointer'); }, 
+            function() { $(this).removeClass('shadow-sm'); }
+        );
+        // ----------------------------   
+        
+        $(document).ready(function() {
+
+            // Change Tooltip Text on mouse enter
+            $('#qr-box').mouseenter(function () {
+                $('#qr-box').attr('title', '{{ $page_owner->wallet_address }}').tooltip('dispose');
+                $('#qr-box').tooltip('show');
+            });
+        });
+
+
+        // ------ Copy address --------        
+        function copy_address() {
+        var address = "{{ $page_owner->wallet_address }}";
+        document.execCommand("copy");
+
+        $('#qr-box').attr('title', 'Copied!').tooltip('dispose');
+        $('#qr-box').tooltip('show');
+        }
+
+        
+        // ---------------------------                    
+    </script>
+
 </body>
 @endsection

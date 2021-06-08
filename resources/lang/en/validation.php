@@ -134,7 +134,7 @@ return [
             'regex' => 'Spaces and special characters, except underscore or hyphens, are not allowed.',
         ],
         'wallet_address' => [
-            'regex' => 'The address format is invalid.'
+            'regex' => 'It appears you made a mistake, the wallet address entered is invalid.'
         ],
         'passionate_about' => [
             'regex' => 'Only letters, numbers and commas are allowed.'

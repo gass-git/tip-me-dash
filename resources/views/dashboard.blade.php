@@ -71,10 +71,11 @@
         <!-- summary -->   
         <div class="row">
             <div id="wrapper" class="container border pl-3 pr-3 mx-auto">
+                
                 <div class="row">
 
                     <!-- reputation -->
-                    <div id="rep-col" class="col-md-3 p-3">
+                    <div id="rep-col" class="col-md-3">
                         <div id="rep-card" class="card text-white">
                             <div class="card-body">
                                 <h5 class="card-title">Reputation</h5>
@@ -85,16 +86,27 @@
                     <!---------------->
 
                     <!-- page link -->
-                    <div class="col-md-9 p-3">
-                        <div id="page-link-card" class="card text-white bg-primary">
-                            <div class="card-body pr-1">
+                    <div id="link-col" class="col-md-9">
+                        <div id="page-link-card" class="card text-white">
+                            <div class="card-body">
                                 <h5 class="card-title">Share your page link</h5>
                                 
                                 <!-- does the user have a username? -->
                                 @if($username = Auth::user()->username)
                                     <form class="form-inline mr-0">
-                                        <input id="share-link" type="text" class="form-control w-75" value="http://tipmedash.com/{{ $username }}" id="user_page">
-                                        <button class="ml-2 btn btn-info" onclick="copy_url()" id="btn">Copy</button>
+
+                                        <div class="input-group w-100">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon1">
+                                                    <i class="fas fa-globe-americas" style="color:#008de4; font-size:22px;"></i>
+                                                </span>
+                                            </div>
+                                            <input id="user-page" type="text" class="form-control" value="http://tipmedash.com/{{ $username }}" readonly>
+                                            <div class="input-group-append">
+                                                <button class="btn btn-dark" type="button" onclick="copy_url()" id="btn">copy</button>
+                                            </div>
+                                        </div>
+                                        <!-- <button class="ml-2 btn btn-info" onclick="copy_url()" id="btn">Copy</button> -->
                                     </form>
                                 @else
                                     <p>
@@ -102,25 +114,78 @@
                                     </p>
                                 @endif
 
-                                <!-- script for copy button -->
-                                <script>
-                                    function copy_url() {
-                                    var url = document.getElementById("user_page");
-                                    url.select();
-                                    url.setSelectionRange(0, 200)
-                                    document.execCommand("copy");
-
-                                    var btn = document.getElementById("btn");
-                                    btn.innerHTML = "Copied";
-                                    setTimeout(() => {document.getElementById("btn").innerHTML = "Copy"}, 2000);
-                                    }
-                                </script>     
-                                <!--------------------------->
+                                
                             </div>
                         </div>
                     </div>
                     <!-- end of page link --->
+
+                    <!-- script for copy url button -->
+                    <script>
+                        function copy_url() {
+                        var url = document.getElementById("user-page");
+                        url.select();
+                        url.setSelectionRange(0, 200)
+                        document.execCommand("copy");
+
+                        var btn = document.getElementById("btn");
+                        btn.innerHTML = "Copied";
+                        setTimeout(() => {document.getElementById("btn").innerHTML = "Copy"}, 2000);
+                        }
+                    </script>     
+                    <!--------------------------->   
+
                 </div>
+
+                @if(Auth::user()->wallet_address)
+                <div class="row">
+
+                    <!-- Dash wallet address -->
+                    <div id="address-col" class="col-md-12">
+                        <div id="wallet-address-card" class="card text-white">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="wallet_address" class="float-left">Dash wallet address </label>
+                                    <div class="input-group mb-1">
+                                        <div class="input-group-prepend"> 
+                                            <span id="dash-span" class="input-group-text" id="basic-addon1"><img class="dash-icon" width="22" src="{{ asset('images/blue-dash-icon.png') }}"></span>    
+                                        </div>
+                                        <input id="dash-address-input" class="form-control" type="text" name="wallet_address" value="{{ Auth::user()->wallet_address }}" readonly/>
+                                        <div class="input-group-append">
+                                            <button id="dropdown-btn" type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="#" onclick="copy_address()">Copy</a>
+                                                <a class="dropdown-item" target="_blank" href="https://www.walletvalidator.com/dash-wallet-validator/{{ Auth::user()->wallet_address }}">Check address</a>
+                                                <a class="dropdown-item" target="_blank" href="https://explorer.mydashwallet.org/address/{{ Auth::user()->wallet_address }}">Address details</a>
+                                            </div>
+                                        </div>
+                                    </div>   
+                                    
+                                </div>
+                            </div>
+                        </div>                    
+                    </div>
+                    <!-- End of Dash wallet address -->
+
+                </div><!--- End of second row -->
+                @endif
+
+
+                <!-- script to copy wallet address -->
+                <script>
+                    function copy_address() {
+                    var url = document.getElementById("dash-address-input");
+                    url.select();
+                    url.setSelectionRange(0, 200)
+                    document.execCommand("copy");
+                    }
+                </script>   
+                <!---------------------------> 
+                                            
+
             </div>
         </div>
         <!------ end of summary ------->                               
@@ -217,5 +282,25 @@
         <!-------------------->
 
     </section>
+
+    <!-- modal balance -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+        <div class="modal-header" style="background-color: #008de4;">
+            <h5 class="modal-title" id="exampleModalLongTitle" style="color:white; font:20px 'montserrat',sans-serif;">Balance</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body pb-0 pt-5" style="padding-left:100px;">
+            <iframe frameborder="0"
+        style="width: 100%; overflow:hidden;" src="https://explorer.mydashwallet.org/address/{{Auth::user()->wallet_address}}/balance/"></iframe>
+        </div>
+        </div>
+    </div>
+    </div>                
+    <!---- end of modal ------->
+
 </body>
 @endsection

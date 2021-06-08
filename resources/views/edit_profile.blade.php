@@ -2,7 +2,20 @@
 @section('content')
 <body>
   <section class="settings-section container">
+    
+    @if(session()->has('message'))
+      <div class="pl-2" style="margin-top:-32px; margin-bottom:7px; height:25px;">
+        <a href="{{ route('dashboard') }}" style="font-family:'montserrat',sans-serif; text-decoration:none; font-size:14px;">
+          <i class="fas fa-angle-double-left mr-2"></i>Return to Dashboard
+        </a>
+        <a class="float-right" href="{{ auth()->user()->username }}" style="font-family:'montserrat',sans-serif; text-decoration:none; font-size:14px;">
+        <i class="far fa-eye mr-2"></i>View my Page
+        </a>
+      </div>
+    @endif
+
     <div class="wrapper border">
+      
       <!-- acoordion start -->
       <div id="accordion">
         

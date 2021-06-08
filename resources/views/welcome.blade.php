@@ -7,7 +7,7 @@
             <div class="row align-items-center">
                 <div class="col-md-8 mt-4 pt-3 pb-4 pr-0">
                     <div class="welcome-text">
-                        <h1 class="pr-5"><span>The easiest way</span> to say thanks online</h1>
+                        <h1 class="pr-5"><span>An easy way</span> to give thanks online</h1>
                         <p>Receive tips instantly from followers directly to your pocket, without third parties involved.
                         Give fans a new way to show appreciation for your work.
                         </p>

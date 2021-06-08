@@ -69,7 +69,7 @@ class EditProfileController extends Controller
 
         if($request->wallet_address){
             $request->validate([
-                'wallet_address' => ['max:40','regex:/^[a-zA-Z0-9]+$/'],
+                'wallet_address' => ['regex:/^[1-9A-HJ-NP-Za-km-z]+$/'],
             ]);
         }
         
@@ -87,7 +87,7 @@ class EditProfileController extends Controller
 
         if($request->website){
             $request->validate([
-                'website' => ['max:30','regex:/^((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)$/'],
+                'website' => ['max:40','regex:/^((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)$/'],
             ]);
         }
 
@@ -150,6 +150,9 @@ class EditProfileController extends Controller
             }
         }
         
+        // Message to activate links 'back to dashboard' & 'view my page'
+        $request->session()->flash('message', 'null');
+
         toast('Changes saved','success');
         return redirect()->route('edit_profile');
     }

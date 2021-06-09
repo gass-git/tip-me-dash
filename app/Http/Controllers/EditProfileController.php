@@ -75,7 +75,7 @@ class EditProfileController extends Controller
         
         if($request->passionate_about){
             $request->validate([
-                'passionate_about' => ['max:30','regex:/^[a-zA-Z0-9, ]+$/'],
+                'passionate_about' => ['max:30','regex:/^[a-zA-Z0-9,& ]+$/'],
             ]);
         }
 

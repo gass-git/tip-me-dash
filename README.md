@@ -38,7 +38,7 @@ Fast, easy, secure, fun, low fees, and a great community.
 
 ### Why a reputation system?
 
-* A high reputation can indicate a creator worth checking out. 
+* A high reputation can indicate a person worth checking out. 
 * Incentivize users to engage with others.
 * Users can show appreciation towards others by boosting their reputation.
 

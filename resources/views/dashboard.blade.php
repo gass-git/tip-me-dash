@@ -56,7 +56,7 @@
                                     installed the app, you can download it from 
                                     <a href="https://play.google.com/store/apps/details?id=hashengineering.darkcoin.wallet&hl=es_CR" target="_blank">Google Play</a>
                                     or the
-                                    <a href="https://apps.apple.com/us/app/dash-wallet/id1206647026" target="_blank">Apple Store</a>.
+                                    <a href="https://apps.apple.com/us/app/dash-wallet/id1206647026" target="_blank">App Store</a>.
                                 </div>
                                 @endif
                                 <!----------------------------->

@@ -47,7 +47,7 @@
                         <p>Experience the easiest and fastest way to say thanks in the Internet. 
                             Fans do not need to register, type credit card information or any other
                              tedious procedure. For supporters to send a tip they just need to scan 
-                             the QR code on your TMD page with their Dash app and they are done! 
+                             a QR code with their <a href="https://www.dash.org/individuals/" target="_blank" title="Learn more">Dash Wallet App</a> and they are done! 
                         </p>
                     </div>
                 </div>
@@ -126,14 +126,15 @@
                     <div class="how-it-works-item">
                         <div class="step">2</div>
                         <h5>Download the app</h5>
-                        <p>Install the DashPay wallet app and set it up in just a few easy steps.</p>
+                        <p>The Dash Wallet App can be found in <a href="https://play.google.com/store/apps/details?id=hashengineering.darkcoin.wallet&hl=es_CR" target="_blank">Google Play</a>
+                         or in the <a href="https://apps.apple.com/us/app/dash-wallet/id1206647026" target="_blank">App store</a>.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="how-it-works-item">
                         <div class="step">3</div>
-                        <h5>setup your TMD account</h5>
-                        <p>Customize your page and remember to set up your wallet address so the QR code is displayed on your TMD page. </p>
+                        <h5>setup the acc</h5>
+                        <p>Customize your page and remember to set up your wallet address so the QR code is displayed on your <a href="#top" title="Tip Me Dash">TMD</a> page. </p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
@@ -163,8 +164,8 @@
                 <div class="col-lg-8">
                     <div class="catchy-2-text">
                         <p>No annoying procedures, start experience the freedom of crypto and connecting with other Dashers.
-                           <a href="https://cryptwerk.com/pay-with/dash/" target="_blank">Spend</a> 
-                           and make <a href="https://www.youtube.com/watch?v=fjj6bQga_sE" target="_blank">passive income with high yields</a>
+                           <a href="https://cryptwerk.com/pay-with/dash/" target="_blank" title="Learn more">Spend</a> 
+                           and make <a href="https://www.youtube.com/watch?v=fjj6bQga_sE" target="_blank" title="Learn more">passive income with high yields</a>
                             as soon as you receive tips.
                         </p>
                     </div>
@@ -260,17 +261,17 @@
                             </div>
                             <!----------------------->
 
-                            <span id="separator-one">|</span>
+                            <span id="separator-one">-</span>
 
                             <!-- tipmedash.com 2020 -->
                             <div id="copyright-two" class="ml-1 mr-1 p-1">
                                 <a href="#top">    
-                                <i class="far fa-copyright mr-2"></i>2021 - Tipmedash.com v0.6 
+                                <i class="far fa-copyright mr-2"></i>2021 Tipmedash.com v0.7 
                                 </a>
                             </div>
                             <!------------------------>
                             
-                            <span id="separator-two">|</span>
+                            <span id="separator-two">-</span>
 
                             <!-- repository link -->
                             <div id="repository-link" class="p-1 ml-1">

@@ -140,6 +140,22 @@ responsiveness
         padding:25px 25px 0px 25px!important;
     }
     
+    /* footer */
+    #separator-two{
+        display:none;
+    }
+}
+
+@media screen and (max-width:525px){
+    
+    /* footer */
+    #separator-one{
+        display:none;
+    }
+    #separator-two{
+        display: block;
+    }
+    
 }
 
 @media screen and (max-width:500px){
@@ -341,6 +357,13 @@ catchy section
     padding-top:110px;
     padding-bottom:110px;
 }
+.catchy a{
+    color:var(--banana-yellow);
+}
+.catchy a:hover{
+    text-decoration: none;
+    color:var(--bright-yellow-1);
+}
 .catchy-title{
     margin-bottom:40px;
 }
@@ -358,8 +381,7 @@ catchy section
     font-style: italic;
 }
 .catchy-text p{
-    font-family: 'Roboto', sans-serif;
-    font-size:17px;
+    font-size:16px;
     font-weight: 300;
     line-height: 28px;
     color:white;
@@ -394,6 +416,7 @@ features section
     color: var(--text-color-1);
 }
 .features h5{
+    font:22px 'helvetica',sans-serif;
     font-weight: 600;
     color:#003091;
 }
@@ -735,6 +758,7 @@ user page
     font-weight:500; 
     margin-top:10px; 
     color:var(--light-deep-blue);
+    cursor: pointer;
 }
 .user-page .reputation-btn{
     font-weight: 600;

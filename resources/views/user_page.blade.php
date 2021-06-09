@@ -13,7 +13,7 @@
                     </div>
                     
                     <img src="{{ asset($page_owner->avatar_url) }}">
-                    <div class="reputation-score">{{ $page_owner->reputation_score }}</div>
+                    <div class="reputation-score" data-toggle="tooltip" data-placement="right" title="A high reputation can indicate a person worth checking out.">{{ $page_owner->reputation_score }}</div>
                     
                     <!-- boost reputation button -->
                     @if(empty($reputation_click->status))

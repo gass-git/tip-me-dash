@@ -1,4 +1,4 @@
-## Tip Me Dash - A fast and easy way to tip online
+## Tipmedash.com - A fast and easy way to tip online
 
 One of the current problems of the internet is that most of the good content is rewarded to creators by showcasing publicity to users resulting in a dirty and unpleasant experience.  Sites as Pexels.com are an example of what the future of the internet could look like. A site with outstanding content and passionate photographers that are incentivize by voluntary donations from users.
 
@@ -11,25 +11,25 @@ high fees that end up in hands of third parties.
 This website application uses only Dash Cryptocurrency to make it simple, fast and with extremely low transaction fees. 
 The transactions are P2P. Tipmedash.com is never in between and by consequence it does not take any fees.
 
-### Why use TipMeDash.Com over other options? (advantages)
+### Why use Tipmedash.com over other options? (advantages)
 
 *   It is easy.
 *   It is fast.
 *   Transactions are P2P without third parties involved.
 *   Dash transaction fees are almost inexistant (~ $0.01).
 *   Due to transaction fees been almost inexistant you can send any amount above 1 cent. Sometimes is not so much about money, is about showing appreciation. For the creator, any tip is welcome even if they are cents. That is the magic of internet, people can send whichever amount they feel comfortable sending and at the end of the day all tips sum up.
-*   Money arrives instantly without the need to ask for permission or deposits to anyone.
+*   Money arrives instantly to the recipient, without the need for them to ask intermediaries permission to move it. Saving them time and unpleasent experiences.
 
 ### Target
 
 *   People that are already using Dash but need a way to show their wallets to their followers.
-*   People looking for an easy system to receive tips in exchange for their creations (Photographers, Artists, Developers, and other creators)
+*   People looking for an easy system to receive tips in exchange for their work (e.g photographers, artists, developers, bloggers, teachers and others)
 
-### This project pretends:
+### This project pretends to:
 
 *   Help grow the Dash Network.
 *   Present people a new and better option for sending tips through the internet.
-*   Educate people that are outside the crypto world about Dash.
+*   Educate people that are outside the crypto world in a simple and friendly about Dash.
 *   Showcase Dash Advantages over other systems of money.
 
 ### Why Dash?

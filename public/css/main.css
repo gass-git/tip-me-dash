@@ -132,6 +132,11 @@ responsiveness
     .welcome-text p{
         padding-right:50px!important;
     }
+    /* user page */
+    .user-page .qr-card{
+        padding-right:10px!important;
+        padding-left:10px!important;
+    }
 }
 
 @media screen and (max-width:768px){
@@ -776,8 +781,8 @@ user page
 .user-page .qr-card{
     margin-top:15px;
     padding-top:15px;
-    padding-right:20px;
-    padding-left:20px;
+    padding-right:15px;
+    padding-left:15px;
     color:#ad9992; 
     min-width:180px;
     text-align: center;

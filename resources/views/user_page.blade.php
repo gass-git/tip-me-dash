@@ -149,19 +149,47 @@
                     
                     <div class="extra-info">
                         <div class="row mt-2">
-                            <div class="col">
+                            <div class="col pr-0" style="min-width:120px;">
                                 <p><b>Passionate About</b><br> @if($passion = $page_owner->passionate_about) {{ $passion }} @else N/A @endif</p>
                                 <p><b>Location</b><br> @if($location = $page_owner->location) {{ $location }} @else N/A @endif </p>
                                 <p><b>Favorite Crypto</b><br>@if($favorite_crypto = $page_owner->favorite_crypto)  {{ $favorite_crypto }} @else N/A @endif</p>
                             </div>
                             <div class="col">
                                 <p><b>Profile Views</b><br> {{ $page_owner->page_views }}</p>
+                                
+                                <!-- Personal website -->
                                 <p><b>Website</b><br>
                                 @if($website_url = $page_owner->website)
-                                <a href="{{ $website_url }}" target="_blank" style="color:#c4a699;"> {{ $website_url }} </a></p>
+                                    
+                                    <!-- php: make the url friendly -->
+                                    @php
+                                        {{
+
+                                        $input = $website_url;
+
+                                        // in case scheme relative URI is passed, e.g., //www.google.com/
+                                        $input = trim($website_url, '/');
+
+                                        // If scheme not included, prepend it
+                                        if (!preg_match('#^http(s)?://#', $input)) {
+                                            $input = 'http://' . $input;
+                                        }
+
+                                        $urlParts = parse_url($input);
+
+                                        // remove www
+                                        $friendly_url = preg_replace('/^www\./', '', $urlParts['host']);
+
+                                        }}
+                                    @endphp
+                                    <!--- end of php ---->
+
+                                    <i class="fas fa-link mr-1"></i><a href="{{ $website_url }}" target="_blank" style="color:#c4a699;">{{ $friendly_url }} </a></p>
                                 @else
-                                N/A
+                                    N/A
                                 @endif
+                                <!-- End of personal website -->
+
                                 <p><b>Desired Superpower</b><br>@if($superpower = $page_owner->desired_superpower)  {{ $superpower }} @else N/A @endif</p>
                             </div>
                         </div>

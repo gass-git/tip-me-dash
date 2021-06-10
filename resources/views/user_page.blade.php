@@ -74,13 +74,13 @@
                         Send <span>{{ $page_owner->username }}</span> some <img width="19" src="{{ asset('images/small-blue-dash-icon.png') }}">
                     </div>
                     
-                    <img id="qr-box"
-                         class="qr-box border"
+                    <img class="qr-box border"
+                         id="qr-box"
                          onclick="copy_address()" 
                          data-toggle="tooltip" 
                          data-placement="right" 
                          title=""
-                         src="data:image/png;base64, {{ base64_encode(QrCode::color(1, 32, 96)->format('png')->errorCorrection('H')->style('round')->size(220)->merge('http://tipmedash.com/images/dash-qr-deep-blue-logo.png',0.30,true)->generate($page_owner->wallet_address)) }}">
+                         src="data:image/png;base64, {{ base64_encode(QrCode::color(1, 32, 96)->format('png')->errorCorrection('H')->style('round')->size(250)->merge('http://tipmedash.com/images/dash-qr-deep-blue-logo.png',0.22,true)->generate($page_owner->wallet_address)) }}">
                     
                     <a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer;">Don't know how it works?</a>
                     @else

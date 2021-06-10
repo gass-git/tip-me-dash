@@ -80,7 +80,7 @@
                          data-toggle="tooltip" 
                          data-placement="right" 
                          title=""
-                         src="data:image/png;base64, {{ base64_encode(QrCode::color(1, 32, 96)->format('png')->errorCorrection('H')->style('round')->size(200)->merge('http://tipmedash.com/images/dash-qr-deep-blue-logo.png',0.30,true)->generate($page_owner->wallet_address)) }}">
+                         src="data:image/png;base64, {{ base64_encode(QrCode::color(1, 32, 96)->format('png')->errorCorrection('H')->style('round')->size(220)->merge('http://tipmedash.com/images/dash-qr-deep-blue-logo.png',0.30,true)->generate($page_owner->wallet_address)) }}">
                     
                     <a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer;">Don't know how it works?</a>
                     @else

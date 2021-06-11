@@ -68,19 +68,19 @@ class UserPageController extends Controller
             // user needs to login to post a message
             if(!Auth::user()){ 
                 toast('You need to login for this.','info');
-                return redirect()->back();
+                return redirect()->back()->withInput();
             }
 
             // there must be content on the msg to post
             if(!$request->message){
                 toast('Why post a message without content?','warning');
-                return redirect()->back();
+                return redirect()->back()->withInput();
             }
 
             // the page owner cannot post a message on his own page 
             if(Auth::user() == $page_owner){
                 toast('Posting on your page is not allowed.','info');
-                return redirect()->back();
+                return redirect()->back()->withInput();
             }
 
             // PENDING the user can write a max of 1 post per day per page
@@ -91,7 +91,7 @@ class UserPageController extends Controller
 
             if($day_post_check){
                 toast("Sorry, you can only write one message per day on a user's page.",'info');
-                return redirect()->back();
+                return redirect()->back()->withInput();
             }                        
 
 

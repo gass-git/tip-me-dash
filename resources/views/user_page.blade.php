@@ -94,10 +94,10 @@
 
                 <!-- message form start -->
                 <div class="border send-message-box">
-                    <form class="main-form" action="{{ route('post_message',['username' => $page_owner->username]) }}" method="post">
+                    <form class="main-form" action="{{ route('post_message',['username' => $page_owner->username]) }}" method="post" enctype="multipart/form-data">
                     @csrf
                         <div class="form-group m-0">
-                            <textarea name="message" class="custom-textarea"></textarea>
+                            <textarea name="message" class="custom-textarea">{{ old('message') }}</textarea>
                             <!-- emoji plugin -->
                             <script>
                                 $(".custom-textarea").emojioneArea({
@@ -113,9 +113,6 @@
                                     travel_places: false,
                                     symbols: false
                                     }
-                                });
-                                $(function () {
-                                $('[data-toggle="tooltip"]').tooltip()
                                 });
                             </script>
                             <!------------------>

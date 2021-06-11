@@ -1,4 +1,4 @@
-## Tipmedash.com - A fast and easy way to tip online
+## tipmedash.com - A fast and easy way to tip online
 
 One of the current problems of the internet is that most of good content is rewarded to creators by showcasing publicity to users resulting in a dirty and unpleasant experience. Sites as Pexels.com are an example of what the future of the internet could look like. A clean site with outstanding content and passionate photographers that are incentivize by voluntary donations from users.
 
@@ -8,9 +8,9 @@ Most of the current online donation’s systems are tedious, they require credit
 
 This website application uses only Dash cryptocurrency to make it simple, fast and with extremely low transaction fees. 
 
-The transactions are P2P. Tipmedash.com is never in between and by consequence it does not take any fees.
+The transactions are P2P. tipmedash.com is never in between and by consequence it does not take any fees.
 
-### Why use Tipmedash.com over other options? (advantages)
+### Why use tipmedash.com over other options? (advantages)
 
 *   It is easy.
 *   It is fast.
@@ -23,6 +23,7 @@ The transactions are P2P. Tipmedash.com is never in between and by consequence i
 
 *   People that are already using Dash but need a way to show their wallets to their followers.
 *   People looking for an easy system to receive tips in exchange for their work (e.g photographers, artists, developers, bloggers, teachers and others)
+* People looking for an extra method to receive support.
 
 ### This project pretends to:
 
@@ -33,7 +34,7 @@ The transactions are P2P. Tipmedash.com is never in between and by consequence i
 
 ### Why Dash?
 
-Fast, easy, secure, fun, low fees, and a great community.
+Fast, secure, easy to use and it has low fees.
 
 ### Why a reputation system?
 

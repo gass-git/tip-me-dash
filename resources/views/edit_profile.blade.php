@@ -71,7 +71,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon3">http://tipmedash.com/</span>
                         </div>
-                        <input type="text" class="form-control" name="username" placeholder="{{ Auth::user()->username }}" value="{{ old('username') }}" aria-describedby="basic-addon3" />
+                        <input type="text" class="form-control" name="username" onfocus="this.placeholder =''" onblur="this.placeholder = '{{ Auth::user()->username }}'" placeholder="{{ Auth::user()->username }}" value="{{ old('username') }}" aria-describedby="basic-addon3" />
                       </div>
                       @error('username')
                           <span class="mt-1" style="color:red; font-size:13px;">
@@ -87,7 +87,7 @@
                   <div class="col-md-6">
                     <div class="form-group mb-1">
                       <label for="location">Location</label>
-                      <input class="form-control" type="text" name="location" placeholder="{{ Auth::user()->location }}" value="{{ old('location') }}"> 
+                      <input class="form-control" type="text" name="location" onfocus="this.placeholder =''" onblur="this.placeholder = '{{ Auth::user()->location }}'" placeholder="{{ Auth::user()->location }}" value="{{ old('location') }}"> 
                     </div>
                     @error('location')
                           <span style="color:red; font-size:13px;">
@@ -175,7 +175,7 @@
                   <div class="col-md-6">
                     <div class="form-group mb-1">
                       <label for="passionate_about">Passionate About</label>
-                      <input class="form-control" type="text" name="passionate_about" placeholder="{{ Auth::user()->passionate_about }}" value="{{ old('passionate_about') }}">
+                      <input class="form-control" type="text" name="passionate_about" onfocus="this.placeholder =''" onblur="this.placeholder = '{{ Auth::user()->passionate_about }}'" placeholder="{{ Auth::user()->passionate_about }}" value="{{ old('passionate_about') }}">
                     </div>  
                     @error('passionate_about')
                           <span style="color:red; font-size:13px;">
@@ -190,7 +190,7 @@
                   <div class="col-md-6">
                     <div class="form-group mb-1">
                       <label for="website">Website</label>
-                      <input class="form-control" type="text" name="website" placeholder="{{ Auth::user()->website }}" value="{{ old('website') }}">
+                      <input class="form-control" type="text" name="website" onfocus="this.placeholder =''" onblur="this.placeholder = '{{ Auth::user()->website }}'" placeholder="{{ Auth::user()->website }}" value="{{ old('website') }}">
                     </div>
                     @error('website')
                       <span style="color:red; font-size:13px;">
@@ -270,7 +270,7 @@
                   <div class="col-md-6">
                     <div class="form-group mb-1">
                       <label for="favorite_crypto">Favorite Cryptocurrency</label>
-                      <input class="form-control" type="text" name="favorite_crypto" placeholder="{{ Auth::user()->favorite_crypto }}" value="{{ old('favorite_crypto') }}">
+                      <input class="form-control" type="text" name="favorite_crypto" onfocus="this.placeholder =''" onblur="this.placeholder = '{{ Auth::user()->favorite_crypto }}'" placeholder="{{ Auth::user()->favorite_crypto }}" value="{{ old('favorite_crypto') }}">
                     </div>
                     @error('favorite_crypto')
                           <span style="color:red; font-size:13px;">
@@ -285,7 +285,7 @@
                   <div class="col-md-6">
                     <div class="form-group mb-1">
                       <label for="desired_superpower">Desired Superpower</label>
-                      <input class="form-control" type="text" name="desired_superpower" placeholder="{{ Auth::user()->desired_superpower }}" value="{{ old('desired_superpower') }}"> 
+                      <input class="form-control" type="text" name="desired_superpower" onfocus="this.placeholder =''" onblur="this.placeholder = '{{ Auth::user()->desired_superpower }}'" placeholder="{{ Auth::user()->desired_superpower }}" value="{{ old('desired_superpower') }}"> 
                     </div>
                     @error('desired_superpower')
                           <span style="color:red; font-size:13px;">

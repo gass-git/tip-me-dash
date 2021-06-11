@@ -200,7 +200,7 @@
                 <div class="guestbook card border">
 
                     @if(count($posts) < 1)
-                        <div class="ml-4">
+                        <div class="ml-4" style="font-size:15px;">
                         <span style="color:#225ccf;text-transform:capitalize;font-weight:bold; font-size:16px;">{{ $page_owner->username }}</span> has not received any messages yet.    
                         </div>
                     @endif

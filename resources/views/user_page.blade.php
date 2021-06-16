@@ -13,7 +13,7 @@
                     </div>
                     
                     <img id="avatar-img" src="{{ asset($page_owner->avatar_url) }}">
-                    <div class="reputation-score" data-toggle="tooltip" data-placement="left" title="A high reputation can indicate a person worth checking out.">{{ $page_owner->reputation_score }}</div>
+                    <div class="reputation-score" title="A high reputation can indicate a person worth checking out.">{{ $page_owner->reputation_score }}</div>
                     
                     <!-- boost reputation button -->
                     @if(empty($reputation_click->status))
@@ -69,7 +69,7 @@
                 @if($page_owner->twitter)
                 <!-- Badges card -->
                 <div class="border badges-card">
-                    <a href="https://twitter.com/gass_tweets" target="_blank">
+                    <a href="https://twitter.com/{{ $page_owner->twitter }}" target="_blank">
                         <img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/{{ $page_owner->twitter }}?style=social">
                     </a>
                 </div>

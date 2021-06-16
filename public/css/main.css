@@ -957,6 +957,12 @@ user page
     border-radius: 10px;
     background-color: rgb(255, 255, 255,0.8);
 }
+.guestbook #no-messages-username{
+    color:#225ccf;
+    text-transform:capitalize;
+    font-weight:bold; 
+    font-size:16px;
+}
 .guestbook .messages{
     font-family: sans-serif;
     margin-top:30px;

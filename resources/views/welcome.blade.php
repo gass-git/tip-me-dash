@@ -266,7 +266,7 @@
                             <!-- tipmedash.com 2020 -->
                             <div id="copyright-two" class="ml-1 mr-1 p-1">
                                 <a href="#top">    
-                                <i class="far fa-copyright mr-2"></i>2021 Tipmedash.com v0.8 
+                                <i class="far fa-copyright mr-2"></i>2021 Tipmedash.com v0.9 
                                 </a>
                             </div>
                             <!------------------------>

@@ -12,7 +12,7 @@
                         {{ $page_owner->username }} 
                     </div>
                     
-                    <img src="{{ asset($page_owner->avatar_url) }}">
+                    <img id="avatar-img" src="{{ asset($page_owner->avatar_url) }}">
                     <div class="reputation-score" data-toggle="tooltip" data-placement="left" title="A high reputation can indicate a person worth checking out.">{{ $page_owner->reputation_score }}</div>
                     
                     <!-- boost reputation button -->
@@ -66,6 +66,16 @@
                 </div>
                 <!-- avatar card end -->
 
+                @if($page_owner->twitter)
+                <!-- Badges card -->
+                <div class="border badges-card">
+                    <a href="https://twitter.com/gass_tweets" target="_blank">
+                        <img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/{{ $page_owner->twitter }}?style=social">
+                    </a>
+                </div>
+                <!-- End of badges card -->
+                @endif
+
                 <!-- QR code card start -->
                 <div class="border qr-card card">
 
@@ -82,12 +92,14 @@
                          title=""
                          src="data:image/png;base64, {{ base64_encode(QrCode::color(1, 32, 96)->format('png')->errorCorrection('H')->style('round')->size(250)->merge('http://tipmedash.com/images/dash-qr-deep-blue-logo.png',0.22,true)->generate($page_owner->wallet_address)) }}">
                     
-                    <a data-toggle="modal" data-target="#exampleModal" style="cursor: pointer;">Don't know how it works?</a>
+                    <a id="sub-qr-link" data-toggle="modal" data-target="#exampleModal">Don't know how it works?</a>
                     @else
                     <center class="mt-1 mb-3">The QR code is not available.</center> 
                     @endif
                 </div>
                 <!-- QR code card end -->
+
+                
 
             </div>
             <div class="col-md-9 p-2">

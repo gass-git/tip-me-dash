@@ -64,8 +64,8 @@
                 <div class="row">
                   
                   <!-- username input start -->
-                  <div class="col-md-6">
-                    <div class="form-group">
+                  <div class="col-md-12">
+                    <div class="form-group mb-3">
                       <label for="username">Username</label>
                       <div class="input-group mb-1">
                         <div class="input-group-prepend">
@@ -83,6 +83,33 @@
                   </div>
                   <!-------------------------->
 
+                 
+                  
+
+                </div>
+
+                <div class="row mb-2">
+
+                  <!-- location input start -->
+                  <div class="col-md-6">
+                    <div class="form-group mb-1">
+                      <label for="twitter">Twitter</label>
+                      <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1" style="padding-right:16px;">@</span>
+                        </div>
+                        <input class="form-control" type="text" name="twitter" onfocus="this.placeholder =''" onblur="this.placeholder = '{{ Auth::user()->twitter }}'" placeholder="{{ Auth::user()->twitter }}" value="{{ old('twitter') }}"> 
+                      </div>
+                    </div>
+                    @error('twitter')
+                          <span style="color:red; font-size:13px;">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ $message }}
+                          </span>
+                    @enderror 
+                  </div>
+                  <!-------------------------->  
+
                   <!-- location input start -->
                   <div class="col-md-6">
                     <div class="form-group mb-1">
@@ -97,7 +124,6 @@
                     @enderror 
                   </div>
                   <!-------------------------->
-                  
 
                 </div>
 

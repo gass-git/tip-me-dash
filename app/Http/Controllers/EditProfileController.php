@@ -47,7 +47,7 @@ class EditProfileController extends Controller
     }
 
     const FIELDS = ['username', 'wallet_address', 'about', 'password', 
-    'website', 'location','favorite_crypto','desired_superpower','passionate_about'];
+    'website', 'location','favorite_crypto','desired_superpower','passionate_about','twitter'];
 
     public function update(Request $request){
         
@@ -60,7 +60,6 @@ class EditProfileController extends Controller
         }
 
         if($request->email){
-            
             $request->validate([
                 'email' => ['string', 'email', 'max:50', 'unique:users'],
             ]);
@@ -73,6 +72,12 @@ class EditProfileController extends Controller
             ]);
         }
         
+        if($request->twitter){
+            $request->validate([
+                'twitter' => ['max:15', 'regex:/^[a-zA-Z0-9_]+$/'],
+            ]);
+        }
+
         if($request->passionate_about){
             $request->validate([
                 'passionate_about' => ['max:30','regex:/^[a-zA-Z0-9,& ]+$/'],

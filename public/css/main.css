@@ -139,14 +139,21 @@ responsiveness
         padding-right:10px!important;
         padding-left:10px!important;
     }
+    .user-page .avatar-card #avatar-img{
+        height:150px!important;
+        width:150px!important;
+    }
 }
 
-@media screen and (max-width:768px){
+@media screen and (max-width:766px){
     
     .dashboard #rep-col{
         padding:25px 25px 0px 25px!important;
     }
-    
+    .user-page .avatar-card #avatar-img{
+        height:170px!important;
+        width:170px!important;
+    }
     /* footer */
     #separator-two{
         display:none;
@@ -736,14 +743,14 @@ user page
 }
 .user-page .avatar-card{
     background-color:transparent!important;
-    padding-bottom:20px;
+    padding-bottom:15px;
     border-radius: 7px;
     min-width:180px;
     min-height:320px;
     align-items: center;
 }
 .user-page .avatar-card .username{
-    margin:20px 1px 0px 1px;
+    margin:15px 1px 0px 1px;
     font-weight: 700;
     font-size:21px; 
     color:var(--light-deep-blue);
@@ -752,10 +759,10 @@ user page
 .user-page .location{
     font-size: 10px;
 }
-.user-page .avatar-card img{
-    margin-top: 15px;
-    height:150px;
-    width:150px;
+.user-page .avatar-card #avatar-img{
+    margin-top: 10px;
+    height:170px;
+    width:170px;
     border-radius:50%; 
     border:10px solid var(--light-gray-1);
 }
@@ -782,7 +789,7 @@ user page
 }
 .user-page .qr-card{
     margin-top:15px;
-    padding-top:15px;
+    padding-top:12px;
     padding-right:15px;
     padding-left:15px;
     color:#ad9992; 
@@ -797,7 +804,7 @@ user page
 .user-page .tip-msg{
     margin-right: -15px; 
     margin-left: -15px;
-    margin-bottom:13px;
+    margin-bottom:10px;
     font-weight: 600; 
     font-size:12px;
     align-items: center;
@@ -825,12 +832,27 @@ user page
     color: #ad9992; 
     opacity:0.9;
 }
+.user-page .qr-card #sub-qr-link{
+    cursor: pointer; 
+    margin:10px 0px 10px 0px;
+}
 .user-page .qr-card a:hover{
     opacity:1;
     color:var(--deep-blue-1);
     /*color:#f8f003; nice lemon yellow*/
 }
-
+.user-page .badges-card{
+    margin-top:15px;
+    padding:10px 15px 10px 15px;
+    color:#ad9992; 
+    min-width:180px;
+    text-align: center;
+    font-size:13px; 
+    border-radius: var(--border-radius-7);
+    border:none;
+    align-items: center;
+    background-color:rgb(255, 255, 255,0.8);
+}
 .user-page .send-message-box{
     padding-top:1px;
     padding-left:0px;

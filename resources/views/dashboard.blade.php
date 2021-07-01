@@ -9,8 +9,7 @@
             <div id="welcome" class="ml-0 pt-3">
 
                 @if(Auth::user()->username)
-                    <a id="username" href="{{ route('user_page',Auth::user()->username) }}">{{ Auth::user()->username }}</a>
-                    , welcome to your dashboard
+                    <a id="username" href="{{ route('user_page',Auth::user()->username) }}">{{ Auth::user()->username }}</a>, welcome to your dashboard
                 @else
                     Welcome to your dashboard 
                 @endif
@@ -71,7 +70,7 @@
             <!-- Right column -->
             <div class="col-sm-9 pl-2 pt-3 pr-2 pb-3">
 
-                <div class="p-4" style="width:100%; height:150px; border-radius:5px;">
+                <div id="page-link">
                     <h5 class="pb-2">Share your page link</h5>
                     
                         <!-- Does the user have a username? -->
@@ -245,8 +244,9 @@
                             of {!! number_format((float)($event->dash_amount), 5) !!}
                             <b style="font-size:18px;">ᕭ</b>
 
-                            <span style="color:rgb(0,0,0,0.8);float:right;">
-                                {{ \Carbon\Carbon::parse($event->created_at)->isoFormat('MMM Do YYYY')}}</span>
+                            <span id="date-span">
+                                {{ Carbon::parse($event->created_at)->isoFormat('MMM Do YYYY')}}
+                            </span>
                         
                         </li>
                         @endforeach

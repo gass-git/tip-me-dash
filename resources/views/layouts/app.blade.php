@@ -18,8 +18,6 @@
     <script src="{{ asset('js/popper.min.js') }}"></script>
     <!-- bootstrap js -->
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <!-- main js -->
-    <script src="{{ asset('js/main.js') }}" defer></script>
     <!-- emoji js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.2/emojionearea.min.js"></script>
     <!-- sweet alert 2 -->
@@ -30,7 +28,7 @@
     <!-- bootstrap css -->
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <!-- main css -->
-    <link rel="stylesheet" href="{{ asset('css/main.css?62') }}">
+    <link rel="stylesheet" href="{{ asset('css/main.css?64') }}">
     <!-- font awesome css -->
     <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
     

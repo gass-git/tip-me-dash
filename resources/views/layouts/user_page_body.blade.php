@@ -105,7 +105,7 @@
             <!-- END of first column -->
 
             <!-- Second column -->
-            <div class="col-md-9 pl-3 pt-2 pr-0 pb-2">
+            <div class="col-md-9 pt-2 pr-0 pb-2" id="second-col">
  
                 <!-- about section start -->
                 <div class="about-wrapper">

@@ -266,7 +266,7 @@
                       <div class="input-group mb-1">
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon1" style="padding-right:16px;">
-                            https://www.youtube.com/channel/
+                            www.youtube.com/channel/
                           </span>
                         </div>
                         <input class="form-control" type="text" name="youtube" onfocus="this.placeholder =''" onblur="this.placeholder = '{{ Auth::user()->youtube }}'" placeholder="{{ Auth::user()->youtube }}" value="{{ old('youtube') }}"> 

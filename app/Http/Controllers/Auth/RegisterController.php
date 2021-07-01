@@ -66,15 +66,11 @@ class RegisterController extends Controller
     {
         // register directly on the website (without using google)
         return User::create([
-            'google_id' => '',
             'avatar_url' =>  'http://tipmedash.com/images/default-profile-pic1.jpg',
             'avatar_name' => '',
             'username' => $data['username'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'twitter' => '',
-            'youtube' => '',
-            'github' => ''
+            'password' => Hash::make($data['password'])
         ]);
     }  
 }

@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\User;
-use App\Log;
-use App\Reputations;
+use App\Tip;
 use Illuminate\Support\Facades\Auth;
 use DB;
 
@@ -28,8 +27,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $recent_logs = DB::table('log')->where('to_user_id', Auth::user()->id)->orderBy('log_id','desc')->get();
-        $users_liked = DB::table('reputations')->where('clicker_id', Auth::user()->id)->orderBy('id','desc')->paginate(3);
-        return view('dashboard',compact('recent_logs','users_liked'));
+        $events = tip::where('recipient_id',Auth::user()->id)->where('status','confirmed')->paginate(5);
+        return view('dashboard',compact('events'));
     }
 }

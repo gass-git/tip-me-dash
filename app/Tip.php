@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Reputations extends Model
+class Tip extends Model
 {
     protected $fillable = [
-        'clicker_id','recipient_id', 'status',
+        'recipient_id', 'sender_id','usd_equivalent', 'dash_amount', 'sent_by', 'message', 'status',
     ];
 
 

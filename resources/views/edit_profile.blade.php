@@ -1,5 +1,20 @@
 @extends('layouts.app')
 @section('content')
+
+<!---- Style to override emojiOneArea plugin ---->
+<style>
+  .custom-textarea {
+      font-size: 12px;
+      width:100%;
+    height: 60px!important;
+    border: 1px solid rgb(77, 213, 255, 0.8);
+    border-radius: 5px;
+      background-color:rgb(0, 141, 228, 0.1);
+      padding-top:3px;
+  }
+  </style>
+  <!----------------------------------------------->
+
 <body>
   <section class="settings-section container">
     
@@ -64,7 +79,7 @@
                 <div class="row">
                   
                   <!-- username input start -->
-                  <div class="col-md-12">
+                  <div class="col-md-6">
                     <div class="form-group mb-3">
                       <label for="username">Username</label>
                       <div class="input-group mb-1">
@@ -83,50 +98,24 @@
                   </div>
                   <!-------------------------->
 
-                 
-                  
+                  <!-- website input start -->
+                  <div class="col-md-6">
+                    <div class="form-group mb-1">
+                      <label for="website">Website</label>
+                      <input class="form-control" type="text" name="website" onfocus="this.placeholder =''" onblur="this.placeholder = '{{ Auth::user()->website }}'" placeholder="{{ Auth::user()->website }}" value="{{ old('website') }}">
+                    </div>
+                    @error('website')
+                      <span style="color:red; font-size:13px;">
+                        <i class="fas fa-exclamation-circle"></i>
+                        {{ $message }}
+                      </span>
+                    @enderror   
+                  </div>  
+                  <!---------------------------------->
 
                 </div>
 
-                <div class="row mb-2">
-
-                  <!-- location input start -->
-                  <div class="col-md-6">
-                    <div class="form-group mb-1">
-                      <label for="twitter">Twitter</label>
-                      <div class="input-group mb-1">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text" id="basic-addon1" style="padding-right:16px;">@</span>
-                        </div>
-                        <input class="form-control" type="text" name="twitter" onfocus="this.placeholder =''" onblur="this.placeholder = '{{ Auth::user()->twitter }}'" placeholder="{{ Auth::user()->twitter }}" value="{{ old('twitter') }}"> 
-                      </div>
-                    </div>
-                    @error('twitter')
-                          <span style="color:red; font-size:13px;">
-                            <i class="fas fa-exclamation-circle"></i>
-                            {{ $message }}
-                          </span>
-                    @enderror 
-                  </div>
-                  <!-------------------------->  
-
-                  <!-- location input start -->
-                  <div class="col-md-6">
-                    <div class="form-group mb-1">
-                      <label for="location">Location</label>
-                      <input class="form-control" type="text" name="location" onfocus="this.placeholder =''" onblur="this.placeholder = '{{ Auth::user()->location }}'" placeholder="{{ Auth::user()->location }}" value="{{ old('location') }}"> 
-                    </div>
-                    @error('location')
-                          <span style="color:red; font-size:13px;">
-                            <i class="fas fa-exclamation-circle"></i>
-                            {{ $message }}
-                          </span>
-                    @enderror 
-                  </div>
-                  <!-------------------------->
-
-                </div>
-
+                
                 <!--------------------- dash wallet address input ------------------------>
                 <div class="form-group">
                   <label for="wallet_address">Dash wallet address </label>
@@ -197,147 +186,165 @@
               
                 <div class="row">
 
-                  <!-- passionate about input start -->
-                  <div class="col-md-6">
+                    <!-- location input start -->
+                    <div class="col-md-6">
                     <div class="form-group mb-1">
-                      <label for="passionate_about">Passionate About</label>
-                      <input class="form-control" type="text" name="passionate_about" onfocus="this.placeholder =''" onblur="this.placeholder = '{{ Auth::user()->passionate_about }}'" placeholder="{{ Auth::user()->passionate_about }}" value="{{ old('passionate_about') }}">
-                    </div>  
-                    @error('passionate_about')
+                      <label for="location">Location</label>
+                      <input class="form-control" type="text" name="location" onfocus="this.placeholder =''" onblur="this.placeholder = '{{ Auth::user()->location }}'" placeholder="{{ Auth::user()->location }}" value="{{ old('location') }}"> 
+                    </div>
+                    @error('location')
                           <span style="color:red; font-size:13px;">
                             <i class="fas fa-exclamation-circle"></i>
                             {{ $message }}
                           </span>
-                    @enderror        
+                    @enderror 
                   </div>
-                  <!------------------------->
+                  <!-------------------------->
 
-                  <!-- website input start -->
-                  <div class="col-md-6">
-                    <div class="form-group mb-1">
-                      <label for="website">Website</label>
-                      <input class="form-control" type="text" name="website" onfocus="this.placeholder =''" onblur="this.placeholder = '{{ Auth::user()->website }}'" placeholder="{{ Auth::user()->website }}" value="{{ old('website') }}">
+                    <!-- passionate about input start -->
+                    <div class="col-md-6">
+                      <div class="form-group mb-1">
+                        <label for="passionate_about">Passionate About</label>
+                        <input class="form-control" type="text" name="passionate_about" onfocus="this.placeholder =''" onblur="this.placeholder = '{{ Auth::user()->passionate_about }}'" placeholder="{{ Auth::user()->passionate_about }}" value="{{ old('passionate_about') }}">
+                      </div>  
+                      @error('passionate_about')
+                            <span style="color:red; font-size:13px;">
+                              <i class="fas fa-exclamation-circle"></i>
+                              {{ $message }}
+                            </span>
+                      @enderror        
                     </div>
-                    @error('website')
-                      <span style="color:red; font-size:13px;">
-                        <i class="fas fa-exclamation-circle"></i>
-                        {{ $message }}
-                      </span>
-                    @enderror   
-                  </div>  
-                  <!---------------------------------->
-
+                    <!------------------------->
+                    
                 </div><!-- end of first row -->
 
-                <!-- about textarea -->
-                <div class="form-group mt-2">
-                  <label for="about">About</label>
-                  
-                  <!--------------------
-                  remembers last text entered in 
-                  about textarea (to avoid annoying re-typing in case of error)
-                   -------------------->
-                  @if(old('about'))
-                    <textarea class="form-control p-2" id="about-textarea" name="about" height="100">{{ old('about') }}</textarea>
-                  @else
-                    <textarea class="form-control p-2" id="about-textarea" name="about" height="100">{{ Auth::user()->about }}</textarea>
-                  @endif
-                  <!------------------->
+                <div class="row mt-2">
 
-                  <!-- emoji plugin -->
-                  <script>
-                                $("#about-textarea").emojioneArea({
-                                    shortnames: true,
-                                    tones:false,
-                                    search:false,
-                                    pickerPosition: "bottom",
-                                    placeholder: "Type something here",
-                                    filters: {
-                                    flags : false,
-                                    animals_nature: false,
-                                    activity: false,
-                                    travel_places: false,
-                                    symbols: false
-                                    }
-                                });
-                            </script>
-                            <!------------------>
-                </div>
-                <!-------------------->
+                  <!-- twitter input start -->
+                  <div class="col-md-6">
+                    <div class="form-group mb-1">
+                      <label for="twitter">Twitter Username</label>
+                      <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1" style="padding-right:16px;">@</span>
+                        </div>
+                        <input class="form-control" type="text" name="twitter" onfocus="this.placeholder =''" onblur="this.placeholder = '{{ Auth::user()->twitter }}'" placeholder="{{ Auth::user()->twitter }}" value="{{ old('twitter') }}"> 
+                      </div>
+                    </div>
+                    @error('twitter')
+                          <span style="color:red; font-size:13px;">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ $message }}
+                          </span>
+                    @enderror 
+                  </div>
+                  <!-------------------------->  
 
+                  <!-- github input start -->
+                  <div class="col-md-6">
+                    <div class="form-group mb-1">
+                      <label for="github">Github Username</label>
+                        <input class="form-control" type="text" name="github" onfocus="this.placeholder =''" onblur="this.placeholder = '{{ Auth::user()->github }}'" placeholder="{{ Auth::user()->github }}" value="{{ old('github') }}"> 
+                    </div>
+                    @error('github')
+                          <span style="color:red; font-size:13px;">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ $message }}
+                          </span>
+                    @enderror 
+                  </div>
+                  <!--------------------------> 
+
+                </div><!-- END of row -->
+              
+                <div class="row mt-2">
+
+                  <!-- youtube input start -->
+                  <div class="col-md-12">
+                    <div class="form-group mb-1">
+                      <label for="youtube">Youtube Channel</label>
+                      <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1" style="padding-right:16px;">
+                            https://www.youtube.com/channel/
+                          </span>
+                        </div>
+                        <input class="form-control" type="text" name="youtube" onfocus="this.placeholder =''" onblur="this.placeholder = '{{ Auth::user()->youtube }}'" placeholder="{{ Auth::user()->youtube }}" value="{{ old('youtube') }}"> 
+                      </div>
+                    </div>
+                    @error('youtube')
+                          <span style="color:red; font-size:13px;">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ $message }}
+                          </span>
+                    @enderror 
+                  </div>
+                  <!--------------------------> 
+
+                </div><!-- END of row -->
+
+                <div class="row mt-2">
+
+                  <!-- about textarea -->
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="about">About</label>
+                      
+                      <!--------------------
+                      remembers last text entered in 
+                      about textarea (to avoid annoying re-typing in case of error)
+                      -------------------->
+                      @if(old('about'))
+                        <textarea class="custom-textarea form-control" id="about-textarea" name="about" height="100">{{ old('about') }}</textarea>
+                      @else
+                        <textarea class="custom-textarea form-control" id="about-textarea" name="about" height="100">{{ Auth::user()->about }}</textarea>
+                      @endif
+                      @error('about')
+                        <span style="color:red; font-size:13px;">
+                          <i class="fas fa-exclamation-circle"></i>
+                          {{ $message }}
+                        </span>
+                      @enderror 
+                      <!------------------->
+
+
+                      <!-- emoji plugin -->
+                      <script>
+                        $("#about-textarea").emojioneArea({
+                            shortnames: true,
+                            tones:false,
+                            search:false,
+                            pickerPosition: "top",
+                            placeholder: "Type something here",
+                            filters: {
+                            flags : false,
+                            animals_nature: false,
+                            activity: false,
+                            travel_places: false,
+                            symbols: false
+                            }
+                        });
+                      </script>
+                      <!------------------>
+                    
+                    </div>
+                  </div><!-- END of about textarea -->
+                </div><!-- END of row -->
+               
                 <button type="submit" class="save-changes-btn shadow-none btn btn-outline-primary"><i class="far fa-save mr-2"></i>Save changes</button>
-              </form>
-              <!-- end of second form -->
 
-            </div>
+              </form><!-- END of second form -->
+
+            </div><!-- END of card body -->
           </div>
-        </div>
-        <!-- collapse two end -->
+        </div><!-- END of collapse 2 -->
+        
 
         <!-- collapse three start -->
         <div class="card">
-          
           <div class="accordion-card-header" id="headingThree">
             <h5 class="mb-0">
               <button class="accordion-header-btn btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                For fun
-              </button>
-            </h5>
-          </div>
-
-          <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-            <div class="card-body">
-              
-              <form class="main-form" action="{{ route('update_profile') }}" method="post" enctype="multipart/form-data" >
-              @csrf     
-                <div class="row">
-
-                  <!-- favorite crypto input -->
-                  <div class="col-md-6">
-                    <div class="form-group mb-1">
-                      <label for="favorite_crypto">Favorite Cryptocurrency</label>
-                      <input class="form-control" type="text" name="favorite_crypto" onfocus="this.placeholder =''" onblur="this.placeholder = '{{ Auth::user()->favorite_crypto }}'" placeholder="{{ Auth::user()->favorite_crypto }}" value="{{ old('favorite_crypto') }}">
-                    </div>
-                    @error('favorite_crypto')
-                          <span style="color:red; font-size:13px;">
-                            <i class="fas fa-exclamation-circle"></i>
-                            {{ $message }}
-                          </span>
-                    @enderror          
-                  </div>
-                  <!---------------------------->
-
-                  <!-- desires superpower input -->
-                  <div class="col-md-6">
-                    <div class="form-group mb-1">
-                      <label for="desired_superpower">Desired Superpower</label>
-                      <input class="form-control" type="text" name="desired_superpower" onfocus="this.placeholder =''" onblur="this.placeholder = '{{ Auth::user()->desired_superpower }}'" placeholder="{{ Auth::user()->desired_superpower }}" value="{{ old('desired_superpower') }}"> 
-                    </div>
-                    @error('desired_superpower')
-                          <span style="color:red; font-size:13px;">
-                            <i class="fas fa-exclamation-circle"></i>
-                            {{ $message }}
-                          </span>
-                    @enderror
-                  </div>
-                  <!------------------------------>
-
-                </div><!-- end of third row -->
-
-                <button type="submit" class="save-changes-btn shadow-none btn btn-outline-primary mt-4"><i class="far fa-save mr-2"></i>Save changes</button>
-              </form>
-              <!-- end of second form -->
-
-            </div>
-          </div>
-        </div>
-        <!-- collapse two end -->
-
-        <!-- collapse four start -->
-        <div class="card">
-          <div class="accordion-card-header" id="headingFour">
-            <h5 class="mb-0">
-              <button class="accordion-header-btn btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                 
                 @if(Auth::user()->password === null)
                   Create password
@@ -350,7 +357,7 @@
             </h5>
           </div>
 
-          <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+          <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
             <div class="card-body">
               
               @if(Auth::user()->password === null)                  
@@ -415,20 +422,20 @@
             </div>
           </div>
         </div>
-        <!-- collapse four end -->
+        <!-- collapse three end -->
 
-        <!-- collapse five start -->
+        <!-- collapse four start -->
         <div class="card">
           
-          <div class="accordion-card-header" id="headingFive">
+          <div class="accordion-card-header" id="headingFour">
             <h5 class="mb-0">
-              <button class="accordion-header-btn btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+              <button class="accordion-header-btn btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                 Change email
               </button>
             </h5>
           </div>
 
-          <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+          <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
             <div class="card-body">
 
               <!-- change email -->
@@ -493,20 +500,20 @@
             </div>
           </div>
         </div>
-        <!-- collapse five end -->                        
+        <!-- collapse four end -->                        
 
-        <!-- collapse six start -->
+        <!-- collapse five start -->
         <div class="card">
           
-          <div class="accordion-card-header" id="headingSix">
+          <div class="accordion-card-header" id="headingFive">
             <h5 class="mb-0">
-              <button class="accordion-header-btn btn btn-link collapsed" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+              <button class="accordion-header-btn btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
                 Delete account
               </button>
             </h5>
           </div>
 
-          <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
+          <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
             <div class="card-body">
 
               <!-- delete acc -->
@@ -537,7 +544,7 @@
             </div>
           </div>
         </div>
-        <!-- collapse six end -->       
+        <!-- collapse five end -->       
                                 
       </div>
       <!-- accordion end -->

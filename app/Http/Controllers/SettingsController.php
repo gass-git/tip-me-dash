@@ -10,7 +10,7 @@ use App\User;
 
 use DB;
 
-class EditProfileController extends Controller
+class SettingsController extends Controller
 {
     
 
@@ -47,72 +47,25 @@ class EditProfileController extends Controller
     }
 
     const FIELDS = ['username', 'wallet_address', 'about', 'password', 
-    'website', 'location','favorite_crypto','desired_superpower','passionate_about','twitter'];
+    'website', 'location','passionate_about','twitter','youtube','github'];
 
     public function update(Request $request){
         
         // validate every field independently
 
-        if($request->username){
-            $request->validate([
-                'username' => ['max:15','unique:users', 'regex:/^[a-zA-Z0-9_-]+$/'],
-            ]);
-        }
-
-        if($request->email){
-            $request->validate([
-                'email' => ['string', 'email', 'max:50', 'unique:users'],
-            ]);
-
-        }
-
-        if($request->wallet_address){
-            $request->validate([
-                'wallet_address' => ['regex:/^[1-9A-HJ-NP-Za-km-z]+$/'],
-            ]);
-        }
-        
-        if($request->twitter){
-            $request->validate([
-                'twitter' => ['max:15', 'regex:/^[a-zA-Z0-9_]+$/'],
-            ]);
-        }
-
-        if($request->passionate_about){
-            $request->validate([
-                'passionate_about' => ['max:30','regex:/^[a-zA-Z0-9,& ]+$/'],
-            ]);
-        }
-
-        if($request->location){
-            $request->validate([
-                'location' => ['max:30','regex:/^[a-zA-Z0-9., ]+$/'],
-            ]);
-        }
-
-        if($request->website){
-            $request->validate([
-                'website' => ['max:40','regex:/^((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)$/'],
-            ]);
-        }
-
-        if($request->favorite_crypto){
-            $request->validate([
-                'favorite_crypto' => ['max:30','regex:/^[a-zA-Z0-9 ]+$/'],
-            ]);
-        }
-
-        if($request->desired_superpower){
-            $request->validate([
-                'desired_superpower' => ['max:30','regex:/^[a-zA-Z0-9 ]+$/'],
-            ]);
-        }
-
-        if($request->avatar){
-            $request->validate([
-                'avatar' => ['image','mimes:jpg,png,jpeg,gif','max:500','dimensions:min_width=100,min_height=100'],
-            ]);
-        }
+        $request->validate([
+            'username' => ['nullable','max:15','unique:users', 'regex:/^[a-zA-Z0-9_-]+$/'],
+            'email' => ['nullable','string', 'email', 'max:50', 'unique:users'],
+            'wallet_address' => ['nullable','regex:/^[1-9A-HJ-NP-Za-km-z]+$/'],
+            'about' => ['nullable','max:300'],
+            'passionate_about' => ['nullable','max:30','regex:/^[a-zA-Z0-9,& ]+$/'],
+            'location' => ['nullable','max:30','regex:/^[a-zA-Z0-9., ]+$/'],
+            'website' => ['nullable','max:40','regex:/^((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)$/'],
+            'avatar' => ['nullable','image','mimes:jpg,png,jpeg,gif','max:500','dimensions:min_width=100,min_height=100'],
+            'twitter' => ['nullable','max:15', 'regex:/^[a-zA-Z0-9_]+$/'],
+            'youtube' => ['nullable','max:50', 'regex:/^[a-zA-Z0-9_-]+$/'],
+            'github' => ['nullable','max:25', 'regex:/^[a-zA-Z0-9_-]+$/'],
+        ]);
 
         // delete wallet address if requested
         if($request->delete_wallet_address){

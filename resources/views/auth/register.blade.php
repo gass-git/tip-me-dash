@@ -7,7 +7,7 @@
         <div class="col-sm-8 main-section">
             <div class="modal-content">
                 <div class="col-12 user-img">
-                    <img src="{{ asset('images/default-profile-pic1.jpg') }}">
+                    <img src="{{ asset('images/avatar-default-2.jpg') }}">
                 </div>
                 
                 <!-- start of register form -->

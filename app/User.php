@@ -18,9 +18,9 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'username', 'email', 'password', 'wallet_address', 'about',
-        'google_id', 'avatar_url','avatar_name', 'website', 'location', 'reputation_score','page_views',
-        'passionate_about','desired_superpower','favorite_crypto',
+        'username', 'email', 'password', 'wallet_address', 'about', 'google_id', 'avatar_url',
+        'avatar_name', 'website', 'location', 'page_views','passionate_about', 'twitter', 
+        'github', 'youtube'
     ];
 
     /**
@@ -40,17 +40,9 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    
-    public function messages(){
-        return $this->hasMany('App\Messages', 'recipient_id');
-    }
 
-    public function reputations(){
-        return $this->hasMany('App\Reputations','recipient_id');
-    }
-
-    public function log(){
-        return $this->hasMany('App\Log','to_user_id');
+    public function tip(){
+        return $this->hasMany('App\Tips','recipient_id');
     }
 
 }

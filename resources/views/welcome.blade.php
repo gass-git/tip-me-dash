@@ -12,8 +12,8 @@
                         Give fans a new way to show appreciation for your work.
                         </p>
                         <div class="buttons-wrapper mr-0 ml-0 mb-4">
-                            <a id="community-btn" href="{{ route('community_activity') }}" class="btn btn-1 bg-primary"><i class="far fa-comments mr-2"></i>Community activity</a>
-                            <a id="start-btn" href="{{ route('register') }}" class="btn btn-1 bg-primary ml-3"><i class="fas fa-rocket mr-2"></i>Start my page</a>
+                            
+                            <a id="start-btn" href="{{ route('register') }}" class="btn btn-1 bg-primary ml-0"><i class="fas fa-rocket mr-2"></i>Start my page</a>
                             <button href="#myModal" data-toggle="modal" type="button" class="btn play-btn">
                                 <i class="fas fa-play"></i> 
                             </button>
@@ -37,7 +37,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="catchy-title">
-                        <h1>No clicks, <span>just a scan..</span></h1>
+                        <h1>Scan and send<span> digital cash</span></h1>
                     </div>
                 </div>
             </div>
@@ -119,7 +119,7 @@
                         <div class="step">1</div>
                         <h5>Sign up</h5>
                         <p><a href="{{ route('register') }}">Registering</a> won't take you more than a minute. You can 
-                    use your Google acc if you want. </p>
+                    use your Google acc. </p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
@@ -134,7 +134,7 @@
                     <div class="how-it-works-item">
                         <div class="step">3</div>
                         <h5>setup the acc</h5>
-                        <p>Customize your page and remember to set up your wallet address so the QR code is displayed on your <a href="#top" title="Tip Me Dash">TMD</a> page. </p>
+                        <p>Customize your page and enter your DASH wallet address.
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
@@ -142,7 +142,7 @@
                         <div class="step">4</div>
                         <h5>All done!</h5>
                         <p>You can now start sharing your own TMD 
-                        url to recieve tips in Dash and <a href="{{ route('community_activity') }}" >connect with others</a>.</p>
+                        url to recieve tips in Dash and connect with others.</p>
                     </div>
                 </div>
             </div>
@@ -174,65 +174,6 @@
         </div>
     </section>
     <!-- sub header 2 -->
-
-
-
-    <!-- community section-->
-    <section class="community">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="community-title">
-                        <h1>Community</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="row pt-2">
-
-                <div class="col-md-6">
-                    
-                <div class="title-1" style="color:white;">RECENTLY REGISTERED</div>
-
-                @foreach($newcomers->take(10) as $newcomer)
-                @if($username = $newcomer->username)
-                <a class="list-group-item list-group-item-action" href="{{ route('user_page',$username) }}" >
-                    <img id="avatar" src="{{ $newcomer->avatar_url }}"></img>
-                    <span class="username ml-2">{{ $username }}</span>
-                    <span id="join-date" class="float-right">{{ date('F d,Y', strtotime($newcomer->created_at)) }}</span>
-                </a>
-                @endif
-                @endforeach
-
-                </div>
-                <div class="col-md-6">
-                    
-                <div class="title-1" style="color:white;">REPUTATION LEADERBOARD</div>
-
-                @foreach($ranking->take(10) as $rank)
-
-                @if($username = $rank->username)
-                <a class="list-group-item list-group-item-action" href="{{ route('user_page',$username) }}">
-                    <img id="avatar" src="{{ $rank->avatar_url }}"></img>
-                    <span class="username ml-2">{{ $username }}</span>
-                    
-                    
-                    <span id="reputation-info" class="float-right">
-                    <span id="label">Reputation: </span><span id="score">{{ $rank->reputation_score }}</span>
-                    </span>
-
-        
-
-                </a>
-                @endif
-                    
-                @endforeach
-
-                </div>
-                
-            </div>
-        </div>
-    </section>
-    <!-- sub-header section end -->
 
     <!-- footer -->
     <section class="footer pt-4 pb-2 shadow">

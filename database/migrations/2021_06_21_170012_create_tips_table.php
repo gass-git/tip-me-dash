@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Messages extends Migration
+class CreateTipsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,16 @@ class Messages extends Migration
      */
     public function up()
     {
-        Schema::create('messages', function(Blueprint $table){
-            $table->increments('message_id');
+        Schema::create('tips', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('recipient_id');
+            $table->integer('sender_id')->nullable();
             $table->foreign('recipient_id')->references('id')->on('users')->onDelete('cascade');            
-            $table->string('author_id');
-            $table->text('message');
-            $table->integer('likes_it')->nullable;
-            $table->integer('loves_it')->nullable;
-            $table->integer('brilliant')->nullable;
+            $table->float('usd_equivalent',10,8)->nullable();
+            $table->float('dash_amount',10,8)->nullable();
+            $table->string('sent_by')->nullable();
+            $table->text('message')->nullable();
+            $table->string('status');
             $table->timestamps();
         });
     }
@@ -33,6 +34,6 @@ class Messages extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('messages');
+        Schema::dropIfExists('tips');
     }
 }

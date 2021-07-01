@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-/* --------- general routes --------- */
+/* --------- General routes --------- */
 Auth::routes(['verify' => true]);
 Route::get('/', 'Controller@show_welcome');
 Route::get('dashboard', 'DashboardController@index')->name('dashboard')->middleware('verified');
@@ -24,27 +24,23 @@ Route::get('dashboard', 'DashboardController@index')->name('dashboard')->middlew
 Route::get('login/google', 'Auth\LoginController@redirectToProvider');
 Route::get('login/google/callback', 'Auth\LoginController@handleProviderCallback');
 
-/* --------- edit profile ---------- */
-Route::get('edit_profile', 'EditProfileController@show')->name('edit_profile')->middleware('verified');
-Route::post('update_profile', 'EditProfileController@update')->name('update_profile');
-Route::post('change_password','EditProfileController@reset_password')->name('change_password');
-Route::post('delete_acc', 'EditProfileController@delete_acc')->name('delete_acc');
-Route::post('change_email','EditProfileController@change_email')->name('change_email');
+/* --------- Tip POSTS ------------------- */
+Route::post('process_tip/{username}', 'TipController@process_tip');
+Route::post('confirm_tip', 'TipController@confirm_tip')->name('confirm_tip');
+Route::post('unconfirmed', 'TipController@unconfirmed')->name('unconfirmed');
 
-/* --------- community activity ----- */
-Route::get('community_activity', 'CommunityActivityController@show')->name('community_activity');
+/* --------- Edit profile ---------- */
+Route::get('edit_profile', 'SettingsController@show')->name('edit_profile')->middleware('verified');
+Route::post('update_profile', 'SettingsController@update')->name('update_profile');
+Route::post('change_password','SettingsController@reset_password')->name('change_password');
+Route::post('delete_acc', 'SettingsController@delete_acc')->name('delete_acc');
+Route::post('change_email','SettingsController@change_email')->name('change_email');
 
-/* ---------- newcomers -------------- */
-Route::get('newcomers','NewComersController@show')->name('newcomers');
-
-/* --------- user page ------------- */
-Route::post('brilliant','UserPageController@brilliant')->name('brilliant');
-Route::post('likes_it','UserPageController@likes_it')->name('likes_it');
-Route::post('loves_it','UserPageController@loves_it')->name('loves_it');
-Route::post('delete_post', 'UserPageController@delete_post')->name('delete_post');
-Route::post('boost_reputation','UserPageController@boost_reputation')->name('boost_reputation');
-Route::post('post_message/{username}', 'UserPageController@post_message')->name('post_message');
+/* ----------- User page GETS -------------- */
 Route::get('{username}', 'UserPageController@show')->name('user_page');
+
+
+
 
 
 

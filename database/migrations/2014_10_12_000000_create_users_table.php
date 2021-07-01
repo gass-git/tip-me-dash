@@ -24,13 +24,13 @@ class CreateUsersTable extends Migration
             $table->string('avatar_url')->nullable();
             $table->string('avatar_name')->nullable();
             $table->text('about')->nullable();
-            $table->double('reputation_score',8,0)->nullable();
             $table->unsignedBigInteger('page_views')->nullable();
             $table->string('website')->nullable();
             $table->string('location')->nullable();
             $table->string('passionate_about')->nullable();
-            $table->string('favorite_crypto')->nullable();
-            $table->string('desired_superpower')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('github')->nullable();
+            $table->string('youtube')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

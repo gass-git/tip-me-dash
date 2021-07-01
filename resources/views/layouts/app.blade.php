@@ -25,27 +25,28 @@
     <!-- sweet alert 2 -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
-
     <!-- emoji css  -->    
-    <link rel="stylesheet" href="{{asset('css/emojionearea.css')}}">
+    <link rel="stylesheet" href="{{asset('css/emojionearea.min.css')}}">
     <!-- bootstrap css -->
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <!-- main css -->
-    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/main.css?62') }}">
     <!-- font awesome css -->
-    <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
     
     <title>{{ config('app.name', 'Laravel') }}</title>
-</head>
 
     <!-- nav bar -->
     <nav class="navbar p-0">
+        
+        <!----- Brand ----->
         <a class="navbar-brand ml-5 mr-0 p-0" href="{{ url('/') }}">
             <div class="container pr-0">
                     <img class="mr-3" src="{{ asset('images/logo9.png') }}" height="30">
                     <div class="brand-text">Tip Me Dash</div>
             </div>
         </a>
+        <!----------------->
 
         @guest
         <!-- authentication Links -->
@@ -53,6 +54,7 @@
             <a class="btn btn-outline-light ml-0 my-2 my-sm-0 mr-2" href="{{ route('login') }}">Login</a>
             <a class="btn btn-primary" href="{{ route('register') }}">Sign up</a>
         </form> 
+        <!-------------------------->
         
         @else
         <!-- navbar dropdown right section -->
@@ -81,10 +83,6 @@
                 @endif
                 <!------------------------------------------------------->
 
-                <!----- community activity --->
-                <a class="dropdown-item" href="{{ route('community_activity') }}">Community activity</a>
-                <!---------------------------->
-
                 <!----- edit profile link --->
                 <a class="dropdown-item" href="{{ route('edit_profile') }}">{{ __('Edit profile') }}</a>
 
@@ -101,10 +99,13 @@
             </div>
 
         </ul> 
+         <!---- END of navbar dropdown right section ---->
+
         @endguest
     </nav>
-    <!-- end nav bar -->
+</head>
 
     @yield('content')
     @include('sweetalert::alert')
+
 </html>

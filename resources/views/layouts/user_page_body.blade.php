@@ -27,7 +27,7 @@
                         {{ $page_owner->username }} 
                     </div>
                     
-                    <img class="mt-2" id="avatar-img" src="{{asset('images/cheers-bro.png')}}">
+                    <img class="mt-2" id="avatar-img" src="{{ $page_owner->avatar_url }}">
 
                     <!-- About -->
                     <div class="mt-4 mb-4 mr-4 ml-4">

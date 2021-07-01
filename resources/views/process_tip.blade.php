@@ -14,7 +14,7 @@
                     </div> 
                 
                     <!-------- QR ------->
-                    <div class="p-5 mt-3" id="qr_box">
+                    <div id="qr_box">
                         
                         <img 
                             data-toggle="tooltip" 

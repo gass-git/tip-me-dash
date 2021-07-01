@@ -206,6 +206,15 @@ MEDIA
     .dashboard #page-link{
         padding:25px 25px 25px 25px!important;
     }
+
+
+    #modal_QR #qr_box{
+        padding:20px!important;
+    }
+
+    #modal_QR #qr_box img{
+        width:300px!important;
+    }
 }
 
 @media screen and (max-width:390px){
@@ -224,6 +233,14 @@ MEDIA
     }
     #separator-one{
         display:none;
+    }
+
+    #modal_QR #qr_box{
+        padding:10px!important;
+    }
+
+    #modal_QR #qr_box img{
+        width:250px!important;
     }
 
 }
@@ -861,6 +878,8 @@ PROCESS TIP MODAL
     vertical-align: middle;
 }
 #modal_QR #qr_box{
+    padding:50px;
+    margin-top:20px;
     border-radius:4px; 
     display:inline-block; 
     background-color:white;

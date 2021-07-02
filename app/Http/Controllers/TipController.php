@@ -61,6 +61,7 @@ class TipController extends Controller
         $data['usd_equivalent'] = $usd_amount;
         $data['dash_amount'] = $dash_toSend;
         $data['status'] = 'not validated';
+        $data['stamp'] = substr(sha1(rand()), 0, 13);
         $data['created_at'] = Carbon::now();
 
         DB::table('tips')->insert($data);

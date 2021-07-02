@@ -6,6 +6,7 @@ use App\User;
 use App\Tip;
 use App\VisitsRecord;
 use DB;
+use Illuminate\Http\Request;
 
 class UserPageController extends Controller
 {
@@ -69,6 +70,11 @@ class UserPageController extends Controller
         return view('user_page', compact('page_owner','usd_amount','tips','biggest_tip','number_of_tips'));
     }
 
+    function praise(Request $req){
 
+        // Find tip
+        tip::where('id',$req->id)->first()->update(['praise' => $req->praise]);
+
+    }
 
 }

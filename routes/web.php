@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EditProfileController;
+use App\Http\Controllers\UserPageController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,6 +29,9 @@ Route::get('login/google/callback', 'Auth\LoginController@handleProviderCallback
 Route::post('process_tip/{username}', 'TipController@process_tip');
 Route::post('confirm_tip', 'TipController@confirm_tip')->name('confirm_tip');
 Route::post('unconfirmed', 'TipController@unconfirmed')->name('unconfirmed');
+
+/* --------- Praise tip ------------------ */
+Route::post('praise', 'UserPageController@praise');
 
 /* --------- Edit profile ---------- */
 Route::get('edit_profile', 'SettingsController@show')->name('edit_profile')->middleware('verified');

@@ -22,6 +22,8 @@ class CreateTipsTable extends Migration
             $table->float('dash_amount',10,8)->nullable();
             $table->string('sent_by')->nullable();
             $table->text('message')->nullable();
+            $table->string('praise')->nullable();
+            $table->string('stamp');
             $table->string('status');
             $table->timestamps();
         });

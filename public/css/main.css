@@ -11,19 +11,21 @@ GLOBAL STYLE
 html {scroll-behavior: smooth;}
 
 :root{
-    --montserrat:font-family: 'montserrat',sans-serif;
+    --montserrat:'Montserrat',sans-serif;
     --dash-blue:#008de4;
     --light-gray-1:#f8f8f8;
     --light-gray-2:#ecece9;
     --text-color-1:#808080;
     --bright-yellow-1:#f8f003;
-    --dark-yellow:#F6BE00;
+    --dark-yellow:rgb(213, 182, 10);
     --banana-yellow:#FEDD00;
     --deep-blue-1:#174093;
     --light-deep-blue:#225ccf;
     --blue-gradient-1: linear-gradient(to right, #037ac4, #0d3b97);
     --blue-gradient-2: linear-gradient(to right, #026daf, #1046b3);
     --border-radius-7: 7px;
+    --box-border-1:1px solid #dadada;
+    --box-bg-1:rgba(255, 255, 255, 0.9);
 }
 /* Remove number arrows on inputs */
 input::-webkit-outer-spin-button,
@@ -35,7 +37,7 @@ input[type=number] {-moz-appearance: textfield;}
 body{
     font-family: 'open sans', sans-serif;
     line-height: 1.5;
-    background-color: #f5f7fa;
+    background-color: #ffffff;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'%3E%3Cpolygon fill='%23d4e9ff' points='957 450 539 900 1396 900'/%3E%3Cpolygon fill='%23b3cae5' points='957 450 872.9 900 1396 900'/%3E%3Cpolygon fill='%23cce6f8' points='-60 900 398 662 816 900'/%3E%3Cpolygon fill='%23b9d1e9' points='337 900 398 662 816 900'/%3E%3Cpolygon fill='%23c5e2ef' points='1203 546 1552 900 876 900'/%3E%3Cpolygon fill='%23bfd8ed' points='1203 546 1552 900 1162 900'/%3E%3Cpolygon fill='%23c0dfe7' points='641 695 886 900 367 900'/%3E%3Cpolygon fill='%23c5dff1' points='587 900 641 695 886 900'/%3E%3Cpolygon fill='%23bcdade' points='1710 900 1401 632 1096 900'/%3E%3Cpolygon fill='%23cce5f5' points='1710 900 1401 632 1365 900'/%3E%3Cpolygon fill='%23bad6d5' points='1210 900 971 687 725 900'/%3E%3Cpolygon fill='%23d4ecf9' points='943 900 1210 900 971 687'/%3E%3C/svg%3E");
     background-attachment: fixed;
     background-size: cover;
@@ -82,8 +84,9 @@ input:focus::placeholder {
 }
 .title-1{
     text-align:center; 
+    font-family: var(--montserrat);
     color:var(--light-deep-blue); 
-    font-size:15px; 
+    font-size:17px; 
     font-weight:600; 
 }
 .accordion-card-header{
@@ -897,8 +900,8 @@ USER PAGE - LAYOUT
 ------------------------*/
 .user-page{
     font-family:var(--montserrat);
-    color:#c4a699;
-    max-width:1000px;
+    color:var(--text-color-1);
+    max-width:1100px;
     margin-top:0px;
     padding-top:50px;
     padding-bottom:100px;
@@ -915,16 +918,16 @@ USER PAGE - LAYOUT
     min-height:280px;
     align-items: center;
     text-align: center;
-    border:1px solid #d6ddfc;
-    background-color: rgba(255, 255, 255, 0.8);
+    border:var(--box-border-1);
+    background-color: var(--box-bg-1);
 }
 .user-page .profile-box .username{
-    padding-top:10px;
+    margin-top:20px;
     border-radius:10px 10px 0px 0px;
-    height:50px;
+    height:40px;
     width:100%;
     font-weight: 700;
-    font-size:21px; 
+    font-size:22px; 
     color:var(--light-deep-blue);
     text-transform: capitalize;
     text-align: center; 
@@ -938,21 +941,26 @@ USER PAGE - LAYOUT
 }
 .user-page .profile-box #about{
     text-align:justify; 
-    font-size:13px; 
-    font-weight:300;
+    font-size:15px; 
+    font-weight:400;
+    font-family:'Roboto', sans-serif;
 }
 .user-page #simpleBox{
     border-radius:10px;
-    border:1px solid #d6ddfc;
-    background-color: rgba(255, 255, 255, 0.8);
+    border:var(--box-border-1);
+    background-color: var(--box-bg-1);
 }
 .user-page .form-wrapper{
-    padding:20px;
+    padding-top:25px;
+    padding-bottom: 15px;
+    padding-left:35px;
+    padding-right:35px;
     border-radius: 10px;
     width:100%;
     height:auto;
     display: flex;
-    background-color: rgb(255,255,255,0.6);
+    background-color: var(--box-bg-1);
+    border:var(--box-border-1);
 }
 .user-page .form-wrapper .box1{
     padding:10px 10px 10px 0px;
@@ -972,15 +980,14 @@ USER PAGE - LAYOUT
     padding:10px 0 10px 0;
 }
 .user-page .form-wrapper input[type=text]{
-    font-family: var(--montserrat);
-    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
     font-weight: 500;
     outline:none;
     width: 100%;
-    height:35px;
+    height:40px;
     padding: 10px 5px 8px 10px;
     display: inline-block;
-    border: none;
     border: 1px solid rgb(77, 213, 255, 0.8);
     border-radius: 5px;
     background-color: rgb(0, 141, 228, 0.1);
@@ -995,9 +1002,10 @@ USER PAGE - LAYOUT
 
 .user-page .form-wrapper input[type=number]{
     outline:none;
-    font-family:var(--montserrat);
-    font-size:25px;
+    font-family:'Roboto', sans-serif;
+    font-size:30px;
     width:100%;
+    color:var(--light-deep-blue);
     height: 40px;
     margin-top: 8px;
     text-align: center;
@@ -1015,24 +1023,21 @@ USER PAGE - LAYOUT
 }
 .about-wrapper{
     width: 100%;
-    padding-top:20px;
-    padding-bottom:20px;
-    padding-left:25px;
-    padding-right:20px;
+    padding-top:25px;
+    padding-bottom:25px;
+    padding-left:35px;
+    padding-right:15px;
     border-radius: 10px;
-    border:1px solid #d6ddfc;
-    background-image: url('/images/bg-dash.png');
+    border:var(--box-border-1);
     background-color:rgb(255, 255, 255,0.8);
-    background-size: cover;
-    background-repeat: no-repeat;
 }
 .about-wrapper .extra-info b{
     color:var(--dash-blue);
 }
 .about-wrapper .extra-info{
-    font-family:sans-serif;
-    font-weight:500; 
-    font-size:13px;
+    font-family:'Roboto', sans-serif;
+    font-weight:400; 
+    font-size:14px;
 }
 .tip-btn{
     background-color: rgb(1, 32, 96);
@@ -1042,7 +1047,7 @@ USER PAGE - LAYOUT
     padding: 10px 20px;
     border: none;
     cursor: pointer;
-    height: 84px;
+    height: 89px;
     width: 100%;
     border-radius: 5px;
     background-image: linear-gradient(180deg, #404c91, #333d78);
@@ -1051,31 +1056,59 @@ USER PAGE - LAYOUT
 .tip-btn:active{
     background-image: linear-gradient(0deg, #404c91, #333d78);
 }  
-.guestbook{
-    font-family: sans-serif;
-    padding-top:20px;
-    padding-bottom:20px;
-    border-radius: 10px;
-    background-color: rgb(255, 255, 255,0.8);
-}
-.guestbook #no-tips{
-    color:#225ccf;
-    text-transform:capitalize;
-    font-weight:bold; 
-    font-size:16px;
-}
-.tip-info{
+.tips-wrapper{
     width:100%;
-    font-family:sans-serif;
     font-weight:500; 
-    font-size:13px;
+    font-size:14px;
     display: inline-block;
     border-radius: 10px;
-    border:1px solid #d6ddfc;
+    background-color:var(--box-bg-1);
+    border:var(--box-border-1);
 }
-.tip-info span{
-    font-size:13px;
-    color:var(--text-color-1);
-    font-weight: bold;
+.tips-wrapper #profile{
+    text-align:center;
+    width:50px;
+    height:50px;
+}
+.tips-wrapper #profile #incognito{
+    font-size:40px; 
+    color:#646464;
+}
+.tips-wrapper #profile #with-name{
+    font-size:40px; 
+    color:#008de4;
+}
+.tips-wrapper .name{
+    color:#646464;
+    font-family:'Roboto', sans-serif;
+}
+.tips-wrapper .tip-title{
+    font-family:var(--montserrat);
+    color:#646464; 
+    font-weight:700; 
+    font-size:15px;
+    word-spacing: 2px;
+}
+.tips-wrapper .tip-title span{
+    color:var(--dash-blue);
+    font-family:var(--montserrat);
+    font-size:15px;
+}
+.tips-wrapper .msg{
+    color:#818181; 
+    font-family: 'Roboto', sans-serif;
+    background-color:rgb(0, 141, 228, 0.1);
+    font-weight: 400;
+    border-radius:3px;
+    word-spacing: 1px;
+    line-height: 22px;
+}
+.tips-wrapper .tip-without-msg{
+    color: #ffffff;
+    padding: 12px 20px 12px 20px;
+    font-size: 15px;
+    width:100%;
+    background-color:rgb(0, 141, 228,0.8);
+    border-radius: 10px;
     word-spacing: 2px;
 }

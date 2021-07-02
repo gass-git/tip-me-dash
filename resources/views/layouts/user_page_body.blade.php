@@ -1,9 +1,10 @@
 <!---- Style to override emojiOneArea plugin ---->
 <style>
 .custom-textarea {
-    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
     width:100%;
-	height: 84px!important;
+	height: 89px!important;
 	border: 1px solid rgb(77, 213, 255, 0.8);
 	border-radius: 5px;
     background-color:rgb(0, 141, 228, 0.1);
@@ -30,7 +31,7 @@
                     <img class="mt-2" id="avatar-img" src="{{ $page_owner->avatar_url }}">
 
                     <!-- About -->
-                    <div class="mt-4 mb-4 mr-4 ml-4">
+                    <div style="margin:30px;">
                         <div id="about">
                         @if($page_owner->about)
                             {{ $page_owner->about }}
@@ -46,7 +47,7 @@
 
                 <!-- Social links --->
                 @if($page_owner->twitter OR $page_owner->youtube OR $page_owner->github)
-                    <div class="pl-4 pt-3 pr-3 pb-3 mt-3" id="simpleBox">
+                    <div class="pl-4 pt-4 pr-3 pb-4 mt-3" id="simpleBox">
                         
                         @if($page_owner->twitter)
                             <div class="mt-0">
@@ -77,10 +78,10 @@
                 <!-- END of social links -->
 
                 @if($number_of_tips > 1)
-                <div class="pl-4 pt-3 pr-4 pb-4 mt-3" id="simpleBox" style="font-family: sans-serif;font-size:13px;">
+                <div class="pl-4 pt-4 pr-4 pb-4 mt-3" id="simpleBox" style="font-family: sans-serif;font-size:15px;">
                     <i class="fas fa-trophy mr-2" style="color:var(--dark-yellow);"></i><b style="color:#008de4;">Hall of Fame</b>
                     <hr class="mt-1 mr-4">
-                    <div style="font-size:11px;">
+                    <div style="font-size:12px;">
                         <b><span style="color:var(--light-deep-blue);">
                                 @if($biggest_tip->sent_by)
                                 {{ $biggest_tip->sent_by }}
@@ -177,7 +178,7 @@
                           enctype="multipart/form-data" >
                           @csrf 
 
-                        <div class="form-wrapper pr-4 pl-4 pb-0" style="border:1px solid #d6ddfc;background-color: rgba(255, 255, 255, 0.8);">
+                        <div class="form-wrapper">
 
                             <div class="box1 pb-0">
 
@@ -190,7 +191,7 @@
                                            class="form-control"
                                            readonly>
                                 @else
-                                    <input name="name" type="text" class="form-control" placeholder="name (optional)" value="{{ old('name') }}">
+                                    <input name="name" type="text" class="form-control" placeholder="Name" value="{{ old('name') }}">
                                     @error('name')
                                         <span style="color:red; font-size:13px;">
                                             <i class="fas fa-exclamation-circle"></i>
@@ -214,7 +215,7 @@
 
                             <!-- optional message input -->
                             <div class="box2">
-                                <textarea name="msg" class="custom-textarea" id="msg" placeholder="optional message">{{ old('msg') }}</textarea>
+                                <textarea name="msg" class="custom-textarea" id="msg" placeholder="Optional message">{{ old('msg') }}</textarea>
                                 @error('msg')
                                     <span style="color:red; font-size:13px;">
                                         <i class="fas fa-exclamation-circle"></i>
@@ -256,58 +257,212 @@
                 </div>    
                 <!------------------->
 
-                <div class="title-1 mt-4 mb-2">RECENT TIPS</div>
-
-                <!-- guestbook -->
+                <div class="title-1 ml-1 mt-4 mb-3">RECENT TIPS</div>
+ 
                 
-                @if($number_of_tips < 1)
-                    <div class="tip-info pt-2 pr-0 pl-4 mt-3 pb-2" style="background-color: rgba(255, 255, 255, 0.3);">
-                        <span style="color:var(--light-deep-blue); text-transform:capitalize;">{{ $page_owner->username }}</span> 
-                        has not received any tips yet
-                    </div>
-                @endif
+                
+                <!--- Tips wrapper --->
+                <div class="tips-wrapper pl-5 pt-0 pr-5 pb-0">
 
-                @foreach($tips as $tip)
-
-                    @if($tip->message)
-                        
-                        <div class="tip-info pt-3 pr-0 pl-4 mt-3 pb-0" style="background-color: rgba(255, 255, 255, 0.7);">
-                            <span style="color:var(--light-deep-blue); text-transform:capitalize;">
-                                @if($tip->sender_id)
-                                    @php $tipper = App\User::where('id',$tip->sender_id)->first()->username; @endphp
-                                    <a href='/{{ $tipper }}'>{{ $tipper }}</a>
-                                @elseif($tipper = $tip->sent_by)
-                                    {{ $tipper }}
-                                @else 
-                                    Incognito
-                                @endif
-                            </span> 
-                            <span>tipped</span>
-                            <span style="color:#008de4;">{{ $tip->dash_amount }} <b style="font-size:16px; ">ᕭ</b></span>
-                            <p class="mt-3 mr-4">{{ $tip->message }}</p>
-                            <p class="mt-0 mr-4 mb-2" style="color: #c2c2c2; font-size: 11px; float: right;">
-                                Equivalent to ${{ $tip->usd_equivalent }} USD at the moment of transfer
-                            </p>
+                    @if($number_of_tips < 1)
+                        <div class="row mt-5 mb-5" style="border-radius: 3px; margin-bottom:10px;">
+                            <b class="mr-1" style="color:var(--light-deep-blue);">{{ $page_owner->username }}</b>has not received any tips yet.
                         </div>
-
-                    @else
-
-                        <div class="tip-info pt-2 pr-0 pl-4 mt-3 pb-2" style="background-color: rgba(255, 255, 255, 0.3);">
-                            <span style="color:var(--light-deep-blue);">@if($tip->sent_by){{ $tip->sent_by }}@else Incognito @endif</span> 
-                            <span>tipped</span> 
-                            <span style="color:#008de4;">{{ $tip->dash_amount }} <b style="font-size:16px; ">ᕭ</b></span>
-                            <div class="mt-1 mr-4 mb-0" style="color: rgb(0, 141, 228,0.4); font-size: 17px; float: right;">
-                                <i class="fas fa-info-circle" title="Equivalent to ${{ $tip->usd_equivalent }} USD at the moment of transfer"></i>
-                            </div>
-                        </div>
-
                     @endif
+                        
+                    @foreach($tips as $tip)
+                    
+                        @if($tip->sender_id)
+                            @php 
+                                $registered_user = App\User::where('id',$tip->sender_id)->first();
+                                $tipper = $registered_user->username; 
+                                $avatar_url = $registered_user->avatar_url;
+                            @endphp
+                        @endif
 
-               @endforeach
+
+                        <!--- Tip post --->
+                        <div class="row mt-5 mb-5" style="border-radius: 3px; margin-bottom:10px;">
+
+                            <!-- Avatar and name -->
+                            <div class="col-sm-2 p-3" style="text-align:center;">
+                                
+                                @if($tip->sender_id)
+
+                                    <!-- REGISTERED USER -->
+                                    <a href='/{{ $tipper }}'>
+                                        <div class="col-sm-2 p-3" style="text-align:center;">
+                                            <img width="70" src="{{ $avatar_url }}" style="border-radius:50%;">
+                                            <div class="mt-1">{{ $tipper }}</div>
+                                        </div>    
+                                    </a>
+                                    <!--------------------->
+
+                                @elseif($tipper = $tip->sent_by)
+
+                                    <!-- NOT REGISTERED BUT ENTERED NAME -->
+                                    <div class="row align-items-center mx-auto" id="profile">
+                                        <img src="{{ Identicon::getImageDataUri($tip->stamp) }}" width="50">
+                                    </div>
+                                    <div class="name mt-1">{{ $tipper }}</div>
+                                    <!------------------------------------->
+
+                                @else 
+
+                                    <!-- INCOGNITO -->
+                                    <div class="row align-items-center mx-auto" id="profile">
+                                        <img src="{{ Identicon::getImageDataUri($tip->stamp) }}" width="50">
+                                    </div>
+                                    <div class="name mt-1">Incognito</div>
+                                    <!--------------->
+                                @endif
+
+                            </div>
+                            <!---- END of avatar and name ------>
+
+                            <!-- Message -->
+                            <div class="col-sm-9">
+                                
+                                <div class="tip-title mb-2">
+
+                                    @if($biggest_tip->id == $tip->id AND $number_of_tips > 1)
+                                        <i class="fas fa-trophy mr-1" 
+                                        title="Biggest tip equivalent to ${{ $tip->usd_equivalent }} at the moment of transfer" 
+                                        style="cursor:pointer;color:var(--dark-yellow);"></i>
+                                    @else
+                                    <i class="fas fa-donate ml-1 mr-1" title="Equivalent to US${{ $tip->usd_equivalent }} at the moment of transfer" style="color:#b1b1b1;cursor:pointer;";></i>
+                                    @endif
+
+                                    Tipped <span>{{ $tip->dash_amount }} ᕭ</span>
+
+                                </div>
+
+                                <div class="msg pl-4 pt-3 pr-4 pb-3">
+                                    @if($msg = $tip->message)
+                                        {{ $msg }}
+                                    @else
+                                        @if($tipper = $tip->sent_by) <b>{{ $tipper }}</b> @else The supporter @endif</b> didn't write a message
+                                    @endif
+                                </div>
+
+                                <div class="mt-3" style="color: #c2c2c2; font-size: 11px;">
+                                    
+                                    @php
+
+                                        $praise = App\tip::where('id',$tip->id)->first()->praise;
+
+                                    @endphp
 
 
-                <!-- end of guestbook -->
-                
+                                    <!-- Visitor not logged in -->
+                                    @guest
+
+                                        <span class="mr-1">Received in: {{ \Carbon\Carbon::parse($tip->created_at)->isoFormat('MMM Do YYYY')}}</span>
+
+                                        @if($praise === 'like')
+                                            | <b class="ml-1" style="text-transform: capitalize;">
+                                            <i class="fas fa-thumbs-up" style="color:var(--dash-blue);"></i> {{ $page_owner->username }}</b> likes this.
+                                        @endif
+                                        
+                                        @if ($praise === 'love')
+                                            | <b class="ml-1" style="text-transform: capitalize;">
+                                            <i class="fas fa-heart" style="color:red;"></i> {{ $page_owner->username }}</b> appreciates this.
+                                        @endif
+
+                                        @if ($praise === 'brilliant')
+                                            | <b class="ml-1" style="text-transform: capitalize;">
+                                            <i class="fas fa-lightbulb" style="color:rgb(238, 204, 13);"></i> {{ $page_owner->username }}</b> thinks this is brilliant. 
+                                        @endif
+
+                                        @if ($praise === 'cheers')
+                                            | <b class="ml-1" style="text-transform: capitalize;">
+                                            <i class="fas fa-beer" style="color:#FFA900;"></i></b> Cheers!
+                                        @endif
+                                            
+                                    @endguest
+                                    <!---------------------------->
+
+
+
+                                    <!-- Logged in user -->
+                                    @auth
+
+                                        <!-- Visitor is the page owner -->
+                                        @if(Auth::user()->id === $page_owner->id)
+
+                                            <span class="mr-1">Received in: {{ \Carbon\Carbon::parse($tip->created_at)->isoFormat('MMM Do YYYY')}}</span>
+                                            <b class="ml-1" style="text-transform: capitalize;">
+
+                                            <span style="float:right;" id="{{ $tip->id }}">
+                                                
+                                                @if($praise === 'like')
+                                                    <a class="like mr-3"  title="Like it" style="color:#008de4; cursor:pointer;"><i class="fas fa-thumbs-up" style="font-size:18px;"></i></a>
+                                                @else
+                                                    <a class="like mr-3"  title="Like it" style="color:rgb(211, 211, 211); cursor:pointer;"><i class="fas fa-thumbs-up" style="font-size:18px;"></i></a>
+                                                @endif
+                                                
+                                                @if($praise === 'love')
+                                                    <a class="love mr-3" title="love it"  style="color:red; cursor:pointer;"><i class="fas fa-heart" style="font-size:18px;"></i></a>
+                                                @else
+                                                    <a class="love mr-3" title="love it"  style="color:rgb(211, 211, 211); cursor:pointer;"><i class="fas fa-heart" style="font-size:18px;"></i></a>
+                                                @endif
+
+                                                @if($praise === 'brilliant')
+                                                    <a class="brilliant mr-3" title="It's brilliant" style="color:rgb(238, 204, 13); cursor:pointer;"><i class="fas fa-lightbulb" style="font-size:18px;"></i></a>
+                                                @else
+                                                    <a class="brilliant mr-3" title="It's brilliant" style="color:rgb(211, 211, 211); cursor:pointer;"><i class="fas fa-lightbulb" style="font-size:18px;"></i></a>
+                                                @endif
+
+                                                @if($praise === 'cheers')
+                                                    <a class="cheers mr-3" title="Cheers!"  style="color:#FFA900; cursor:pointer;"><i class="fas fa-beer" style="font-size:18px;"></i></a>
+                                                @else
+                                                    <a class="cheers mr-3" title="Cheers!"  style="color:rgb(211, 211, 211); cursor:pointer;"><i class="fas fa-beer" style="font-size:18px;"></i></a>
+                                                @endif
+
+                                            </span></b>
+
+
+                                        <!-- Visitor is NOT the page owner -->    
+                                        @else
+                                            <span class="mr-1">Received in: {{ \Carbon\Carbon::parse($tip->created_at)->isoFormat('MMM Do YYYY')}}</span>
+                                            
+                                            @if($praise === 'like')
+                                                | <b class="ml-1" style="text-transform: capitalize;">
+                                                <i class="fas fa-thumbs-up" style="color:var(--dash-blue);"></i> {{ $page_owner->username }}</b> likes this.
+                                            @endif
+                                            
+                                            @if ($praise === 'love')
+                                                | <b class="ml-1" style="text-transform: capitalize;">
+                                                <i class="fas fa-heart" style="color:red;"></i> {{ $page_owner->username }}</b> appreciates this.
+                                            @endif
+
+                                            @if ($praise === 'brilliant')
+                                                | <b class="ml-1" style="text-transform: capitalize;">
+                                                <i class="fas fa-lightbulb" style="color:rgb(238, 204, 13);"></i> {{ $page_owner->username }}</b> thinks this is brilliant. 
+                                            @endif
+
+                                            @if ($praise === 'cheers')
+                                                | <b class="ml-1" style="text-transform: capitalize;">
+                                                <i class="fas fa-beer" style="color:#FFA900;"></i></b> Cheers!
+                                            @endif
+
+                                        @endif
+
+                                    @endauth  
+                                    <!---------------------->
+
+
+                                </div>
+
+                            </div>
+                            <!---- END of message -->
+
+                        </div>
+                        <!--- END of tip post --->
+
+                    @endforeach
+
+                </div>
                 <!--  pagination -->
                 <center>
                     <div class="mt-3" style="display:inline-block;">
@@ -319,6 +474,7 @@
             </div>  
         </div>
 
+        
         <!-- modal:dont know how it works? -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">

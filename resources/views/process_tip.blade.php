@@ -141,12 +141,15 @@
 
                                 if(amount == dash_toSend){
 
+                                    /* Get transaction id */
+                                    var txid = data.txs[A].txid;
+
                                     $.ajax({
                                         method: 'POST',
                                         url: "{{route('confirm_tip')}}",
                                         async: false,
                                         data: {
-                                            _token: '{{ csrf_token() }}', tip_id: id
+                                            _token: '{{ csrf_token() }}', tip_id: id, transaction_id: txid
                                         },
                                         success:function(){
                                             clearInterval(interval);

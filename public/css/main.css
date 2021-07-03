@@ -901,7 +901,7 @@ USER PAGE - LAYOUT
 .user-page{
     font-family:var(--montserrat);
     color:var(--text-color-1);
-    max-width:1100px;
+    max-width:1000px;
     margin-top:0px;
     padding-top:50px;
     padding-bottom:100px;
@@ -1082,26 +1082,26 @@ USER PAGE - LAYOUT
     color:#646464;
     font-family:'Roboto', sans-serif;
 }
-.tips-wrapper .tip-title{
+.tip-title{
     font-family:var(--montserrat);
     color:#646464; 
     font-weight:700; 
     font-size:15px;
     word-spacing: 2px;
 }
-.tips-wrapper .tip-title span{
+.tip-title span{
     color:var(--dash-blue);
     font-family:var(--montserrat);
     font-size:15px;
 }
-.tips-wrapper .msg{
-    color:#818181; 
+.msg{
+    color:#525252; 
     font-family: 'Roboto', sans-serif;
-    background-color:rgb(0, 141, 228, 0.1);
-    font-weight: 400;
+    font-weight: 500;
     border-radius:3px;
     word-spacing: 1px;
     line-height: 22px;
+    text-align:justify;
 }
 .tips-wrapper .tip-without-msg{
     color: #ffffff;
@@ -1111,4 +1111,17 @@ USER PAGE - LAYOUT
     background-color:rgb(0, 141, 228,0.8);
     border-radius: 10px;
     word-spacing: 2px;
+}
+.tip-username{
+    font-family: 'Roboto', sans-serif;
+    font-size:14px;
+    text-transform: capitalize;
+    font-weight: 500;
+}
+.tip-box{
+    /*background-image: linear-gradient(to right,  rgb(0, 141, 228, 0.3) 0%,rgb(0, 141, 228, 0.3) 15%,rgb(0, 141, 228, 0.1) 15%,rgb(0, 141, 228, 0.1) 100%);*/
+    border-radius:10px;
+    padding-left:35px;
+    background-color:rgb(0, 141, 228, 0.1);
+    border: 1px solid rgba(41, 176, 218, 0.8);
 }

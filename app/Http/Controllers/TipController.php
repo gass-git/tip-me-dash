@@ -16,7 +16,7 @@ class TipController extends Controller
         
         $req->validate([
             'msg' => ['nullable','max:300'],
-            'name' => ['nullable','max:25','regex:/^[a-zA-Z0-9 @]+$/'],
+            'name' => ['nullable','max:25'],
         ]);
         $page_owner = User::where('username', $req->username)->first();
 
@@ -61,7 +61,6 @@ class TipController extends Controller
         $data['usd_equivalent'] = $usd_amount;
         $data['dash_amount'] = $dash_toSend;
         $data['status'] = 'not validated';
-        $data['stamp'] = substr(sha1(rand()), 0, 13);
         $data['created_at'] = Carbon::now();
 
         DB::table('tips')->insert($data);
@@ -107,8 +106,7 @@ class TipController extends Controller
     }
 
     function confirm_tip(Request $req){
-
-        Tip::where('id',$req->tip_id)->update(['status' => 'confirmed','updated_at' => Carbon::now()]);
+        Tip::where('id',$req->tip_id)->update(['status' => 'confirmed','stamp' => $req->transaction_id,'updated_at' => Carbon::now()]);
         toast("Tip confirmed",'success');
     }
 

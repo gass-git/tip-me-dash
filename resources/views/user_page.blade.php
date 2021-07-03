@@ -6,7 +6,7 @@
 
     // ------- global variables ------------
     var csrf_token = '{{ csrf_token() }}';
-    var grey = 'rgb(211, 211, 211)';
+    var grey = 'rgb(175, 175, 175)';
     var dark_yellow = 'rgb(238, 204, 13)';
     var beer_yellow = '#FFA900';
     var dash_blue = '#008de4';
@@ -32,7 +32,7 @@
         $('#' + tip_id).children().eq(1).css('color',grey);
         $('#' + tip_id).children().eq(1).attr('title','Love it');
         $('#' + tip_id).children().eq(2).css('color',grey);
-        $('#' + tip_id).children().eq(2).attr('title',"It's brilliant!");
+        $('#' + tip_id).children().eq(2).attr('title',"Brilliant");
         $('#' + tip_id).children().eq(3).css('color',grey);
         $('#' + tip_id).children().eq(3).attr('title','Cheers!');
         
@@ -64,7 +64,7 @@
         $('#' + tip_id).children().eq(0).css('color',grey);
         $('#' + tip_id).children().eq(0).attr('title','Like it');
         $('#' + tip_id).children().eq(2).css('color',grey);
-        $('#' + tip_id).children().eq(2).attr('title',"It's brilliant!");
+        $('#' + tip_id).children().eq(2).attr('title',"brilliant");
         $('#' + tip_id).children().eq(3).css('color',grey);
         $('#' + tip_id).children().eq(3).attr('title','Cheers!');
         
@@ -130,7 +130,7 @@
         $('#' + tip_id).children().eq(1).css('color',grey);
         $('#' + tip_id).children().eq(1).attr('title','Love it');
         $('#' + tip_id).children().eq(2).css('color',grey);
-        $('#' + tip_id).children().eq(2).attr('title','It is brilliant!');
+        $('#' + tip_id).children().eq(2).attr('title','brilliant');
 
         $.ajax({
             method:'post',

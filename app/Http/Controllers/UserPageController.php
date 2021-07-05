@@ -103,6 +103,7 @@ class UserPageController extends Controller
         $user->header_img_name = $img_new_name;
         $user->save();
         
+        toast('Changes saved!','success');
         return redirect()->back();
     }
 

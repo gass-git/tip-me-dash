@@ -18,15 +18,8 @@
         
         <!-- Header image -->
         @guest
-
-            @if($header_img_url = $page_owner->header_img_url)
-                <div class="header-img w-100" style="background-image:url({{ $header_img_url }})">
+                <div class="header-img w-100" style="background-image:url({{ $page_owner->header_img_url }})">
                 </div>
-            @else
-                <div class="header-img w-100" style="background-image:url({{ asset('images/header-img.jpg') }})">
-                </div>  
-            @endif
-
         @endguest
 
         @auth
@@ -36,49 +29,22 @@
 
                 <form class="main-form" action="{{ url('upload_header_img') }}" method="post" enctype="multipart/form-data">
                 @csrf
-
-                    @if($img_url = $page_owner->header_img_url)
-                        
-                        <div class="header-img w-100" style="background-image:url({{ $img_url }})">
-
-                            <input type="file" name="input" id="input" style="display:block">
-                            <button type="submit">save</button>
+                    <div class="header-img w-100 d-flex align-items-end pr-2" style="background-image:url({{ $page_owner->header_img_url }})">
+                        <div class="ml-auto">
+                            <label class="btn btn-sm btn-outline-light mr-2" for="input" id="input-btn" type="file" name="input">Change cover</label>
+                            <input type="file" name="input" id="input" style="display:none">
+                            <button id="save-btn" class="btn btn-sm btn-outline-success mr-2 mb-2" type="submit" style="display:none;">save</button>
+                            <a id="cancel-btn" class="btn btn-sm btn-outline-danger mr-2 mb-2" style="display:none;" href="/{{ $page_owner->username }}">Cancel</a>
                         </div>
-
-                    @else
-                        
-                        <div class="header-img w-100" style="background-image:url({{ asset('images/header-img-2.jpg') }})">
-                            
-                            <!-- Upload image button -->
-                            <input type="file" name="input" id="input" style="display:block">
-                            <!------------------------->
-                            <button type="submit">save</button>
-                        </div>
-
-                    @endif   
-
-                </form>
-                    
-            @else
-
-                @if($header_img_url = $page_owner->header_img_url)
-                    <div class="header-img w-100" style="background-image:url({{ $header_img_url }})">
                     </div>
-                @else
-                    <div class="header-img w-100" style="background-image:url({{ asset('images/header-img-2.jpg') }})">
-                    </div>  
-                @endif   
+                </form>  
 
+            @else
+                <div class="header-img w-100" style="background-image:url({{  $page_owner->header_img_url }})">
+                </div>
             @endif
 
         @endauth
-        
-        <script>
-
-        
-
-        </script>    
-        
         <!---- END of header image ---->
 
         <div class="user-page container">

@@ -4,6 +4,7 @@
 
 <script>
 
+    // -------- Change cover image ------
     $("#input").change(function(){
         readURL(this);
     });
@@ -16,13 +17,16 @@
             reader.onload = function (e) {
                 console.log(e.target.result)
                 $('.header-img').css('background-image','url('+e.target.result+')');
+                $('#input').css('display','none');
+                $('#cancel-btn').removeAttr('style');
+                $('#save-btn').removeAttr('style');
             }
 
             reader.readAsDataURL(input.files[0]);
         }
     }
+    // --------------------------------
 
-    
 
     // ------- global variables ------------
     var csrf_token = '{{ csrf_token() }}';

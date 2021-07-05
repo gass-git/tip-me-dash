@@ -30,7 +30,7 @@
                 <form class="main-form" action="{{ url('upload_header_img') }}" method="post" enctype="multipart/form-data">
                 @csrf
                     <div class="header-img w-100 d-flex align-items-end pr-2" style="background-image:url({{ $page_owner->header_img_url }})">
-                        <div class="ml-auto">
+                        <div class="ml-auto" style="z-index:2;">
                             <label class="btn btn-sm btn-outline-light mr-2" for="input" id="input-btn" type="file" name="input">Change cover</label>
                             <input type="file" name="input" id="input" style="display:none">
                             <button id="save-btn" class="btn btn-sm btn-outline-success mr-2 mb-2" type="submit" style="display:none;">save</button>
@@ -54,7 +54,7 @@
                 <div class="col-sm-3 p-0 ml-5">
 
                     <!-- User profile -->
-                    <div class="profile-box shadow">
+                    <div class="profile-box pb-4 shadow">
 
                         <div class="avatar" style="background-image:url({{ $page_owner->avatar_url }})"></div>
 
@@ -71,84 +71,70 @@
                             @endif
                             </p>
 
-                            <b>Passionate About</b>
-                            <br>
-                            <p>
                             @if($passion = $page_owner->passionate_about) 
-                                {{ $passion }} 
-                            @else 
-                                N/A 
+                                <b>Passionate About</b>
+                                <br>
+                                <p>{{ $passion }}</p>
                             @endif
-                            </p>
-
-                            <b>Website</b>
-                            <br>
-                            <p>
+                            
                             @if($website_url = $page_owner->website)
                                 @php
                                     $input = $website_url;
-
-                                    // in case scheme relative URI is passed, e.g., //www.google.com/
                                     $input = trim($website_url, '/');
-
-                                    // If scheme not included, prepend it
                                     if (!preg_match('#^http(s)?://#', $input)) {$input = 'http://' . $input;}
-
                                     $urlParts = parse_url($input);
-
-                                    // remove www
                                     $friendly_url = preg_replace('/^www\./', '', $urlParts['host']); 
                                 @endphp
+                                <b>Website</b>
+                                <br>
+                                <p>
                                 <i class="fas fa-link mr-1"></i>
-                                <a href="{{ $website_url }}" target="_blank" style="color:#c4a699;">
-                                    {{ $friendly_url }} 
-                                </a>
-                            @else
-                                N/A
+                                <a href="{{ $website_url }}" target="_blank">{{ $friendly_url }}</a>
+                                </p>
                             @endif
-                            </p>
-
+                            
                             <b>Profile Views:</b> {{ $page_owner->page_views }}
 
                         </div>
                         <!-- END of about section -->
                             
-                        <hr class="mx-auto" style="width:80%;">
-
                         <!-- Social section -->
-                        <div class="pl-4 pt-0 pr-4 pb-0">
+                        @if($page_owner->twitter OR $page_owner->youtube OR $page_owner->github)
+                            <hr class="mx-auto" style="width:80%;">
+                            <div class="pl-4 pt-0 pr-4 pb-0">
 
-                            @if($page_owner->twitter)
-                                <div class="mt-0">
-                                    <a href="https://twitter.com/{{ $page_owner->twitter }}" target="_blank">
-                                        <img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/{{ $page_owner->twitter }}?style=social">
-                                    </a>
-                                </div>
-                            @endif
+                                @if($page_owner->twitter)
+                                    <div class="mt-0">
+                                        <a href="https://twitter.com/{{ $page_owner->twitter }}" target="_blank">
+                                            <img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/{{ $page_owner->twitter }}?style=social">
+                                        </a>
+                                    </div>
+                                @endif
 
-                            @if($page_owner->youtube)
-                                <div class="mt-2">
-                                    <a href="https://youtube.com/channel/{{ $page_owner->youtube }}" target="_blank">
-                                        <img src="https://img.shields.io/youtube/channel/views/{{ $page_owner->youtube }}?style=social">
-                                    </a>
-                                </div>
-                            @endif
+                                @if($page_owner->youtube)
+                                    <div class="mt-2">
+                                        <a href="https://youtube.com/channel/{{ $page_owner->youtube }}" target="_blank">
+                                            <img src="https://img.shields.io/youtube/channel/views/{{ $page_owner->youtube }}?style=social">
+                                        </a>
+                                    </div>
+                                @endif
 
-                            @if($page_owner->github)
-                                <div class="mt-2">
-                                    <a href="https://github.com/{{ $page_owner->github }}" target="_blank">
-                                        <img src="https://img.shields.io/github/followers/{{ $page_owner->github }}?style=social">
-                                    </a>
-                                </div>
-                            @endif
+                                @if($page_owner->github)
+                                    <div class="mt-2">
+                                        <a href="https://github.com/{{ $page_owner->github }}" target="_blank">
+                                            <img src="https://img.shields.io/github/followers/{{ $page_owner->github }}?style=social">
+                                        </a>
+                                    </div>
+                                @endif
 
-                        </div>
+                            </div>
+                        @endif    
                         <!-- END of social section -->
 
-                        <hr class="mx-auto" style="width:80%;">
 
                         <!-- Hall of fame section -->
                         @if($number_of_tips > 1)
+                        <hr class="mx-auto" style="width:80%;">
                             <div class="pl-4 pt-0 pr-4 pb-4 mt-3" style="font-size:15px;">
                     
                     
@@ -197,7 +183,11 @@
                             <span><img src="{{ Identicon::getImageDataUri($tip_sent->stamp) }}" width="20" height="20" ></span>
                         @endforeach
                         <br>
-                        Budapest, HU
+                        @if($location = $page_owner->location)
+                        {{ $location }}
+                        @else
+                        Planet Earth, MW
+                        @endif
                     </a>
                     <!------------------------>
 

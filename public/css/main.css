@@ -945,6 +945,10 @@ USER PAGE BODY LAYOUT
     font-size: 14px;
     color:var(--dash-blue);
 }
+.user-page .profile-box a{
+    text-decoration: none;
+    color:grey;
+}
 
 .user-page .right-col{
     margin-top:-80px;

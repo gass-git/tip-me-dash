@@ -4,6 +4,26 @@
 
 <script>
 
+    $("#input").change(function(){
+        readURL(this);
+    });
+
+    function readURL(input){
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                console.log(e.target.result)
+                $('.header-img').css('background-image','url('+e.target.result+')');
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    
+
     // ------- global variables ------------
     var csrf_token = '{{ csrf_token() }}';
     var grey = 'rgb(175, 175, 175)';

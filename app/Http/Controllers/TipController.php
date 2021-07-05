@@ -73,6 +73,13 @@ class TipController extends Controller
                 ->orderBy('id','DESC')
                 ->paginate(5);
 
+        // Get page owner tips sent
+        $tips_sent = DB::table('tips')
+        ->where('sender_id',$page_owner->id)
+        ->where('status','confirmed')
+        ->orderBy('id','DESC')
+        ->paginate(3);        
+
         // Get page owner tips
         $number_of_tips = DB::table('tips')
         ->where('recipient_id',$page_owner->id)
@@ -101,7 +108,8 @@ class TipController extends Controller
             'page_owner',
             'tips',
             'biggest_tip',
-            'number_of_tips'
+            'number_of_tips',
+            'tips_sent'
         ));
     }
 

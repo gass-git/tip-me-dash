@@ -40,6 +40,9 @@ Route::post('change_password','SettingsController@reset_password')->name('change
 Route::post('delete_acc', 'SettingsController@delete_acc')->name('delete_acc');
 Route::post('change_email','SettingsController@change_email')->name('change_email');
 
+/* ----------- User page POSTS ------------- */
+Route::post('upload_header_img', 'UserPageController@upload_header_img');
+
 /* ----------- User page GETS -------------- */
 Route::get('{username}', 'UserPageController@show')->name('user_page');
 

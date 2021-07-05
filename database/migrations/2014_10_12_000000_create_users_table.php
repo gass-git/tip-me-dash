@@ -23,6 +23,8 @@ class CreateUsersTable extends Migration
             $table->string('wallet_address')->nullable();
             $table->string('avatar_url')->nullable();
             $table->string('avatar_name')->nullable();
+            $table->string('header_img_url')->nullable();
+            $table->string('header_img_name')->nullable();
             $table->text('about')->nullable();
             $table->unsignedBigInteger('page_views')->nullable();
             $table->string('website')->nullable();

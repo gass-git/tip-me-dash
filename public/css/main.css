@@ -12,6 +12,9 @@ html {scroll-behavior: smooth;}
 
 :root{
     --montserrat:'Montserrat',sans-serif;
+    --roboto:'roboto',sans-serif;
+    --sans-serif:sans-serif;
+    --helvetica:'helvetica', sans-serif;
     --dash-blue:#008de4;
     --light-gray-1:#f8f8f8;
     --light-gray-2:#ecece9;
@@ -38,9 +41,9 @@ body{
     font-family: 'open sans', sans-serif;
     line-height: 1.5;
     background-color: #ffffff;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'%3E%3Cpolygon fill='%23d4e9ff' points='957 450 539 900 1396 900'/%3E%3Cpolygon fill='%23b3cae5' points='957 450 872.9 900 1396 900'/%3E%3Cpolygon fill='%23cce6f8' points='-60 900 398 662 816 900'/%3E%3Cpolygon fill='%23b9d1e9' points='337 900 398 662 816 900'/%3E%3Cpolygon fill='%23c5e2ef' points='1203 546 1552 900 876 900'/%3E%3Cpolygon fill='%23bfd8ed' points='1203 546 1552 900 1162 900'/%3E%3Cpolygon fill='%23c0dfe7' points='641 695 886 900 367 900'/%3E%3Cpolygon fill='%23c5dff1' points='587 900 641 695 886 900'/%3E%3Cpolygon fill='%23bcdade' points='1710 900 1401 632 1096 900'/%3E%3Cpolygon fill='%23cce5f5' points='1710 900 1401 632 1365 900'/%3E%3Cpolygon fill='%23bad6d5' points='1210 900 971 687 725 900'/%3E%3Cpolygon fill='%23d4ecf9' points='943 900 1210 900 971 687'/%3E%3C/svg%3E");
-    background-attachment: fixed;
-    background-size: cover;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'%3E%3Cpolygon fill='%23e9f1f2' points='957 450 539 900 1396 900'/%3E%3Cpolygon fill='%23fcdce1' points='957 450 872.9 900 1396 900'/%3E%3Cpolygon fill='%23dfeef3' points='-60 900 398 662 816 900'/%3E%3Cpolygon fill='%23f2dae9' points='337 900 398 662 816 900'/%3E%3Cpolygon fill='%23d6eaf5' points='1203 546 1552 900 876 900'/%3E%3Cpolygon fill='%23e3d9ef' points='1203 546 1552 900 1162 900'/%3E%3Cpolygon fill='%23d1e5f8' points='641 695 886 900 367 900'/%3E%3Cpolygon fill='%23d1daf0' points='587 900 641 695 886 900'/%3E%3Cpolygon fill='%23d0dffa' points='1710 900 1401 632 1096 900'/%3E%3Cpolygon fill='%23c0daeb' points='1710 900 1401 632 1365 900'/%3E%3Cpolygon fill='%23d4d8fa' points='1210 900 971 687 725 900'/%3E%3Cpolygon fill='%23b6d9e0' points='943 900 1210 900 971 687'/%3E%3C/svg%3E");
+background-attachment: fixed;
+background-size: cover;
     /* CREDITS - background by SVGBackgrounds.com */
 }
 .blue-gradient{
@@ -268,8 +271,8 @@ ANIMATIONS
 NAVBAR
 -------------------*/
 .navbar{
-    background-image:var(--blue-gradient-1);
-    height:60px;
+    background-image:white;
+    height:50px;
 }
 .navbar .btn{
     font-family:'montserrat'sans-serif;
@@ -282,11 +285,11 @@ NAVBAR
     border-radius: 50%;
 }
 .navbar-brand{
-    margin-top:3px;
+    margin-top:0px;
 }
 .brand-text{
     font-family: 'Montserrat', sans-serif;
-    color:white;
+    color:rgb(0, 0, 0);
     font-size:18px; 
     font-weight:500;
 }
@@ -723,6 +726,14 @@ edit profile
     background-size: cover;
     transition: all ease-in-out .3s;
 }
+.preview-new-avatar{
+    display:none;
+    width:116px;
+    height:116px;
+    border-radius:50%;
+    background-position: center center;
+    background-size: cover;
+}
 .personal-figcaption{
     cursor: pointer;
     position: absolute;
@@ -742,14 +753,6 @@ edit profile
     margin-top: 35px;
     width: 50px;
     height: 50px;
-}
-.preview-new-avatar{
-    display:none;
-    width:116px;
-    height:116px;
-    border-radius:50%;
-    background-position: center center;
-    background-size: cover;
 }
 .settings-section .save-changes-btn{
     font-weight: 600;
@@ -895,72 +898,68 @@ PROCESS TIP MODAL
     color:var(--banana-yellow); /* clock toggle */
 }
 
-/*-----------------------
-USER PAGE - LAYOUT
-------------------------*/
+/* --------------------------
+USER PAGE BODY LAYOUT
+-----------------------------*/
 .user-page{
-    font-family:var(--montserrat);
-    color:var(--text-color-1);
-    max-width:1000px;
+    font-family:var(--roboto);
+    color:grey;
+    max-width: 1000px;
     margin-top:0px;
-    padding-top:50px;
+    padding-top:0px;
     padding-bottom:100px;
     margin-bottom:0px;
-    padding-right: 40px;
-    padding-left: 40px;
+    padding-right: 0px;
+    padding-left: 0px;
 }
-.user-page #second-col{
-    padding-left:20px;
+.header-img{
+    background-position: fixed;
+    background-size: cover;
+    background-position: center;
+    height:200px;
 }
 .user-page .profile-box{
-    border-radius: 10px;
-    min-width:180px;
-    min-height:280px;
-    align-items: center;
-    text-align: center;
-    border:var(--box-border-1);
-    background-color: var(--box-bg-1);
+    margin-top:-120px;  
+    background-color: white; 
+    border-radius:4px; 
 }
-.user-page .profile-box .username{
-    margin-top:20px;
-    border-radius:10px 10px 0px 0px;
-    height:40px;
-    width:100%;
-    font-weight: 700;
-    font-size:22px; 
-    color:var(--light-deep-blue);
-    text-transform: capitalize;
-    text-align: center; 
-    background-color:transparent;
+.user-page .profile-box .avatar{
+    width: 100%;
+    height:320px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 4px 4px 0 0;
 }
-.user-page .profile-box #avatar-img{
-    height:180px;
-    width:180px;
-    border-radius: 50%;
-    border:10px solid rgb(0, 141, 228,0.1);
+.user-page .profile-box h5{
+    font-family:var(--montserrat);
+    font-weight:600; 
+    font-size:16px; 
+    color:black;
 }
-.user-page .profile-box #about{
-    text-align:justify; 
-    font-size:15px; 
-    font-weight:400;
-    font-family:'Roboto', sans-serif;
+.user-page .profile-box p{
+    font-size: 14px;
+    font-weight:400; 
+    font-family:var(--roboto);
 }
-.user-page #simpleBox{
-    border-radius:10px;
-    border:var(--box-border-1);
-    background-color: var(--box-bg-1);
+.user-page .profile-box b{
+    font-size: 14px;
+    color:var(--dash-blue);
 }
+
+.user-page .right-col{
+    margin-top:-80px;
+}
+
 .user-page .form-wrapper{
-    padding-top:25px;
-    padding-bottom: 15px;
-    padding-left:35px;
-    padding-right:35px;
-    border-radius: 10px;
+    padding-top:15px;
+    padding-bottom: 5px;
+    padding-left:25px;
+    padding-right:25px;
     width:100%;
     height:auto;
     display: flex;
     background-color: var(--box-bg-1);
-    border:var(--box-border-1);
+    border-radius:3px;
 }
 .user-page .form-wrapper .box1{
     padding:10px 10px 10px 0px;
@@ -989,7 +988,7 @@ USER PAGE - LAYOUT
     padding: 10px 5px 8px 10px;
     display: inline-block;
     border: 1px solid rgb(77, 213, 255, 0.8);
-    border-radius: 5px;
+    border-radius: 2px;
     background-color: rgb(0, 141, 228, 0.1);
     color:grey;
 }
@@ -1011,7 +1010,7 @@ USER PAGE - LAYOUT
     text-align: center;
     display: inline-block;
     border: 1px solid rgb(77, 213, 255, 0.8);
-    border-radius: 5px;
+    border-radius: 2px;
     background-color: rgb(0, 141, 228, 0.1);
 }
 
@@ -1020,24 +1019,6 @@ USER PAGE - LAYOUT
     outline:none!important;
     box-shadow: none!important;
     background-color: rgb(0, 141, 228, 0.2);
-}
-.about-wrapper{
-    width: 100%;
-    padding-top:25px;
-    padding-bottom:25px;
-    padding-left:35px;
-    padding-right:15px;
-    border-radius: 10px;
-    border:var(--box-border-1);
-    background-color:rgb(255, 255, 255,0.8);
-}
-.about-wrapper .extra-info b{
-    color:var(--dash-blue);
-}
-.about-wrapper .extra-info{
-    font-family:'Roboto', sans-serif;
-    font-weight:400; 
-    font-size:14px;
 }
 .tip-btn{
     background-color: rgb(1, 32, 96);
@@ -1049,13 +1030,14 @@ USER PAGE - LAYOUT
     cursor: pointer;
     height: 89px;
     width: 100%;
-    border-radius: 5px;
+    border-radius: 3px;
     background-image: linear-gradient(180deg, #404c91, #333d78);
     outline:none;
 }
 .tip-btn:active{
     background-image: linear-gradient(0deg, #404c91, #333d78);
 }  
+
 .tips-wrapper{
     width:100%;
     font-weight:500; 
@@ -1120,8 +1102,9 @@ USER PAGE - LAYOUT
 }
 .tip-box{
     /*background-image: linear-gradient(to right,  rgb(0, 141, 228, 0.3) 0%,rgb(0, 141, 228, 0.3) 15%,rgb(0, 141, 228, 0.1) 15%,rgb(0, 141, 228, 0.1) 100%);*/
-    border-radius:10px;
-    padding-left:35px;
-    background-color:rgb(0, 141, 228, 0.1);
-    border: 1px solid rgba(41, 176, 218, 0.8);
+    border-radius:3px;
+    padding-left:25px;
+    border: 1px solid rgba(218, 218, 218, 0.8);
+    background-color: rgb(255,255,255,0.9);
 }
+

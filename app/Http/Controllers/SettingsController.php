@@ -96,7 +96,7 @@ class SettingsController extends Controller
 
             $image_new_name = date('dmy_H_s_i').'_'.$user->id.'_'.$image->getClientOriginalName();
             $image->storeAs('profile-pics',$image_new_name,'public');
-            $user->avatar_url = 'https://tipmedash.com/storage/profile-pics/'.$image_new_name;
+            $user->avatar_url = 'http://tipmedash.com/storage/profile-pics/'.$image_new_name;
             $user->avatar_name = $image_new_name;
             $user->save();
         }

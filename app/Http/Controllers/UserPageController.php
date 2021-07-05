@@ -7,6 +7,8 @@ use App\Tip;
 use App\VisitsRecord;
 use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class UserPageController extends Controller
 {
@@ -21,6 +23,13 @@ class UserPageController extends Controller
                 ->where('status','confirmed')
                 ->orderBy('id','DESC')
                 ->paginate(5);
+
+        // Get page owner tips sent
+        $tips_sent = DB::table('tips')
+        ->where('sender_id',$page_owner->id)
+        ->where('status','confirmed')
+        ->orderBy('id','DESC')
+        ->paginate(3);
 
         // Get total number of tips for page owner
         // Get page owner tips
@@ -67,7 +76,7 @@ class UserPageController extends Controller
         // -------------------------------------------------------------------------------------------------
 
         // Push parameters to user page
-        return view('user_page', compact('page_owner','usd_amount','tips','biggest_tip','number_of_tips'));
+        return view('user_page', compact('page_owner','usd_amount','tips','biggest_tip','number_of_tips','tips_sent'));
     }
 
     function praise(Request $req){
@@ -75,6 +84,26 @@ class UserPageController extends Controller
         // Find tip
         tip::where('id',$req->id)->first()->update(['praise' => $req->praise]);
 
+    }
+
+    function upload_header_img(Request $req){
+
+        $user = Auth::user();
+
+        $img = $req->file('input');
+
+        // If the user already has uploaded a header image delete it before uploading the new one
+        if($user->header_img_name){
+            Storage::delete('/public/header-pics/'.$user->header_img_name);
+        }
+
+        $img_new_name = date('dmy_H_s_i').'_'.$user->id.'_'.$img->getClientOriginalName();
+        $img->storeAs('header-pics',$img_new_name,'public');
+        $user->header_img_url = 'http://tipmedash.com/storage/header-pics/'.$img_new_name;
+        $user->header_img_name = $img_new_name;
+        $user->save();
+        
+        return redirect()->back();
     }
 
 }

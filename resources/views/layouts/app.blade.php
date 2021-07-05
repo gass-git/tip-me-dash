@@ -28,7 +28,7 @@
     <!-- bootstrap css -->
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <!-- main css -->
-    <link rel="stylesheet" href="{{ asset('css/main.css?6') }}">
+    <link rel="stylesheet" href="{{ asset('css/main.css?16') }}">
     <!-- font awesome css -->
     <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
     
@@ -40,7 +40,7 @@
         <!----- Brand ----->
         <a class="navbar-brand ml-5 mr-0 p-0" href="{{ url('/') }}">
             <div class="container pr-0">
-                    <img class="mr-3" src="{{ asset('images/logo9.png') }}" height="30">
+                    <img class="mr-3" src="{{ asset('images/logo2.png') }}" height="30">
                     <div class="brand-text">Tip Me Dash</div>
             </div>
         </a>
@@ -49,8 +49,8 @@
         @guest
         <!-- authentication Links -->
         <form id="auth-links" class="form-inline mr-5 p-0">
-            <a class="btn btn-outline-light ml-0 my-2 my-sm-0 mr-2" href="{{ route('login') }}">Login</a>
-            <a class="btn btn-primary" href="{{ route('register') }}">Sign up</a>
+            <a class="btn btn-outline-dark ml-0 my-2 my-sm-0 mr-2" href="{{ route('login') }}">Login</a>
+            <a class="btn btn-outline-primary" href="{{ route('register') }}">Sign up</a>
         </form> 
         <!-------------------------->
         

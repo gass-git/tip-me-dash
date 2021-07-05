@@ -84,6 +84,7 @@ class LoginController extends Controller
             $data['google_id'] = $google_data->getId();
             $data['email'] = $google_data->getEmail();
             $data['avatar_url'] = 'https://tipmedash.com/images/avatar-default-1.jpg';
+            $data['header_img_url'] = 'http://tipmedash.com/images/default-header-img.jpg';
             $data['email_verified_at'] = Carbon::now();
             $data['created_at'] = Carbon::now();
             $data['updated_at'] = Carbon::now();

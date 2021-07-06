@@ -35,7 +35,8 @@ Route::post('praise', 'UserPageController@praise');
 
 /* --------- Edit profile ---------- */
 Route::get('edit_profile', 'SettingsController@show')->name('edit_profile')->middleware('verified');
-Route::post('update_profile', 'SettingsController@update')->name('update_profile');
+Route::post('save_one','SettingsController@save_one');
+Route::post('save_two', 'SettingsController@save_two');
 Route::post('change_password','SettingsController@reset_password')->name('change_password');
 Route::post('delete_acc', 'SettingsController@delete_acc')->name('delete_acc');
 Route::post('change_email','SettingsController@change_email')->name('change_email');

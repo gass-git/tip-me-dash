@@ -33,8 +33,8 @@
                         <div class="ml-auto" style="z-index:2;">
                             <label class="btn btn-sm btn-outline-light mr-2" for="input" id="input-btn" type="file" name="input">Change cover</label>
                             <input type="file" name="input" id="input" style="display:none">
-                            <button id="save-btn" class="btn btn-sm btn-outline-success mr-2 mb-2" type="submit" style="display:none;">save</button>
-                            <a id="cancel-btn" class="btn btn-sm btn-outline-danger mr-2 mb-2" style="display:none;" href="/{{ $page_owner->username }}">Cancel</a>
+                            <button id="save-btn" class="btn btn-sm btn-success mr-2 mb-2" type="submit" style="display:none;">save</button>
+                            <a id="cancel-btn" class="btn btn-sm btn-danger mr-2 mb-2" style="display:none;" href="/{{ $page_owner->username }}">Cancel</a>
                         </div>
                     </div>
                 </form>  
@@ -152,11 +152,11 @@
                                         @endphp
                                 
                                         <a href="/{{ $registered_tipper }}" style="text-decoration: none!important;">
-                                            <b>{{ $registered_tipper }}</b>
+                                            <b style="text-transform:capitalize;">{{ $registered_tipper }}</b>
                                         </a>
 
                                     @elseif($tipper = $biggest_tip->sent_by)
-                                        <b style="color:black;">{{ $tipper }}</b>
+                                        <b style="color:black;text-transform:capitalize;">{{ $tipper }}</b>
                                     @else
                                         <b style="color:black;">Incognito</b> 
                                     @endif
@@ -179,9 +179,6 @@
                     <!-- Username & location -->
                     <a href="/{{ $page_owner->username }}" style="text-decoration: none; color:white;">
                         <span style="margin-bottom:0;font-size:30px;text-transform:capitalize;">{{ $page_owner->username }}</span>
-                        @foreach($tips_sent as $tip_sent)
-                            <span><img src="{{ Identicon::getImageDataUri($tip_sent->stamp) }}" width="20" height="20" ></span>
-                        @endforeach
                         <br>
                         @if($location = $page_owner->location)
                         {{ $location }}
@@ -231,7 +228,7 @@
                                 </div>
                                 <!--- END of amount input ---->
 
-                                <center style="font-size: 10px;">USD</center>
+                                <center><div style="font-size: 11px;color:grey;">USD</center>
                             
                             </div>
                             <!-- END of form box 1 -->
@@ -301,35 +298,40 @@
 
                                     <div class="d-flex">
 
-                                        <div class="p-2 ml-3 mt-2 mr-4 mb-0 msg" style="font-size:14px;">
+                                        <div class="p-2 ml-3 mt-2 mr-4 mb-0 msg" style="font-size:14px;width:100%;">
                                             
-                                            <p class="tip-title">
+                                            <p class="d-flex tip-title align-items-lg-center p-2">
 
-                                                <i class="fas fa-donate ml-1 mr-1" style="color:#c5ab84;cursor:pointer;font-size:18px;" title="Equivalent to US${{ $tip->usd_equivalent }} at the moment of transfer"></i>
+                                                <i class="fas fa-donate ml-1 mr-1" data-toggle="tooltip" data-placement="top" style="color:var(--dark-yellow);font-size:18px;" title="Equivalent to US${{ $tip->usd_equivalent }} at the moment of transfer"></i>
                                             
                                                 @if($tip->sender_id)
                                                     <a href="/{{ $registered_tipper }}" style="text-decoration: none!important;" title="Registered user">
-                                                        <span style="color:var(--light-deep-blue);">
+                                                        <span class="ml-1" style="color:var(--light-deep-blue);text-transform:capitalize;">
                                                             {{ $registered_tipper }}
                                                         </span>
                                                     </a>    
-                                                @else
-                                                    <span style="color:var(--light-deep-blue);">
+                                                @elseif($tip->sent_by)
+                                                    <span class="ml-1" style="color:var(--light-deep-blue);text-transform:capitalize;">
                                                         {{ $tip->sent_by }}
+                                                    </span>
+                                                @else
+                                                    <span class="ml-1" style="color:var(--light-deep-blue);text-transform:capitalize;">
+                                                        Incognito
                                                     </span>
                                                 @endif
 
-                                                Tipped <span>{!! number_format((float)($tip->dash_amount), 5) !!} ᕭ</span>
-
+                                                <span class="ml-1 mr-1" style="color:#646464">Tipped </span>
+                                                <span>{!! number_format((float)($tip->dash_amount), 5) !!} ᕭ</span>
+                                                
                                                 @if($tip->message)
-                                                    + <span id="{{ $tip->id }}" class="show-msg" style="cursor:pointer;">
-                                                        <i id="tip-msg-icon-{{ $tip->id }}" class="fas fa-envelope"></i>
+                                                    <span id="{{ $tip->id }}" class="show-msg">
+                                                        <i id="tip-msg-icon-{{ $tip->id }}" class="ml-2 fas fa-envelope" title="show message" style="padding-bottom:0px;"></i>
                                                     </span>
                                                 @endif    
                                             </p>
 
                                             @if($msg = $tip->message)
-                                                <div id="tip-msg-{{ $tip->id }}" class="tip-msg" style="margin-top:-7px;display:none;">
+                                                <div id="tip-msg-{{ $tip->id }}" class="border tip-msg pt-3 pr-4 pb-3 pl-4 mt-3 mb-3" style="display:none;">
                                                     {{ $msg }}
                                                 </div>
                                             @endif    
@@ -378,27 +380,27 @@
                                                     <span class="ml-5" id="{{ $tip->id }}" style="color:#c5ab84; ">
                                                         
                                                         @if($praise === 'like')
-                                                            <a class="like mr-3"  title="Like it" style="color:#008de4; cursor:pointer;"><i class="fas fa-thumbs-up" style="font-size:16px;"></i></a>
+                                                            <a id="like-{{ $tip->id }}" class="like mr-3"  title="Like it" style="color:#008de4; cursor:pointer;"><i class="fas fa-thumbs-up" style="font-size:16px;"></i></a>
                                                         @else
-                                                            <a class="like mr-3"  title="Like it" style="color:rgb(175, 175, 175); cursor:pointer;"><i class="fas fa-thumbs-up" style="font-size:16px;"></i></a>
+                                                            <a id="like-{{ $tip->id }}" class="like mr-3"  title="Like it" style="color:rgb(175, 175, 175); cursor:pointer;"><i class="fas fa-thumbs-up" style="font-size:16px;"></i></a>
                                                         @endif
                                                         
                                                         @if($praise === 'love')
-                                                            <a class="love mr-3" title="love it"  style="color:red; cursor:pointer;"><i class="fas fa-heart" style="font-size:16px;"></i></a>
+                                                            <a id="love-{{ $tip->id }}" class="love mr-3" title="love it"  style="color:red; cursor:pointer;"><i class="fas fa-heart" style="font-size:16px;"></i></a>
                                                         @else
-                                                            <a class="love mr-3" title="love it"  style="color:rgb(175, 175, 175); cursor:pointer;"><i class="fas fa-heart" style="font-size:16px;"></i></a>
+                                                            <a id="love-{{ $tip->id }}" class="love mr-3" title="love it"  style="color:rgb(175, 175, 175); cursor:pointer;"><i class="fas fa-heart" style="font-size:16px;"></i></a>
                                                         @endif
 
                                                         @if($praise === 'brilliant')
-                                                            <a class="brilliant mr-3" title="It's brilliant" style="color:rgb(238, 204, 13); cursor:pointer;"><i class="fas fa-lightbulb" style="font-size:16px;"></i></a>
+                                                            <a id="brilliant-{{ $tip->id }}" class="brilliant mr-3" title="It's brilliant" style="color:rgb(238, 204, 13); cursor:pointer;"><i class="fas fa-lightbulb" style="font-size:16px;"></i></a>
                                                         @else
-                                                            <a class="brilliant mr-3" title="It's brilliant" style="color:rgb(175, 175, 175); cursor:pointer;"><i class="fas fa-lightbulb" style="font-size:16px;"></i></a>
+                                                            <a id="brilliant-{{ $tip->id }}" class="brilliant mr-3" title="It's brilliant" style="color:rgb(175, 175, 175); cursor:pointer;"><i class="fas fa-lightbulb" style="font-size:16px;"></i></a>
                                                         @endif
 
                                                         @if($praise === 'cheers')
-                                                            <a class="cheers mr-3" title="Cheers!"  style="color:#FFA900; cursor:pointer;"><i class="fas fa-beer" style="font-size:16px;"></i></a>
+                                                            <a id="cheers-{{ $tip->id }}" class="cheers mr-3" title="Cheers!"  style="color:#FFA900; cursor:pointer;"><i class="fas fa-beer" style="font-size:16px;"></i></a>
                                                         @else
-                                                            <a class="cheers mr-3" title="Cheers!"  style="color:rgb(175, 175, 175); cursor:pointer;"><i class="fas fa-beer" style="font-size:16px;"></i></a>
+                                                            <a id="cheers-{{ $tip->id }}" class="cheers mr-3" title="Cheers!"  style="color:rgb(175, 175, 175); cursor:pointer;"><i class="fas fa-beer" style="font-size:16px;"></i></a>
                                                         @endif
 
                                                     </span>
@@ -442,9 +444,13 @@
 
                                 <div class="col-sm-2">
 
-                                    <div class="d-flex flex-row-reverse" style="height:100%;">
-                                        <a href="https://explorer.dash.org/insight/tx/{{ $tip->stamp }}" target="_blank" class="stamp my-auto " style="text-align:right;margin-right:23px; padding:7px;" title="Transaction stamp">    
-                                            <img src="{{ Identicon::getImageDataUri($tip->stamp) }}" width="60" height="60" >
+                                    <div class="d-flex flex-row-reverse mt-3 mr-4" style="height:60px;">
+                                        <a href="https://explorer.dash.org/insight/tx/{{ $tip->stamp }}" 
+                                           target="_blank" 
+                                           class="stamp" 
+                                           title="tx stamp">
+
+                                           <img src="{{ Identicon::getImageDataUri($tip->stamp) }}" width="65" height="65" >
                                         </a> 
                                     </div>
 
@@ -456,18 +462,7 @@
                     
                     @endforeach
 
-                    <!-- Open message JQuery -->
-                    <script>
-                        $('.show-msg').click(function(){
-                            id = $(this).attr('id');
-                            $('#tip-msg-'+id).toggle().css('display');
-                            $('#tip-msg-icon-'+id).toggleClass('fa-envelope-open');
-                        });
-                    </script>   
-                    <!-------------------------->
-
                 </div> <!-- ENF of right column -->
-
             </div> <!-- END of row -->
         </div> <!-- END of user-page container -->
     </section> <!-- END of w-100 section -->

@@ -205,7 +205,7 @@
         <!---------------------------> 
                                         
   
-        <div class="title-1 mt-4" style="font-size:17px;">RECENT ACTIVITY</div>
+        <div class="title-1 mt-4" style="font-size:17px;"><i class="fas fa-broadcast-tower mr-2"></i>RECENT ACTIVITY</div>
 
         <!-- Recent activity section -->
         <div class="row mt-3">
@@ -213,43 +213,79 @@
             <div class="m-0 p-0" style="width:100%;">
                 <ul class="list-group">
 
-                    @if($number_of_tips < 1)
+                    @if($events === null)
+
                         <div class="alert alert-light pl-4" style="background-color: rgb(255,255,255,0.7);border:1px solid #c2ccfa;">
                            No recent activity
-                        </div>              
+                        </div>     
+
                     @else
+
                         @foreach($events as $event)
-                        <li class="list-group-item">
-                            <i class="fas fa-donate mr-2" style="color:var(--dark-yellow);font-size:18px;"></i>
-                            <b style="color:#225ccf;text-transform:capitalize;">
-                            @if($event->sender_id)
-                                @php 
-                                    $username = app\user::where('id',$event->sender_id)->first()->username;
-                                @endphp
 
-                                <a href="/{{ $username }}" style="color:#225ccf;">
-                                   {{ $username }}
-                                </a>
-                            @elseif($event->sent_by)
-                                {{ $event->sent_by }} 
-                            @else
-                                Incognito
-                            @endif
-                            </b>
+                            <li class="list-group-item">
 
-                            <a href="/{{ Auth::user()->username }}">
-                                sent you a tip 
-                            </a>
+                                <i class="fas fa-angle-right mr-2" style="color:var(--light-deep-blue);font-size:18px;"></i>
+                                
+                                    @if($event->event_type === 'tip')
 
-                            of {!! number_format((float)($event->dash_amount), 5) !!}
-                            <b style="font-size:18px;">ᕭ</b>
+                                        <b style="color:var(--light-deep-blue);text-transform:capitalize;">
+                                            @if($event->from_id)
 
-                            <span id="date-span">
-                                {{ Carbon::parse($event->created_at)->isoFormat('MMM Do YYYY')}}
-                            </span>
+                                                @php
+                                                    $tipper = app\user::where('id',$event->from_id)->first()->username;
+                                                @endphp
+
+                                                <a href="/{{ $tipper }}" style="color:#225ccf;">
+                                                    {{ $tipper }}
+                                                </a>
+
+                                            @else
+                                                {{ $event->guest_name }} 
+                                            @endif
+                                        </b>
+
+                                        @php    
+                                            $recipient = app\user::where('id',$event->to_id)->first()->username;
+                                        @endphp
+
+                                        <a href="/{{ $recipient }}">
+                                            {{ $event->p2p_event }}
+                                        </a>
+
+                                    @endif
+
+
+                                    @if($event->event_type === 'praise' AND $event->from_id)
+
+                                        @php 
+                                            $clapper = app\user::where('id',$event->from_id)->first()->username;
+                                            $recipient = app\user::where('id',$event->to_id)->first()->username;
+                                        @endphp
+
+                                        <b style="color:var(--light-deep-blue);text-transform:capitalize;">
+
+                                            <a href="/{{ $clapper }}" style="color:#225ccf;">
+                                                {{ $clapper }}
+                                            </a>
+                                
+                                        </b>         
+
+                                        <a href="/{{ $clapper }}">
+                                            {{ $event->p2p_event }}
+                                        </a>
+
+                                    @endif
+
+
+                                <span id="date-span">
+                                    {{ Carbon::parse($event->created_at)->isoFormat('MMM Do YYYY')}}
+                                </span>
                         
-                        </li>
+                            </li>
+                            
                         @endforeach
+
                     @endif
 
                 </ul>

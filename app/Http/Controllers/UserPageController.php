@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Tip;
 use App\VisitsRecord;
+use App\Log;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class UserPageController extends Controller
 {
@@ -81,9 +83,61 @@ class UserPageController extends Controller
 
     function praise(Request $req){
 
-        // Find tip
-        tip::where('id',$req->id)->first()->update(['praise' => $req->praise]);
+        $tip =  tip::where('id',$req->id)->first();
+        $current = $tip->praise;
 
+        if($current == $req->praise){
+            
+            $tip->update(['praise' => null]);
+            
+            $event = log::where('tip_id',$tip->id)->where('event_type','praise')->first();
+            
+            $event->delete();
+
+        }else{
+
+            $tip->update(['praise' => $req->praise]);
+
+            $event = log::where('tip_id', $tip->id)->where('event_type','praise')->first();
+        
+            $praise = $req->praise;
+
+            if($praise == "like"){
+                $p2p_detail = "liked your tip";
+                $g_detail = "liked";
+            }
+
+            if($praise == "love"){
+                $p2p_detail = "loved your tip";
+                $g_detail = "loved";
+            }
+
+            if($praise == "brilliant"){
+                $p2p_detail ="thinks it's brilliant";
+                $g_detail = "thinks it's brilliant";
+            }
+
+            if($praise == "cheers"){
+                $p2p_detail = "toasted";
+                $g_detail = "toasted";
+            }
+
+            // If event already exists update it if not create one
+            if($event){
+                $event->update(['p2p_event' => $p2p_detail]);
+                $event->update(['global_event' => $g_detail]);
+            }else{
+                $data = array();
+                $data['tip_id'] = $req->id;
+                $data['from_id'] = Auth::user()->id;
+                $data['to_id'] = $tip->sender_id;
+                $data['event_type'] = 'praise';
+                $data['p2p_event'] = $p2p_detail;
+                $data['global_event'] = $g_detail;
+                $data['created_at'] = Carbon::now();
+                DB::table('logs')->insert($data);
+            }
+        }
     }
 
     function upload_header_img(Request $req){

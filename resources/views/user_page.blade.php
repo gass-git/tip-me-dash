@@ -28,6 +28,24 @@
     // --------------------------------
 
 
+    // ------ Toggle bootstrap tooltip ---------
+    $('[data-toggle="tooltip"]').tooltip();   
+    // ----------------------------------------- 
+
+
+    // ----- Show msg ----------------
+    $('.show-msg').click(function(){
+        id = $(this).attr('id');
+        $('#tip-msg-'+id).toggle().css('display');
+        $('#tip-msg-icon-'+id).toggleClass('fa-envelope-open');
+        if($('#tip-msg-icon-'+id).css('padding-bottom') == '0px'){
+            $('#tip-msg-icon-'+id).css('padding-bottom','8px');
+        }else{
+            $('#tip-msg-icon-'+id).css('padding-bottom','0px');
+        }
+    });
+    // -------------------------------
+
     // ------- global variables ------------
     var csrf_token = '{{ csrf_token() }}';
     var grey = 'rgb(175, 175, 175)';
@@ -40,9 +58,9 @@
     // --------- like btn script -------------------------------
     $('.like').on('click', function(event) {   
         
-        var tip_id = $(this).parent().attr('id');                // get the id of the post
-        var element = $('#' + tip_id).children().eq(0);          // get the element clicked
-        
+        var tip_id = $(this).parent().attr('id');               // get the id of the post
+        var element = $('#like-' + tip_id);                     // get the element clicked
+
         // change element color and title on click
         if(element.css('color') === grey){
             element.css('color',dash_blue);
@@ -52,13 +70,12 @@
             element.attr('title', 'Like it');
         }
         
-        // set the 2nd & 3rd children elements to default color and title
-        $('#' + tip_id).children().eq(1).css('color',grey);
-        $('#' + tip_id).children().eq(1).attr('title','Love it');
-        $('#' + tip_id).children().eq(2).css('color',grey);
-        $('#' + tip_id).children().eq(2).attr('title',"Brilliant");
-        $('#' + tip_id).children().eq(3).css('color',grey);
-        $('#' + tip_id).children().eq(3).attr('title','Cheers!');
+        $('#love-' + tip_id).css('color',grey);
+        $('#love-' + tip_id).attr('title','Love it');
+        $('#brilliant-' + tip_id).css('color',grey);
+        $('#brilliant-' + tip_id).attr('title',"Brilliant");
+        $('#cheers-' + tip_id).css('color',grey);
+        $('#cheers-' + tip_id).attr('title','Cheers!');
         
         $.ajax({
             method:'post',
@@ -73,7 +90,7 @@
     $('.love').on('click', function(event) {
                     
         var tip_id = $(this).parent().attr('id');            // get the id of the post 
-        var element = $('#' + tip_id).children().eq(1);      // get the element clicked
+        var element = $('#love-' + tip_id);                     // get the element clicked
         
         // change element color and title on click
         if(element.css('color') === grey){
@@ -84,13 +101,12 @@
             element.attr('title', 'Love it');
         }
 
-        // set the 1st & 3rd children elements to default color
-        $('#' + tip_id).children().eq(0).css('color',grey);
-        $('#' + tip_id).children().eq(0).attr('title','Like it');
-        $('#' + tip_id).children().eq(2).css('color',grey);
-        $('#' + tip_id).children().eq(2).attr('title',"brilliant");
-        $('#' + tip_id).children().eq(3).css('color',grey);
-        $('#' + tip_id).children().eq(3).attr('title','Cheers!');
+        $('#like-' + tip_id).css('color',grey);
+        $('#like-' + tip_id).attr('title','Like it');
+        $('#brilliant-' + tip_id).css('color',grey);
+        $('#brilliant-' + tip_id).attr('title',"Brilliant");
+        $('#cheers-' + tip_id).css('color',grey);
+        $('#cheers-' + tip_id).attr('title','Cheers!');
         
         $.ajax({
             method:'post',
@@ -105,7 +121,7 @@
     $('.brilliant').on('click', function(event) {
                     
         var tip_id = $(this).parent().attr('id');            // get the id of the post 
-        var element = $('#' + tip_id).children().eq(2);      // get the element clicked
+        var element = $('#brilliant-' + tip_id);                     // get the element clicked
         
         // change element color and title on click
         if(element.css('color') === grey){
@@ -116,13 +132,12 @@
             element.attr('title', "It's brilliant!");
         }
 
-         // set the 1st & 3rd children elements to default color and title
-        $('#' + tip_id).children().eq(0).css('color',grey);
-        $('#' + tip_id).children().eq(0).attr('title','Like it');
-        $('#' + tip_id).children().eq(1).css('color',grey);
-        $('#' + tip_id).children().eq(1).attr('title','Love it');
-        $('#' + tip_id).children().eq(3).css('color',grey);
-        $('#' + tip_id).children().eq(3).attr('title','Cheers!');
+        $('#like-' + tip_id).css('color',grey);
+        $('#like-' + tip_id).children().eq(0).attr('title','Like it');
+        $('#love-' + tip_id).css('color',grey);
+        $('#love-' + tip_id).attr('title','Love it');
+        $('#cheers-' + tip_id).css('color',grey);
+        $('#cheers-' + tip_id).attr('title','Cheers!');
 
         $.ajax({
             method:'post',
@@ -137,7 +152,7 @@
     $('.cheers').on('click', function(event) {
                     
         var tip_id = $(this).parent().attr('id');            // get the id of the post 
-        var element = $('#' + tip_id).children().eq(3);      // get the element clicked
+        var element = $('#cheers-' + tip_id);                     // get the element clicked
         
         // change element color and title on click
         if(element.css('color') === grey){
@@ -148,13 +163,12 @@
             element.attr('title', "Cheers!");
         }
 
-            // set the 1st & 3rd children elements to default color and title
-        $('#' + tip_id).children().eq(0).css('color',grey);
-        $('#' + tip_id).children().eq(0).attr('title','Like it');
-        $('#' + tip_id).children().eq(1).css('color',grey);
-        $('#' + tip_id).children().eq(1).attr('title','Love it');
-        $('#' + tip_id).children().eq(2).css('color',grey);
-        $('#' + tip_id).children().eq(2).attr('title','brilliant');
+        $('#like-' + tip_id).css('color',grey);
+        $('#like-' + tip_id).attr('title','Like it');
+        $('#love-' + tip_id).css('color',grey);
+        $('#love-' + tip_id).attr('title','Love it');
+        $('#brilliant-' + tip_id).css('color',grey);
+        $('#brilliant-' + tip_id).attr('title','brilliant');
 
         $.ajax({
             method:'post',

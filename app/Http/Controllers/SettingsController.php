@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -13,11 +14,83 @@ use DB;
 class SettingsController extends Controller
 {
     
-
     public function show(){
-        return view('edit_profile');
+        $user = Auth::user();
+        return view('edit_profile',compact('user'));
     }
-    
+
+    public function save_one(Request $req){
+
+        $user = Auth::user();
+
+        $req->validate([
+            'username' => ['required','max:15',Rule::unique('users')->ignore($user->id, 'id'), 'regex:/^[a-zA-Z0-9_-]+$/'],
+            'wallet_address' => ['nullable','regex:/^[1-9A-HJ-NP-Za-km-z]+$/'],
+            'location' => ['nullable','max:30','regex:/^[a-zA-Z0-9., ]+$/'],
+            'avatar' => ['nullable','image','mimes:jpg,png,jpeg,gif','max:500','dimensions:min_width=100,min_height=100'],
+        ]);
+
+        /**@abstract
+         * 
+         * UPLOAD AVATAR
+         * - If avatar_name variable is null it means the user is uploading an img for the first time.
+         * - If the user has uploaded an avatar before, delete it before uploading the new one.
+         * 
+         */
+
+        $img = $req->file('avatar');
+
+        if($img){
+            if($user->avatar_name){
+                Storage::delete('/public/profile-pics/'.$user->avatar_name);
+            }
+
+            $img_new_name = date('dmy_H_s_i').'_'.$user->id.'_'.$img->getClientOriginalName();
+            $img->storeAs('profile-pics',$img_new_name,'public');
+            $user->avatar_url = 'http://tipmedash.com/storage/profile-pics/'.$img_new_name;
+            $user->avatar_name = $img_new_name;
+        }
+
+        $user->username = $req->username;
+        $user->location = $req->location;
+        $user->wallet_address = $req->wallet_address;
+        
+        $user->save();
+
+        // Message to activate links 'back to dashboard' & 'view my page'
+        $req->session()->flash('message', 'null');    
+
+        toast('Changes saved!','success');
+        return redirect()->back();
+    }
+
+    const FIELDS = ['about','website','passionate_about','twitter','youtube','github'];
+
+    public function save_two(Request $req){
+        
+        $user = Auth::user();
+
+        $req->validate([
+            'about' => ['nullable','max:300'],
+            'passionate_about' => ['nullable','max:30','regex:/^[a-zA-Z0-9,& ]+$/'],
+            'website' => ['nullable','max:40','regex:/^((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)$/'],
+            'twitter' => ['nullable','max:15', 'regex:/^[a-zA-Z0-9_]+$/'],
+            'youtube' => ['nullable','max:50', 'regex:/^[a-zA-Z0-9_-]+$/'],
+            'github' => ['nullable','max:25', 'regex:/^[a-zA-Z0-9_-]+$/'],
+        ]);
+
+        foreach (self::FIELDS as $field) {
+                $user->$field = $req->$field;
+                $user->save();
+        }
+
+        // Message to activate links 'back to dashboard' & 'view my page'
+        $req->session()->flash('message', 'null');    
+
+        toast('Changes saved','success');
+        return redirect()->route('edit_profile');
+    }
+
     public function reset_password(Request $request){
 
         $user = Auth::user();
@@ -44,75 +117,6 @@ class SettingsController extends Controller
         // Fail: current password does not match
         toast('Current password is invalid','error');
         return redirect()->back();
-    }
-
-    const FIELDS = ['username', 'wallet_address', 'about', 'password', 
-    'website', 'location','passionate_about','twitter','youtube','github'];
-
-    public function update(Request $request){
-        
-        // validate every field independently
-
-        $request->validate([
-            'username' => ['nullable','max:15','unique:users', 'regex:/^[a-zA-Z0-9_-]+$/'],
-            'email' => ['nullable','string', 'email', 'max:50', 'unique:users'],
-            'wallet_address' => ['nullable','regex:/^[1-9A-HJ-NP-Za-km-z]+$/'],
-            'about' => ['nullable','max:300'],
-            'passionate_about' => ['nullable','max:30','regex:/^[a-zA-Z0-9,& ]+$/'],
-            'location' => ['nullable','max:30','regex:/^[a-zA-Z0-9., ]+$/'],
-            'website' => ['nullable','max:40','regex:/^((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)$/'],
-            'avatar' => ['nullable','image','mimes:jpg,png,jpeg,gif','max:500','dimensions:min_width=100,min_height=100'],
-            'twitter' => ['nullable','max:15', 'regex:/^[a-zA-Z0-9_]+$/'],
-            'youtube' => ['nullable','max:50', 'regex:/^[a-zA-Z0-9_-]+$/'],
-            'github' => ['nullable','max:25', 'regex:/^[a-zA-Z0-9_-]+$/'],
-        ]);
-
-        // delete wallet address if requested
-        if($request->delete_wallet_address){
-            DB::table('users')->where('id',Auth::user()->id)->update(['wallet_address' => null]);
-        }
-
-        $user = Auth::user();
-
-        $username = $request->username;
-        // PENDING $email = $request->email; 
-
-        if($username){ 
-            $user->username = $username; 
-            $user->save();
-        }
-
-        /** upload avatar section */
-        
-        $image = $request->file('avatar');
-
-        if($image){
-
-            // note: if avatar_name variable is null it means the user has never uploaded an image..
-            // if the user has uploaded an avatar before, delete it before uploading the new one..
-            if($user->avatar_name){
-                Storage::delete('/public/profile-pics/'.$user->avatar_name);
-            }
-
-            $image_new_name = date('dmy_H_s_i').'_'.$user->id.'_'.$image->getClientOriginalName();
-            $image->storeAs('profile-pics',$image_new_name,'public');
-            $user->avatar_url = 'http://tipmedash.com/storage/profile-pics/'.$image_new_name;
-            $user->avatar_name = $image_new_name;
-            $user->save();
-        }
-
-        foreach (self::FIELDS as $field) {
-            if ($request->$field) {
-                $user->$field = $request->$field;
-                $user->save();
-            }
-        }
-        
-        // Message to activate links 'back to dashboard' & 'view my page'
-        $request->session()->flash('message', 'null');
-
-        toast('Changes saved','success');
-        return redirect()->route('edit_profile');
     }
 
     public function change_email(Request $request){

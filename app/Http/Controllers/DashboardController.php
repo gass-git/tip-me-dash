@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\User;
 use App\Tip;
+use App\Log;
 use Illuminate\Support\Facades\Auth;
 use DB;
 
@@ -27,7 +28,10 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $events = tip::where('recipient_id',Auth::user()->id)->where('status','confirmed')->paginate(5);
+
+        $events = log::where('to_id',Auth::user()->id)->paginate(10);
+        
+
         return view('dashboard',compact('events'));
     }
 }

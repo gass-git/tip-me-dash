@@ -23,7 +23,7 @@ class CreateTipsTable extends Migration
             $table->string('sent_by')->nullable();
             $table->text('message')->nullable();
             $table->string('praise')->nullable();
-            $table->string('stamp');
+            $table->string('stamp')->nullable();
             $table->string('status');
             $table->timestamps();
         });

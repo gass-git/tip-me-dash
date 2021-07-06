@@ -1070,10 +1070,9 @@ USER PAGE BODY LAYOUT
 }
 .tip-title{
     font-family:var(--montserrat);
-    color:#646464; 
     font-weight:700; 
     font-size:15px;
-    word-spacing: 2px;
+    height:30px;
 }
 .tip-title span{
     color:var(--dash-blue);
@@ -1112,3 +1111,13 @@ USER PAGE BODY LAYOUT
     background-color: rgb(255,255,255,0.9);
 }
 
+.tip-msg{
+    border-radius: 3px;
+    line-height: 25px;
+    margin-left: 5px;
+    background-color:rgb(0, 141, 228, 0.1);
+}
+.user-page .show-msg{
+    cursor:pointer;
+    color:var(--light-deep-blue);
+}

@@ -23,7 +23,7 @@
         <a href="{{ route('dashboard') }}" style="font-family:'montserrat',sans-serif; text-decoration:none; font-size:14px;">
           <i class="fas fa-angle-double-left mr-2"></i>Return to Dashboard
         </a>
-        <a class="float-right" href="{{ auth()->user()->username }}" style="font-family:'montserrat',sans-serif; text-decoration:none; font-size:14px;">
+        <a class="float-right" href="{{ $user->username }}" style="font-family:'montserrat',sans-serif; text-decoration:none; font-size:14px;">
         <i class="far fa-eye mr-2"></i>View my Page
         </a>
       </div>
@@ -48,7 +48,7 @@
           <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
             <div class="card-body">
 
-              <form class="main-form" action="{{ route('update_profile') }}" method="post" enctype="multipart/form-data">
+              <form class="main-form" action="{{ url('save_one') }}" method="post" enctype="multipart/form-data">
               @csrf
                 <!-- change avatar start-->
                 <div class="change-avatar-box" id="change-avatar">
@@ -117,7 +117,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon3">http://tipmedash.com/</span>
                         </div>
-                        <input type="text" class="form-control" name="username" onfocus="this.placeholder =''" onblur="this.placeholder = '{{ Auth::user()->username }}'" placeholder="{{ Auth::user()->username }}" value="{{ old('username') }}" aria-describedby="basic-addon3" />
+                        <input type="text" class="form-control" name="username" value="{{ $user->username }}" />
                       </div>
                       @error('username')
                           <span class="mt-1" style="color:red; font-size:13px;">
@@ -129,23 +129,22 @@
                   </div>
                   <!-------------------------->
 
-                  <!-- website input start -->
+                  <!-- location input start -->
                   <div class="col-md-6">
                     <div class="form-group mb-1">
-                      <label for="website">Website</label>
-                      <input class="form-control" type="text" name="website" onfocus="this.placeholder =''" onblur="this.placeholder = '{{ Auth::user()->website }}'" placeholder="{{ Auth::user()->website }}" value="{{ old('website') }}">
+                      <label for="location">Location</label>
+                      <input class="form-control" type="text" name="location" value="{{ $user->location }}"> 
                     </div>
-                    @error('website')
-                      <span style="color:red; font-size:13px;">
-                        <i class="fas fa-exclamation-circle"></i>
-                        {{ $message }}
-                      </span>
-                    @enderror   
-                  </div>  
-                  <!---------------------------------->
+                    @error('location')
+                          <span style="color:red; font-size:13px;">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ $message }}
+                          </span>
+                    @enderror 
+                  </div>
+                  <!-------------------------->
 
                 </div>
-
                 
                 <!--------------------- dash wallet address input ------------------------>
                 <div class="form-group">
@@ -178,19 +177,6 @@
                 </div>
                 <!------------------------------------------------------------------------->
 
-                <!-- Allow the user to delete wallet address if he has one-->
-                @if(Auth::user()->wallet_address) 
-                  <div class="form-group">
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" name="delete_wallet_address">
-                      <label class="form-check-label" for="delete wallet address">
-                        Delete wallet address
-                      </label>
-                    </div>
-                  </div>
-                @endif
-                <!---------------------------------------------------------->
-
                 <button type="submit" class="save-changes-btn shadow-none btn btn-outline-primary"><i class="far fa-save mr-2"></i>Save changes</button>
               </form> 
             </div>
@@ -212,31 +198,31 @@
           <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
             <div class="card-body">
               
-              <form class="main-form" action="{{ route('update_profile') }}" method="post" enctype="multipart/form-data" >
+              <form class="main-form" action="{{ url('save_two') }}" method="post" enctype="multipart/form-data" >
               @csrf     
               
                 <div class="row">
 
-                    <!-- location input start -->
-                    <div class="col-md-6">
+                  <!-- website input start -->
+                  <div class="col-md-6">
                     <div class="form-group mb-1">
-                      <label for="location">Location</label>
-                      <input class="form-control" type="text" name="location" onfocus="this.placeholder =''" onblur="this.placeholder = '{{ Auth::user()->location }}'" placeholder="{{ Auth::user()->location }}" value="{{ old('location') }}"> 
+                      <label for="website">Website</label>
+                      <input class="form-control" type="text" name="website" value="{{ $user->website }}">
                     </div>
-                    @error('location')
-                          <span style="color:red; font-size:13px;">
-                            <i class="fas fa-exclamation-circle"></i>
-                            {{ $message }}
-                          </span>
-                    @enderror 
-                  </div>
-                  <!-------------------------->
+                    @error('website')
+                      <span style="color:red; font-size:13px;">
+                        <i class="fas fa-exclamation-circle"></i>
+                        {{ $message }}
+                      </span>
+                    @enderror   
+                  </div>  
+                  <!---------------------------------->
 
                     <!-- passionate about input start -->
                     <div class="col-md-6">
                       <div class="form-group mb-1">
                         <label for="passionate_about">Passionate About</label>
-                        <input class="form-control" type="text" name="passionate_about" onfocus="this.placeholder =''" onblur="this.placeholder = '{{ Auth::user()->passionate_about }}'" placeholder="{{ Auth::user()->passionate_about }}" value="{{ old('passionate_about') }}">
+                        <input class="form-control" type="text" name="passionate_about" value="{{ $user->passionate_about }}">
                       </div>  
                       @error('passionate_about')
                             <span style="color:red; font-size:13px;">
@@ -259,7 +245,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon1" style="padding-right:16px;">@</span>
                         </div>
-                        <input class="form-control" type="text" name="twitter" onfocus="this.placeholder =''" onblur="this.placeholder = '{{ Auth::user()->twitter }}'" placeholder="{{ Auth::user()->twitter }}" value="{{ old('twitter') }}"> 
+                        <input class="form-control" type="text" name="twitter" value="{{ $user->twitter }}"> 
                       </div>
                     </div>
                     @error('twitter')
@@ -275,7 +261,7 @@
                   <div class="col-md-6">
                     <div class="form-group mb-1">
                       <label for="github">Github Username</label>
-                        <input class="form-control" type="text" name="github" onfocus="this.placeholder =''" onblur="this.placeholder = '{{ Auth::user()->github }}'" placeholder="{{ Auth::user()->github }}" value="{{ old('github') }}"> 
+                        <input class="form-control" name="github" type="text" value="{{ $user->github }}"> 
                     </div>
                     @error('github')
                           <span style="color:red; font-size:13px;">
@@ -300,7 +286,7 @@
                             www.youtube.com/channel/
                           </span>
                         </div>
-                        <input class="form-control" type="text" name="youtube" onfocus="this.placeholder =''" onblur="this.placeholder = '{{ Auth::user()->youtube }}'" placeholder="{{ Auth::user()->youtube }}" value="{{ old('youtube') }}"> 
+                        <input class="form-control" type="text" name="youtube" value="{{ $user->youtube }}"> 
                       </div>
                     </div>
                     @error('youtube')
@@ -328,7 +314,7 @@
                       @if(old('about'))
                         <textarea class="custom-textarea form-control" id="about-textarea" name="about" height="100">{{ old('about') }}</textarea>
                       @else
-                        <textarea class="custom-textarea form-control" id="about-textarea" name="about" height="100">{{ Auth::user()->about }}</textarea>
+                        <textarea class="custom-textarea form-control" id="about-textarea" name="about" height="100">{{ $user->about }}</textarea>
                       @endif
                       @error('about')
                         <span style="color:red; font-size:13px;">
@@ -337,7 +323,6 @@
                         </span>
                       @enderror 
                       <!------------------->
-
 
                       <!-- emoji plugin -->
                       <script>
@@ -351,8 +336,7 @@
                             flags : false,
                             animals_nature: false,
                             activity: false,
-                            travel_places: false,
-                            symbols: false
+                            travel_places: false
                             }
                         });
                       </script>
@@ -377,7 +361,7 @@
             <h5 class="mb-0">
               <button class="accordion-header-btn btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                 
-                @if(Auth::user()->password === null)
+                @if($user->password === null)
                   Create password
                 @else
                   Change password
@@ -391,7 +375,7 @@
           <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
             <div class="card-body">
               
-              @if(Auth::user()->password === null)                  
+              @if($user->password === null)                  
                 <div class="alert alert-primary" role="alert" style="font-size:13px;">
                 <i class="fas fa-bell mr-2" style="font-size:17px;"></i> 
                 You registered with google, that means you still haven't created

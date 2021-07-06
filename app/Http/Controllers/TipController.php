@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Tip;
+use App\Log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -114,8 +115,36 @@ class TipController extends Controller
     }
 
     function confirm_tip(Request $req){
-        Tip::where('id',$req->tip_id)->update(['status' => 'confirmed','stamp' => $req->transaction_id,'updated_at' => Carbon::now()]);
-        toast("Tip confirmed",'success');
+        
+        tip::where('id',$req->tip_id)->update([
+            'status' => 'confirmed',
+            'stamp' => $req->transaction_id,
+            'updated_at' => Carbon::now()
+        ]);
+
+        $tip = tip::where('id',$req->tip_id)->first();
+
+        $data = array();
+
+        if($tip->sender_id){
+            $data['from_id'] = $tip->sender_id;
+        }elseif($tip->sent_by){
+            $data['guest_name'] = $tip->sent_by;
+        }else{
+            $data['guest_name'] = 'Incognito';
+        }
+
+        $data['tip_id'] = $req->tip_id;
+        $data['to_id'] = $tip->recipient_id;
+        $data['event_type'] = 'tip';
+        $data['p2p_event'] = 'sent you a tip';
+        $data['global_event'] = 'sent a tip';
+        $data['created_at'] = Carbon::now();
+        $data['updated_at'] = Carbon::now();
+        DB::table('logs')->insert($data);
+
+        toast("Tip confirmed!",'success');
+
     }
 
     function unconfirmed(Request $req){

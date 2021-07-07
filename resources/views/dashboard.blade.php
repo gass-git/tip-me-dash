@@ -1,5 +1,7 @@
-@extends('layouts.app')
+@extends('layouts/app')
 @section('content')
+@include('layouts/navbar_one')
+
 <body>
     <section class="dashboard container">
         
@@ -204,93 +206,95 @@
         </script>   
         <!---------------------------> 
                                         
-  
+
         <div class="title-1 mt-4" style="font-size:17px;"><i class="fas fa-broadcast-tower mr-2"></i>RECENT ACTIVITY</div>
+
 
         <!-- Recent activity section -->
         <div class="row mt-3">
-
             <div class="m-0 p-0" style="width:100%;">
-                <ul class="list-group">
+                
+                <!-- Continue if the authenticated user has events in his log -->
+                @if($number_of_events > 0)
 
-                    @if($events === null)
+                    <ul class="list-group">
 
-                        <div class="alert alert-light pl-4" style="background-color: rgb(255,255,255,0.7);border:1px solid #c2ccfa;">
-                           No recent activity
-                        </div>     
-
-                    @else
-
+                        <!-- Loop through the last events -->
                         @foreach($events as $event)
 
                             <li class="list-group-item">
 
                                 <i class="fas fa-angle-right mr-2" style="color:var(--light-deep-blue);font-size:18px;"></i>
                                 
-                                    @if($event->event_type === 'tip')
+                                @if($event->type === 'tip')
 
-                                        <b style="color:var(--light-deep-blue);text-transform:capitalize;">
-                                            @if($event->from_id)
+                                    <b style="color:var(--light-deep-blue);text-transform:capitalize;">
+                                        @if($event->from_id)
 
-                                                @php
-                                                    $tipper = app\user::where('id',$event->from_id)->first()->username;
-                                                @endphp
+                                            @php
+                                                $tipper = app\user::where('id',$event->from_id)->first()->username; // User who tipped
+                                            @endphp
 
-                                                <a href="/{{ $tipper }}" style="color:#225ccf;">
-                                                    {{ $tipper }}
-                                                </a>
-
-                                            @else
-                                                {{ $event->guest_name }} 
-                                            @endif
-                                        </b>
-
-                                        @php    
-                                            $recipient = app\user::where('id',$event->to_id)->first()->username;
-                                        @endphp
-
-                                        <a href="/{{ $recipient }}">
-                                            {{ $event->p2p_event }}
-                                        </a>
-
-                                    @endif
-
-
-                                    @if($event->event_type === 'praise' AND $event->from_id)
-
-                                        @php 
-                                            $clapper = app\user::where('id',$event->from_id)->first()->username;
-                                            $recipient = app\user::where('id',$event->to_id)->first()->username;
-                                        @endphp
-
-                                        <b style="color:var(--light-deep-blue);text-transform:capitalize;">
-
-                                            <a href="/{{ $clapper }}" style="color:#225ccf;">
-                                                {{ $clapper }}
+                                            <a href="/{{ $tipper }}" style="color:#225ccf;">
+                                                {{ $tipper }}
                                             </a>
-                                
-                                        </b>         
 
-                                        <a href="/{{ $clapper }}">
-                                            {{ $event->p2p_event }}
+                                        @else
+                                            {{ $event->guest_name }} 
+                                        @endif
+                                    </b>
+
+                                    @php    
+                                        $recipient = app\user::where('id',$event->to_id)->first()->username; // User who received the tip
+                                    @endphp
+
+                                    <a href="/{{ $recipient }}">
+                                        {{ $event->p2p_event }}
+                                    </a>
+
+                                @endif
+
+
+                                @if($event->type === 'praise' AND $event->from_id)
+
+                                    @php 
+                                        $clapper = app\user::where('id',$event->from_id)->first()->username;  // User who praises
+                                        $recipient = app\user::where('id',$event->to_id)->first()->username;  // User who receives the praise
+                                    @endphp
+
+                                    <b style="color:var(--light-deep-blue);text-transform:capitalize;">
+
+                                        <a href="/{{ $clapper }}" style="color:#225ccf;">
+                                            {{ $clapper }}
                                         </a>
+                            
+                                    </b>         
 
-                                    @endif
+                                    <a href="/{{ $clapper }}">
+                                        {{ $event->p2p_event }}
+                                    </a>
 
+                                @endif
 
                                 <span id="date-span">
                                     {{ Carbon::parse($event->created_at)->isoFormat('MMM Do YYYY')}}
                                 </span>
                         
                             </li>
-                            
-                        @endforeach
 
-                    @endif
+                        @endforeach    
+                        <!-- END of events loop -->
 
-                </ul>
+                    </ul>       
+
+                <!-- The user doesn't have events on his log -->    
+                @else
+                    <div class="no-activity-box pl-4 pt-2 pb-2">
+                        No recent activity
+                    </div> 
+                @endif
+
             </div>
-
         </div>
         <!------ END of recent activity section ----->
 

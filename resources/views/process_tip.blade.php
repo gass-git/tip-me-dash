@@ -1,6 +1,8 @@
 @extends('layouts/app')
 @section('content')
+@include('layouts/navbar_two')
 @include('layouts/user_page_body')
+
 
     <!-- Start of modal QR -->
     <div class="modal fade" id="modal_QR" data-backdrop="static" data-keyboard="false">

@@ -1,5 +1,6 @@
-@extends('layouts.app')
+@extends('layouts/app')
 @section('content')
+@include('layouts/navbar_one')
 
 <!---- Style to override emojiOneArea plugin ---->
 <style>

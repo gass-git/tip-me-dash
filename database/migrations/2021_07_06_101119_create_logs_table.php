@@ -20,7 +20,7 @@ class CreateLogsTable extends Migration
             $table->string('guest_name')->nullable();
             $table->unsignedBigInteger('from_id')->nullable();
             $table->unsignedBigInteger('to_id')->nullable();
-            $table->string('event_type')->nullable();
+            $table->string('type')->nullable();
             $table->string('p2p_event')->nullable();
             $table->string('global_event')->nullable();
             $table->timestamps();

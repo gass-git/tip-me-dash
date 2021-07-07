@@ -90,7 +90,7 @@ class UserPageController extends Controller
             
             $tip->update(['praise' => null]);
             
-            $event = log::where('tip_id',$tip->id)->where('event_type','praise')->first();
+            $event = log::where('tip_id',$tip->id)->where('type','praise')->first();
             
             $event->delete();
 
@@ -98,7 +98,7 @@ class UserPageController extends Controller
 
             $tip->update(['praise' => $req->praise]);
 
-            $event = log::where('tip_id', $tip->id)->where('event_type','praise')->first();
+            $event = log::where('tip_id', $tip->id)->where('type','praise')->first();
         
             $praise = $req->praise;
 
@@ -131,7 +131,7 @@ class UserPageController extends Controller
                 $data['tip_id'] = $req->id;
                 $data['from_id'] = Auth::user()->id;
                 $data['to_id'] = $tip->sender_id;
-                $data['event_type'] = 'praise';
+                $data['type'] = 'praise';
                 $data['p2p_event'] = $p2p_detail;
                 $data['global_event'] = $g_detail;
                 $data['created_at'] = Carbon::now();

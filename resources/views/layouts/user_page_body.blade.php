@@ -206,9 +206,9 @@
                                            type="text" 
                                            value="{{ Auth::user()->username }}" 
                                            class="form-control"
-                                           readonly>
+                                           readonly/>
                                 @else
-                                    <input name="name" type="text" class="form-control" placeholder="Name" value="{{ old('name') }}">
+                                    <input name="name" type="text" class="form-control" onfocus="this.placeholder =''" onblur="this.placeholder = 'Name'" placeholder="Name"  " value="{{ old('name') }}">
                                     @error('name')
                                         <span style="color:red; font-size:13px;">
                                             <i class="fas fa-exclamation-circle"></i>
@@ -275,7 +275,16 @@
                     </form>
                     <!------ END of send tip form -------->
 
+                    @if($number_of_tips == 0)
+                        <center style="color:grey; word-spacing:1px;">
+                            <b style="text-transform:capitalize;color:var(--light-deep-blue);">
+                                {{ $page_owner->username }}
+                            </b> 
+                            <span style="font-weight:200">has not received any tips yet</span>
+                        </center>
+                    @endif
 
+                    <!----------- Tips section ------------------> 
                     @foreach($tips as $tip)
 
                         @if($tip->sender_id)
@@ -346,7 +355,9 @@
                                                 @guest
                                                     
                                                     <span style="font-size:13px"> ― </span> 
-                                                    <span class="mr-1">Received on {{ \Carbon\Carbon::parse($tip->created_at)->isoFormat('MMM Do YYYY')}}</span>
+                                                    <span class="mr-1">Received on {{ \Carbon\Carbon::parse($tip->created_at)->isoFormat('MMM Do YYYY')}} - 
+                                                        <span style="cursor:help" data-toggle="tooltip" data-placement="top" title="Dash price in USD at the moment of transfer">DP ${{ $tip->dash_usd }}</span>
+                                                    </span>
                                                 
                                                     @if($praise === 'like')
                                                         ⁂<i class="fas fa-thumbs-up ml-2" style="color:var(--dash-blue);font-size:12px;"></i> Thanks! this is great
@@ -370,12 +381,14 @@
                                                 <!-- Logged in user -->
                                                 @auth
             
-                                                    <!-- Visitor is the page owner -->
+                                                    <!-- Looged user is the page owner -->
                                                     @if(Auth::user()->id === $page_owner->id)
             
                                                     
                                                     <span style="font-size:13px"> ― </span> 
-                                                    <span class="mr-1">Received on {{ \Carbon\Carbon::parse($tip->created_at)->isoFormat('MMM Do YYYY')}}</span>
+                                                    <span class="mr-1">Received on {{ \Carbon\Carbon::parse($tip->created_at)->isoFormat('MMM Do YYYY')}} - 
+                                                        <span style="cursor:help" data-toggle="tooltip" data-placement="top" title="Dash price in USD at the moment of transfer">DP ${{ $tip->dash_usd }}</span>
+                                                    </span>
 
                                                     <span class="ml-5" id="{{ $tip->id }}" style="color:#c5ab84; ">
                                                         
@@ -406,12 +419,14 @@
                                                     </span>
             
             
-                                                    <!-- Visitor is NOT the page owner -->    
+                                                    <!-- Logged user is NOT the page owner -->    
                                                     @else
             
                                                     
                                                         <span style="font-size:13px"> ― </span> 
-                                                        <span class="mr-1">Received on {{ \Carbon\Carbon::parse($tip->created_at)->isoFormat('MMM Do YYYY')}}</span>
+                                                        <span class="mr-1">Received on {{ \Carbon\Carbon::parse($tip->created_at)->isoFormat('MMM Do YYYY')}} - 
+                                                            <span style="cursor:help" data-toggle="tooltip" data-placement="top" title="Dash price in USD at the moment of transfer">DP ${{ $tip->dash_usd }}</span>
+                                                        </span>
                                                         
                                                         @if($praise === 'like')
                                                             ⁂<i class="fas fa-thumbs-up ml-2" style="color:var(--dash-blue);"></i> Thanks! this is great
@@ -461,6 +476,7 @@
                         </div>
                     
                     @endforeach
+                    <!--------- END of tip section  ------------------> 
 
                 </div> <!-- ENF of right column -->
             </div> <!-- END of row -->

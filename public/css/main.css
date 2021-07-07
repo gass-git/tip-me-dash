@@ -49,9 +49,6 @@ background-size: cover;
 .blue-gradient{
     background-image: var(--blue-gradient-1);
 }
-input:focus::placeholder {
-    color: transparent;
-}
 .btn-1{
     padding:10px 15px;
     font-family: 'montserrat',sans-serif;
@@ -271,7 +268,6 @@ ANIMATIONS
 NAVBAR
 -------------------*/
 .navbar{
-    background-image:white;
     height:50px;
 }
 .navbar .btn{
@@ -280,14 +276,20 @@ NAVBAR
     font-weight:500;  
 }
 .navbar .user-avatar{
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
 }
 .navbar-brand{
     margin-top:0px;
 }
-.brand-text{
+.brand-text-one{
+    font-family: 'Montserrat', sans-serif;
+    color:rgb(255, 255, 255);
+    font-size:18px; 
+    font-weight:500;
+}
+.brand-text-two{
     font-family: 'Montserrat', sans-serif;
     color:rgb(0, 0, 0);
     font-size:18px; 
@@ -855,6 +857,11 @@ dashboard-section
     color:rgb(0,0,0,0.8);
     float:right;
 }
+.dashboard .no-activity-box{
+    background-color:rgb(255, 255, 255,0.5);
+    border:1px solid #c2ccfa; 
+    border-radius:5px; 
+}
 /* --------------------
 PROCESS TIP MODAL
 --------------------- */
@@ -985,7 +992,6 @@ USER PAGE BODY LAYOUT
 .user-page .form-wrapper input[type=text]{
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
-    font-weight: 500;
     outline:none;
     width: 100%;
     height:40px;
@@ -997,7 +1003,6 @@ USER PAGE BODY LAYOUT
     color:grey;
 }
 .user-page .form-wrapper input[type=text]:focus{
-    background-color: rgb(0, 141, 228, 0.1);
     outline:none!important;
     box-shadow: none!important;
     background-color: rgb(0, 141, 228, 0.2);
@@ -1019,7 +1024,6 @@ USER PAGE BODY LAYOUT
 }
 
 .user-page .form-wrapper input[type=number]:focus{
-    background-color: rgb(0, 141, 228, 0.1);
     outline:none!important;
     box-shadow: none!important;
     background-color: rgb(0, 141, 228, 0.2);
@@ -1110,7 +1114,6 @@ USER PAGE BODY LAYOUT
     border: 1px solid rgba(218, 218, 218, 0.8);
     background-color: rgb(255,255,255,0.9);
 }
-
 .tip-msg{
     border-radius: 3px;
     line-height: 25px;

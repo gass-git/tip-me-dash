@@ -58,6 +58,7 @@ class TipController extends Controller
             $data['message'] = $req->msg;
         }
 
+        $data['dash_usd'] = $dash_usd;
         $data['recipient_id'] = $page_owner->id;
         $data['usd_equivalent'] = $usd_amount;
         $data['dash_amount'] = $dash_toSend;
@@ -136,7 +137,7 @@ class TipController extends Controller
 
         $data['tip_id'] = $req->tip_id;
         $data['to_id'] = $tip->recipient_id;
-        $data['event_type'] = 'tip';
+        $data['type'] = 'tip';
         $data['p2p_event'] = 'sent you a tip';
         $data['global_event'] = 'sent a tip';
         $data['created_at'] = Carbon::now();

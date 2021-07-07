@@ -1,6 +1,7 @@
-@extends('layouts.app')
-
+@extends('layouts/app')
 @section('content')
+@include('layouts/navbar_two')
+
 <body>
 
     <div class="login-form modal-dialog text-center" style="background-color:transparent;">

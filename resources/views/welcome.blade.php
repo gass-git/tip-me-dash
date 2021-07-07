@@ -1,5 +1,7 @@
 @extends('layouts/app')
 @section('content')
+@include('layouts/navbar_one')
+
 <body id="top" class="blue-gradient">
     <!-- header section start -->
     <section class="header d-flex align-items-center shadow">

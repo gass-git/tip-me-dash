@@ -137,22 +137,44 @@ MEDIA
      .about-wrapper{
         background-image: none!important;
     }
+
 }
 
-@media screen and (max-width:766px){
-    
-    .user-page .avatar-card #avatar-img{
-        height:170px!important;
-        width:170px!important;
+@media screen and (max-width:870px){
+
+    .user-page{
+        padding-left:30px!important;
+        padding-right:10px!important;
     }
 
+    .user-page .right-col{
+        padding-left:10px!important;
+    }
+
+    .user-page .profile-box{
+        margin-right:10px;
+    }
+
+}
+
+@media screen and (max-width:767px){
+    
      /* About wrapper */
      .about-wrapper{
         margin-left:0px!important;
     }
 
-    .user-page #second-col{
-        padding-left:0px!important;
+    .user-page .col-md-3{
+        display:none;
+    }
+
+    .user-page{
+        padding-left:40px!important;
+        padding-right:40px!important;
+    }
+
+    .user-page .right-col #mobile-avatar{
+        display:block!important;
     }
 
     /* footer */
@@ -168,8 +190,36 @@ MEDIA
     }
 }
 
+@media screen and (max-width:670px){
+    
+    .user-page{
+        padding-left:20px!important;
+        padding-right:20px!important;
+    }
+
+}
+
+@media screen and (max-width:585px){
+
+    .user-page #stamp{
+        display: none;
+    }
+
+}
+
 @media screen and (max-width:525px){
     
+    .user-page{
+        padding-left:10px!important;
+        padding-right:5px!important;
+    }
+
+    .user-page #auth-tip-date{
+        display:none!important;
+    }
+
+
+
     /* footer */
     #separator-one{
         display:none;
@@ -225,6 +275,11 @@ MEDIA
     /*---- user page ----*/
     .visitor-avatar{
         display:none;
+    }
+
+    .user-page .tip-body{
+        margin-right:8px!important;
+        margin-left:8px!important;
     }
 
     /*--- footer -------*/
@@ -913,11 +968,11 @@ USER PAGE BODY LAYOUT
     color:grey;
     max-width: 1000px;
     margin-top:0px;
+    margin-bottom:0px;
     padding-top:0px;
     padding-bottom:100px;
-    margin-bottom:0px;
-    padding-right: 0px;
-    padding-left: 0px;
+    padding-right: 50px;
+    padding-left: 50px;
 }
 .header-img{
     background-position: fixed;
@@ -926,13 +981,16 @@ USER PAGE BODY LAYOUT
     height:200px;
 }
 .user-page .profile-box{
-    margin-top:-120px;  
+    min-width: 170px;
+    max-width: 220px;
+    margin-top:-100px;  
     background-color: white; 
     border-radius:4px; 
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
 }
 .user-page .profile-box .avatar{
     width: 100%;
-    height:320px;
+    height:295px;
     background-position: center;
     background-size: cover;
     border-radius: 4px 4px 0 0;
@@ -956,21 +1014,27 @@ USER PAGE BODY LAYOUT
     text-decoration: none;
     color:grey;
 }
-
 .user-page .right-col{
-    margin-top:-80px;
+    margin-top:-63px;
+    padding-left:30px;
 }
-
+.user-page .right-col #mobile-avatar{
+    border: 3px solid rgb(255,255,255,0.4);
+    display:none;
+    margin-top:-26px;
+    border-radius: 4px;
+    width:70px;
+}
 .user-page .form-wrapper{
-    padding-top:15px;
-    padding-bottom: 5px;
-    padding-left:25px;
-    padding-right:25px;
+    padding:15px 25px 0px 25px;
+    margin:45px 0 35px 0;
     width:100%;
     height:auto;
     display: flex;
     background-color: var(--box-bg-1);
-    border-radius:3px;
+    border-radius:5px;
+    /*box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;*/
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 .user-page .form-wrapper .box1{
     padding:10px 10px 10px 0px;
@@ -1083,7 +1147,9 @@ USER PAGE BODY LAYOUT
     font-family:var(--montserrat);
     font-size:15px;
 }
-.msg{
+.tip-body{
+    margin-left:20px; 
+    margin-right:10px;
     color:#525252; 
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
@@ -1091,6 +1157,8 @@ USER PAGE BODY LAYOUT
     word-spacing: 1px;
     line-height: 22px;
     text-align:justify;
+    font-size:14px;
+    width:100%;
 }
 .tips-wrapper .tip-without-msg{
     color: #ffffff;
@@ -1108,17 +1176,22 @@ USER PAGE BODY LAYOUT
     font-weight: 500;
 }
 .tip-box{
-    /*background-image: linear-gradient(to right,  rgb(0, 141, 228, 0.3) 0%,rgb(0, 141, 228, 0.3) 15%,rgb(0, 141, 228, 0.1) 15%,rgb(0, 141, 228, 0.1) 100%);*/
+    min-height: 110px;
     border-radius:3px;
     padding-left:25px;
     border: 1px solid rgba(218, 218, 218, 0.8);
-    background-color: rgb(255,255,255,0.9);
+    background-color:rgb(0, 141, 228, 0.1);
 }
 .tip-msg{
     border-radius: 3px;
     line-height: 25px;
     margin-left: 5px;
-    background-color:rgb(0, 141, 228, 0.1);
+    margin-right:10px;
+    background-color:rgba(255, 255, 255, 0.5);
+}
+.user-page .praise-icons{
+    color:#c5ab84;
+    margin-left:30px;
 }
 .user-page .show-msg{
     cursor:pointer;

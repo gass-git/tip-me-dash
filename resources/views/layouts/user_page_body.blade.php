@@ -17,44 +17,44 @@
     <section class="w-100 ">
         
         <!-- Header image -->
-        @guest
-                <div class="header-img w-100" style="background-image:url({{ $page_owner->header_img_url }})">
-                </div>
-        @endguest
-
-        @auth
-        
-            <!-- The visitor is the page owner -->    
-            @if(Auth::user()->id === $page_owner->id)
-
-                <form class="main-form" action="{{ url('upload_header_img') }}" method="post" enctype="multipart/form-data">
-                @csrf
-                    <div class="header-img w-100 d-flex align-items-end pr-2" style="background-image:url({{ $page_owner->header_img_url }})">
-                        <div class="ml-auto" style="z-index:2;">
-                            <label class="btn btn-sm btn-outline-light mr-2" for="input" id="input-btn" type="file" name="input">Change cover</label>
-                            <input type="file" name="input" id="input" style="display:none">
-                            <button id="save-btn" class="btn btn-sm btn-success mr-2 mb-2" type="submit" style="display:none;">save</button>
-                            <a id="cancel-btn" class="btn btn-sm btn-danger mr-2 mb-2" style="display:none;" href="/{{ $page_owner->username }}">Cancel</a>
-                        </div>
+            @guest
+                    <div class="header-img w-100" style="background-image:url({{ $page_owner->header_img_url }});">
                     </div>
-                </form>  
+            @endguest
 
-            @else
-                <div class="header-img w-100" style="background-image:url({{  $page_owner->header_img_url }})">
-                </div>
-            @endif
+            @auth
+            
+                <!-- The visitor is the page owner -->    
+                @if(Auth::user()->id === $page_owner->id)
 
-        @endauth
+                    <form class="main-form" action="{{ url('upload_header_img') }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                        <div class="header-img w-100 d-flex align-items-end pr-2" style="background-image:url({{ $page_owner->header_img_url }})">
+                            <div class="ml-auto" style="z-index:2;">
+                                <label class="btn btn-sm btn-outline-light mr-2" for="input" id="input-btn" type="file" name="input">Change cover</label>
+                                <input type="file" name="input" id="input" style="display:none">
+                                <button id="save-btn" class="btn btn-sm btn-success mr-2 mb-2" type="submit" style="display:none;">save</button>
+                                <a id="cancel-btn" class="btn btn-sm btn-danger mr-2 mb-2" style="display:none;" href="/{{ $page_owner->username }}">Cancel</a>
+                            </div>
+                        </div>
+                    </form>  
+
+                @else
+                    <div class="header-img w-100" style="background-image:url({{  $page_owner->header_img_url }})">
+                    </div>
+                @endif
+
+            @endauth
         <!---- END of header image ---->
 
         <div class="user-page container">
             <div class="row">
                 
                 <!-- Left column -->
-                <div class="col-sm-3 p-0 ml-5">
+                <div class="col-md-3 p-0">
 
                     <!-- User profile -->
-                    <div class="profile-box pb-4 shadow">
+                    <div class="profile-box pb-4">
 
                         <div class="avatar" style="background-image:url({{ $page_owner->avatar_url }})"></div>
 
@@ -174,19 +174,33 @@
 
 
                 <!-- Right column -->
-                <div class="right-col col-sm-8 ml-4 text-white">
+                <div class="right-col col-md-9">
 
-                    <!-- Username & location -->
-                    <a href="/{{ $page_owner->username }}" style="text-decoration: none; color:white;">
-                        <span style="margin-bottom:0;font-size:30px;text-transform:capitalize;">{{ $page_owner->username }}</span>
-                        <br>
-                        @if($location = $page_owner->location)
-                        {{ $location }}
-                        @else
-                        Planet Earth, MW
-                        @endif
-                    </a>
-                    <!------------------------>
+                    <div class="d-flex">
+
+                        <!-- Responsive avatar -->
+                        <div>
+                            <img id="mobile-avatar" class="mr-2" src="{{ $page_owner->avatar_url }}">
+                        </div>
+
+                        <!-- END of responsive avatar -->
+
+                        <!-- Username & location -->
+                        <a href="/{{ $page_owner->username }}" style="text-decoration: none; color:rgb(255,255,255,0.9);">
+                            <p class="ml-2" style="margin-bottom:0;font-size:30px;text-transform:capitalize; line-height:23px;font-weight:300;">
+                                {{ $page_owner->username }}
+                            </p>
+                            <span class="ml-2" style="padding-left:2px;word-spacing:1.5px;font-size:12px;font-weight:100; font-family:var(--roboto);font-weight:100;color:rgb(255,255,255,0.8);">
+                                @if($location = $page_owner->location)
+                                {{ $location }}
+                                @else
+                                Planet Earth, MW
+                                @endif
+                            </span>
+                        </a>
+                        <!------------------------>
+
+                    </div>    
 
                     <!-- tipping form -->
                     <form class="main-form" 
@@ -195,7 +209,7 @@
                           enctype="multipart/form-data" >
                           @csrf 
 
-                        <div class="form-wrapper shadow-sm mt-5 mb-5">
+                        <div class="form-wrapper">
 
                             <!-- Start of form box 1 -->
                             <div class="box1 pb-0">
@@ -301,17 +315,15 @@
 
                             <div class="row mb-0">
 
-                                
+                                <div class="col-sm-10 mr-0">
 
-                                <div class="col-sm-10">
+                                    <div class="d-flex mt-2">
 
-                                    <div class="d-flex">
-
-                                        <div class="p-2 ml-3 mt-2 mr-4 mb-0 msg" style="font-size:14px;width:100%;">
+                                        <div class="tip-body">
                                             
                                             <p class="d-flex tip-title align-items-lg-center p-2">
 
-                                                <i class="fas fa-donate ml-1 mr-1" data-toggle="tooltip" data-placement="top" style="color:var(--dark-yellow);font-size:18px;" title="Equivalent to US${{ $tip->usd_equivalent }} at the moment of transfer"></i>
+                                                <i class="fas fa-donate ml-0 mr-1" data-toggle="tooltip" data-placement="top" style="color:var(--dark-yellow);font-size:18px;" title="Equivalent to US${{ $tip->usd_equivalent }} at the moment of transfer"></i>
                                             
                                                 @if($tip->sender_id)
                                                     <a href="/{{ $registered_tipper }}" style="text-decoration: none!important;" title="Registered user">
@@ -345,7 +357,7 @@
                                                 </div>
                                             @endif    
 
-                                            <p class="mt-2 mb-0" style="font-size:11px;color:grey;">
+                                            <p class="mt-4 mb-0" style="font-size:11px;color:grey;">
                                                 
                                                 @php
                                                     $praise = App\tip::where('id',$tip->id)->first()->praise;
@@ -384,13 +396,12 @@
                                                     <!-- Looged user is the page owner -->
                                                     @if(Auth::user()->id === $page_owner->id)
             
-                                                    
-                                                    <span style="font-size:13px"> ― </span> 
-                                                    <span class="mr-1">Received on {{ \Carbon\Carbon::parse($tip->created_at)->isoFormat('MMM Do YYYY')}} - 
-                                                        <span style="cursor:help" data-toggle="tooltip" data-placement="top" title="Dash price in USD at the moment of transfer">DP ${{ $tip->dash_usd }}</span>
-                                                    </span>
-
-                                                    <span class="ml-5" id="{{ $tip->id }}" style="color:#c5ab84; ">
+                                                        <span id="auth-tip-date" style="font-size:13px"> ― </span> 
+                                                        <span id="auth-tip-date" class="mr-1">Received on {{ \Carbon\Carbon::parse($tip->created_at)->isoFormat('MMM Do YYYY')}} - 
+                                                            <span style="cursor:help" data-toggle="tooltip" data-placement="top" title="Dash price in USD at the moment of transfer">DP ${{ $tip->dash_usd }}</span>
+                                                        </span>
+                                                        
+                                                    <span class="praise-icons" id="{{ $tip->id }}">
                                                         
                                                         @if($praise === 'like')
                                                             <a id="like-{{ $tip->id }}" class="like mr-3"  title="Like it" style="color:#008de4; cursor:pointer;"><i class="fas fa-thumbs-up" style="font-size:16px;"></i></a>
@@ -457,7 +468,7 @@
 
                                 </div>
 
-                                <div class="col-sm-2">
+                                <div id="stamp" class="col-sm-2">
 
                                     <div class="d-flex flex-row-reverse mt-3 mr-4" style="height:60px;">
                                         <a href="https://explorer.dash.org/insight/tx/{{ $tip->stamp }}" 

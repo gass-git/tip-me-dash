@@ -124,7 +124,7 @@
             @php 
                 use Carbon\Carbon;
 
-                $confirmed_tip = App\tip::where('recipient_id',Auth::user()->id)->where('status','confirmed');
+                $confirmed_tip = App\Tip::where('recipient_id',Auth::user()->id)->where('status','confirmed');
                 $number_of_tips = $confirmed_tip->count();
                 $dash_30_days = $confirmed_tip->whereDate('created_at', '>', Carbon::now()->subDays(30))->sum('dash_amount');
                 $usd_30_days = $confirmed_tip->whereDate('created_at', '>', Carbon::now()->subDays(30))->sum('usd_equivalent');

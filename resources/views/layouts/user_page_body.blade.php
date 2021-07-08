@@ -20,29 +20,29 @@
         @php
 
             // Page owner tips
-            $tips = App\tip::where('recipient_id',$page_owner->id)
+            $tips = App\Tip::where('recipient_id',$page_owner->id)
                         ->where('status','confirmed')
                         ->orderBy('id','DESC')
                         ->paginate(5);
         
-            $supporters = App\tip::where('recipient_id',$page_owner->id)
+            $supporters = App\Tip::where('recipient_id',$page_owner->id)
                                 ->where('status','confirmed')
                                 ->distinct('sender_ip')
                                 ->count();
 
             // Amount of people tipped by a page owner               
-            $people_tipped = App\tip::where('sender_id',$page_owner->id)
+            $people_tipped = App\Tip::where('sender_id',$page_owner->id)
                                 ->where('status','confirmed')
                                 ->distinct('recipient_id')
                                 ->count();
 
             // Five most recent tips sent to different people                    
-            $tips_sent = App\tip::where('sender_id',$page_owner->id)
+            $tips_sent = App\Tip::where('sender_id',$page_owner->id)
                         ->where('status','confirmed')
                         ->distinct('recipient_id')
                         ->latest()->take(5)->get();
 
-            $biggest_tip = App\tip::where('recipient_id',$page_owner->id)
+            $biggest_tip = App\Tip::where('recipient_id',$page_owner->id)
                         ->where('status','confirmed')
                         ->orderBy('usd_equivalent','DESC')
                         ->first();
@@ -101,7 +101,7 @@
                                 @foreach ($tips_sent as $sent)
 
                                     @php
-                                        $recipient_username = App\user::where('id',$sent->recipient_id)->first()->username;
+                                        $recipient_username = App\User::where('id',$sent->recipient_id)->first()->username;
                                     @endphp
 
                                     <div class="small-stamp mt-2 mr-2 mb-2 ml-2">
@@ -121,7 +121,7 @@
 
                         @php
 
-                            $donation_sent = App\tip::where('sender_id',$page_owner->id);
+                            $donation_sent = App\Tip::where('sender_id',$page_owner->id);
 
                             $likes_and_cheers = $donation_sent->where('praise','like')->orWhere('praise','cheers')->count();
                             $brilliants_and_loves = $donation_sent->where('praise','brilliant')->orWhere('praise','love')->count();
@@ -532,7 +532,7 @@
                                             <p class="mt-4 mb-0" style="font-size:11px;color:grey;">
                                                 
                                                 @php
-                                                    $praise = App\tip::where('id',$tip->id)->first()->praise;
+                                                    $praise = App\Tip::where('id',$tip->id)->first()->praise;
                                                 @endphp
             
                                                 <!-- Visitor not logged in -->

@@ -50,14 +50,14 @@ class UserPageController extends Controller
 
     function praise(Request $req){
 
-        $tip =  tip::where('id',$req->id)->first();
+        $tip =  Tip::where('id',$req->id)->first();
         $current = $tip->praise;
 
         if($current == $req->praise){
             
             $tip->update(['praise' => null]);
             
-            $event = log::where('tip_id',$tip->id)->where('type','praise')->first();
+            $event = Log::where('tip_id',$tip->id)->where('type','praise')->first();
             
             $event->delete();
 
@@ -65,7 +65,7 @@ class UserPageController extends Controller
 
             $tip->update(['praise' => $req->praise]);
 
-            $event = log::where('tip_id', $tip->id)->where('type','praise')->first();
+            $event = Log::where('tip_id', $tip->id)->where('type','praise')->first();
         
             $praise = $req->praise;
 

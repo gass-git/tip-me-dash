@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Tip;
-use App\Log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -36,7 +35,7 @@ class TipController extends Controller
          *  - The page owner cannot tip himself
          * 
          */
-        $amount_of_tips = tip::where('sender_ip', $IP)
+        $amount_of_tips = Tip::where('sender_ip', $IP)
                     ->where('status','confirmed')
                     ->whereDate('created_at', Carbon::today())
                     ->count();
@@ -99,8 +98,8 @@ class TipController extends Controller
 
 
         /* ------- Extra variables to compact on view ----------------------- */
-        $tip_id = tip::max('id');
-        $tip = tip::where('id', $tip_id)->first();
+        $tip_id = Tip::max('id');
+        $tip = Tip::where('id', $tip_id)->first();
         $address = $page_owner->wallet_address;
         $QRstring = "dash:" . $address . "?amount=" .$tip->dash_amount;
         /* ------------------------------------------------------------------ */
@@ -110,13 +109,13 @@ class TipController extends Controller
 
     function confirm_tip(Request $req){
         
-        tip::where('id',$req->tip_id)->update([
+        Tip::where('id',$req->tip_id)->update([
             'status' => 'confirmed',
             'stamp' => $req->transaction_id,
             'updated_at' => Carbon::now()
         ]);
 
-        $tip = tip::where('id',$req->tip_id)->first();
+        $tip = Tip::where('id',$req->tip_id)->first();
 
         $data = array();
 

@@ -157,7 +157,7 @@ class SettingsController extends Controller
             // Success
 
             /* find user to delete */
-            $user = user::findOrFail(Auth::user()->id);
+            $user = User::findOrFail(Auth::user()->id);
 
             /* logout the user */
             Auth::logout();

@@ -47,6 +47,26 @@
     });
     // -------------------------------
 
+    // ------- Lock icon --------------------
+    $('#lock').click(function(e){ 
+
+        $('#lock-checkbox').click()
+
+        if( $(this).attr('class') == 'fas fa-lock-open' ){
+            $(this).removeClass('fa-lock-open')
+            $(this).addClass('fa-lock')
+            $('#lock-style').css('right','129px')
+            document.getElementById('lock-sound').play()
+        }else{
+            $(this).removeClass('fa-lock')
+            $(this).addClass('fa-lock-open')
+            $('#lock-style').css('right','125px')
+            document.getElementById('lock-sound').play()
+        }
+
+    })
+    // -----------------------------------
+
     // ------- global variables ------------
     var csrf_token = '{{ csrf_token() }}';
     var grey = 'rgb(175, 175, 175)';

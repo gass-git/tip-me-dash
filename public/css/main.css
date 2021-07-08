@@ -214,6 +214,10 @@ MEDIA
         padding-right:5px!important;
     }
 
+    .user-page #lock-style{
+        right:110px!important;
+    }
+
     .user-page #auth-tip-date{
         display:none!important;
     }
@@ -970,7 +974,7 @@ USER PAGE BODY LAYOUT
     margin-top:0px;
     margin-bottom:0px;
     padding-top:0px;
-    padding-bottom:100px;
+    padding-bottom:0px;
     padding-right: 50px;
     padding-left: 50px;
 }
@@ -994,6 +998,25 @@ USER PAGE BODY LAYOUT
     background-position: center;
     background-size: cover;
     border-radius: 4px 4px 0 0;
+}
+.user-page .small-stamp{
+    opacity:0.7;
+}
+.user-page .small-stamp:hover{
+    opacity: 1;
+}
+.user-page .views-pill{
+    width:50%;
+    border-radius:3px; 
+    border: 1px solid rgb(64, 193, 233);
+    background-color: rgb(0, 141, 228, 0.1);
+}
+.user-page .score-pill{
+    width: 50%;
+    text-align:center;
+    border-radius:3px;
+    background-color:rgb(240, 201, 41,0.4);
+    border:1px solid rgb(249, 178, 8,0.8);
 }
 .user-page .profile-box h5{
     font-family:var(--montserrat);
@@ -1196,4 +1219,11 @@ USER PAGE BODY LAYOUT
 .user-page .show-msg{
     cursor:pointer;
     color:var(--light-deep-blue);
+}
+.user-page .stamp{
+    opacity:0.9;
+    transition: 300ms ease-in-out;
+}
+.user-page .stamp:hover{
+    opacity: 1;
 }

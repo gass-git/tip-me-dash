@@ -17,12 +17,14 @@ class CreateTipsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('recipient_id');
             $table->integer('sender_id')->nullable();
+            $table->string('sender_ip');
             $table->foreign('recipient_id')->references('id')->on('users')->onDelete('cascade');  
             $table->float('usd_equivalent',10,8)->nullable();
             $table->float('dash_amount',10,8)->nullable();
             $table->integer('dash_usd')->nullable();
             $table->string('sent_by')->nullable();
             $table->text('message')->nullable();
+            $table->string('private_msg')->nullable();
             $table->string('praise')->nullable();
             $table->string('stamp')->nullable();
             $table->string('status');

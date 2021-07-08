@@ -15,22 +15,53 @@ class TipController extends Controller
 {
     function process_tip(Request $req){
         
+
         $req->validate([
             'msg' => ['nullable','max:300'],
             'name' => ['nullable','max:25'],
         ]);
-        $page_owner = User::where('username', $req->username)->first();
 
+
+        /* ---- Global variables ----------------------------------------- */
+        $page_owner = User::where('username', $req->username)->first();
+        $IP = request()->ip();
+        /* ---------------------------------------------------------------- */
+
+
+        /**@abstract
+         * 
+         * EXTRA VALIDATIONS
+         *  - It's not allowed to make more than two tips a day to the same user.
+         *  - The user needs to enter a wallet address to receive tips.
+         *  - The page owner cannot tip himself
+         * 
+         */
+        $amount_of_tips = tip::where('sender_ip', $IP)
+                    ->where('status','confirmed')
+                    ->whereDate('created_at', Carbon::today())
+                    ->count();
+
+        if($amount_of_tips > 1){
+            toast("It's not allowed to make more than two tips a day to the same user.",'info');
+            return redirect()->back();
+        }
+        
         if($page_owner->wallet_address == null){
             toast('Not possible, this user has not entered a wallet address yet.','info');
             return redirect()->back()->withInput();
         }
 
-        // --- API - Get dash usd exchange rate ------------------
+        if(Auth::user() == $page_owner){
+            toast('Why would you tip yourself?','info');
+            return redirect()->back();
+        }
+
+
+        /* --- API --- Get dash usd exchange rate ----------------- */
         $api = 'https://www.dashcentral.org/api/v1/public'; 
         $response = Http::get($api);
         $obj = json_decode($response);
-        // -------------------------------------------------------
+        /* -------------------------------------------------------- */   
 
         $rand_decimal = rand (1, 10) / 100;                                     // Create a random decimal
         $dash_usd = round($obj->exchange_rates->dash_usd, 8) + $rand_decimal;   // Dash usd price plus the random decimal
@@ -38,14 +69,11 @@ class TipController extends Controller
         $dash_toSend = round( $usd_amount/$dash_usd, 8);                        // Dash conversion to send
 
        
-
-        // The page owner cannot tip himself
-        if(Auth::user() == $page_owner){
-            toast('Why would you tip yourself?','info');
-            return redirect()->back()->withInput();
-        }
-
-        // ---- Insert data in Tips table ------------------------
+        /**@abstract
+         * 
+         * Insert data on tips table
+         * 
+         */
         $data = array();
 
         if(Auth::user()){
@@ -54,65 +82,30 @@ class TipController extends Controller
             $data['sent_by'] = $req->name;
         }
 
-        if($req->msg){
-            $data['message'] = $req->msg;
+        if($req->lock){
+            $data['private_msg'] = 'yes';
         }
 
-        $data['dash_usd'] = $dash_usd;
+        $data['message'] = $req->msg;
+        $data['sender_ip'] = $IP;
         $data['recipient_id'] = $page_owner->id;
         $data['usd_equivalent'] = $usd_amount;
         $data['dash_amount'] = $dash_toSend;
+        $data['dash_usd'] = $dash_usd;
         $data['status'] = 'not validated';
         $data['created_at'] = Carbon::now();
 
         DB::table('tips')->insert($data);
-        // -------------------------------------------------------
 
-        // Get page owner tips
-        $tips = DB::table('tips')
-                ->where('recipient_id',$page_owner->id)
-                ->where('status','confirmed')
-                ->orderBy('id','DESC')
-                ->paginate(5);
 
-        // Get page owner tips sent
-        $tips_sent = DB::table('tips')
-        ->where('sender_id',$page_owner->id)
-        ->where('status','confirmed')
-        ->orderBy('id','DESC')
-        ->paginate(3);        
-
-        // Get page owner tips
-        $number_of_tips = DB::table('tips')
-        ->where('recipient_id',$page_owner->id)
-        ->where('status','confirmed')
-        ->count();
-
-        // Hall of fame
-        $biggest_tip = DB::table('tips')
-                ->where('recipient_id',$page_owner->id)
-                ->where('status','confirmed')
-                ->orderBy('usd_equivalent','DESC')
-                ->first();
-
-        $tip_id = Tip::max('id');
-        $tip = Tip::where('id', $tip_id)->first();
-
+        /* ------- Extra variables to compact on view ----------------------- */
+        $tip_id = tip::max('id');
+        $tip = tip::where('id', $tip_id)->first();
         $address = $page_owner->wallet_address;
         $QRstring = "dash:" . $address . "?amount=" .$tip->dash_amount;
+        /* ------------------------------------------------------------------ */
 
-        return view('process_tip', compact(
-            'QRstring',
-            'dash_usd',
-            'dash_toSend',
-            'usd_amount',
-            'tip_id', 
-            'page_owner',
-            'tips',
-            'biggest_tip',
-            'number_of_tips',
-            'tips_sent'
-        ));
+        return view('process_tip', compact('QRstring','dash_usd','dash_toSend','usd_amount','tip_id','page_owner'));
     }
 
     function confirm_tip(Request $req){
@@ -152,5 +145,6 @@ class TipController extends Controller
 
         Tip::where('id',$req->tip_id)->update(['status' => 'unconfirmed','updated_at' => Carbon::now()]);
         toast("You runned out of time, the tip was not confirmed",'error');
+        
     }
 }

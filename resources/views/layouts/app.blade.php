@@ -28,11 +28,13 @@
         <!-- bootstrap css -->
         <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
         <!-- main css -->
-        <link rel="stylesheet" href="{{ asset('css/main.css?28') }}">
+        <link rel="stylesheet" href="{{ asset('css/main.css?39') }}">
         <!-- font awesome css -->
         <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
         
         <title>{{ config('app.name', 'Laravel') }}</title>
+
+        <audio id="lock-sound" src="sounds/lock.mp3"></audio>
 
     </head>
 

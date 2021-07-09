@@ -42,8 +42,8 @@ body{
     line-height: 1.5;
     background-color: #ffffff;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'%3E%3Cpolygon fill='%23e9f1f2' points='957 450 539 900 1396 900'/%3E%3Cpolygon fill='%23fcdce1' points='957 450 872.9 900 1396 900'/%3E%3Cpolygon fill='%23dfeef3' points='-60 900 398 662 816 900'/%3E%3Cpolygon fill='%23f2dae9' points='337 900 398 662 816 900'/%3E%3Cpolygon fill='%23d6eaf5' points='1203 546 1552 900 876 900'/%3E%3Cpolygon fill='%23e3d9ef' points='1203 546 1552 900 1162 900'/%3E%3Cpolygon fill='%23d1e5f8' points='641 695 886 900 367 900'/%3E%3Cpolygon fill='%23d1daf0' points='587 900 641 695 886 900'/%3E%3Cpolygon fill='%23d0dffa' points='1710 900 1401 632 1096 900'/%3E%3Cpolygon fill='%23c0daeb' points='1710 900 1401 632 1365 900'/%3E%3Cpolygon fill='%23d4d8fa' points='1210 900 971 687 725 900'/%3E%3Cpolygon fill='%23b6d9e0' points='943 900 1210 900 971 687'/%3E%3C/svg%3E");
-background-attachment: fixed;
-background-size: cover;
+    background-attachment: fixed;
+    background-size: cover;
     /* CREDITS - background by SVGBackgrounds.com */
 }
 .blue-gradient{
@@ -605,13 +605,6 @@ FOOTER
 .powered img:hover{
     opacity: 1;
 }
-.powered-two img{
-    opacity:0.2;
-    transition: 1s ease;
-}
-.powered-two img:hover{
-    opacity: 0.5;
-}
 .footer-info {
     font-size:13px; 
     border-top:1px solid rgb(255,255,255,0.1);
@@ -979,7 +972,7 @@ USER PAGE BODY LAYOUT
     color:grey;
     max-width: 1000px;
     margin-top:0px;
-    margin-bottom:0px;
+    margin-bottom:130px;
     padding-top:0px;
     padding-bottom:0px;
     padding-right: 50px;

@@ -14,7 +14,7 @@
 <!----------------------------------------------->
     
 <body>
-    <section class="w-100 ">
+    <section class="w-100">
         
         <!------- Global php stdClass objects -------------->
         @php
@@ -53,18 +53,28 @@
 
         <!-- Header image -->
             @guest
-                    <div class="header-img w-100" style="background-image:url({{ $page_owner->header_img_url }});">
+
+                @if ($page_owner->header_img_url)
+                    <div class="header-img w-100" style="background-image:url({{ $page_owner->header_img_url }})">
                     </div>
+                @else  
+                    <div class="header-img w-100" style="background-image:var(--blue-gradient-1)">
+                    </div>
+                @endif  
+
             @endguest
 
             @auth
             
-                <!-- The visitor is the page owner -->    
-                @if(Auth::user()->id === $page_owner->id)
+                @if(Auth::user()->id === $page_owner->id) <!-- The logged user is the page owner -->    
 
                     <form class="main-form" action="{{ url('upload_header_img') }}" method="post" enctype="multipart/form-data">
                     @csrf
-                        <div class="header-img w-100 d-flex align-items-end pr-2" style="background-image:url({{ $page_owner->header_img_url }})">
+                        @if ($page_owner->header_img_url)
+                            <div class="header-img w-100 d-flex align-items-end pr-2"  style="background-image:url({{ $page_owner->header_img_url }})">
+                        @else  
+                            <div class="header-img w-100 d-flex align-items-end pr-2"  style="background-image:var(--blue-gradient-1)">
+                        @endif  
                             <div class="ml-auto" style="z-index:2;">
                                 <label class="btn btn-sm btn-outline-light mr-2" for="input" id="input-btn" type="file" name="input">Change cover</label>
                                 <input type="file" name="image" id="input" style="display:none">
@@ -75,17 +85,21 @@
                     </form>  
 
                     @error('image')
-
                         @php
-                            
                             Alert::toast($message, 'info');
                         @endphp
-                         
                     @enderror
+                
+                @else <!-- The logged visitor is not the page owner -->    
 
-                @else
-                    <div class="header-img w-100" style="background-image:url({{  $page_owner->header_img_url }})">
-                    </div>
+                    @if ($page_owner->header_img_url)
+                        <div class="header-img w-100" style="background-image:url({{ $page_owner->header_img_url }})">
+                        </div>
+                    @else  
+                        <div class="header-img w-100" style="background-image:var(--blue-gradient-1)">
+                        </div>
+                    @endif  
+
                 @endif
 
             @endauth
@@ -640,7 +654,6 @@
                 </div> <!-- END of right column -->
             </div> <!-- END of row -->
         </div> <!-- END of user-page container -->
-        @include('layouts/footer_two')
     </section> <!-- END of w-100 section -->
 </body>
 

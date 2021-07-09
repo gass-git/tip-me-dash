@@ -201,7 +201,7 @@ MEDIA
 
 @media screen and (max-width:585px){
 
-    .user-page .stamp{
+    .user-page .col-sm-2{
         display: none;
     }
 
@@ -605,6 +605,13 @@ FOOTER
 .powered img:hover{
     opacity: 1;
 }
+.powered-two img{
+    opacity:0.2;
+    transition: 1s ease;
+}
+.powered-two img:hover{
+    opacity: 0.5;
+}
 .footer-info {
     font-size:13px; 
     border-top:1px solid rgb(255,255,255,0.1);
@@ -985,8 +992,7 @@ USER PAGE BODY LAYOUT
     height:200px;
 }
 .user-page .profile-box{
-    min-width: 170px;
-    max-width: 220px;
+    min-width: 190px;
     margin-top:-100px;  
     background-color: white; 
     border-radius:4px; 

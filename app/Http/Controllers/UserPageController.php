@@ -132,7 +132,7 @@ class UserPageController extends Controller
 
             if($praise == "brilliant"){
                 $p2p_detail ="thinks it's brilliant";
-                $g_detail = "thinks it's brilliant";
+                $g_detail = "brilliant";
             }
 
             if($praise == "cheers"){
@@ -161,9 +161,13 @@ class UserPageController extends Controller
 
     function upload_header_img(Request $req){
 
+        $req->validate(['image' => ['image','mimes:jpg,png,jpeg,gif','max:700'],
+        ]);
+
+
         $user = Auth::user();
 
-        $img = $req->file('input');
+        $img = $req->file('image');
 
         // If the user already has uploaded a header image delete it before uploading the new one
         if($user->header_img_name){

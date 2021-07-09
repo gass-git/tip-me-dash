@@ -125,7 +125,7 @@
                             <i class="fas fa-exclamation-circle"></i>
                             {{ $message }}
                           </span>
-                        @enderror
+                      @enderror
                     </div>
                   </div>
                   <!-------------------------->

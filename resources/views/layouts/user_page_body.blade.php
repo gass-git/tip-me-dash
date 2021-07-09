@@ -67,12 +67,21 @@
                         <div class="header-img w-100 d-flex align-items-end pr-2" style="background-image:url({{ $page_owner->header_img_url }})">
                             <div class="ml-auto" style="z-index:2;">
                                 <label class="btn btn-sm btn-outline-light mr-2" for="input" id="input-btn" type="file" name="input">Change cover</label>
-                                <input type="file" name="input" id="input" style="display:none">
+                                <input type="file" name="image" id="input" style="display:none">
                                 <button id="save-btn" class="btn btn-sm btn-success mr-2 mb-2" type="submit" style="display:none;">save</button>
                                 <a id="cancel-btn" class="btn btn-sm btn-danger mr-2 mb-2" style="display:none;" href="/{{ $page_owner->username }}">Cancel</a>
                             </div>
                         </div>
                     </form>  
+
+                    @error('image')
+
+                        @php
+                            
+                            Alert::toast($message, 'info');
+                        @endphp
+                         
+                    @enderror
 
                 @else
                     <div class="header-img w-100" style="background-image:url({{  $page_owner->header_img_url }})">
@@ -154,8 +163,7 @@
 
                         
                         <!-- About section -->
-                        <div class="pt-3 pr-2 pb-0 pl-3">
-
+                        <div class="pt-3 pr-3 pb-0 pl-3">
                             <p>
                             @if($about = $page_owner->about)
                                 {{ $about }}
@@ -185,9 +193,6 @@
                                 <a href="{{ $website_url }}" target="_blank">{{ $friendly_url }}</a>
                                 </p>
                             @endif
-                            
-                            
-
                         </div>
                         <!-- END of about section -->
                             
@@ -228,7 +233,7 @@
                         <!-- Hall of fame section -->
                         @if($supporters > 1)
                         <hr class="mx-auto" style="width:80%;">
-                            <div class="pl-4 pt-0 pr-4 pb-4 mt-3" style="font-size:15px;">
+                            <div class="pl-3 pt-0 pr-3 pb-4 mt-3" style="font-size:15px;">
                     
                                 <div style="font-size:14px;">
                                     <span style="font-size:20px">🏆</span>
@@ -256,7 +261,7 @@
                                     @endif
 
                                     tipped ${!! number_format((float)($biggest_tip->usd_equivalent), 1) !!} usd
-                                    on {{ $date }} - Equivalent to {!! number_format((float)($biggest_tip->dash_amount), 3) !!} ᕭ
+                                    on {{ $date }}, equivalent to {!! number_format((float)($biggest_tip->dash_amount), 3) !!} ᕭ
                                     at the time of transfer.
                                 </div>   
                             </div>
@@ -288,7 +293,7 @@
                                 @if($location = $page_owner->location)
                                 {{ $location }}
                                 @else
-                                Planet Earth, MW
+                                    Location N/A
                                 @endif
                             </span>
                         </a>
@@ -632,9 +637,10 @@
                     @endforeach
                     <!--------- END of tip section  ------------------> 
 
-                </div> <!-- ENF of right column -->
+                </div> <!-- END of right column -->
             </div> <!-- END of row -->
         </div> <!-- END of user-page container -->
+        @include('layouts/footer_two')
     </section> <!-- END of w-100 section -->
 </body>
 

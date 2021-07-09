@@ -43,8 +43,8 @@
                 <div class="alert alert-primary" role="alert" style="width:100%;font-size:15px;">
                     
                     <i class="far fa-bell mr-2" style="font-size:17px;"></i>
-                    Enter your Dash wallet Address
-                    <a href="{{ route('edit_profile') }}">here</a> to start receiving tips! If you haven't 
+                    Enter your Dash wallet address
+                    <a href="{{ route('edit_profile') }}">here</a> to start receiving tips. If you haven't 
                     installed the app, you can download it from 
                     <a href="https://play.google.com/store/apps/details?id=hashengineering.darkcoin.wallet&hl=es_CR" target="_blank">Google Play</a>
                     or the

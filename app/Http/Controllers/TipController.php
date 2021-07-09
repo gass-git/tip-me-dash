@@ -36,6 +36,7 @@ class TipController extends Controller
          * 
          */
         $amount_of_tips = Tip::where('sender_ip', $IP)
+                    ->where('recipient_id', $page_owner->id)
                     ->where('status','confirmed')
                     ->whereDate('created_at', Carbon::today())
                     ->count();

@@ -39,7 +39,7 @@
             <a class="dropdown-item" href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a>
 
             <!-- if the user has a username show his TMD page link -->
-            @if(Auth::user()->username)
+            @if(Auth::user()->username AND Auth::user()->email_verified_at)
             <a class="dropdown-item" href="{{ auth()->user()->username }}">{{ __('View my page') }}</a>
             @endif
             <!------------------------------------------------------->

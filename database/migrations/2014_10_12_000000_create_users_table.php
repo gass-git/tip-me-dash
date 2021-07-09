@@ -27,6 +27,7 @@ class CreateUsersTable extends Migration
             $table->string('header_img_name')->nullable();
             $table->text('about')->nullable();
             $table->unsignedBigInteger('page_views')->nullable();
+            $table->unsignedBigInteger('points')->nullable();
             $table->string('website')->nullable();
             $table->string('location')->nullable();
             $table->string('passionate_about')->nullable();

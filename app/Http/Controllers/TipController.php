@@ -110,12 +110,20 @@ class TipController extends Controller
 
     function confirm_tip(Request $req){
         
+        /* ----- Update tip ------------------------- */
         Tip::where('id',$req->tip_id)->update([
             'status' => 'confirmed',
             'stamp' => $req->transaction_id,
             'updated_at' => Carbon::now()
         ]);
+        /* ------------------------------------------ */
 
+
+        /**@abstract
+         * 
+         * - Create a log of the confirmed tip
+         * 
+         */
         $tip = Tip::where('id',$req->tip_id)->first();
 
         $data = array();
@@ -136,6 +144,32 @@ class TipController extends Controller
         $data['created_at'] = Carbon::now();
         $data['updated_at'] = Carbon::now();
         DB::table('logs')->insert($data);
+
+
+        /**@abstract
+         * 
+         * If this IP has not tipped the page owner before then add points to: 
+         * - To the tipper if he is registered (+40)
+         * - To the recipient of the tip (+15)
+         * 
+         */
+        $amount = Tip::where('sender_ip',$tip->sender_ip)->where('recipient_id', $tip->recipient_id)->count();
+
+        if($amount == 1){
+
+            // Add points to the sender of the tip if he is registered
+            if($tip->sender_id){
+                $user = User::where('id', $tip->sender_id)->first();
+                $user->points = $user->points + 40;
+                $user->save();
+            }
+
+            // Add points to the recipient of the tip
+            $user = User::where('id', $tip->recipient_id)->first();
+            $user->points = $user->points + 15;
+            $user->save();
+        }
+
 
         toast("Tip confirmed!",'success');
 

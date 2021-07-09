@@ -70,6 +70,7 @@ class RegisterController extends Controller
             'header_img_url' => 'http://tipmedash.com/images/default-header-img.jpg',
             'username' => $data['username'],
             'email' => $data['email'],
+            'points' => 10,
             'password' => Hash::make($data['password'])
         ]);
     }  

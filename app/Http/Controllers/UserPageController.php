@@ -52,21 +52,72 @@ class UserPageController extends Controller
 
         $tip =  Tip::where('id',$req->id)->first();
         $current = $tip->praise;
+        $user = User::where('id',$tip->sender_id)->first();
 
-        if($current == $req->praise){
+        /**@abstract
+         * 
+         * If the tip has a praise and the tipper is registered then
+         * remove the corresponding points of that user.
+         * 
+         */
+        if($tip->praise AND $user){
+
+            switch ($tip->praise) {
+                case "like":
+                    $user->points -= 1;
+                    break;
+                case "cheers":
+                    $user->points -= 2;
+                    break;
+                case "love":
+                case "brilliant":
+                    $user->points -= 3;
+                    break;
+            }
+        }
+
+        /**@abstract
+         * 
+         * 1) If user decides to remove the praise:
+         * - Update the praise to null.
+         * - Delete the event on the log table.
+         * 
+         * 2) If the user decides to change the praise:
+         * - Update the praise.
+         * - Update the event on the log table.
+         * - Add the corresponding points to the user who sent the tip if he is registered.
+         * 
+         * 3) If the praise is new:
+         * - Assign a praise.
+         * - Create a new event on the log table.
+         * 
+         */
+        if($current == $req->praise){   // ---- Scenario 1 ------
             
             $tip->update(['praise' => null]);
-            
             $event = Log::where('tip_id',$tip->id)->where('type','praise')->first();
-            
             $event->delete();
 
-        }else{
+        }
+        else{   // ---- Scenario 2 and 3 ------
+
+            if($user){
+                switch ($tip->praise) {
+                    case "like":
+                        $user->points += 1;
+                        break;
+                    case "cheers":
+                        $user->points += 2;
+                        break;
+                    case "love":
+                    case "brilliant":
+                        $user->points += 3;
+                        break;
+                }
+            }
 
             $tip->update(['praise' => $req->praise]);
-
             $event = Log::where('tip_id', $tip->id)->where('type','praise')->first();
-        
             $praise = $req->praise;
 
             if($praise == "like"){
@@ -89,7 +140,7 @@ class UserPageController extends Controller
                 $g_detail = "toasted";
             }
 
-            // If event already exists update it if not create one
+            // If event already exists update it, if not, create one.
             if($event){
                 $event->update(['p2p_event' => $p2p_detail]);
                 $event->update(['global_event' => $g_detail]);
@@ -105,6 +156,7 @@ class UserPageController extends Controller
                 DB::table('logs')->insert($data);
             }
         }
+        $user->save();
     }
 
     function upload_header_img(Request $req){

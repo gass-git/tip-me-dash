@@ -5,6 +5,24 @@
 
 <script>
 
+    // -------- Emoji plugin ----------
+    $("#msg").emojioneArea({
+        pickerPosition: "bottom",
+        filtersPosition: "bottom",
+        tonesStyle: "square",
+        shortnames: true,
+        tones:false,
+        search:false,
+        filters: {
+            flags : false,
+            animals_nature: false,
+            activity: false,
+            travel_places: false
+        }
+    });
+    // --------------------------------
+
+
     // -------- Change cover image ------
     $("#input").change(function(){
         readURL(this);
@@ -201,6 +219,4 @@
     // ------------------------------------------------------
 
 </script>    
-
-
 @endsection

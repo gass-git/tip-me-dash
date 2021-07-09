@@ -16,7 +16,7 @@
 <body>
     <section class="w-100 ">
         
-        <!------- Global php -------------->
+        <!------- Global php stdClass objects -------------->
         @php
 
             // Page owner tips
@@ -48,7 +48,7 @@
                         ->first();
 
         @endphp
-        <!------- END of global php ------->
+        <!------- END of global php stdClass classes ------->
 
 
         <!-- Header image -->
@@ -118,18 +118,6 @@
 
 
                         <!-- Number pills -->
-
-                        @php
-
-                            $donation_sent = App\Tip::where('sender_id',$page_owner->id);
-
-                            $likes_and_cheers = $donation_sent->where('praise','like')->orWhere('praise','cheers')->count();
-                            $brilliants_and_loves = $donation_sent->where('praise','brilliant')->orWhere('praise','love')->count();
-
-                            $score = $supporters * 20 + $people_tipped * 50 + $likes_and_cheers * 1 + $brilliants_and_loves * 2 + 10;
-
-                        @endphp
-
                         <div class="d-flex mt-2 pr-3 pt-2 pl-3 pb-2" style="height: 48px;">
                             
                             <div class="views-pill flex-fill mr-1 pt-1 pr-2 pb-1 pl-2" title="page views">
@@ -152,8 +140,8 @@
                                     <div class="m-0 pl-1" style="width:30%;">
                                         ⁂
                                     </div>
-                                    <div class="m-0 pl-2" style="width:70%;text-align:center;" title="score">
-                                        {{ $score }}
+                                    <div class="m-0 pl-2" style="width:70%;text-align:center;" title="points">
+                                        {{ $page_owner->points }}
                                     </div>
                                 </div>
 
@@ -166,9 +154,7 @@
 
                         
                         <!-- About section -->
-                        <div class="pt-2 pr-2 pb-0 pl-3">
-
-                            <h5>ABOUT</h5>
+                        <div class="pt-3 pr-2 pb-0 pl-3">
 
                             <p>
                             @if($about = $page_owner->about)
@@ -243,7 +229,6 @@
                         @if($supporters > 1)
                         <hr class="mx-auto" style="width:80%;">
                             <div class="pl-4 pt-0 pr-4 pb-4 mt-3" style="font-size:15px;">
-                    
                     
                                 <div style="font-size:14px;">
                                     <span style="font-size:20px">🏆</span>
@@ -366,24 +351,7 @@
                                     </span>
                                 @enderror 
 
-                                <!-- emoji plugin -->
-                                <script>
-                                    $("#msg").emojioneArea({
-                                        pickerPosition: "bottom",
-                                        filtersPosition: "bottom",
-                                        tonesStyle: "square",
-                                        shortnames: true,
-                                        tones:false,
-                                        search:false,
-                                        filters: {
-                                            flags : false,
-                                            animals_nature: false,
-                                            activity: false,
-                                            travel_places: false
-                                        }
-                                    });
-                                </script>
-                                <!------------------>    
+                                 
 
                             </div>
                             <!-- END of message textarea -->
@@ -405,6 +373,8 @@
                     </form>
                     <!------ END of send tip form -------->
 
+
+                    <!-- If user has not received tips show this -->
                     @if($supporters === 0)
                         <center style="color:grey; word-spacing:1px;">
                             <b style="text-transform:capitalize;color:var(--light-deep-blue);">
@@ -413,6 +383,8 @@
                             <span style="font-weight:200">has not received any tips yet</span>
                         </center>
                     @endif
+                    <!---------------------------------------------->
+
 
                     <!----------- Tips section ------------------> 
                     @foreach($tips as $tip)
@@ -499,8 +471,7 @@
                                                 @endif
                                                 <!-- END of envelope icon -->
 
-                                            </p>
-
+                                            </p><!-- END of tip tittle -->
 
                                             <!---- Message content section ------>
                                             @if($tip->message AND $tip->private_msg === 'yes')
@@ -527,8 +498,7 @@
                                             <!--- END of message content section ----->
 
 
-
-
+                                            <!--- Tip footer info and praise buttons --->    
                                             <p class="mt-4 mb-0" style="font-size:11px;color:grey;">
                                                 
                                                 @php
@@ -633,7 +603,8 @@
                                                 <!---------------------->
 
                                             </p>
-            
+                                            <!--- END of tip footer info and praise buttons -->
+
                                         </div>
 
                                     </div>   

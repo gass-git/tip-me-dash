@@ -75,7 +75,9 @@ class LoginController extends Controller
         $google_data = Socialite::driver('google')->user();
 
         /* Search for user with Google id or email */
-        $registered_user = User::where('google_id', $google_data->getId())->orwhere('email',$google_data->email)->first();
+        $registered_user = User::where('google_id', $google_data->getId())
+                                ->orwhere('email',$google_data->email)
+                                ->first();
 
         /* Register user with google data if it's not registered */
         if(!$registered_user){
@@ -85,6 +87,7 @@ class LoginController extends Controller
             $data['email'] = $google_data->getEmail();
             $data['avatar_url'] = 'https://tipmedash.com/images/avatar-default-1.jpg';
             $data['header_img_url'] = 'http://tipmedash.com/images/default-header-img.jpg';
+            $data['points'] = 10;
             $data['email_verified_at'] = Carbon::now();
             $data['created_at'] = Carbon::now();
             $data['updated_at'] = Carbon::now();

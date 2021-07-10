@@ -41,20 +41,22 @@ class TipController extends Controller
                     ->whereDate('created_at', Carbon::today())
                     ->count();
 
+        if(Auth::user() == $page_owner){
+            toast('Why would you tip yourself?','info');
+            return redirect()->back();
+        }
+
         if($amount_of_tips > 1){
             toast("It's not allowed to make more than two tips a day to the same user.",'info');
             return redirect()->back();
         }
-        
+
         if($page_owner->wallet_address == null){
             toast('Not possible, this user has not entered a wallet address yet.','info');
             return redirect()->back()->withInput();
         }
 
-        if(Auth::user() == $page_owner){
-            toast('Why would you tip yourself?','info');
-            return redirect()->back();
-        }
+       
 
 
         /* --- API --- Get dash usd exchange rate ----------------- */

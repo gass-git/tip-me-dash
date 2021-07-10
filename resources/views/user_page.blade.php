@@ -3,18 +3,19 @@
 
     @include('layouts/navbar_two')
     @include('layouts/user_page_body')
+    
     <script>
 
-        // ------- global variables ------------
+        /* ------- Global variables ----------------- */
         var csrf_token = '{{ csrf_token() }}';
         var grey = 'rgb(175, 175, 175)';
         var dark_yellow = 'rgb(238, 204, 13)';
         var beer_yellow = '#FFA900';
         var dash_blue = '#008de4';
         var route_one = 'praise';   
-        // -------------------------------------
+        /* ------------------------------------------- */
 
-        /* -------- Emoji plugin ---------- */
+        /* -------- Emoji plugin --------------------- */
         $("#msg").emojioneArea({
             pickerPosition: "bottom",
             filtersPosition: "bottom",
@@ -29,16 +30,15 @@
                 travel_places: false
             }
         });
-        /* -------------------------------- */
+        /* ------------------------------------------- */
 
-        /* -------- Change cover image ------ */
-        $("#input").change(function(){
-            readURL(this);
-        });
+        /* -------- Change cover image --------------- */
+        $("#input").change(function(){ readURL(this) });
 
         function readURL(input){
 
             if (input.files && input.files[0]) {
+                
                 var reader = new FileReader();
 
                 reader.onload = function (e) {
@@ -52,45 +52,41 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
-        /* -------------------------------- */
+        /* ------------------------------------------ */
 
-        /* ------- Change username color ----- */
+        /* ------- Change username color ------------ */
+        $('#username').click(function(){
 
-            $('#username').click(function(){
+            if( $(this).css('color') == 'rgba(17, 25, 33, 0.8)' ){ $(this).css('color','white') }
+            else{ $(this).css('color','rgba(17, 25, 33, 0.8)') }
 
-                if($(this).css('color') == 'rgba(17, 25, 33, 0.8)' ){
-                    $(this).css('color','white')
-                }else{
-                    $(this).css('color','rgba(17, 25, 33, 0.8)')
-                }
+            var rgba = $(this).css('color');
 
-                $rgba = $(this).css('color')
+            $.ajax({
+                method: 'post',
+                url: 'username_color',
+                data: {_token: csrf_token, color: rgba}
+            });
+        });
+        /* ----------------------------------------- */
 
-                $.ajax({
-                    method: 'post',
-                    url: 'username_color',
-                    data: {_token: csrf_token, color: $rgba}
-                })
-            })
-
-        /* ----------------------------------- */
-
-        /* --------- Random cover image --- */
+        /* --------- Random cover image ------------ */
         $('.fa-random').click(function(){
 
-            $('#loader').css('display','none')
-            setTimeout(function(){$('#loader').css('display','block') }, 250)
+            $('#loader').css('display','none');
 
-            var rand = Math.floor((Math.random() * 25) + 1)
-            var src = "http://tipmedash.com/images/covers/"+rand+".jpg"
-            var img_src = "url(http://tipmedash.com/images/covers/"+rand+".jpg)"
-            $('.header-img').css('background-image',img_src)
-            $('#rand-cover-input').attr('value',src)
-            $('#cancel-btn').removeAttr('style')
-            $('#save-btn').removeAttr('style')
+            setTimeout(function(){$('#loader').css('display','block') }, 100);
 
-        })
-        /* -------------------------------- */
+            var rand = Math.floor((Math.random() * 25) + 1);
+            var src = "http://tipmedash.com/images/covers/"+rand+".jpg";
+            var img_src = "url(http://tipmedash.com/images/covers/"+rand+".jpg)";
+
+            $('.header-img').css('background-image',img_src);
+            $('#rand-cover-input').attr('value',src);
+            $('#cancel-btn').removeAttr('style');
+            $('#save-btn').removeAttr('style');
+        });
+        /* ----------------------------------------- */
 
         /* ------- Set the header_img_url to null ------- */
         $('.fa-trash-alt').click(function(){
@@ -99,54 +95,59 @@
                 url: 'delete_cover',
                 data: { _token: csrf_token },
                 success:function(){ location.reload() }
-            })   
-        })
+            });
+        });
         /* ---------------------------------------------- */
 
+        $('[data-toggle="tooltip"]').tooltip();   // Toggle bootstrap tooltip 
 
-        // ------ Toggle bootstrap tooltip ---------
-        $('[data-toggle="tooltip"]').tooltip();   
-        // ----------------------------------------- 
-
-
-        // ----- Show msg ----------------
+        /* ----- Show msg ------------------------------- */
         $('.show-msg').click(function(){
-            id = $(this).attr('id');
+            var id = $(this).attr('id');
+            var element = $('#tip-msg-icon-'+id);
+
             $('#tip-msg-'+id).toggle().css('display');
-            $('#tip-msg-icon-'+id).toggleClass('fa-envelope-open');
-            if($('#tip-msg-icon-'+id).css('padding-bottom') == '0px'){
-                $('#tip-msg-icon-'+id).css('padding-bottom','8px');
+
+            if( element.attr('class') == 'ml-2 fas fa-envelope' ){
+                element.removeClass('fa-envelope');
+                element.addClass('fa-envelope-open');
             }else{
-                $('#tip-msg-icon-'+id).css('padding-bottom','0px');
+                element.removeClass('fa-envelope-open');
+                element.addClass('fa-envelope');
+            }
+
+            if(element.css('padding-bottom') == '0px'){
+                element.css('padding-bottom','8px');
+            }else{
+                element.css('padding-bottom','0px');
             }
         });
-        // -------------------------------
+        /* ------------------------------------------------ */
 
-        // ------- Lock icon --------------------
+        /* ------- Lock icon ------------------------------ */
         $('#lock').click(function(e){ 
 
-            $('#lock-checkbox').click()
+            $('#lock-checkbox').click();
 
             if( $(this).attr('class') == 'fas fa-lock-open' ){
-                $(this).removeClass('fa-lock-open')
-                $(this).addClass('fa-lock')
-                $('#lock-style').css('right','129px')
-                document.getElementById('lock-sound').play()
+                $(this).removeClass('fa-lock-open');
+                $(this).addClass('fa-lock');
+                $('#lock-style').css('right','129px');
+                document.getElementById('lock-sound').play();
             }else{
-                $(this).removeClass('fa-lock')
-                $(this).addClass('fa-lock-open')
-                $('#lock-style').css('right','125px')
-                document.getElementById('lock-sound').play()
+                $(this).removeClass('fa-lock');
+                $(this).addClass('fa-lock-open');
+                $('#lock-style').css('right','125px');
+                document.getElementById('lock-sound').play();
             }
+        });
+        /* ------------------------------------------------ */
 
-        })
-        // -----------------------------------
-
-        // --------- like btn script -------------------------------
+        /* --------- like btn script ---------------------- */
         $('.like').on('click', function(event) {   
             
-            var tip_id = $(this).parent().attr('id');               // get the id of the post
-            var element = $('#like-' + tip_id);                     // get the element clicked
+            var tip_id = $(this).parent().attr('id');         // get the id of the post
+            var element = $('#like-' + tip_id);               // get the element clicked
 
             // change element color and title on click
             if(element.css('color') === grey){
@@ -169,15 +170,14 @@
                 url: route_one,
                 data:{ id: tip_id, _token: csrf_token, praise:"like"}
             });
-
         });
-        // ---------------------------------------------------------
+        /* --------------------------------------------------- */
 
-        // ------------- loves it btn script -----------------------
+        /* ------------- loves it btn script ----------------- */
         $('.love').on('click', function(event) {
                         
-            var tip_id = $(this).parent().attr('id');            // get the id of the post 
-            var element = $('#love-' + tip_id);                     // get the element clicked
+            var tip_id = $(this).parent().attr('id');          // get the id of the post 
+            var element = $('#love-' + tip_id);                // get the element clicked
             
             // change element color and title on click
             if(element.css('color') === grey){
@@ -202,13 +202,13 @@
             });
 
         });
-        // ------------------------------------------------------
+        /* --------------------------------------------------- */
 
-        // ------------- loves it btn script -----------------------
+        /* ------------- Brilliant btn script ---------------- */
         $('.brilliant').on('click', function(event) {
                         
             var tip_id = $(this).parent().attr('id');            // get the id of the post 
-            var element = $('#brilliant-' + tip_id);                     // get the element clicked
+            var element = $('#brilliant-' + tip_id);             // get the element clicked
             
             // change element color and title on click
             if(element.css('color') === grey){
@@ -231,15 +231,14 @@
                 url: route_one,
                 data:{ id: tip_id, _token: csrf_token, praise:"brilliant"}
             });
-
         });
-        // ------------------------------------------------------
+        /* ---------------------------------------------------- */
 
-        // ------------- Cheers btn script -----------------------
+        /* ------------- Cheers btn script -------------------- */
         $('.cheers').on('click', function(event) {
                         
             var tip_id = $(this).parent().attr('id');            // get the id of the post 
-            var element = $('#cheers-' + tip_id);                     // get the element clicked
+            var element = $('#cheers-' + tip_id);                // get the element clicked
             
             // change element color and title on click
             if(element.css('color') === grey){
@@ -262,9 +261,8 @@
                 url: route_one,
                 data:{ id: tip_id, _token: csrf_token, praise:"cheers"}
             });
-
         });
-        // ------------------------------------------------------
+        /* ---------------------------------------------------- */
 
     </script>    
     

@@ -146,11 +146,9 @@ MEDIA
         padding-left:30px!important;
         padding-right:10px!important;
     }
-
     .user-page .right-col{
         padding-left:10px!important;
     }
-
     .user-page .profile-box{
         margin-right:10px;
     }
@@ -167,12 +165,10 @@ MEDIA
     .user-page .col-md-3{
         display:none;
     }
-
     .user-page{
         padding-left:40px!important;
         padding-right:40px!important;
     }
-
     .user-page .right-col #mobile-avatar{
         display:block!important;
     }
@@ -213,16 +209,15 @@ MEDIA
         padding-left:10px!important;
         padding-right:5px!important;
     }
-
     .user-page #lock-style{
         right:110px!important;
     }
-
     .user-page #auth-tip-date{
         display:none!important;
     }
-
-
+    #input-btn{
+        display:none!important;
+    }
 
     /* footer */
     #separator-one{
@@ -284,6 +279,9 @@ MEDIA
     .user-page .tip-body{
         margin-right:8px!important;
         margin-left:8px!important;
+    }
+    .user-page .form-wrapper input[type=number]{
+        font-size:20px!important;
     }
 
     /*--- footer -------*/
@@ -514,7 +512,7 @@ WELCOME PAGE: GET STARTED SECTION
     padding:30px;
     text-align: center;
 }
-.how-it-works-item.line-right::before{
+.how-it-works-item .line-right::before{
     content:'';
     position:absolute;
     height:2px;
@@ -972,7 +970,7 @@ USER PAGE BODY LAYOUT
     color:grey;
     max-width: 1000px;
     margin-top:0px;
-    margin-bottom:130px;
+    margin-bottom:50px;
     padding-top:0px;
     padding-bottom:0px;
     padding-right: 50px;
@@ -992,6 +990,21 @@ USER PAGE BODY LAYOUT
     color:white;
     opacity:0.8;
     transition:100ms;
+}
+.user-page .username{
+    margin-bottom:0;
+    font-size:35px;
+    text-transform:capitalize; 
+    line-height:23px;
+    font-weight:400;
+}
+.user-page .location{
+    padding-left:2px;
+    word-spacing:1.5px;
+    font-size:12px;
+    font-weight:100; 
+    font-family:var(--roboto);
+    font-weight:100;
 }
 .user-page .profile-box{
     min-width: 190px;
@@ -1064,7 +1077,6 @@ USER PAGE BODY LAYOUT
     display: flex;
     background-color: var(--box-bg-1);
     border-radius:5px;
-    /*box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;*/
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 .user-page .form-wrapper .box1{

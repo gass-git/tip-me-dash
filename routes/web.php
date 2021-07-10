@@ -43,6 +43,8 @@ Route::post('change_email','SettingsController@change_email')->name('change_emai
 
 /* ----------- User page POSTS ------------- */
 Route::post('upload_header_img', 'UserPageController@upload_header_img');
+Route::post('delete_cover', 'UserPageController@delete_cover');
+Route::post('username_color', 'UserPageController@change_username_color');
 
 /* ----------- User page GETS -------------- */
 Route::get('{username}', 'UserPageController@show')->name('user_page');

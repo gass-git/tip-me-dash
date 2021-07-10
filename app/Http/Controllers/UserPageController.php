@@ -161,27 +161,42 @@ class UserPageController extends Controller
 
     function upload_header_img(Request $req){
 
-        $req->validate(['image' => ['image','mimes:jpg,png,jpeg,gif','max:700'],
-        ]);
-
+        $req->validate(['image' => 'image|mimes:jpg,png,jpeg,gif|max:700']);
 
         $user = Auth::user();
-
-        $img = $req->file('image');
+        $upload_cover = $req->file('image');
+        $rand_cover = $req->rand_cover;
 
         // If the user already has uploaded a header image delete it before uploading the new one
         if($user->header_img_name){
             Storage::delete('/public/header-pics/'.$user->header_img_name);
         }
 
-        $img_new_name = date('dmy_H_s_i').'_'.$user->id.'_'.$img->getClientOriginalName();
-        $img->storeAs('header-pics',$img_new_name,'public');
-        $user->header_img_url = 'http://tipmedash.com/storage/header-pics/'.$img_new_name;
-        $user->header_img_name = $img_new_name;
+        if($upload_cover){
+            $img = $req->file('image');
+            $img_new_name = date('dmy_H_s_i').'_'.$user->id.'_'.$img->getClientOriginalName();
+            $img->storeAs('header-pics',$img_new_name,'public');
+            $user->header_img_url = 'http://tipmedash.com/storage/header-pics/'.$img_new_name;
+            $user->header_img_name = $img_new_name;
+        }
+
+        if($rand_cover){
+            $src =  $rand_cover;
+            $user->header_img_url = $src;
+            $user->header_img_name = null;
+        }
+
         $user->save();
         
         toast('Changes saved!','success');
         return redirect()->back();
     }
 
+    function delete_cover(){
+       User::where('id',Auth::user()->id)->update(['header_img_url' => null]);
+    }
+
+    function change_username_color(Request $req){
+        User::where('id',Auth::user()->id)->update(['username_color' => $req->color]);
+    }
 }

@@ -75,12 +75,31 @@
                         @else  
                             <div class="header-img w-100 d-flex align-items-end pr-2"  style="background-image:var(--blue-gradient-1)">
                         @endif  
-                            <div class="ml-auto" style="z-index:2;">
-                                <label class="btn btn-sm btn-outline-light mr-2" for="input" id="input-btn" type="file" name="input">Change cover</label>
-                                <input type="file" name="image" id="input" style="display:none">
-                                <button id="save-btn" class="btn btn-sm btn-success mr-2 mb-2" type="submit" style="display:none;">save</button>
-                                <a id="cancel-btn" class="btn btn-sm btn-danger mr-2 mb-2" style="display:none;" href="/{{ $page_owner->username }}">Cancel</a>
+                            <div class="cover-icons">
+                                @if(Auth::user()->header_img_url)
+                                    <i class="far fa-trash-alt mr-1" style="cursor:pointer" title="delete cover"></i>
+                                @endif
+                                <i class="fas fa-random" style="cursor:pointer" title="random cover"></i>
                             </div>
+
+                            @if(Auth::user()->header_img_url)
+                                <div class="ml-auto mr-5" style="z-index:2">
+                                    <label class="btn btn-sm btn-outline-light mr-2" for="input" id="input-btn" type="file" name="input">Upload cover</label>
+                                    <input id="input"  type="file" name="image" style="display:none">
+                                    <input id="rand-cover-input" name="rand_cover" style="display: none" value="">
+                                    <button id="save-btn" class="btn btn-sm btn-success mr-2 mb-2" type="submit" style="display:none;">save</button>
+                                    <a id="cancel-btn" class="btn btn-sm btn-danger mr-2 mb-2" style="display:none;" href="/{{ $page_owner->username }}">Cancel</a>
+                                </div>
+                            @else
+                                <div class="ml-auto mr-4" style="z-index:2">
+                                    <label class="btn btn-sm btn-outline-light mr-2" for="input" id="input-btn" type="file" name="input">Upload cover</label>
+                                    <input id="input"  type="file" name="image" style="display:none">
+                                    <input id="rand-cover-input" name="rand_cover" style="display: none" value="">
+                                    <button id="save-btn" class="btn btn-sm btn-success mr-2 mb-2" type="submit" style="display:none;">save</button>
+                                    <a id="cancel-btn" class="btn btn-sm btn-danger mr-2 mb-2" style="display:none;" href="/{{ $page_owner->username }}">Cancel</a>
+                                </div>
+                            @endif
+
                         </div>
                     </form>  
 
@@ -299,18 +318,39 @@
                         <!-- END of responsive avatar -->
 
                         <!-- Username & location -->
-                        <a href="/{{ $page_owner->username }}" style="text-decoration: none; color:rgb(255,255,255,0.9);">
-                            <p class="ml-2" style="margin-bottom:0;font-size:30px;text-transform:capitalize; line-height:23px;font-weight:300;">
-                                {{ $page_owner->username }}
-                            </p>
-                            <span class="ml-2" style="padding-left:2px;word-spacing:1.5px;font-size:12px;font-weight:100; font-family:var(--roboto);font-weight:100;color:rgb(255,255,255,0.8);">
-                                @if($location = $page_owner->location)
-                                {{ $location }}
-                                @else
-                                    Location N/A
-                                @endif
-                            </span>
-                        </a>
+                        @guest
+                            <a href="" style="text-decoration: none; color:{{ $page_owner->username_color }};" data-toggle="tooltip" data-placement="top" title="change color">
+                                <p class="ml-2" style="margin-bottom:0;font-size:30px;text-transform:capitalize; line-height:23px;font-weight:300;">
+                                    {{ $page_owner->username }}
+                                </p>
+                                <span class="ml-2" style="padding-left:2px;word-spacing:1.5px;font-size:12px;font-weight:100; font-family:var(--roboto);font-weight:100;color:rgb(255,255,255,0.8);">
+                                    @if($location = $page_owner->location)
+                                    {{ $location }}
+                                    @else
+                                        Location N/A
+                                    @endif
+                                </span>
+                            </a>
+                        @endguest
+                            
+                        @auth
+                            <div id="username" class="p-2" style="color:{{ $page_owner->username_color }};cursor:pointer;" data-toggle="tooltip" data-placement="top" title="change color">
+                                <p class="ml-2" style="margin-bottom:0;font-size:35px;text-transform:capitalize; line-height:23px;font-weight:400;">
+                                    {{ $page_owner->username }}
+                                </p>
+                                <span class="ml-2" style="padding-left:2px;word-spacing:1.5px;font-size:12px;font-weight:100; font-family:var(--roboto);font-weight:100;">
+                                    @if($location = $page_owner->location)
+                                    {{ $location }}
+                                    @else
+                                        Location N/A
+                                    @endif
+                                </span>
+                            </div>
+                        @endauth
+
+
+
+                        
                         <!------------------------>
 
                     </div>    
@@ -376,7 +416,7 @@
                             <!-- END of message textarea -->
 
                             <!-- Lock icon --->
-                            <div id="lock-style" style="position: absolute;display:flex;right:125px;top:183px; cursor:pointer;">
+                            <div id="lock-style" style="position: absolute;display:flex;right:125px;top:200px; cursor:pointer;">
                                 <i id="lock" class="fas fa-lock-open" title="private message option"></i>
                                 <input id="lock-checkbox" name="lock" type="checkbox" style="display:none;"/>
                             </div>

@@ -984,6 +984,15 @@ USER PAGE BODY LAYOUT
     background-position: center;
     height:200px;
 }
+.cover-icons{
+    z-index:3;
+    position:absolute;
+    right:15px;
+    top:216px;
+    color:white;
+    opacity:0.8;
+    transition:100ms;
+}
 .user-page .profile-box{
     min-width: 190px;
     margin-top:-100px;  

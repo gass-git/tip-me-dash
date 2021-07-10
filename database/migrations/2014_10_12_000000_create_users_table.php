@@ -34,6 +34,7 @@ class CreateUsersTable extends Migration
             $table->string('twitter')->nullable();
             $table->string('github')->nullable();
             $table->string('youtube')->nullable();
+            $table->string('username_color');
             $table->rememberToken();
             $table->timestamps();
         });

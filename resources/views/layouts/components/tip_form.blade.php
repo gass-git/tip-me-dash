@@ -30,31 +30,13 @@
             <!--- END of name input --->
 
             <!-- amount input -->
-            @guest
-                <div class="input-group mb-0">
-                    @if(old('amount_entered'))
-                        <input name="amount_entered" type="number" style="color:#4a569c;" step=".01" class="form-control" value="{{ old('amount_entered') }}" />
-                    @else
-                        <input name="amount_entered" type="number" style="color:#4a569c;" step=".01" class="form-control" value="5.00" />
-                    @endif
-                </div>
-            @endguest
-            
-            @auth
-                @if(Auth::user()->id === $page_owner->id)
-                    <div class="input-group mb-0">
-                        <input type="number" style="color:#4a569c;" step=".01" class="form-control" value="5.00" readonly />
-                    </div>
+            <div class="input-group mb-0">
+                @if(old('amount_entered'))
+                    <input name="amount_entered" type="number" style="color:#4a569c;" step=".01" class="form-control" value="{{ old('amount_entered') }}" />
                 @else
-                    <div class="input-group mb-0">
-                        @if(old('amount_entered'))
-                            <input name="amount_entered" type="number" style="color:#4a569c;" step=".01" class="form-control" value="{{ old('amount_entered') }}" />
-                        @else
-                            <input name="amount_entered" type="number" style="color:#4a569c;" step=".01" class="form-control" value="5.00" />
-                        @endif
-                    </div>
+                    <input name="amount_entered" type="number" style="color:#4a569c;" step=".01" class="form-control" value="5.00" />
                 @endif
-            @endauth         
+            </div>
             <!--- END of amount input ---->
 
             <center><div style="font-size: 11px;color:grey;">USD</center>
@@ -64,50 +46,21 @@
 
         <!-- Message textarea -->
         <div class="box2">
-            
-            @guest
-                <textarea name="msg" class="custom-textarea" id="msg" placeholder="Optional message">{{ old('msg') }}</textarea>
-                @error('msg')
-                    <span style="color:red; font-size:13px;">
-                        <i class="fas fa-exclamation-circle"></i>
-                        {{ $message }}
-                    </span>
-                @enderror 
-            @endguest
-
-            @auth
-                @if(Auth::user()->id === $page_owner->id)
-                    <textarea name="msg" class="custom-textarea"  readonly></textarea>
-                @else
-                    <textarea name="msg" class="custom-textarea" id="msg" placeholder="Optional message">{{ old('msg') }}</textarea>
-                    @error('msg')
-                        <span style="color:red; font-size:13px;">
-                            <i class="fas fa-exclamation-circle"></i>
-                            {{ $message }}
-                        </span>
-                    @enderror 
-                @endif
-            @endauth
-
+            <textarea name="msg" class="custom-textarea" id="msg" placeholder="Optional message">{{ old('msg') }}</textarea>
+            @error('msg')
+                <span style="color:red; font-size:13px;">
+                    <i class="fas fa-exclamation-circle"></i>
+                    {{ $message }}
+                </span>
+            @enderror 
         </div>
         <!-- END of message textarea -->
 
         <!-- Lock icon --->
-        @auth
-            @if(Auth::user()->id !== $page_owner->id)
-                <div id="lock-style" style="position: absolute;display:flex;right:125px;top:183px; cursor:pointer;z-index:3">
-                    <i id="lock" class="fas fa-lock-open" title="private message option"></i>
-                    <input id="lock-checkbox" name="lock" type="checkbox" style="display:none;"/>
-                </div>
-            @endif
-        @endauth
-
-        @guest
-            <div id="lock-style" style="position: absolute;display:flex;right:125px;top:183px; cursor:pointer;z-index:3">
-                <i id="lock" class="fas fa-lock-open" title="private message option"></i>
-                <input id="lock-checkbox" name="lock" type="checkbox" style="display:none;"/>
-            </div>
-        @endguest
+        <div id="lock-style" style="position: absolute;display:flex;right:125px;top:183px; cursor:pointer;z-index:3">
+            <i id="lock" class="fas fa-lock-open" title="private message option"></i>
+            <input id="lock-checkbox" name="lock" type="checkbox" style="display:none;" />
+        </div>
         <!---------------->
 
         <!-- submit tip button -->

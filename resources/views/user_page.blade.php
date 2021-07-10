@@ -77,6 +77,10 @@
 
         /* --------- Random cover image --- */
         $('.fa-random').click(function(){
+
+            $('#loader').css('display','none')
+            setTimeout(function(){$('#loader').css('display','block') }, 250)
+
             var rand = Math.floor((Math.random() * 25) + 1)
             var src = "http://tipmedash.com/images/covers/"+rand+".jpg"
             var img_src = "url(http://tipmedash.com/images/covers/"+rand+".jpg)"
@@ -84,6 +88,7 @@
             $('#rand-cover-input').attr('value',src)
             $('#cancel-btn').removeAttr('style')
             $('#save-btn').removeAttr('style')
+
         })
         /* -------------------------------- */
 

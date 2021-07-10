@@ -70,11 +70,18 @@
 
                     <form class="main-form" action="{{ url('upload_header_img') }}" method="post" enctype="multipart/form-data">
                     @csrf
+
                         @if ($page_owner->header_img_url)
-                            <div class="header-img w-100 d-flex align-items-end pr-2"  style="background-image:url({{ $page_owner->header_img_url }})">
+                            <div class="header-img w-100 d-flex align-items-end pr-2"  style="background-image:url({{ $page_owner->header_img_url }});">
                         @else  
                             <div class="header-img w-100 d-flex align-items-end pr-2"  style="background-image:var(--blue-gradient-1)">
                         @endif  
+
+                            <div id="loader" style="position:absolute;z-index:-1;left: 50%;top:125px;display:none;">
+                                <div class="spinner-border" style="width: 3rem; height: 3rem;color:rgb(0,0,0,0.2);">
+                                </div>
+                            </div>
+
                             <div class="cover-icons">
                                 @if(Auth::user()->header_img_url)
                                     <i class="far fa-trash-alt mr-1" style="cursor:pointer" title="delete cover"></i>

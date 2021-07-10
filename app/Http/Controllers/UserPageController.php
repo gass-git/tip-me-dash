@@ -177,7 +177,7 @@ class UserPageController extends Controller
         if($upload_cover){
             
             $img = $req->file('image');
-            $img_new_name = date('dmy_H_s_i').'_'.$user->id.'_'.$img->getClientOriginalName();
+            $img_new_name = date('dmy_H_s_i').'_'.$user->id;
             $img->storeAs('header-pics',$img_new_name,'public');
             $user->header_img_url = 'http://tipmedash.com/storage/header-pics/'.$img_new_name;
             $user->header_img_name = $img_new_name;

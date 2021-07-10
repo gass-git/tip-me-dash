@@ -45,7 +45,7 @@ class SettingsController extends Controller
                 Storage::delete('/public/profile-pics/'.$user->avatar_name);
             }
 
-            $img_new_name = date('dmy_H_s_i').'_'.$user->id.'_'.$img->getClientOriginalName();
+            $img_new_name = date('dmy_H_s_i').'_'.$user->id;
             $img->storeAs('profile-pics',$img_new_name,'public');
             $user->avatar_url = 'http://tipmedash.com/storage/profile-pics/'.$img_new_name;
             $user->avatar_name = $img_new_name;

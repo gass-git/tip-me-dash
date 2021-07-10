@@ -161,7 +161,9 @@ class UserPageController extends Controller
 
     function upload_header_img(Request $req){
 
-        $req->validate(['image' => 'image|mimes:jpg,png,jpeg,gif|max:700']);
+        $req->validate([
+            'image' => ['image','mimes:jpg,png,jpeg,gif','max:700']
+        ]);
 
         $user = Auth::user();
         $upload_cover = $req->file('image');

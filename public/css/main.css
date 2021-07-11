@@ -1123,6 +1123,7 @@ USER PAGE BODY LAYOUT
     color:var(--light-deep-blue);
     height: 40px;
     margin-top: 8px;
+    padding:0px!important;
     text-align: center;
     display: inline-block;
     border: 1px solid rgb(77, 213, 255, 0.8);

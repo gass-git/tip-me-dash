@@ -30,7 +30,7 @@
             <!--- END of name input --->
 
             <!-- amount input -->
-            <div class="input-group mb-0 p-0">
+            <div class="input-group mb-0">
                 @if(old('amount_entered'))
                     <input name="amount_entered" type="number" style="color:#4a569c;" step=".01" class="form-control" value="{{ old('amount_entered') }}" />
                 @else

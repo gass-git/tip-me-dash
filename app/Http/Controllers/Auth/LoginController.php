@@ -82,7 +82,7 @@ class LoginController extends Controller
 
     public function handleProviderCallback(Request $request)
     {
-        $prev = url()->previous();
+        dd($request->session()->get('_previous'));
         /* If the user denise permission on google to provide login information, redirect to login page. */
         if($request->get('error')){
             return redirect()->route('login');
@@ -141,7 +141,6 @@ class LoginController extends Controller
 
        
       
-        $prev = url()->previous();
         $url_one = 'https://tipmedash.com/';         
         $url_two = 'http://tipmedash.test/';
   

@@ -82,7 +82,7 @@ class LoginController extends Controller
 
     public function handleProviderCallback(Request $request)
     {
-
+        $prev = url()->previous();
         /* If the user denise permission on google to provide login information, redirect to login page. */
         if($request->get('error')){
             return redirect()->route('login');
@@ -139,7 +139,7 @@ class LoginController extends Controller
         /* Redirect to Dashboard */
        // return redirect()->route('dashboard');
 
-       dd(url()->previous());
+       
       
         $prev = url()->previous();
         $url_one = 'https://tipmedash.com/';         

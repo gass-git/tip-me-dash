@@ -92,17 +92,16 @@ class TipController extends Controller
             $data['private_msg'] = 'yes';
         }
 
-        $data['message'] = $req->msg;
-        $data['sender_ip'] = $IP;
-        $data['recipient_id'] = $page_owner->id;
-        $data['usd_equivalent'] = $usd_amount;
-        $data['dash_amount'] = $dash_toSend;
-        $data['dash_usd'] = $dash_usd;
-        $data['status'] = 'not validated';
-        $data['created_at'] = Carbon::now();
-
-        DB::table('tips')->insert($data);
-
+        Tip::create([
+            'message' => $req->msg,
+            'sender_ip' => $IP,
+            'recipient_id' => $page_owner->id,
+            'usd_equivalent' => $usd_amount,
+            'dash_amount' => $dash_toSend,
+            'dash_usd' => $dash_usd,
+            'status' => 'not validated',
+            'created_at' => Carbon::now()
+        ]);
 
         /* ------- Extra variables to compact on view ----------------------- */
         $tip_id = Tip::max('id');

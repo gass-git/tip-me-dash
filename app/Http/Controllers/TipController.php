@@ -74,7 +74,6 @@ class TipController extends Controller
         $usd_amount = $req->amount_entered;                                     // USD amount entered by supporter
         $dash_toSend = round( $usd_amount/$dash_usd, 8);                        // Dash conversion to send
 
-       
         /**@abstract
          * 
          * Insert data on tips table
@@ -92,16 +91,16 @@ class TipController extends Controller
             $data['private_msg'] = 'yes';
         }
 
-        Tip::create([
-            'message' => $req->msg,
-            'sender_ip' => $IP,
-            'recipient_id' => $page_owner->id,
-            'usd_equivalent' => $usd_amount,
-            'dash_amount' => $dash_toSend,
-            'dash_usd' => $dash_usd,
-            'status' => 'not validated',
-            'created_at' => Carbon::now()
-        ]);
+        $data['message'] = $req->msg;
+        $data['sender_ip'] = $IP;
+        $data['recipient_id'] = $page_owner->id;
+        $data['usd_equivalent'] = $usd_amount;
+        $data['dash_amount'] = $dash_toSend;
+        $data['dash_usd'] = $dash_usd;
+        $data['status'] = 'not validated';
+        $data['created_at'] = Carbon::now();
+
+        DB::table('tips')->insert($data);
 
         /* ------- Extra variables to compact on view ----------------------- */
         $tip_id = Tip::max('id');

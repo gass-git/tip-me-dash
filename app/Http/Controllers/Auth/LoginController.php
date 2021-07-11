@@ -36,6 +36,23 @@ class LoginController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::DASHBOARD;
 
+    public function showLoginForm(){
+        
+        if(!session()->has('url.intended')){
+      
+            $prev = url()->previous();
+            $url_one = 'https://tipmedash.com/';         
+            $url_two = 'http://tipmedash.test/';
+      
+            if($prev == $url_one OR $prev == $url_two){
+                   session(['url.intended' => 'dashboard']);
+               }else{
+                   session(['url.intended' => url()->previous()]);
+            }
+        }
+        return view('auth.login');
+      }
+
     /**
      * Create a new controller instance.
      *
@@ -123,21 +140,6 @@ class LoginController extends Controller
         return redirect()->route('dashboard');
     }
 
-    public function showLoginForm(){
-        
-        if(!session()->has('url.intended')){
-      
-            $prev = url()->previous();
-            $url_one = 'https://tipmedash.com/';         
-            $url_two = 'http://tipmedash.test/';
-      
-            if($prev == $url_one OR $prev == $url_two){
-                   session(['url.intended' => 'dashboard']);
-               }else{
-                   session(['url.intended' => url()->previous()]);
-            }
-        }
-        return view('auth.login');
-      }
+    
 
 }

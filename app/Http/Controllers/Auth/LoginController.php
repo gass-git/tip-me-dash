@@ -137,7 +137,7 @@ class LoginController extends Controller
         auth()->login($registered_user);
 
         /* Redirect to Dashboard */
-        return redirect()->route('dashboard');
+       // return redirect()->route('dashboard');
     }
 
     

@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Laravel\Socialite\Facades\Socialite;
 use Carbon\Carbon;
 use DB;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth;
 
 use App\User;
 use App\SocialProfile;
@@ -35,6 +35,23 @@ class LoginController extends Controller
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::DASHBOARD;
+
+    public function showLoginForm(){
+        
+        if(!session()->has('url.intended')){
+      
+            $prev = url()->previous();
+            $url_one = 'https://tipmedash.com/';         
+            $url_two = 'http://tipmedash.test/';
+      
+            if($prev == $url_one OR $prev == $url_two){
+                   session(['url.intended' => 'dashboard']);
+               }else{
+                   session(['url.intended' => url()->previous()]);
+            }
+        }
+        return view('auth.login');
+      }
 
     /**
      * Create a new controller instance.

@@ -14,50 +14,54 @@ class TipController extends Controller
 {
     function process_tip(Request $req){
         
-
         $req->validate([
             'msg' => ['nullable','max:300'],
             'name' => ['nullable','max:25'],
         ]);
-
 
         /* ---- Global variables ----------------------------------------- */
         $page_owner = User::where('username', $req->username)->first();
         $IP = request()->ip();
         /* ---------------------------------------------------------------- */
 
-
         /**@abstract
          * 
          * EXTRA VALIDATIONS
          *  - It's not allowed to make more than two tips a day to the same user.
+         *  - It's not allowed to push the tip button more than four times per day - spam protection.
          *  - The user needs to enter a wallet address to receive tips.
          *  - The page owner cannot tip himself
          * 
          */
-        $amount_of_tips = Tip::where('sender_ip', $IP)
-                    ->where('recipient_id', $page_owner->id)
-                    ->where('status','confirmed')
-                    ->whereDate('created_at', Carbon::today())
-                    ->count();
+        $btn_clicks_24h = Tip::where('sender_ip', $IP)
+                            ->whereDate('created_at', Carbon::today())
+                            ->count();
+
+        if($btn_clicks_24h >= 4){
+            toast('You cannot send more tips for today','info');
+            return back();
+        }            
+
+        $tips_to_user_24h = Tip::where('sender_ip', $IP)
+                        ->where('recipient_id', $page_owner->id)
+                        ->where('status','confirmed')
+                        ->whereDate('created_at', Carbon::today())
+                        ->count();
 
         if(Auth::user() == $page_owner){
             toast('Why would you tip yourself?','info');
-            return redirect()->back();
+            return back();
         }
 
-        if($amount_of_tips > 1){
+        if($tips_to_user_24h >= 2){
             toast("It's not allowed to make more than two tips a day to the same user.",'info');
-            return redirect()->back();
+            return back();
         }
 
         if($page_owner->wallet_address == null){
-            toast('Not possible, this user has not entered a wallet address yet.','info');
-            return redirect()->back()->withInput();
+            toast('Not possible, the user has not entered a wallet address yet.','info');
+            return back();
         }
-
-       
-
 
         /* --- API --- Get dash usd exchange rate ----------------- */
         $api = 'https://www.dashcentral.org/api/v1/public'; 
@@ -120,7 +124,6 @@ class TipController extends Controller
         ]);
         /* ------------------------------------------ */
 
-
         /**@abstract
          * 
          * - Create a log of the confirmed tip
@@ -147,7 +150,6 @@ class TipController extends Controller
         $data['updated_at'] = Carbon::now();
         DB::table('logs')->insert($data);
 
-
         /**@abstract
          * 
          * If this IP has not tipped the page owner before then add points to: 
@@ -171,16 +173,11 @@ class TipController extends Controller
             $user->points = $user->points + 15;
             $user->save();
         }
-
-
         toast("Tip confirmed!",'success');
-
     }
 
     function unconfirmed(Request $req){
-
         Tip::where('id',$req->tip_id)->update(['status' => 'unconfirmed','updated_at' => Carbon::now()]);
-        toast("You runned out of time, the tip was not confirmed",'error');
-        
+        toast("You runned out of time",'error');
     }
 }

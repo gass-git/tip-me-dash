@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Laravel\Socialite\Facades\Socialite;
 use Carbon\Carbon;
 use DB;
-use App\Http\Controllers\Auth;
+use Illuminate\Support\Facades\Auth;
 
 use App\User;
 use App\SocialProfile;
@@ -35,6 +35,23 @@ class LoginController extends Controller
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::DASHBOARD;
+
+    public function showLoginForm(){
+        
+        if(!session()->has('url.intended')){
+      
+            $prev = url()->previous();
+            $url_one = 'https://tipmedash.com/';         
+            $url_two = 'http://tipmedash.test/';
+      
+            if($prev == $url_one OR $prev == $url_two){
+                   session(['url.intended' => 'dashboard']);
+               }else{
+                   session(['url.intended' => url()->previous()]);
+            }
+        }
+        return view('auth.login');
+      }
 
     /**
      * Create a new controller instance.
@@ -66,21 +83,17 @@ class LoginController extends Controller
     public function handleProviderCallback(Request $request)
     {
 
-        /* If the user denise permission on google to provide login information, redirect to login page. */
-        if($request->get('error')){
+        if($request->get('error')){  // If the user denise permission on google to provide login information, redirect to login page. 
             return redirect()->route('login');
         }
 
-        /* Request data from Google */
-        $google_data = Socialite::driver('google')->user();
+        $google_data = Socialite::driver('google')->user(); // Request data from Google
 
-        /* Search for user with Google id or email */
-        $registered_user = User::where('google_id', $google_data->getId())
+        $registered_user = User::where('google_id', $google_data->getId()) // Search for user with Google id or email.
                                 ->orwhere('email',$google_data->email)
                                 ->first();
 
-        /* Register user with google data if it's not registered */
-        if(!$registered_user){
+        if(!$registered_user){   // Register user with google data if it's not registered.
 
             $data = array();
             $data['google_id'] = $google_data->getId();
@@ -94,32 +107,25 @@ class LoginController extends Controller
 
             DB::table('users')->insert($data);
 
-            /* Find user after registering */
-            $registered_user = User::where('google_id', $google_data->getId())->first();
+            $registered_user = User::where('google_id', $google_data->getId())->first();    // Find user after registering.
         }
 
-        /** Conditions in case the user changes email and signs in with Google */
+        /**@abtract
+         * 
+         * Conditions in case the user changes email and logs in with Google:
+         * 1) The user is registered with his google email but without the google_id assigned.
+         * 2) The user is registered with google email or id, but his email is not verified.
+         * 
+         */
+        if($registered_user->google_id == null){
+            $registered_user->google_id = $google_data->getId();
+            $registered_user->save();
+        }
 
-            // If the user is registered with his google email but without the google_id assigned
-            if($registered_user->google_id == null){
-
-                $registered_user->google_id = $google_data->getId();
-                $registered_user->save();
-            }
-
-            // if the user is registered with google email or id, but his email is not verified
-            if($registered_user->email_verified_at == null){
-
-                $registered_user->email_verified_at = Carbon::now();
-                $registered_user->save();
-            }
-
-        /** ------------------------------------------------------------------- */
-
-
+        if($registered_user->email_verified_at == null){
+            $registered_user->email_verified_at = Carbon::now();
+            $registered_user->save();
+        }
         auth()->login($registered_user);
-
-        /* Redirect to Dashboard */
-        return redirect()->route('dashboard');
     }
 }

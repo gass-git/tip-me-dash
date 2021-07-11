@@ -26,7 +26,6 @@ class UserPageController extends Controller
         }
         /* ----------------------------------------------------------------------- */
 
-
         /* ------- Add a page view to the page owner if the visitor ip is new ---- */
         $IP = request()->ip();
         $ip_on_record = VisitsRecord::where('page_owner_id',$page_owner->id)->where('ip',$IP)->first();
@@ -191,7 +190,7 @@ class UserPageController extends Controller
         $user->save();
         
         toast('Changes saved!','success');
-        return redirect()->back();
+        return back();
     }
 
     function delete_cover(){

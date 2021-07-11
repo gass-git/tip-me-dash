@@ -139,7 +139,7 @@ class LoginController extends Controller
         /* Redirect to Dashboard */
        // return redirect()->route('dashboard');
 
-       if(!session()->has('url.intended')){
+       dd(url()->previous());
       
         $prev = url()->previous();
         $url_one = 'https://tipmedash.com/';         
@@ -150,7 +150,7 @@ class LoginController extends Controller
            }else{
                session(['url.intended' => url()->previous()]);
         }
-    }
+    
     return view('auth.login');
 
     }

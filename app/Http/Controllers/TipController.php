@@ -12,6 +12,7 @@ use Carbon\Carbon;
 
 class TipController extends Controller
 {
+
     function process_tip(Request $req){
         
         $req->validate([
@@ -114,8 +115,10 @@ class TipController extends Controller
 
     function confirm_tip(Request $req){
         
+        $tip = Tip::where('id',$req->tip_id)->first();
+
         /* ----- Update tip ------------------------- */
-        Tip::where('id',$req->tip_id)->update([
+        $tip->update([
             'status' => 'confirmed',
             'stamp' => $req->transaction_id,
             'updated_at' => Carbon::now()
@@ -127,8 +130,6 @@ class TipController extends Controller
          * - Create a log of the confirmed tip
          * 
          */
-        $tip = Tip::where('id',$req->tip_id)->first();
-
         $data = array();
 
         if($tip->sender_id){
@@ -155,7 +156,10 @@ class TipController extends Controller
          * - To the recipient of the tip (+15)
          * 
          */
-        $amount = Tip::where('sender_ip',$tip->sender_ip)->where('recipient_id', $tip->recipient_id)->count();
+        $amount = Tip::where('sender_ip',$tip->sender_ip)
+                    ->where('status','confirmed')
+                    ->where('recipient_id', $tip->recipient_id)
+                    ->count();
 
         if($amount == 1){
 

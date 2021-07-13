@@ -38,7 +38,7 @@ class TipController extends Controller
                             ->whereDate('created_at', Carbon::today())
                             ->count();
 
-        if($btn_clicks_24h >= 4){
+        if($btn_clicks_24h > 5){
             toast('You cannot send more tips for today','info');
             return back();
         }            

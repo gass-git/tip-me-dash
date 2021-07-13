@@ -64,7 +64,7 @@
                         @elseif($tip->message AND $tip->private_msg === null)
                         
                             <span id="{{ $tip->id }}" class="show-msg">
-                                <i id="tip-msg-icon-{{ $tip->id }}" class="ml-2 fas fa-envelope" title="show private message" style="padding-bottom:0px;"></i>
+                                <i id="tip-msg-icon-{{ $tip->id }}" class="ml-2 fas fa-envelope" title="show message" style="padding-bottom:0px;"></i>
                             </span>
 
                         @endif

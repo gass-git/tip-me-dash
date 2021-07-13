@@ -48,7 +48,7 @@
                                 @if(Auth::user()->id === $page_owner->id)
 
                                     <span id="{{ $tip->id }}" class="show-msg" style="color:black">
-                                        <i id="tip-msg-icon-{{ $tip->id }}" class="ml-2 fas fa-envelope" title="show private message" style="padding-bottom:0px;"></i>
+                                        <i id="tip-msg-icon-{{ $tip->id }}" class="ml-2 fas fa-envelope" title="private message" style="padding-bottom:0px;"></i>
                                     </span>
 
                                 @else
@@ -64,7 +64,7 @@
                         @elseif($tip->message AND $tip->private_msg === null)
                         
                             <span id="{{ $tip->id }}" class="show-msg">
-                                <i id="tip-msg-icon-{{ $tip->id }}" class="ml-2 fas fa-envelope" title="show message" style="padding-bottom:0px;"></i>
+                                <i id="tip-msg-icon-{{ $tip->id }}" class="ml-2 fas fa-envelope" title="message" style="padding-bottom:0px;"></i>
                             </span>
 
                         @endif

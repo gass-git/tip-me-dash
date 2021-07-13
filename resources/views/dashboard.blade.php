@@ -84,7 +84,7 @@
                                             <i class="fas fa-globe-americas" style="color:#008de4; font-size:22px;"></i>
                                         </span>
                                     </div>
-                                    <input id="personal-url" type="text" class="form-control" value="http://tipmedash.com/{{ $username }}" readonly>
+                                    <input id="personal-url" type="text" class="form-control" value="https://tipmedash.com/{{ $username }}" readonly>
                                     <div class="input-group-append">
                                         <button class="btn btn-dark" type="button" onclick="copy_url()" id="btn">copy</button>
                                     </div>

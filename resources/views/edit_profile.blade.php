@@ -116,7 +116,7 @@
                       <label for="username">Username</label>
                       <div class="input-group mb-1">
                         <div class="input-group-prepend">
-                          <span class="input-group-text" id="basic-addon3">http://tipmedash.com/</span>
+                          <span class="input-group-text" id="basic-addon3">https://tipmedash.com/</span>
                         </div>
                         <input type="text" class="form-control" name="username" value="{{ $user->username }}" />
                       </div>

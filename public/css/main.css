@@ -41,9 +41,12 @@ body{
     font-family: 'open sans', sans-serif;
     line-height: 1.5;
     background-color: #ffffff;
-background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'%3E%3Cpolygon fill='%23ebfaff' points='957 450 539 900 1396 900'/%3E%3Cpolygon fill='%23d7f2ff' points='957 450 872.9 900 1396 900'/%3E%3Cpolygon fill='%23ecfaff' points='-60 900 398 662 816 900'/%3E%3Cpolygon fill='%23dff5ff' points='337 900 398 662 816 900'/%3E%3Cpolygon fill='%23edfbff' points='1203 546 1552 900 876 900'/%3E%3Cpolygon fill='%23e7f7ff' points='1203 546 1552 900 1162 900'/%3E%3Cpolygon fill='%23eefbff' points='641 695 886 900 367 900'/%3E%3Cpolygon fill='%23effaff' points='587 900 641 695 886 900'/%3E%3Cpolygon fill='%23effcff' points='1710 900 1401 632 1096 900'/%3E%3Cpolygon fill='%23f7fcff' points='1710 900 1401 632 1365 900'/%3E%3Cpolygon fill='%23f0fcff' points='1210 900 971 687 725 900'/%3E%3Cpolygon fill='%23ffffff' points='943 900 1210 900 971 687'/%3E%3C/svg%3E");
-background-attachment: fixed;
-background-size: cover;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'%3E%3Cpolygon fill='%23bdedff' points='957 450 539 900 1396 900'/%3E%3Cpolygon fill='%23ebf7ff' points='957 450 872.9 900 1396 900'/%3E%3Cpolygon fill='%23c3eeff' points='-60 900 398 662 816 900'/%3E%3Cpolygon fill='%23eff9ff' points='337 900 398 662 816 900'/%3E%3Cpolygon fill='%23c9efff' points='1203 546 1552 900 876 900'/%3E%3Cpolygon fill='%23f3faff' points='1203 546 1552 900 1162 900'/%3E%3Cpolygon fill='%23cef1ff' points='641 695 886 900 367 900'/%3E%3Cpolygon fill='%23f7fcff' points='587 900 641 695 886 900'/%3E%3Cpolygon fill='%23d4f2ff' points='1710 900 1401 632 1096 900'/%3E%3Cpolygon fill='%23fbfdff' points='1710 900 1401 632 1365 900'/%3E%3Cpolygon fill='%23d9f3ff' points='1210 900 971 687 725 900'/%3E%3Cpolygon fill='%23ffffff' points='943 900 1210 900 971 687'/%3E%3C/svg%3E");
+    background-attachment: fixed;
+    background-size: cover;
+    /*background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'%3E%3Cpolygon fill='%23ebfaff' points='957 450 539 900 1396 900'/%3E%3Cpolygon fill='%23d7f2ff' points='957 450 872.9 900 1396 900'/%3E%3Cpolygon fill='%23ecfaff' points='-60 900 398 662 816 900'/%3E%3Cpolygon fill='%23dff5ff' points='337 900 398 662 816 900'/%3E%3Cpolygon fill='%23edfbff' points='1203 546 1552 900 876 900'/%3E%3Cpolygon fill='%23e7f7ff' points='1203 546 1552 900 1162 900'/%3E%3Cpolygon fill='%23eefbff' points='641 695 886 900 367 900'/%3E%3Cpolygon fill='%23effaff' points='587 900 641 695 886 900'/%3E%3Cpolygon fill='%23effcff' points='1710 900 1401 632 1096 900'/%3E%3Cpolygon fill='%23f7fcff' points='1710 900 1401 632 1365 900'/%3E%3Cpolygon fill='%23f0fcff' points='1210 900 971 687 725 900'/%3E%3Cpolygon fill='%23ffffff' points='943 900 1210 900 971 687'/%3E%3C/svg%3E");
+    background-attachment: fixed;
+    background-size: cover;*/
     /*background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'%3E%3Cpolygon fill='%23e9f1f2' points='957 450 539 900 1396 900'/%3E%3Cpolygon fill='%23fcdce1' points='957 450 872.9 900 1396 900'/%3E%3Cpolygon fill='%23dfeef3' points='-60 900 398 662 816 900'/%3E%3Cpolygon fill='%23f2dae9' points='337 900 398 662 816 900'/%3E%3Cpolygon fill='%23d6eaf5' points='1203 546 1552 900 876 900'/%3E%3Cpolygon fill='%23e3d9ef' points='1203 546 1552 900 1162 900'/%3E%3Cpolygon fill='%23d1e5f8' points='641 695 886 900 367 900'/%3E%3Cpolygon fill='%23d1daf0' points='587 900 641 695 886 900'/%3E%3Cpolygon fill='%23d0dffa' points='1710 900 1401 632 1096 900'/%3E%3Cpolygon fill='%23c0daeb' points='1710 900 1401 632 1365 900'/%3E%3Cpolygon fill='%23d4d8fa' points='1210 900 971 687 725 900'/%3E%3Cpolygon fill='%23b6d9e0' points='943 900 1210 900 971 687'/%3E%3C/svg%3E");
     background-attachment: fixed;
     background-size: cover;*/
@@ -1289,12 +1292,13 @@ USER PAGE BODY LAYOUT
     background-color:rgba(255, 255, 255, 0.4);
 }
 .tip-msg{
-    color:rgb(156, 156, 156);
+    color:grey;
+    border: 1px solid rgb(77, 213, 255, 0.8);
+    background-color: rgb(0, 141, 228, 0.1);
     border-radius: 3px;
     line-height: 25px;
     margin-left: 5px;
     margin-right:10px;
-    background-color:rgba(255, 255, 255, 0.5);
 }
 .user-page .praise-icons{
     color:#c5ab84;

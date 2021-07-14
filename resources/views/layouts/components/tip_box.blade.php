@@ -98,7 +98,7 @@
 
 
                     <!--- Tip footer info and praise buttons --->    
-                    <p class="mt-4 mb-0" style="font-size:11px;color:rgb(170, 170, 170);">
+                    <p class="mt-4 mb-0" style="font-size:11px;color:rgb(156, 156, 156);">
                         
                         @php
                             $praise = App\Tip::where('id',$tip->id)->first()->praise;
@@ -147,25 +147,25 @@
                                 @if($praise === 'like')
                                     <a id="like-{{ $tip->id }}" class="like mr-3"  title="Like it" style="color:#008de4; cursor:pointer;"><i class="fas fa-thumbs-up" style="font-size:16px;"></i></a>
                                 @else
-                                    <a id="like-{{ $tip->id }}" class="like mr-3"  title="Like it" style="color:rgb(211, 211, 211); cursor:pointer;"><i class="fas fa-thumbs-up" style="font-size:16px;"></i></a>
+                                    <a id="like-{{ $tip->id }}" class="like mr-3"  title="Like it" style="color:rgb(190, 190, 190); cursor:pointer;"><i class="fas fa-thumbs-up" style="font-size:16px;"></i></a>
                                 @endif
                                 
                                 @if($praise === 'love')
                                     <a id="love-{{ $tip->id }}" class="love mr-3" title="love it"  style="color:red; cursor:pointer;"><i class="fas fa-heart" style="font-size:16px;"></i></a>
                                 @else
-                                    <a id="love-{{ $tip->id }}" class="love mr-3" title="love it"  style="color:rgb(211, 211, 211); cursor:pointer;"><i class="fas fa-heart" style="font-size:16px;"></i></a>
+                                    <a id="love-{{ $tip->id }}" class="love mr-3" title="love it"  style="color:rgb(190, 190, 190); cursor:pointer;"><i class="fas fa-heart" style="font-size:16px;"></i></a>
                                 @endif
 
                                 @if($praise === 'brilliant')
                                     <a id="brilliant-{{ $tip->id }}" class="brilliant mr-3" title="It's brilliant" style="color:rgb(238, 204, 13); cursor:pointer;"><i class="fas fa-lightbulb" style="font-size:16px;"></i></a>
                                 @else
-                                    <a id="brilliant-{{ $tip->id }}" class="brilliant mr-3" title="It's brilliant" style="color:rgb(211, 211, 211); cursor:pointer;"><i class="fas fa-lightbulb" style="font-size:16px;"></i></a>
+                                    <a id="brilliant-{{ $tip->id }}" class="brilliant mr-3" title="It's brilliant" style="color:rgb(190, 190, 190); cursor:pointer;"><i class="fas fa-lightbulb" style="font-size:16px;"></i></a>
                                 @endif
 
                                 @if($praise === 'cheers')
                                     <a id="cheers-{{ $tip->id }}" class="cheers mr-3" title="Cheers!"  style="color:#FFA900; cursor:pointer;"><i class="fas fa-beer" style="font-size:16px;"></i></a>
                                 @else
-                                    <a id="cheers-{{ $tip->id }}" class="cheers mr-3" title="Cheers!"  style="color:rgb(211, 211, 211); cursor:pointer;"><i class="fas fa-beer" style="font-size:16px;"></i></a>
+                                    <a id="cheers-{{ $tip->id }}" class="cheers mr-3" title="Cheers!"  style="color:rgb(190, 190, 190); cursor:pointer;"><i class="fas fa-beer" style="font-size:16px;"></i></a>
                                 @endif
 
                             </span>

@@ -132,7 +132,7 @@
             
             
                                 <!--- Tip footer info and praise buttons --->    
-                                <p class="mt-4 mb-0" style="font-size:11px;color:rgb(170, 170, 170);">
+                                <p class="mt-4 mb-0" style="font-size:11px;color:rgb(156, 156, 156);">
                                     
                                     @php
                                         $praise = App\Tip::where('id',$tip->id)->first()->praise;

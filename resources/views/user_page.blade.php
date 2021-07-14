@@ -8,7 +8,7 @@
 
         /* ------- Global variables ----------------- */
         var csrf_token = '{{ csrf_token() }}';
-        var grey = 'rgb(211, 211, 211)';
+        var grey = 'rgb(190, 190, 190)';
         var dark_yellow = 'rgb(238, 204, 13)';
         var beer_yellow = '#FFA900';
         var dash_blue = '#008de4';

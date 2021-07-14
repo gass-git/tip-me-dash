@@ -1110,7 +1110,7 @@ USER PAGE BODY LAYOUT
     font-size: 14px;
     font-weight:400; 
     font-family:var(--roboto);
-    color:rgb(170, 170, 170)!important;
+    color:rgb(156, 156, 156)!important;
 }
 .user-page .profile-box b{
     font-size: 14px;
@@ -1118,7 +1118,7 @@ USER PAGE BODY LAYOUT
 }
 .user-page .profile-box a{
     text-decoration: none;
-    color:rgb(170, 170, 170)!important;
+    color:rgb(156, 156, 156)!important;
 }
 .user-page .right-col{
     margin-top:-63px;

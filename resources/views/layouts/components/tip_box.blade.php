@@ -37,7 +37,7 @@
 
                             @guest
                                 
-                                <span class="show-msg" style="color:black;cursor:not-allowed;">
+                                <span class="show-msg" style="color:rgb(85, 85, 85);cursor:not-allowed;">
                                     <i class="ml-2 fas fa-envelope" title="private message" style="padding-bottom:0px;"></i>
                                 </span>
 
@@ -47,13 +47,13 @@
                                 
                                 @if(Auth::user()->id === $page_owner->id)
 
-                                    <span id="{{ $tip->id }}" class="show-msg" style="color:black">
+                                    <span id="{{ $tip->id }}" class="show-msg" style="color:rgb(85, 85, 85);cursor:pointer">
                                         <i id="tip-msg-icon-{{ $tip->id }}" class="ml-2 fas fa-envelope" title="private message" style="padding-bottom:0px;"></i>
                                     </span>
 
                                 @else
 
-                                    <span class="show-msg" style="color:black;cursor:not-allowed;">
+                                    <span class="show-msg" style="color:rgb(85, 85, 85);cursor:not-allowed;">
                                         <i class="ml-2 fas fa-envelope" title="private message" style="padding-bottom:0px;"></i>
                                     </span>
 
@@ -98,7 +98,7 @@
 
 
                     <!--- Tip footer info and praise buttons --->    
-                    <p class="mt-4 mb-0" style="font-size:11px;color:grey;">
+                    <p class="mt-4 mb-0" style="font-size:11px;color:rgb(170, 170, 170);">
                         
                         @php
                             $praise = App\Tip::where('id',$tip->id)->first()->praise;
@@ -113,7 +113,7 @@
                             </span>
                         
                             @if($praise === 'like')
-                                ⁂<i class="fas fa-thumbs-up ml-2" style="color:var(--dash-blue);font-size:12px;"></i> Thanks! this is great
+                                ⁂<i class="fas fa-thumbs-up ml-2" style="color:var(--dash-blue);font-size:12px;"></i> Thanks! This is great
                             @endif
                             
                             @if ($praise === 'love')
@@ -147,25 +147,25 @@
                                 @if($praise === 'like')
                                     <a id="like-{{ $tip->id }}" class="like mr-3"  title="Like it" style="color:#008de4; cursor:pointer;"><i class="fas fa-thumbs-up" style="font-size:16px;"></i></a>
                                 @else
-                                    <a id="like-{{ $tip->id }}" class="like mr-3"  title="Like it" style="color:rgb(175, 175, 175); cursor:pointer;"><i class="fas fa-thumbs-up" style="font-size:16px;"></i></a>
+                                    <a id="like-{{ $tip->id }}" class="like mr-3"  title="Like it" style="color:rgb(211, 211, 211); cursor:pointer;"><i class="fas fa-thumbs-up" style="font-size:16px;"></i></a>
                                 @endif
                                 
                                 @if($praise === 'love')
                                     <a id="love-{{ $tip->id }}" class="love mr-3" title="love it"  style="color:red; cursor:pointer;"><i class="fas fa-heart" style="font-size:16px;"></i></a>
                                 @else
-                                    <a id="love-{{ $tip->id }}" class="love mr-3" title="love it"  style="color:rgb(175, 175, 175); cursor:pointer;"><i class="fas fa-heart" style="font-size:16px;"></i></a>
+                                    <a id="love-{{ $tip->id }}" class="love mr-3" title="love it"  style="color:rgb(211, 211, 211); cursor:pointer;"><i class="fas fa-heart" style="font-size:16px;"></i></a>
                                 @endif
 
                                 @if($praise === 'brilliant')
                                     <a id="brilliant-{{ $tip->id }}" class="brilliant mr-3" title="It's brilliant" style="color:rgb(238, 204, 13); cursor:pointer;"><i class="fas fa-lightbulb" style="font-size:16px;"></i></a>
                                 @else
-                                    <a id="brilliant-{{ $tip->id }}" class="brilliant mr-3" title="It's brilliant" style="color:rgb(175, 175, 175); cursor:pointer;"><i class="fas fa-lightbulb" style="font-size:16px;"></i></a>
+                                    <a id="brilliant-{{ $tip->id }}" class="brilliant mr-3" title="It's brilliant" style="color:rgb(211, 211, 211); cursor:pointer;"><i class="fas fa-lightbulb" style="font-size:16px;"></i></a>
                                 @endif
 
                                 @if($praise === 'cheers')
                                     <a id="cheers-{{ $tip->id }}" class="cheers mr-3" title="Cheers!"  style="color:#FFA900; cursor:pointer;"><i class="fas fa-beer" style="font-size:16px;"></i></a>
                                 @else
-                                    <a id="cheers-{{ $tip->id }}" class="cheers mr-3" title="Cheers!"  style="color:rgb(175, 175, 175); cursor:pointer;"><i class="fas fa-beer" style="font-size:16px;"></i></a>
+                                    <a id="cheers-{{ $tip->id }}" class="cheers mr-3" title="Cheers!"  style="color:rgb(211, 211, 211); cursor:pointer;"><i class="fas fa-beer" style="font-size:16px;"></i></a>
                                 @endif
 
                             </span>
@@ -181,7 +181,7 @@
                                 </span>
                                 
                                 @if($praise === 'like')
-                                    ⁂<i class="fas fa-thumbs-up ml-2" style="color:var(--dash-blue);"></i> Thanks! this is great
+                                    ⁂<i class="fas fa-thumbs-up ml-2" style="color:var(--dash-blue);"></i> Thanks! This is great
                                 @endif
                                 
                                 @if ($praise === 'love')

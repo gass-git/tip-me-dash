@@ -11,7 +11,7 @@
                         <a class="list-group-item list-group-item-action" href="{{ route('user_page',$username) }}" >
                             <img id="avatar" src="{{ $rookie->avatar_url }}"></img>
                             <span class="username ml-2">{{ $username }}</span>
-                            <span id="join-date" class="float-right">{{ date('F d,Y', strtotime($rookie->created_at)) }}</span>
+                            <span id="join-date" class="float-right">{{ date('F d, Y', strtotime($rookie->created_at)) }}</span>
                         </a>
                     @endif
                 @endforeach

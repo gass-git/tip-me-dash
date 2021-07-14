@@ -18,4 +18,7 @@ class Controller extends BaseController
         return view('welcome',compact('newcomers','ranks'));
     }
 
+    public function show_recent(){
+        return view('recent');
+    }
 }

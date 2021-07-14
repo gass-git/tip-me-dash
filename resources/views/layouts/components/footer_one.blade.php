@@ -16,25 +16,25 @@
                  <div class="footer-info col-md-12 mt-3" >
                      <div class="d-flex justify-content-center flex-wrap mt-2" style="color:">
 
-                         <!-- design and build -->
+                         <!-- design and built -->
                          <div id="copyright-one" class="mr-1  p-1">
                              <a href="https://tipmedash.com/gass" target="_blank">
-                                 <i class="fas fa-coffee mr-2"></i>Design & Built in Budapest by Gabriel Salinas
+                                 <i class="fas fa-coffee mr-2"></i>Design & built in Budapest by Gass
                              </a>    
                          </div>
                          <!----------------------->
 
-                         <span id="separator-one">-</span>
+                         <span id="separator-one">⁂</span>
 
                          <!-- tipmedash.com 2020 -->
                          <div id="copyright-two" class="ml-1 mr-1 p-1">
                              <a href="#top">    
-                             <i class="far fa-copyright mr-2"></i>2021 Tipmedash.com v1.x 
+                             2021 tipmedash.com v1.x 
                              </a>
                          </div>
                          <!------------------------>
                          
-                         <span id="separator-two">-</span>
+                         <span id="separator-two">⁂</span>
 
                          <!-- repository link -->
                          <div id="repository-link" class="p-1 ml-1">

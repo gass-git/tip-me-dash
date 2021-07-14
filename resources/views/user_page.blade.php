@@ -77,7 +77,7 @@
 
             setTimeout(function(){$('#loader').css('display','block') }, 100);
 
-            var rand = Math.floor((Math.random() * 25) + 1);
+            var rand = Math.floor((Math.random() * 33) + 1);
             var src = "http://tipmedash.com/images/covers/"+rand+".jpg";
             var img_src = "url(http://tipmedash.com/images/covers/"+rand+".jpg)";
 

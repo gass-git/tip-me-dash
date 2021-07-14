@@ -637,12 +637,12 @@ LOGIN PAGE
     padding: 0;
 }
 .login-form .user-img{
-    margin-top:-50px;
+    margin-top:-60px;
     margin-bottom:35px;
 }
 .login-form .user-img img{
-    width:100px;
-    height:100px;
+    width:120px;
+    height:120px;
     border-radius: 50%;
 }
 .login-form .modal-content{
@@ -659,7 +659,7 @@ LOGIN PAGE
 }
 .login-form .form-group input{
     height:42px;
-    font-size:18px;
+    font-size:15px;
     padding-left: 54px;
     border-radius:5px;
 }
@@ -701,12 +701,12 @@ SIGN UP PAGE
     padding: 0;
 }
 .register-form .user-img{
-    margin-top:-50px;
+    margin-top:-60px;
     margin-bottom:35px;
 }
 .register-form .user-img img{
-    width:100px;
-    height:100px;
+    width:120px;
+    height:120px;
     border-radius: 50%;
 }
 .register-form .modal-content{
@@ -725,7 +725,7 @@ SIGN UP PAGE
 }
 .register-form .form-group input{
     height:42px;
-    font-size:18px;
+    font-size:15px;
     padding-left: 14px;
     border-radius:5px;
 }

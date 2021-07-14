@@ -189,6 +189,9 @@
     <div class="d-flex justify-content-center">{{ $recent_tips->links() }}</div>
 
     <script>
+
+    $('[data-toggle="tooltip"]').tooltip();   // Toggle bootstrap tooltip 
+
     /* ----- Show msg ------------------------------- */
     $('.show-msg').click(function(){
         var id = $(this).attr('id');

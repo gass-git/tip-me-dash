@@ -24,17 +24,17 @@
                          </div>
                          <!----------------------->
 
-                         <span id="separator-one">⁂</span>
+                         <span id="separator-one">-</span>
 
                          <!-- tipmedash.com 2020 -->
                          <div id="copyright-two" class="ml-1 mr-1 p-1">
                              <a href="#top">    
-                             2021 tipmedash.com v1.x 
+                             Tipmedash.com 1.x 
                              </a>
                          </div>
                          <!------------------------>
                          
-                         <span id="separator-two">⁂</span>
+                         <span id="separator-one">-</span>
 
                          <!-- repository link -->
                          <div id="repository-link" class="p-1 ml-1">

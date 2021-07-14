@@ -592,6 +592,46 @@ WELCOME PAGE: CATCHY SECTION 2
     color:var(--dash-blue);
 }
 /*------------------
+stats sections
+-------------------*/
+.stats{
+    padding-top:110px;
+    padding-bottom:110px;
+}
+.stats-title{
+    margin-bottom:40px;
+}
+.stats-title h1{
+    font-family: 'montserrat', sans-serif;
+    color:#ffffff;
+    font-weight:700;
+    font-size:40px;
+    margin-bottom:20px;
+    text-align: center;
+    font-style: italic;
+}
+#join-date{
+    font-size:14px;
+}
+#points-info{
+    font-size:14px;
+}
+#points-info #score{
+    color:var(--deep-blue-1);
+    font-weight:600;
+}
+.stats #avatar{
+    width:25px;
+    height:25px;
+    border-radius:50%;
+}
+.stats .username{
+    text-transform: capitalize; 
+    color:#008de4; 
+    font-weight:600;
+    font-size:15px;
+}
+/*------------------
 FOOTER
 -------------------*/
 .footer{

@@ -176,7 +176,8 @@
         </div>
     </section>
     <!-- sub header 2 -->
-
+    
+    @include('layouts/components/stats')
     @include('layouts/components/footer_one')
 
     <!-- Modal HTML -->

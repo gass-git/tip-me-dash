@@ -297,8 +297,21 @@ MEDIA
 
 @media screen and (max-width:390px){
     
+    /* welcome page */
     .welcome-text h1{
+        font-size:40px!important;
+    }
+    .catchy-title h1{
+        font-size:32px!important;
+    }
+    .catchy-2-title h1{
+        font-size:32px!important;
+    }
+    .features-title h1{
         font-size:35px!important;
+    }
+    .get-started-title h1{
+        font-size:32px!important;
     }
 
     /*---- user page ----*/

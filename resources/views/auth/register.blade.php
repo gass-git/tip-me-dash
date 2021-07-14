@@ -1,6 +1,6 @@
 @extends('layouts/app')
 @section('content')
-@include('layouts/navbar_two')
+@include('layouts/components/navbar_two')
 <body>
 
     <div class="register-form modal-dialog text-center">

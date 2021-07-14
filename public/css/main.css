@@ -660,7 +660,8 @@ LOGIN PAGE
 .login-form .form-group input{
     height:42px;
     font-size:15px;
-    padding-left: 54px;
+    padding-left: 50px;
+    padding-right:5px;
     border-radius:5px;
 }
 .login-form .email-icon{

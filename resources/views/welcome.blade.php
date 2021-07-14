@@ -1,6 +1,6 @@
 @extends('layouts/app')
 @section('content')
-@include('layouts/navbar_one')
+@include('layouts/components/navbar_one')
 
 <body id="top" class="blue-gradient">
     <!-- header section start -->
@@ -177,7 +177,7 @@
     </section>
     <!-- sub header 2 -->
 
-    @include('layouts/footer_one')
+    @include('layouts/components/footer_one')
 
     <!-- Modal HTML -->
     <div id="myModal" class="modal fade">

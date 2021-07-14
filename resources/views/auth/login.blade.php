@@ -1,11 +1,11 @@
 @extends('layouts/app')
 @section('content')
-@include('layouts/navbar_two')
+@include('layouts/components/navbar_two')
 
 <body>
 
     <div class="login-form modal-dialog text-center" style="background-color:transparent;">
-        <div class="col-sm-9 main-section">
+        <div class="col-sm-9 pr-2 pl-2 main-section">
             <div class="border modal-content">
                 <div class="col-12 user-img">
                     <img src="{{ asset('images/avatar-default-2.jpg') }}">

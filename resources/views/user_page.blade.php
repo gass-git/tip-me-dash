@@ -1,7 +1,7 @@
 @extends('layouts/app')
 @section('content')
 
-    @include('layouts/navbar_two')
+    @include('layouts/components/navbar_two')
     @include('layouts/user_page_body')
     
     <script>

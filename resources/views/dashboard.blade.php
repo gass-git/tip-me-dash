@@ -1,6 +1,6 @@
 @extends('layouts/app')
 @section('content')
-@include('layouts/navbar_one')
+@include('layouts/components/navbar_one')
 
 <body>
     <section class="dashboard container">

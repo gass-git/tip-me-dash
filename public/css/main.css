@@ -1289,6 +1289,7 @@ USER PAGE BODY LAYOUT
     background-color:rgba(255, 255, 255, 0.4);
 }
 .tip-msg{
+    color:rgb(156, 156, 156);
     border-radius: 3px;
     line-height: 25px;
     margin-left: 5px;

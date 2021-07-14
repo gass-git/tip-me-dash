@@ -163,6 +163,10 @@ MEDIA
 
 @media screen and (max-width:767px){
     
+    .stats .container .col-md-6{
+        margin-bottom:50px!important;
+    }
+
      /* About wrapper */
      .about-wrapper{
         margin-left:0px!important;

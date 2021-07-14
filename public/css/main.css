@@ -370,7 +370,7 @@ WELCOME PAGE: HEADER SECTION
     font-family: 'montserrat', sans-serif;
     color:var(--dash-blue);
     font-weight:700;
-    font-size:50px;
+    font-size:52px;
     margin-bottom:20px;
 }
 .welcome-text h1 span{
@@ -378,7 +378,7 @@ WELCOME PAGE: HEADER SECTION
 }
 .welcome-text p{
     font-family: 'Roboto', sans-serif;
-    font-size:17px;
+    font-size:18px;
     font-weight: 300;
     line-height: 28px;
     color:var(--text-color-1);
@@ -439,8 +439,9 @@ WELCOME PAGE: CATCHY SECTION
     font-style: italic;
 }
 .catchy-text p{
-    font-size:16px;
-    font-weight: 300;
+    font-family: 'Roboto', sans-serif;
+    font-size:17px;
+    font-weight: 100!important;
     line-height: 28px;
     color:white;
     text-align: center;
@@ -576,7 +577,7 @@ WELCOME PAGE: CATCHY SECTION 2
 }
 .catchy-2-text p{
     font-family: 'Roboto', sans-serif;
-    font-size:17px;
+    font-size:18px;
     font-weight: 300;
     line-height: 28px;
     color:var(--text-color-1);

@@ -8,7 +8,7 @@
     $recent_tips = App\Tip::where('status','confirmed')
                     ->whereDate('created_at', '>', Carbon::now()->subDays(30))
                     ->orderBy('id','DESC')
-                    ->paginate(5);
+                    ->paginate(10);
 
 @endphp
 <div class="container mx-auto mt-5" id="recent" style="max-width:600px;min-width:440px;">

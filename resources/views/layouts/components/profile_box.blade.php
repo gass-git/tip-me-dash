@@ -130,9 +130,9 @@
     <!-- Hall of fame section -->
     @if($supporters > 1)
     <hr class="mx-auto" style="width:80%;">
-        <div class="pl-3 pt-0 pr-3 pb-4 mt-3" style="font-size:15px;">
+        <div class="pl-3 pt-0 pr-3 pb-0 mt-3 mb-0" style="font-size:15px;">
 
-            <div style="font-size:14px;">
+            <p>
                 <span style="font-size:20px">🏆</span>
             
                 @php 
@@ -160,7 +160,7 @@
                 tipped ${!! number_format((float)($biggest_tip->usd_equivalent), 1) !!} usd
                 on {{ $date }}, equivalent to {!! number_format((float)($biggest_tip->dash_amount), 3) !!} ᕭ
                 at the time of transfer.
-            </div>   
+            </p>   
         </div>
     @endif
     <!-- END of hall of fame section -->

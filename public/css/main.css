@@ -1293,6 +1293,7 @@ USER PAGE BODY LAYOUT
 }
 .tip-msg{
     color:grey;
+    font-weight:400; 
     border: 1px solid rgb(77, 213, 255, 0.8);
     background-color: rgb(0, 141, 228, 0.1);
     border-radius: 3px;

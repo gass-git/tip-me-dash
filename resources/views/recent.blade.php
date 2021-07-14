@@ -186,7 +186,7 @@
             </div>
     @endforeach
 
-    <div class="d-flex justify-content-center">{{ $recent_tips->links() }}</div>
+    <div class="d-flex justify-content-center mb-5">{{ $recent_tips->links() }}</div>
 
     <script>
 

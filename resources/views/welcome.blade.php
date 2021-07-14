@@ -14,7 +14,7 @@
                         Give fans a new way to show appreciation for your work.
                         </p>
                         <div class="buttons-wrapper mr-0 ml-0 mb-4">
-                            <a id="community-btn" href="{{ url('recent') }}" class="btn btn-1 bg-primary"><i class="far fa-comments mr-2"></i>Recent Activity</a>
+                            <a id="community-btn" href="{{ url('recent') }}" class="btn btn-1 bg-primary"><i class="far fa-comments mr-2"></i>Recent activity</a>
                             <a id="start-btn" href="{{ route('register') }}" class="btn btn-1 bg-primary ml-3"><i class="fas fa-rocket mr-2"></i>Start my page</a>
                             <button href="#myModal" data-toggle="modal" type="button" class="btn play-btn">
                                 <i class="fas fa-play"></i> 

@@ -4,15 +4,18 @@
 @include('layouts/components/navbar_one')
 </div>
 @php
-
-    $recent_tips = App\Tip::where('status','confirmed')->orderBy('id','DESC')->get();
+    use Carbon\Carbon;
+    $recent_tips = App\Tip::where('status','confirmed')
+                    ->whereDate('created_at', '>', Carbon::now()->subDays(30))
+                    ->orderBy('id','DESC')
+                    ->paginate(5);
 
 @endphp
 <div class="container mx-auto mt-5" id="recent" style="max-width:600px;min-width:440px;">
 
 
 
-    @foreach($recent_tips->take(10) as $tip)
+    @foreach($recent_tips as $tip)
 
         @php
 
@@ -182,6 +185,8 @@
                 </div>    
             </div>
     @endforeach
+
+    <div class="d-flex justify-content-center">{{ $recent_tips->links() }}</div>
 
     <script>
     /* ----- Show msg ------------------------------- */

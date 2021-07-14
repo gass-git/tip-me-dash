@@ -98,6 +98,8 @@
                 @endforeach
                 <!--------------------------------------------> 
 
+                <div class="mt-5">{{ $tips->links() }}</div>
+
             </div> 
             <!-- END of right column -->
 

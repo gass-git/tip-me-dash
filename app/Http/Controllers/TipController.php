@@ -154,7 +154,7 @@ class TipController extends Controller
         DB::table('logs')->insert($data);
 
         Notification::route('mail',$tip_recipient->email)
-                        ->notify(new TipReceived($tip));
+                        ->notify(new TipReceived($tip_recipient));
 
         /**@abstract
          * 

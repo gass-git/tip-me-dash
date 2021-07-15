@@ -159,8 +159,12 @@ class TipController extends Controller
         /**@abstract
          * 
          * If this IP has not tipped the page owner before then add points to: 
-         * - To the tipper if he is registered (+40)
-         * - To the recipient of the tip (+15)
+         * - The tipper if he is registered (+30)
+         * - The recipient of the tip (+15)
+         * 
+         * Else:
+         * - The tipper if he is registered (+10)
+         * - The recipient of the tip (+5)
          * 
          */
         $amount = Tip::where('sender_ip',$tip->sender_ip)
@@ -173,15 +177,26 @@ class TipController extends Controller
             // Add points to the sender of the tip if he is registered
             if($tip->sender_id){
                 $user = User::where('id', $tip->sender_id)->first();
-                $user->points = $user->points + 40;
-                $user->save();
+                $user->points = $user->points + 30;
             }
 
             // Add points to the recipient of the tip
             $user = User::where('id', $tip->recipient_id)->first();
             $user->points = $user->points + 15;
-            $user->save();
+        }else{
+           
+            // Add points to the sender of the tip if he is registered
+            if($tip->sender_id){
+                $user = User::where('id', $tip->sender_id)->first();
+                $user->points = $user->points + 10;
+            }
+
+            // Add points to the recipient of the tip
+            $user = User::where('id', $tip->recipient_id)->first();
+            $user->points = $user->points + 5;
         }
+
+        $user->save();
         toast("Tip confirmed!",'success');
     }
 

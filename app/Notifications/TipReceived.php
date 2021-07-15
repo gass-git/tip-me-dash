@@ -16,9 +16,9 @@ class TipReceived extends Notification
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($tip_recipient)
     {
-        //
+        $this->username = $tip_recipient->username;
     }
 
     /**

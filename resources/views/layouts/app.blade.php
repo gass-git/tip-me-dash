@@ -11,7 +11,7 @@
         <link rel="icon" type="image/png" href="{{ asset('images/pin-32.png') }}">
 
         <!-- cookies -->
-        <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/js-cookie@rc"></script>
         <!-- app js -->
         <script src="{{ asset('js/jquery.min.js') }}"></script>
         <!-- popper js -->

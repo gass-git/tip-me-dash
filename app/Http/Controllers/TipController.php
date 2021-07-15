@@ -8,6 +8,7 @@ use App\Tip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Notification;
 use DB;
 use Carbon\Carbon;
 
@@ -152,7 +153,7 @@ class TipController extends Controller
         $data['updated_at'] = Carbon::now();
         DB::table('logs')->insert($data);
 
-        $tip_recipient->notify(new TipReceived($tip_recipient));
+        Notification::send(new TipReceived($tip_recipient));
 
         /**@abstract
          * 

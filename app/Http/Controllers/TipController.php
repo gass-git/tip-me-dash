@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\TipReceived;
 use App\User;
 use App\Tip;
 use Illuminate\Http\Request;
@@ -116,6 +117,7 @@ class TipController extends Controller
     function confirm_tip(Request $req){
         
         $tip = Tip::where('id',$req->tip_id)->first();
+        $tip_recipient = User::where('id',$tip->recipient_id)->first();
 
         /* ----- Update tip ------------------------- */
         $tip->update([
@@ -127,8 +129,9 @@ class TipController extends Controller
 
         /**@abstract
          * 
-         * - Create a log of the confirmed tip
-         * 
+         * - Create a log of the confirmed tip.
+         * - Send email notification.
+         *
          */
         $data = array();
 
@@ -148,6 +151,8 @@ class TipController extends Controller
         $data['created_at'] = Carbon::now();
         $data['updated_at'] = Carbon::now();
         DB::table('logs')->insert($data);
+
+        $tip_recipient->notify(new TipReceived($tip_recipient));
 
         /**@abstract
          * 

@@ -56,7 +56,7 @@
             
                                     @else
             
-                                        <span class="ml-1" style="color:var(--light-deep-blue);text-transform:capitalize;">
+                                        <span class="ml-1" style="color:#646464;text-transform:capitalize;">
                                             Incognito
                                         </span>
             

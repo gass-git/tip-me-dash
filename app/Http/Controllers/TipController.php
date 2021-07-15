@@ -153,7 +153,8 @@ class TipController extends Controller
         $data['updated_at'] = Carbon::now();
         DB::table('logs')->insert($data);
 
-        Notification::send(new TipReceived($tip_recipient));
+        Notification::route('mail',$tip_recipient->email)
+                        ->notify(new TipReceived($tip));
 
         /**@abstract
          * 

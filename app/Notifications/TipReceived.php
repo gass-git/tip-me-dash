@@ -40,12 +40,10 @@ class TipReceived extends Notification
      */
     public function toMail($notifiable)
     {
-        $username = $this->username;
-
         return (new MailMessage)
-                    ->greeting('Hello, '.$username)
+                    ->greeting('Hello')
                     ->line('You received a brand new tip!')
-                    ->action('View Tip', url('/'.$username));
+                    ->action('View Tip', url('/'));
     }
 
     /**

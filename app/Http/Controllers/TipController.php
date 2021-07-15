@@ -166,6 +166,9 @@ class TipController extends Controller
          * - The tipper if he is registered (+10)
          * - The recipient of the tip (+5)
          * 
+         * IMPORTANT $user->save() is necessary to implement in various ocations
+         * due to $user changing from sender to receiver.
+         * 
          */
         $amount = Tip::where('sender_ip',$tip->sender_ip)
                     ->where('status','confirmed')
@@ -178,25 +181,27 @@ class TipController extends Controller
             if($tip->sender_id){
                 $user = User::where('id', $tip->sender_id)->first();
                 $user->points = $user->points + 30;
+                $user->save();
             }
 
             // Add points to the recipient of the tip
             $user = User::where('id', $tip->recipient_id)->first();
             $user->points = $user->points + 15;
+            $user->save();
         }else{
            
             // Add points to the sender of the tip if he is registered
             if($tip->sender_id){
                 $user = User::where('id', $tip->sender_id)->first();
                 $user->points = $user->points + 10;
+                $user->save();
             }
 
             // Add points to the recipient of the tip
             $user = User::where('id', $tip->recipient_id)->first();
             $user->points = $user->points + 5;
+            $user->save();
         }
-
-        $user->save();
         toast("Tip confirmed!",'success');
     }
 

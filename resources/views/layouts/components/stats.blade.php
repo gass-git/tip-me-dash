@@ -6,7 +6,7 @@
                 
             <div class="title-1 mb-3" style="color:white;">RECENTLY REGISTERED</div>
 
-                @foreach($newcomers->take(10) as $rookie)
+                @foreach($newcomers->take(5) as $rookie)
                     @if($username = $rookie->username)
                         <a class="list-group-item list-group-item-action" href="{{ route('user_page',$username) }}" >
                             <img id="avatar" src="{{ $rookie->avatar_url }}"></img>
@@ -21,7 +21,7 @@
                 
             <div class="title-1 mb-3" style="color:white;">LEADERBOARD</div>
 
-                @foreach($ranks->take(10) as $rank)
+                @foreach($ranks->take(5) as $rank)
                     @if($username = $rank->username)
                         <a class="list-group-item list-group-item-action" href="{{ route('user_page',$username) }}">
                             <img id="avatar" src="{{ $rank->avatar_url }}"></img>

@@ -121,6 +121,11 @@ class SettingsController extends Controller
 
     public function change_email(Request $request){
 
+        if(Auth::user()->password == null){
+            toast('You must create a password first','info');
+            return redirect()->back();
+        }
+
         // Validate email
         $request->validate([
             'email' => ['required', 'string', 'email', 'max:40', 'unique:users'],
@@ -152,6 +157,16 @@ class SettingsController extends Controller
 
     public function delete_acc(Request $request){
         
+        if(Auth::user()->password == null){
+            toast('You have not created a password yet','info');
+            return redirect()->back();
+        }
+
+        if($request->password == null){
+            toast('You must enter a password for this','info');
+            return redirect()->back();
+        }
+
         if (password_verify($request->password, Auth::user()->password)) {
             
             // Success

@@ -193,13 +193,20 @@ class TipController extends Controller
 
         if($number_of_tips == 1){
             
-            if($regd_tipper){  $regd_tipper->points += 30;  } 
+            if($regd_tipper){  
+                $regd_tipper->points += 30;
+                $regd_tipper->save();
+            } 
             $recipient->points += 15;  
-
+            $recipient->save();
         }else{
 
-            if($regd_tipper){  $regd_tipper->points += 10; }
+            if($regd_tipper){  
+                $regd_tipper->points += 10; 
+                $regd_tipper->save();
+            }
             $recipient->points += 5;    
+            $recipient->save();
         }
 
         /** @abstract
@@ -208,12 +215,12 @@ class TipController extends Controller
          * - Add one received to the recipient.
          * 
          */
-        if($regd_tipper){ $regd_tipper->sent += 1; }
+        if($regd_tipper){ 
+            $regd_tipper->sent += 1;
+            $regd_tipper->save();
+         }
         $recipient->received += 1;
-
-        /* Save data */
         $recipient->save();
-        $regd_tipper->save();
 
         /** @abstract
          * 
@@ -222,8 +229,8 @@ class TipController extends Controller
          * will crash.
          * 
          */
-        
-        /* Notification::route('mail',$recipient->email)->notify(new TipReceived($recipient)); */
+
+        Notification::route('mail',$recipient->email)->notify(new TipReceived($recipient));
 
         toast("Tip confirmed!",'success');
     }

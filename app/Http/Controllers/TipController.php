@@ -136,8 +136,11 @@ class TipController extends Controller
 
     function confirm_tip(Request $req){
         
+        /* ---- Global variables ----- */
         $tip = Tip::where('id',$req->tip_id)->first();
         $recipient = User::where('id',$tip->recipient_id)->first();
+        $data = array();
+        /* --------------------------- */
 
         /* ----- Update tip ------------------------- */
         $tip->update([
@@ -153,8 +156,6 @@ class TipController extends Controller
          * - Send email notification.
          *
          */
-        $data = array();
-
         if($tip->sender_id){
             $data['from_id'] = $tip->sender_id;
         }elseif($tip->sent_by){
@@ -218,7 +219,7 @@ class TipController extends Controller
         if($regd_tipper){ 
             $regd_tipper->sent += 1;
             $regd_tipper->save();
-         }
+        }
         $recipient->received += 1;
         $recipient->save();
 
@@ -229,7 +230,6 @@ class TipController extends Controller
          * will crash.
          * 
          */
-
         Notification::route('mail',$recipient->email)->notify(new TipReceived($recipient));
 
         toast("Tip confirmed!",'success');

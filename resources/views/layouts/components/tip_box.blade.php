@@ -34,7 +34,7 @@
 
                         @elseif($tip->sender_id AND $registered_tipper === null)
                         
-                                <span class="ml-1" style="color:var(--deep-blue-1);text-transform:capitalize;">
+                                <span class="ml-1" style="color:var(--deep-blue-1);text-transform:capitalize;" title="this user deleted his account">
                                     {{ $tip->sent_by }}
                                 </span>
 

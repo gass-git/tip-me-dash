@@ -175,16 +175,6 @@ class TipController extends Controller
 
         /** @abstract
          * 
-         * IMPORTANT!
-         * Disable notifications when testing on localhost, if not, the controller
-         * will crash otherwise.
-         * 
-         */
-        Notification::route('mail',$recipient->email)
-                        ->notify(new TipReceived($recipient));
-
-        /** @abstract
-         * 
          * If this IP has not tipped the page owner before then add points to: 
          * - The tipper if he is registered (+30)
          * - The recipient of the tip (+15)
@@ -224,6 +214,16 @@ class TipController extends Controller
         /* Save data */
         $recipient->save();
         $regd_tipper->save();
+
+        /** @abstract
+         * 
+         * IMPORTANT!
+         * Disable notifications when testing on localhost, if not, the controller
+         * will crash.
+         * 
+         */
+        
+        /* Notification::route('mail',$recipient->email)->notify(new TipReceived($recipient)); */
 
         toast("Tip confirmed!",'success');
     }

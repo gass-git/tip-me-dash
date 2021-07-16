@@ -11,7 +11,7 @@
 
                             /** @abstract 
                             * 
-                            * CONDITIONS:
+                            * SCENARIOUS:
                             * 
                             * 1) Tip has sender_id and the tipper has not deleted his acc
                             * 2) Tip has sender_id and the tipper has deleted his acc
@@ -34,25 +34,25 @@
 
                         @elseif($tip->sender_id AND $registered_tipper === null)
                         
-                                <span class="ml-1" style="color:#646464;text-transform:capitalize;">
+                                <span class="ml-1" style="color:var(--deep-blue-1);text-transform:capitalize;">
                                     {{ $tip->sent_by }}
                                 </span>
 
                         @elseif($tip->sent_by)
 
-                            <span class="ml-1" style="color:#646464;text-transform:capitalize;">
+                            <span class="ml-1" style="color:var(--deep-blue-1);text-transform:capitalize;">
                                 {{ $tip->sent_by }}
                             </span>
 
                         @else
 
-                            <span class="ml-1" style="color:#646464;text-transform:capitalize;">
+                            <span class="ml-1" style="color:var(--deep-blue-1);text-transform:capitalize;">
                                 Incognito
                             </span>
 
                         @endif
 
-                        <span class="ml-1 mr-1" style="color:#646464">Tipped </span>
+                        <span class="ml-1 mr-1" style="color:#646464">tipped </span>
                         <span>{!! number_format((float)($tip->dash_amount), 5) !!} ᕭ</span>
                         
                         <!-- Envelope icon -->

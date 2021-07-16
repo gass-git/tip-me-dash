@@ -136,25 +136,41 @@
                 <span style="font-size:20px">🏆</span>
             
                 @php 
+
+                    /** @abstract 
+                    * 
+                    * SCENARIOUS:
+                    * 
+                    * 1) Tip has sender_id and the tipper has not deleted his acc
+                    * 2) Tip has sender_id and the tipper has deleted his acc
+                    * 3) Tip has a tipper name
+                    * 4) Tip has no sender_id and no tipper name (Incognito)
+                    *
+                    */
+
                     $date = \Carbon\Carbon::parse($biggest_tip->created_at)->isoFormat('MMM Do YYYY');
+                    $registered_tipper = App\User::where('id', $biggest_tip->sender_id)->first();
+
                 @endphp
         
-                @if($user_id = $biggest_tip->sender_id)
+                @if($biggest_tip->sender_id AND $registered_tipper)
                 
-                    @php 
-                        $registered_user = App\User::where('id', $user_id)->first();
-                        $registered_tipper = $registered_user->username; 
-                        $avatar_url = $registered_user->avatar_url;
-                    @endphp
-            
-                    <a href="/{{ $registered_tipper }}" style="text-decoration: none!important;">
-                        <b style="text-transform:capitalize;">{{ $registered_tipper }}</b>
+                    <a href="/{{ $registered_tipper->username }}" style="text-decoration: none!important;">
+                        <b style="text-transform:capitalize;">{{ $registered_tipper->username }}</b>
                     </a>
 
-                @elseif($tipper = $biggest_tip->sent_by)
-                    <b style="color:black;text-transform:capitalize;">{{ $tipper }}</b>
+                @elseif($biggest_tip->sender_id AND $registered_tipper === null)    
+
+                    <b style="color:var(--deep-blue-1);text-transform:capitalize;">{{ $biggest_tip->sent_by }}</b>
+
+                @elseif($biggest_tip->sent_by)
+
+                    <b style="color:var(--deep-blue-1);text-transform:capitalize;">{{ $biggest_tip->sent_by }}</b>
+
                 @else
-                    <b style="color:black;">Incognito</b> 
+
+                    <b style="color:var(--deep-blue-1)">Incognito</b> 
+
                 @endif
 
                 tipped ${!! number_format((float)($biggest_tip->usd_equivalent), 1) !!} usd

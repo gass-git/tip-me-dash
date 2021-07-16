@@ -21,11 +21,11 @@
 
                                                 /** @abstract 
                                                 * 
-                                                * CONDITIONS:
+                                                * SCENARIOUS:
                                                 * 
                                                 * 1) Tip has sender_id and the tipper has not deleted his acc
                                                 * 2) Tip has sender_id and the tipper has deleted his acc
-                                                * 3) Tip has a tipper name
+                                                * 3) Tip has NO sender_id but has a tipper name
                                                 * 4) Tip has no sender_id and no tipper name (Incognito)
                                                 *
                                                 */
@@ -51,19 +51,19 @@
 
                                             @elseif($tip->sender_id AND $registered_tipper === null)
                                             
-                                                    <span class="ml-1" style="color:#646464;text-transform:capitalize;">
+                                                    <span class="ml-1" style="color:var(--deep-blue-1);text-transform:capitalize;">
                                                         {{ $tip->sent_by }}
                                                     </span>
                     
                                             @elseif($tip->sent_by)
                     
-                                                <span class="ml-1" style="color:#646464;text-transform:capitalize;">
+                                                <span class="ml-1" style="color:var(--deep-blue-1);text-transform:capitalize;">
                                                     {{ $tip->sent_by }}
                                                 </span>
                     
                                             @else
                     
-                                                <span class="ml-1" style="color:#646464;text-transform:capitalize;">
+                                                <span class="ml-1" style="color:var(--deep-blue-1);text-transform:capitalize;">
                                                     Incognito
                                                 </span>
                     

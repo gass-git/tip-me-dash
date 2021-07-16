@@ -125,7 +125,6 @@
                 use Carbon\Carbon;
 
                 $confirmed_tip = App\Tip::where('recipient_id',Auth::user()->id)->where('status','confirmed');
-                $number_of_tips = $confirmed_tip->count();
                 $dash_30_days = $confirmed_tip->whereDate('created_at', '>', Carbon::now()->subDays(30))->sum('dash_amount');
                 $usd_30_days = $confirmed_tip->whereDate('created_at', '>', Carbon::now()->subDays(30))->sum('usd_equivalent');
                 $dash_all_time = $confirmed_tip->sum('dash_amount');
@@ -133,8 +132,8 @@
             @endphp
 
             <div class="col-sm-4">
-                <div class="pt-4" id="style-one">{{ $number_of_tips }}</div>
-                <div class="pt-2" id="style-two">Tips</div>
+                <div class="pt-4" id="style-one">{{ Auth::user()->received }}</div>
+                <div class="pt-2" id="style-two">Tips received</div>
             </div>
 
             <div class="col-sm-4" style="border-left:1px solid rgba(138, 138, 138, 0.4);">

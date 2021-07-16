@@ -24,9 +24,9 @@
 
                         @if($tip->sender_id AND $registered_tipper)
                     
-                            <a href="/{{ $registered_tipper }}" style="text-decoration: none!important;" title="Registered user">
+                            <a href="/{{ $registered_tipper->username }}" style="text-decoration: none!important;" title="Registered user">
                                 <span class="ml-1" style="color:var(--light-deep-blue);text-transform:capitalize;">
-                                    {{ $registered_tipper }}
+                                    {{ $registered_tipper->username }}
                                 </span>
                             </a>    
 

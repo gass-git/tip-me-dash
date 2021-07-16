@@ -86,8 +86,7 @@
                     @if($tip->sender_id)
 
                         @php 
-                            $registered_user = App\User::where('id',$tip->sender_id)->first();
-                            $registered_tipper = $registered_user->username; 
+                            $registered_tipper = App\User::where('id',$tip->sender_id)->first();
                             $avatar_url = $registered_user->avatar_url;
                         @endphp
                     

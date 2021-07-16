@@ -133,7 +133,7 @@
 
             <div class="col-sm-4">
                 <div class="pt-4" id="style-one">{{ Auth::user()->received }}</div>
-                <div class="pt-2" id="style-two">Tips received</div>
+                <div class="pt-2" id="style-two">Tips Received</div>
             </div>
 
             <div class="col-sm-4" style="border-left:1px solid rgba(138, 138, 138, 0.4);">
@@ -144,7 +144,7 @@
                     <img class="align-items-center" src="{{ asset('images/dash-icon.png') }}">
                 </div>
                 <div class="pt-2" id="style-three">Equivalent to US${{ $usd_30_days }}</div>
-                <div class="pt-2" id="style-two">Last 30 days</div>
+                <div class="pt-2" id="style-two">Last 30 Days</div>
             </div>
 
             <div class="col-sm-4" style="border-left:1px solid rgba(138, 138, 138, 0.4);">
@@ -155,7 +155,7 @@
                     <img class="align-items-center" src="{{ asset('images/dash-icon.png') }}">
                 </div>
                 <div class="pt-2" id="style-three">Equivalent to US${{ $usd_all_time }}</div>
-                <div class="pt-1" id="style-two">All time</div>
+                <div class="pt-1" id="style-two">All Time</div>
             </div>
 
         </div>    

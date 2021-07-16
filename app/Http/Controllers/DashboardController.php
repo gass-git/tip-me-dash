@@ -25,7 +25,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $events = log::where('to_id',Auth::user()->id)->paginate(10);
+        $events = Log::where('to_id',Auth::user()->id)->orderBy('id','DESC')->paginate(10);
         $number_of_events = log::where('to_id',Auth::user()->id)->count();
         return view('dashboard',compact('events','number_of_events'));
     }

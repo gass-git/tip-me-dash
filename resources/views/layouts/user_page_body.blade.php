@@ -83,15 +83,6 @@
                 <!----------- Tips section ------------------> 
                 @foreach($tips as $tip)
 
-                    @if($tip->sender_id)
-
-                        @php 
-                            $registered_tipper = App\User::where('id',$tip->sender_id)->first();
-                            $avatar_url = $registered_user->avatar_url;
-                        @endphp
-                    
-                    @endif
-
                     @include('layouts/components/tip_box')
                 
                 @endforeach

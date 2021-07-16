@@ -20,6 +20,8 @@
                             *
                             */
 
+                            $registered_tipper = App\User::where('id',$tip->sender_id)->first();
+                        
                         @endphp
 
                         @if($tip->sender_id AND $registered_tipper)

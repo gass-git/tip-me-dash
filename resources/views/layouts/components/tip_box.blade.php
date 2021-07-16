@@ -6,24 +6,45 @@
                 <div class="tip-body">
                     <p class="d-flex tip-title align-items-lg-center p-2">
                         <i class="fas fa-donate ml-0 mr-1" data-toggle="tooltip" data-placement="top" style="color:var(--dark-yellow);font-size:18px;" title="equivalent to ${{ $tip->usd_equivalent }} usd at the moment of transfer"></i>
-                    
-                        @if($tip->sender_id)
 
+                        @php
+
+                            /** @abstract 
+                            * 
+                            * CONDITIONS:
+                            * 
+                            * 1) Tip has sender_id and the tipper has not deleted his acc
+                            * 2) Tip has sender_id and the tipper has deleted his acc
+                            * 3) Tip has a tipper name
+                            * 4) Tip has no sender_id and no tipper name (Incognito)
+                            *
+                            */
+
+                        @endphp
+
+                        @if($tip->sender_id AND $registered_tipper)
+                    
                             <a href="/{{ $registered_tipper }}" style="text-decoration: none!important;" title="Registered user">
                                 <span class="ml-1" style="color:var(--light-deep-blue);text-transform:capitalize;">
                                     {{ $registered_tipper }}
                                 </span>
                             </a>    
 
+                        @elseif($tip->sender_id AND $registered_tipper === null)
+                        
+                                <span class="ml-1" style="color:#646464;text-transform:capitalize;">
+                                    {{ $tip->sent_by }}
+                                </span>
+
                         @elseif($tip->sent_by)
 
-                            <span class="ml-1" style="color:var(--light-deep-blue);text-transform:capitalize;">
+                            <span class="ml-1" style="color:#646464;text-transform:capitalize;">
                                 {{ $tip->sent_by }}
                             </span>
 
                         @else
 
-                            <span class="ml-1" style="color:var(--light-deep-blue);text-transform:capitalize;">
+                            <span class="ml-1" style="color:#646464;text-transform:capitalize;">
                                 Incognito
                             </span>
 

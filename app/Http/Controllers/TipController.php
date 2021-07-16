@@ -27,11 +27,12 @@ class TipController extends Controller
         $IP = request()->ip();
         /* ---------------------------------------------------------------- */
 
-        /**@abstract
+        /** @abstract
          * 
          * EXTRA VALIDATIONS
-         *  - It's not allowed to make more than two tips a day to the same user.
-         *  - It's not allowed to push the tip button more than four times per day - spam protection.
+         *  - It's not allowed to push the tip button more than 5 times per day - spam protection by IP.
+         *  - It's not allowed to make more than two tips a day to the same user, 
+         *    this is validated by ID if the user is registered and by IP if it's a guest.
          *  - The user needs to enter a wallet address to receive tips.
          *  - The page owner cannot tip himself
          * 
@@ -45,19 +46,34 @@ class TipController extends Controller
             return back();
         }            
 
-        $tips_to_user_24h = Tip::where('sender_ip', $IP)
-                        ->where('recipient_id', $page_owner->id)
-                        ->where('status','confirmed')
-                        ->whereDate('created_at', Carbon::today())
-                        ->count();
+        if(Auth::user()){       
+            $tips_to_user_24h_ID = Tip::where('sender_id', auth::user()->id)
+                                ->where('recipient_id', $page_owner->id)
+                                ->where('status','confirmed')
+                                ->whereDate('created_at', Carbon::today())
+                                ->count();   
+                                
+            if($tips_to_user_24h_ID >= 2){
+                toast("It's not allowed to make more than two tips a day to the same user.",'info');
+                return back();
+            }
 
+        }else{
+
+            $tips_to_user_24h_IP = Tip::where('sender_ip', $IP)
+                                ->where('recipient_id', $page_owner->id)
+                                ->where('status','confirmed')
+                                ->whereDate('created_at', Carbon::today())
+                                ->count();
+
+            if($tips_to_user_24h_IP >= 2){
+                toast("It's not allowed to make more than two tips a day to the same user.",'info');
+                return back();
+            }
+        }
+       
         if(Auth::user() == $page_owner){
             toast('Why would you tip yourself?','info');
-            return back();
-        }
-
-        if($tips_to_user_24h >= 2){
-            toast("It's not allowed to make more than two tips a day to the same user.",'info');
             return back();
         }
 
@@ -77,7 +93,7 @@ class TipController extends Controller
         $usd_amount = $req->amount_entered;                                     // USD amount entered by supporter
         $dash_toSend = round( $usd_amount/$dash_usd, 8);                        // Dash conversion to send
 
-        /**@abstract
+        /** @abstract
          * 
          * INSERT DATA ON TIPS TABLE
          * 
@@ -121,7 +137,7 @@ class TipController extends Controller
     function confirm_tip(Request $req){
         
         $tip = Tip::where('id',$req->tip_id)->first();
-        $tip_recipient = User::where('id',$tip->recipient_id)->first();
+        $recipient = User::where('id',$tip->recipient_id)->first();
 
         /* ----- Update tip ------------------------- */
         $tip->update([
@@ -131,7 +147,7 @@ class TipController extends Controller
         ]);
         /* ------------------------------------------ */
 
-        /**@abstract
+        /** @abstract
          * 
          * - Create a log of the confirmed tip.
          * - Send email notification.
@@ -156,10 +172,18 @@ class TipController extends Controller
         $data['updated_at'] = Carbon::now();
         DB::table('logs')->insert($data);
 
-        Notification::route('mail',$tip_recipient->email)
-                        ->notify(new TipReceived($tip_recipient));
 
-        /**@abstract
+        /** @abstract
+         * 
+         * IMPORTANT!
+         * Disable notifications when testing on localhost, if not, the controller
+         * will crash otherwise.
+         * 
+         */
+        Notification::route('mail',$recipient->email)
+                        ->notify(new TipReceived($recipient));
+
+        /** @abstract
          * 
          * If this IP has not tipped the page owner before then add points to: 
          * - The tipper if he is registered (+30)
@@ -169,42 +193,38 @@ class TipController extends Controller
          * - The tipper if he is registered (+10)
          * - The recipient of the tip (+5)
          * 
-         * IMPORTANT $user->save() is necessary to implement in various ocations
-         * due to $user changing from sender to receiver.
-         * 
          */
         $number_of_tips = Tip::where('sender_ip',$tip->sender_ip)
                     ->where('status','confirmed')
                     ->where('recipient_id', $tip->recipient_id)
                     ->count();
 
+        $regd_tipper = User::where('id',$tip->sender_id)->first();    
+
         if($number_of_tips == 1){
+            
+            if($regd_tipper){  $regd_tipper->points += 30;  } 
+            $recipient->points += 15;  
 
-            // Add points to the sender of the tip if he is registered
-            if($tip->sender_id){
-                $user = User::where('id', $tip->sender_id)->first();
-                $user->points += 30;
-                $user->save();
-            }
-
-            // Add points to the recipient of the tip
-            $user = User::where('id', $tip->recipient_id)->first();
-            $user->points += 15;
-            $user->save();
         }else{
-           
-            // Add points to the sender of the tip if he is registered
-            if($tip->sender_id){
-                $user = User::where('id', $tip->sender_id)->first();
-                $user->points += 10;
-                $user->save();
-            }
 
-            // Add points to the recipient of the tip
-            $user = User::where('id', $tip->recipient_id)->first();
-            $user->points += 5;
-            $user->save();
+            if($regd_tipper){  $regd_tipper->points += 10; }
+            $recipient->points += 5;    
         }
+
+        /** @abstract
+         * 
+         * - Add one sent to the tipper if he is registered.
+         * - Add one received to the recipient.
+         * 
+         */
+        if($regd_tipper){ $regd_tipper->sent += 1; }
+        $recipient->received += 1;
+
+        /* Save data */
+        $recipient->save();
+        $regd_tipper->save();
+
         toast("Tip confirmed!",'success');
     }
 

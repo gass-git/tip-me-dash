@@ -29,7 +29,7 @@
                          <!-- tipmedash.com 2020 -->
                          <div id="copyright-two" class="ml-1 mr-1 p-1">
                              <a href="#top">    
-                             Tipmedash.com 1.x 
+                             Tipmedash.com 2.x 
                              </a>
                          </div>
                          <!------------------------>

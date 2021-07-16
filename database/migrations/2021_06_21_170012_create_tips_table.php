@@ -11,6 +11,15 @@ class CreateTipsTable extends Migration
      *
      * @return void
      */
+
+    /** @abstract
+     * 
+     * IMPORTANT:
+     * If a user deletes his account all the tips that where sent to him
+     * will be deleted, but not the ones he sent.
+     * 
+     */
+
     public function up()
     {
         Schema::create('tips', function (Blueprint $table) {

@@ -79,21 +79,24 @@ class TipController extends Controller
 
         /**@abstract
          * 
-         * Insert data on tips table
+         * INSERT DATA ON TIPS TABLE
+         * 
+         * Note: save sent_by name for registered tippers in case
+         * in the future they delete their acc and the tip needs this name
+         * to fill up the sender info.
          * 
          */
         $data = array();
-
-        if(Auth::user()){
-            $data['sender_id'] = Auth::user()->id;
-        }elseif($req->name){
-            $data['sent_by'] = $req->name;
-        }
 
         if($req->lock){
             $data['private_msg'] = 'yes';
         }
 
+        if(Auth::user()){
+            $data['sender_id'] = Auth::user()->id;
+        }
+
+        $data['sent_by'] = $req->name;
         $data['message'] = $req->msg;
         $data['sender_ip'] = $IP;
         $data['recipient_id'] = $page_owner->id;

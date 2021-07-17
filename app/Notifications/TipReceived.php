@@ -41,19 +41,19 @@ class TipReceived extends Notification
      */
     public function toMail($notifiable)
     {
-        $username = $this->username;
-        $location = $this->location;
+        $recipient_username = $this->username;
+        $sender_location = $this->location;
 
-        if($location != 'no location'){
+        if($sender_location){
             return (new MailMessage)
-                    ->greeting('Hello! '.$username)
-                    ->line('You received a brand new donation from a user located in '.$location)
-                    ->action('View Tip', url('/'.$username));
+                    ->greeting('Hello! '.$recipient_username)
+                    ->line('You received a brand new donation from a user located in '.$sender_location)
+                    ->action('View Tip', url('/'.$recipient_username));
         }else{
             return (new MailMessage)
-                    ->greeting('Hello, '.$username)
+                    ->greeting('Hello, '.$recipient_username)
                     ->line('You received a brand new donation!')
-                    ->action('View Tip', url('/'.$username));
+                    ->action('View Tip', url('/'.$recipient_username));
         }
 
     }

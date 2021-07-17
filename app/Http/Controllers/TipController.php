@@ -280,9 +280,11 @@ class TipController extends Controller
         if($regd_tipper){
             if($regd_tipper->location){
                 $tipper_location = $regd_tipper->location;
+            }else{
+                $tipper_location = null; // If the registered tipper has no location
             }
         }else{
-            $tipper_location = 'no location';
+            $tipper_location = null;  // If the tipper is not logged in
         }
 
         Notification::route('mail',$recipient->email)->notify(new TipReceived($recipient, $tipper_location));

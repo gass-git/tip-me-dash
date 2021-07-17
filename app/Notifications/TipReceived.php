@@ -44,7 +44,7 @@ class TipReceived extends Notification
         $username = $this->username;
         $location = $this->location;
 
-        if($location){
+        if($location != 'no location'){
             return (new MailMessage)
                     ->greeting('Hello! '.$username)
                     ->line('You received a brand new donation from a user located in '.$location)

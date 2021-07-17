@@ -282,7 +282,7 @@ class TipController extends Controller
                 $tipper_location = $regd_tipper->location;
             }
         }else{
-            $tipper_location = null;
+            $tipper_location = 'no location';
         }
 
         Notification::route('mail',$recipient->email)->notify(new TipReceived($recipient, $tipper_location));

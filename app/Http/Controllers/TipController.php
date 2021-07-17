@@ -176,26 +176,70 @@ class TipController extends Controller
 
         /** @abstract
          * 
-         * If this IP has not tipped the page owner before then add points to: 
-         * - The tipper if he is registered (+30)
+         * Point rewards for registered tippers
+         * 
+         * x: points for a regd. tipper if he is supporting a recipient for the first time.
+         * y: points for a regd. tipper if he is supporting a recipient he has supported before.
+         * 
+         */
+        $amount = $tip->usd_equivalent;
+        
+        switch ($amount){
+            case ($amount < 0.05): $x = 0;
+            break;
+            case ($amount >= 0.05 and $amount < 0.50): $x = 1;
+            break;
+            case ($amount >= 0.50 and $amount < 1): $x = 6;
+            break;
+            case ($amount >= 1 and $amount < 4): $x = 14;
+            break;
+            case($amount >= 4): $x = 60;
+            break;
+        }
+   
+        switch ($amount){
+            case ($amount < 1): $y = 0;
+            break;
+            case ($amount >= 1 and $amount < 4): $y = 7;
+            break;
+            case ($amount >= 4 and $amount < 10): $y = 37;
+            break;
+            case($amount >= 10): $y = 60;
+            break;
+        }
+
+        /** @abstract
+         * 
+         * If the tipper with this IP has not tipped the page owner before then add points to: 
+         * - The tipper if he is registered (+x)
          * - The recipient of the tip (+15)
          * 
-         * Else:
-         * - The tipper if he is registered (+10)
+         * ELSE:
+         * - The tipper if he is registered (+y)
          * - The recipient of the tip (+5)
          * 
          */
-        $number_of_tips = Tip::where('sender_ip',$tip->sender_ip)
+
+        $regd_tipper = User::where('id',$tip->sender_id)->first();     
+
+        /* ---- Check the number of tips by IP only if the tipper is not logged in ---- */
+        if($regd_tipper){
+            $number_of_tips = Tip::where('sender_id',$tip->sender_id)
                     ->where('status','confirmed')
                     ->where('recipient_id', $tip->recipient_id)
                     ->count();
-
-        $regd_tipper = User::where('id',$tip->sender_id)->first();    
-
+        }else{
+            $number_of_tips = Tip::where('sender_ip',$tip->sender_ip)
+                    ->where('status','confirmed')
+                    ->where('recipient_id', $tip->recipient_id)
+                    ->count();
+        }
+        /* ----------------------------------------------------------------------------- */
+        
         if($number_of_tips == 1){
             
             if($regd_tipper){  
-                $regd_tipper->points += 30;
+                $regd_tipper->points += $x;
                 $regd_tipper->save();
             } 
             $recipient->points += 15;  
@@ -203,7 +247,7 @@ class TipController extends Controller
         }else{
 
             if($regd_tipper){  
-                $regd_tipper->points += 10; 
+                $regd_tipper->points += $y; 
                 $regd_tipper->save();
             }
             $recipient->points += 5;    

@@ -16,9 +16,10 @@ class TipReceived extends Notification
      *
      * @return void
      */
-    public function __construct($recipient)
+    public function __construct($recipient, $tipper_location)
     {
         $this->username = $recipient->username;
+        $this->location = $tipper_location;
     }
 
     /**
@@ -41,11 +42,20 @@ class TipReceived extends Notification
     public function toMail($notifiable)
     {
         $username = $this->username;
+        $location = $this->location;
 
-        return (new MailMessage)
+        if($location){
+            return (new MailMessage)
+                    ->greeting('Hello! '.$username)
+                    ->line('You received a brand new donation from a user located in '.$location)
+                    ->action('View Tip', url('/'.$username));
+        }else{
+            return (new MailMessage)
                     ->greeting('Hello, '.$username)
                     ->line('You received a brand new donation!')
                     ->action('View Tip', url('/'.$username));
+        }
+
     }
 
     /**

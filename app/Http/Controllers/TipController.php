@@ -273,8 +273,19 @@ class TipController extends Controller
          * Disable notifications when testing on localhost, if not, the controller
          * will crash.
          * 
+         * If the tipper is registered and has a location send a notification
+         * with this data.
+         * 
          */
-        Notification::route('mail',$recipient->email)->notify(new TipReceived($recipient));
+        if($regd_tipper){
+            if($regd_tipper->location){
+                $tipper_location = $regd_tipper->location;
+            }
+        }else{
+            $tipper_location = null;
+        }
+
+        Notification::route('mail',$recipient->email)->notify(new TipReceived($recipient, $tipper_location));
 
         toast("Tip confirmed!",'success');
     }

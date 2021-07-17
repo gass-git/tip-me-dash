@@ -2,21 +2,38 @@
 
     <div class="avatar" style="background-image:url({{ $page_owner->avatar_url }})"></div>
 
-    <!-- Tips sent -->
-    @if($people_tipped > 4)
+    <!-- Tips sent --> @{{-- Show if the user has tipped 5 different people or more --}}
+    @if($people_tipped >= 5)
         <div class="d-flex flex-row-reverse pr-2" style="height:40px;">
             
             @foreach ($tips_sent as $sent)
 
                 @php
-                    $recipient_username = App\User::where('id',$sent->recipient_id)->first()->username;
+
+                    /** @abstract
+                     * 
+                     *  Possible scenario: the recipient of the tip deletes his account.
+                     * 
+                     */
+                    $regd_recipient = App\User::where('id',$sent->recipient_id)->first();
+
                 @endphp
 
-                <div class="small-stamp mt-2 mr-2 mb-2 ml-2">
-                    <a href="/{{ $recipient_username }}">
-                        <img src="{{ Identicon::getImageDataUri($sent->stamp) }}" width="25" height="25" >
-                    </a>
-                </div>    
+                @if($regd_recipient)
+
+                    <div class="small-stamp mt-2 mr-2 mb-2 ml-2">
+                        <a href="/{{ $regd_recipient->username }}">
+                            <img src="{{ Identicon::getImageDataUri($sent->stamp) }}" width="25" height="25" >
+                        </a>
+                    </div>  
+
+                @else
+
+                    <div class="small-stamp mt-2 mr-2 mb-2 ml-2">
+                        <img src="{{ Identicon::getImageDataUri($sent->stamp) }}" width="25" height="25" title="the recipient of this tip deleted his account">
+                    </div>  
+
+                @endif
 
             @endforeach
 
@@ -142,26 +159,26 @@
                     * SCENARIOUS:
                     * 
                     * 1) Tip has sender_id and the tipper has not deleted his acc
-                    * 2) Tip has sender_id and the tipper has deleted his acc
+                    * 2) Tip has sender_id but the tipper has deleted his acc
                     * 3) Tip has a tipper name
                     * 4) Tip has no sender_id and no tipper name (Incognito)
                     *
                     */
 
                     $date = \Carbon\Carbon::parse($biggest_tip->created_at)->isoFormat('MMM Do YYYY');
-                    $registered_tipper = App\User::where('id', $biggest_tip->sender_id)->first();
+                    $regd_tipper = App\User::where('id', $biggest_tip->sender_id)->first();
 
                 @endphp
         
-                @if($biggest_tip->sender_id AND $registered_tipper)
+                @if($biggest_tip->sender_id AND $regd_tipper)
                 
-                    <a href="/{{ $registered_tipper->username }}" style="text-decoration: none!important;">
-                        <b style="text-transform:capitalize;">{{ $registered_tipper->username }}</b>
+                    <a href="/{{ $regd_tipper->username }}" style="text-decoration: none!important;">
+                        <b style="text-transform:capitalize;">{{ $regd_tipper->username }}</b>
                     </a>
 
-                @elseif($biggest_tip->sender_id AND $registered_tipper === null)    
+                @elseif($biggest_tip->sender_id AND $regd_tipper === null)    
 
-                    <b style="color:var(--deep-blue-1);text-transform:capitalize;">{{ $biggest_tip->sent_by }}</b>
+                    <b style="color:var(--deep-blue-1);text-transform:capitalize;" title="this user has deleted his account">{{ $biggest_tip->sent_by }}</b>
 
                 @elseif($biggest_tip->sent_by)
 

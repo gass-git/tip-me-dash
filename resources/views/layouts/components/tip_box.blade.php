@@ -20,19 +20,19 @@
                             *
                             */
 
-                            $registered_tipper = App\User::where('id',$tip->sender_id)->first();
+                            $regd_tipper = App\User::where('id',$tip->sender_id)->first();
                         
                         @endphp
 
-                        @if($tip->sender_id AND $registered_tipper)
+                        @if($tip->sender_id AND $regd_tipper)
                     
-                            <a href="/{{ $registered_tipper->username }}" style="text-decoration: none!important;" title="Registered user">
+                            <a href="/{{ $regd_tipper->username }}" style="text-decoration: none!important;" title="Registered user">
                                 <span class="ml-1" style="color:var(--light-deep-blue);text-transform:capitalize;">
-                                    {{ $registered_tipper->username }}
+                                    {{ $regd_tipper->username }}
                                 </span>
                             </a>    
 
-                        @elseif($tip->sender_id AND $registered_tipper === null)
+                        @elseif($tip->sender_id AND $regd_tipper === null)
                         
                                 <span class="ml-1" style="color:var(--deep-blue-1);text-transform:capitalize;" title="this user deleted his account">
                                     {{ $tip->sent_by }}

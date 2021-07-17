@@ -44,7 +44,7 @@ class TipReceived extends Notification
 
         return (new MailMessage)
                     ->greeting('Hello, '.$username)
-                    ->line('You received a brand new tip!')
+                    ->line('You received a brand new donation!')
                     ->action('View Tip', url('/'.$username));
     }
 

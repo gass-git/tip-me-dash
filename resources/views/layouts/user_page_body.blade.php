@@ -72,7 +72,7 @@
                 @include('layouts/components/tip_form')
 
                 <!-- If user has not received tips show this -->
-                @if($page_owner->received === null)
+                @if($page_owner->received < 1)
                     <center style="color:grey; word-spacing:1px;">
                         <b style="text-transform:capitalize;color:var(--light-deep-blue);">{{ $page_owner->username }}</b> 
                         <span style="font-weight:200">has not received any tips yet</span>

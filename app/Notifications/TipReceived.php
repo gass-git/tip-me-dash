@@ -47,7 +47,7 @@ class TipReceived extends Notification
         if($sender_location){
             return (new MailMessage)
                     ->greeting('Hello! '.$recipient_username)
-                    ->line('You received a brand new donation from a user located in '.$sender_location)
+                    ->line('You received a brand new donation from a supporter located in '.$sender_location)
                     ->action('View Tip', url('/'.$recipient_username));
         }else{
             return (new MailMessage)

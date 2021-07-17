@@ -182,7 +182,7 @@ class TipController extends Controller
          * y: points for a regd. tipper if he is supporting a recipient he has supported before.
          * 
          */
-        $amount = $tip->usd_equivalent;
+        $amount = round($tip->usd_equivalent, 2); // Round value with 2 decimals
         
         switch ($amount){
             case ($amount < 0.05): $x = 0;

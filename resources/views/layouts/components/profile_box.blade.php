@@ -2,7 +2,7 @@
 
     <div class="avatar" style="background-image:url({{ $page_owner->avatar_url }})"></div>
 
-    <!-- Tips sent --> @{{-- Show if the user has tipped 5 different people or more --}}
+    <!-- Tips sent --> {{-- Show if the user has tipped 5 different people or more --}}
     @if($people_tipped >= 5)
         <div class="d-flex flex-row-reverse pr-2" style="height:40px;">
             

@@ -70,6 +70,8 @@ class RegisterController extends Controller
             'username' => $data['username'],
             'email' => $data['email'],
             'points' => 10,
+            'sent' => 0,
+            'received' => 0,
             'password' => Hash::make($data['password']),
             'username_color' => 'rgb(255,255,255)'
         ]);

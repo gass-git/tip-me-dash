@@ -269,25 +269,28 @@ class TipController extends Controller
 
         /** @abstract
          * 
-         * IMPORTANT!
-         * Disable notifications when testing on localhost, if not, the controller
+         * IMPORTANT: Disable notifications when testing on localhost, if not, the controller
          * will crash.
-         * 
-         * If the tipper is registered and has a location send a notification
+         *
+         * - If the recipient changed email and it has not verified it, then skip this step.
+         * - If the tipper is registered and has a location send a notification
          * with this data.
          * 
          */
-        if($regd_tipper){
-            if($regd_tipper->location){
-                $tipper_location = $regd_tipper->location;
+        if($recipient->email_verified_at){
+            
+            if($regd_tipper){
+                if($regd_tipper->location){
+                    $tipper_location = $regd_tipper->location;
+                }else{
+                    $tipper_location = null; // If the registered tipper has no location
+                }
             }else{
-                $tipper_location = null; // If the registered tipper has no location
+                $tipper_location = null;  // If the tipper is not logged in
             }
-        }else{
-            $tipper_location = null;  // If the tipper is not logged in
-        }
 
-        Notification::route('mail',$recipient->email)->notify(new TipReceived($recipient, $tipper_location));
+            Notification::route('mail',$recipient->email)->notify(new TipReceived($recipient, $tipper_location));
+        }
 
         toast("Tip confirmed!",'success');
     }

@@ -150,12 +150,7 @@ class TipController extends Controller
         ]);
         /* ------------------------------------------ */
 
-        /** @abstract
-         * 
-         * - Create a log of the confirmed tip.
-         * - Send email notification.
-         *
-         */
+        /* --- Create a log of the confirmed tip --- */
         if($tip->sender_id){
             $data['from_id'] = $tip->sender_id;
         }elseif($tip->sent_by){
@@ -172,7 +167,7 @@ class TipController extends Controller
         $data['created_at'] = Carbon::now();
         $data['updated_at'] = Carbon::now();
         DB::table('logs')->insert($data);
-
+        /* ------------------------------------------ */
 
         /** @abstract
          * 
@@ -182,29 +177,32 @@ class TipController extends Controller
          * y: points for a regd. tipper if he is supporting a recipient he has supported before.
          * 
          */
-        $amount = round($tip->usd_equivalent, 2); // Round value with 2 decimals
-        
+        $amount = round($tip->usd_equivalent, 1); // Round value with 1 decimals
+        $EP = round( $amount / 10 );              // Extra points
+
         switch ($amount){
-            case ($amount < 0.05): $x = 0;
+            case ($amount < 0.1): $x = 0;
             break;
-            case ($amount >= 0.05 and $amount < 0.50): $x = 1;
+            case ($amount >= 0.1 and $amount < 0.5): $x = 1;
             break;
-            case ($amount >= 0.50 and $amount < 1): $x = 6;
+            case ($amount >= 0.5 and $amount < 1): $x = 7;
             break;
-            case ($amount >= 1 and $amount < 4): $x = 14;
+            case ($amount >= 1 and $amount < 4): $x = 17;
             break;
-            case($amount >= 4): $x = 60;
+            case($amount >= 4): $x = 72 + $EP;
             break;
         }
    
         switch ($amount){
             case ($amount < 1): $y = 0;
             break;
-            case ($amount >= 1 and $amount < 4): $y = 7;
+            case ($amount >= 1 and $amount < 4): $y = 1;
             break;
-            case ($amount >= 4 and $amount < 10): $y = 37;
+            case ($amount >= 4 and $amount < 8): $y = 4;
             break;
-            case($amount >= 10): $y = 60;
+            case ($amount >= 8 and $amount < 10): $y = 11;
+            break;
+            case($amount >= 10): $y = 25 + $EP;
             break;
         }
 
@@ -212,11 +210,11 @@ class TipController extends Controller
          * 
          * If the tipper with this IP has not tipped the page owner before then add points to: 
          * - The tipper if he is registered (+x)
-         * - The recipient of the tip (+15)
+         * - The recipient of the tip (+20)
          * 
          * ELSE:
          * - The tipper if he is registered (+y)
-         * - The recipient of the tip (+5)
+         * - The recipient of the tip (+9)
          * 
          */
 
@@ -242,7 +240,7 @@ class TipController extends Controller
                 $regd_tipper->points += $x;
                 $regd_tipper->save();
             } 
-            $recipient->points += 15;  
+            $recipient->points += 20;  
             $recipient->save();
         }else{
 
@@ -250,7 +248,7 @@ class TipController extends Controller
                 $regd_tipper->points += $y; 
                 $regd_tipper->save();
             }
-            $recipient->points += 5;    
+            $recipient->points += 9;    
             $recipient->save();
         }
 

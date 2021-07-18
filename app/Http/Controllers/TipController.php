@@ -220,12 +220,29 @@ class TipController extends Controller
 
         $regd_tipper = User::where('id',$tip->sender_id)->first();     
 
-        /* ---- Check the number of tips by IP only if the tipper is not logged in ---- */
+        // If the tipper is logged in check number of tips by id and ip
         if($regd_tipper){
+            
             $number_of_tips = Tip::where('sender_id',$tip->sender_id)
-                    ->where('status','confirmed')
-                    ->where('recipient_id', $tip->recipient_id)
-                    ->count();
+                                ->where('status','confirmed')
+                                ->where('recipient_id', $tip->recipient_id)
+                                ->count();
+
+            // Second check by ip        
+            if($number_of_tips == 1){
+                
+                $number_of_tips_ip = Tip::where('sender_ip',$tip->sender_ip)
+                                    ->where('status','confirmed')
+                                    ->where('recipient_id', $tip->recipient_id)
+                                    ->count();
+                
+                if($number_of_tips < $number_of_tips_ip){
+                    
+                    $number_of_tips = $number_of_tips_ip;
+
+                }
+            }        
+
         }else{
             $number_of_tips = Tip::where('sender_ip',$tip->sender_ip)
                     ->where('status','confirmed')

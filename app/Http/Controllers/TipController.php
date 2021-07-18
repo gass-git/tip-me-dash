@@ -30,11 +30,14 @@ class TipController extends Controller
         /** @abstract
          * 
          * EXTRA VALIDATIONS
-         *  - It's not allowed to push the tip button more than 5 times per day - spam protection by IP.
-         *  - It's not allowed to make more than two tips a day to the same user, 
-         *    this is validated by ID if the user is registered and by IP if it's a guest.
-         *  - The user needs to enter a wallet address to receive tips.
-         *  - The page owner cannot tip himself
+         *  1) It's not allowed to push the tip button more than 5 times per day - spam protection by IP.
+         *  2) It's not allowed to make more than two tips a day to the same user, 
+         *    this is validated by ID & IP if the user is logged in and by IP if it's a guest.   
+         * 
+         *  3) The user needs to enter a wallet address to receive tips.
+         *  4) The page owner cannot tip himself.
+         * 
+         * Note: Validation 2 is to protect a user for been spammed.
          * 
          */
         $btn_clicks_24h = Tip::where('sender_ip', $IP)
@@ -52,8 +55,20 @@ class TipController extends Controller
                                 ->where('status','confirmed')
                                 ->whereDate('created_at', Carbon::today())
                                 ->count();   
-                                
-            if($tips_to_user_24h_ID >= 2){
+                          
+            $tips_to_user_24h = $tips_to_user_24h_ID;
+
+            $tips_to_user_24h_IP = Tip::where('sender_ip', $IP)
+                                ->where('recipient_id', $page_owner->id)
+                                ->where('status','confirmed')
+                                ->whereDate('created_at', Carbon::today())
+                                ->count();                    
+
+            if($tips_to_user_24h_ID <  $tips_to_user_24h_IP){
+                $tips_to_user_24h = $tips_to_user_24h_IP;
+            }
+
+            if($tips_to_user_24h >= 2){
                 toast("It's not allowed to make more than two tips a day to the same user.",'info');
                 return back();
             }
@@ -171,104 +186,55 @@ class TipController extends Controller
 
         /** @abstract
          * 
-         * Point rewards for registered tippers
+         * Point rewards based on links between registered users.
          * 
-         * x: points for a regd. tipper if he is supporting a recipient for the first time.
-         * y: points for a regd. tipper if he is supporting a recipient he has supported before.
+         * A user is rewarded when:
+         * - Receives a tip from a new supporter (+10)
+         * - Tips a recipient he has never tipped before (+$P)
          * 
-         */
-        $amount = round($tip->usd_equivalent, 1); // Round value with 1 decimals
-        $EP = round( $amount / 10 );              // Extra points
-
-        switch ($amount){
-            case ($amount < 0.1): $x = 0;
-            break;
-            case ($amount >= 0.1 and $amount < 0.5): $x = 1;
-            break;
-            case ($amount >= 0.5 and $amount < 1): $x = 7;
-            break;
-            case ($amount >= 1 and $amount < 4): $x = 17;
-            break;
-            case($amount >= 4): $x = 72 + $EP;
-            break;
-        }
-   
-        switch ($amount){
-            case ($amount < 1): $y = 0;
-            break;
-            case ($amount >= 1 and $amount < 4): $y = 1;
-            break;
-            case ($amount >= 4 and $amount < 8): $y = 4;
-            break;
-            case ($amount >= 8 and $amount < 10): $y = 11;
-            break;
-            case($amount >= 10): $y = 25 + $EP;
-            break;
-        }
-
-        /** @abstract
-         * 
-         * If the tipper with this IP has not tipped the page owner before then add points to: 
-         * - The tipper if he is registered (+x)
-         * - The recipient of the tip (+20)
-         * 
-         * ELSE:
-         * - The tipper if he is registered (+y)
-         * - The recipient of the tip (+9)
+         * Note: $P is a dinamic variable to avoid users tip low amounts just to get points. It's a way
+         * of preventing a bad incentive.
          * 
          */
+        $amount = round($tip->usd_equivalent,1);
+        
+        switch ($amount){
+            case ($amount < 0.5): $p = 1; 
+            break;
+            case (1 > $amount and $amount >= 0.5): $p = 4; 
+            break;
+            case (3 > $amount and $amount >= 1): $p = 15; 
+            break;
+            case (5 > $amount and $amount >= 3): $p = 25; 
+            break;
+            case ($amount >= 5): $p = 30; 
+            break;
+        }
 
         $regd_tipper = User::where('id',$tip->sender_id)->first();     
 
-        // If the tipper is logged in check number of tips by id and ip
         if($regd_tipper){
             
             $number_of_tips = Tip::where('sender_id',$tip->sender_id)
                                 ->where('status','confirmed')
                                 ->where('recipient_id', $tip->recipient_id)
-                                ->count();
+                                ->count();   
 
-            // Second check by ip        
             if($number_of_tips == 1){
-                
-                $number_of_tips_ip = Tip::where('sender_ip',$tip->sender_ip)
-                                    ->where('status','confirmed')
-                                    ->where('recipient_id', $tip->recipient_id)
-                                    ->count();
-                
-                if($number_of_tips < $number_of_tips_ip){
+
+                if($regd_tipper){  
                     
-                    $number_of_tips = $number_of_tips_ip;
+                    $regd_tipper->points += $p;
+                    $regd_tipper->save();
 
-                }
+                    $recipient->points += 10;
+                    $recipient->save();
+
+                } 
             }        
-
-        }else{
-            $number_of_tips = Tip::where('sender_ip',$tip->sender_ip)
-                    ->where('status','confirmed')
-                    ->where('recipient_id', $tip->recipient_id)
-                    ->count();
         }
-        /* ----------------------------------------------------------------------------- */
+
         
-        if($number_of_tips == 1){
-            
-            if($regd_tipper){  
-                $regd_tipper->points += $x;
-                $regd_tipper->save();
-            } 
-            $recipient->points += 20;  
-            $recipient->save();
-        }else{
-
-            if($regd_tipper){  
-                $regd_tipper->points += $y; 
-                $regd_tipper->save();
-            }
-            $recipient->points += 9;    
-            $recipient->save();
-        }
-
         /** @abstract
          * 
          * - Add one sent to the tipper if he is registered.
@@ -279,9 +245,11 @@ class TipController extends Controller
             $regd_tipper->sent += 1;
             $regd_tipper->save();
         }
+
         $recipient->received += 1;
         $recipient->save();
 
+        
         /** @abstract
          * 
          * IMPORTANT: Disable notifications when testing on localhost, if not, the controller
@@ -304,7 +272,7 @@ class TipController extends Controller
                 $tipper_location = null;  // If the tipper is not logged in
             }
 
-            Notification::route('mail',$recipient->email)->notify(new TipReceived($recipient, $tipper_location));
+          //  Notification::route('mail',$recipient->email)->notify(new TipReceived($recipient, $tipper_location));
         }
 
         toast("Tip confirmed!",'success');

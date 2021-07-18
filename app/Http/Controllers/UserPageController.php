@@ -60,19 +60,7 @@ class UserPageController extends Controller
          * 
          */
         if($tip->praise AND $user){
-
-            switch ($tip->praise) {
-                case "like":
-                    $user->points -= 1;
-                    break;
-                case "cheers":
-                    $user->points -= 2;
-                    break;
-                case "love":
-                case "brilliant":
-                    $user->points -= 3;
-                    break;
-            }
+            $user->points -= 1;
         }
 
         /**@abstract
@@ -101,18 +89,7 @@ class UserPageController extends Controller
         else{   // ---- Scenario 2 and 3 ------
 
             if($user){
-                switch ($tip->praise) {
-                    case "like":
-                        $user->points += 1;
-                        break;
-                    case "cheers":
-                        $user->points += 2;
-                        break;
-                    case "love":
-                    case "brilliant":
-                        $user->points += 3;
-                        break;
-                }
+                $user->points += 1;
             }
 
             $tip->update(['praise' => $req->praise]);

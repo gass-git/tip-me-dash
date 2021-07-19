@@ -191,8 +191,8 @@ class TipController extends Controller
          * Note one: $P is a dynamic variable to avoid users tip low amounts just to get points. It's a way
          * of preventing a bad incentive.
          * 
-         * Note two: it's more common for people to wait for support rather than 
-         * tip. Taking this into consideration, incentivizing to support more than to receive tips
+         * Note two: it's more common for people to wait for support than to give.
+         * Taking this into consideration, incentivizing to support more than to receive support
          * makes sense.
          * 
          */

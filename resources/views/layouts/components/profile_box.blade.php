@@ -58,13 +58,13 @@
         </div> 
 
         
-        <div class="score-pill ml-1 pt-1 pr-2 pb-1 pl-2" title="people tipped">
+        <div class="score-pill ml-1 pt-1 pr-2 pb-1 pl-2">
             
             <div class="d-flex">
                 <div class="m-0 pl-1" style="width:30%;">
                     ⁂
                 </div>
-                <div class="m-0 pl-2" style="width:70%;text-align:center;" title="points">
+                <div class="m-0 pl-2" style="width:70%;text-align:center;" title="mesh points">
                     {{ $page_owner->points }}
                 </div>
             </div>

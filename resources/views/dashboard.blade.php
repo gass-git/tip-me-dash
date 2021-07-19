@@ -120,19 +120,9 @@
 
         <!-- Tips stats -->
         <div class="row p-3" id="tips-stats">
-            
-            @php 
-                use Carbon\Carbon;
-
-                $confirmed_tip = App\Tip::where('recipient_id',Auth::user()->id)->where('status','confirmed');
-                $dash_30_days = $confirmed_tip->whereDate('created_at', '>', Carbon::now()->subDays(30))->sum('dash_amount');
-                $usd_30_days = $confirmed_tip->whereDate('created_at', '>', Carbon::now()->subDays(30))->sum('usd_equivalent');
-                $dash_all_time = $confirmed_tip->sum('dash_amount');
-                $usd_all_time = $confirmed_tip->sum('usd_equivalent');
-            @endphp
 
             <div class="col-sm-4">
-                <div class="pt-4" id="style-one">{{ Auth::user()->received }}</div>
+                <div class="pt-4" id="style-one">{{ $confirmed_tips->count() }}</div>
                 <div class="pt-2" id="style-two">Tips Received</div>
             </div>
 
@@ -208,6 +198,9 @@
 
         <div class="title-1 mt-4" style="font-size:17px;"><i class="fas fa-broadcast-tower mr-2"></i>RECENT ACTIVITY</div>
 
+        @php
+            use Carbon\Carbon;  // This is needed for event date  
+        @endphp
 
         <!-- Recent activity section -->
         <div class="row mt-3">
@@ -275,8 +268,12 @@
 
                                 @endif
 
+                                @php
+                                    $created_at = Carbon::parse($event->created_at)->isoFormat('MMM Do YYYY');
+                                @endphp
+
                                 <span id="date-span">
-                                    {{ Carbon::parse($event->created_at)->isoFormat('MMM Do YYYY')}}
+                                    {{ $created_at }}
                                 </span>
                         
                             </li>

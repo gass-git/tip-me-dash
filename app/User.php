@@ -5,7 +5,6 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\socialProfile;
 
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -20,8 +19,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $fillable = [
         'username', 'email', 'password', 'wallet_address', 'about', 'google_id', 'avatar_url',
         'avatar_name', 'website', 'location', 'page_views','passionate_about', 'twitter', 
-        'github', 'youtube','header_img_url','header_img_name','points','username_color',
-        'sent','received'
+        'github', 'youtube','header_img_url','header_img_name','points','username_color'
     ];
 
     /**

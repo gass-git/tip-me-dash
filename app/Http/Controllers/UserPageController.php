@@ -98,22 +98,18 @@ class UserPageController extends Controller
 
             if($praise == "like"){
                 $p2p_detail = "liked your tip";
-                $g_detail = "liked";
             }
 
             if($praise == "love"){
                 $p2p_detail = "loved your tip";
-                $g_detail = "loved";
             }
 
             if($praise == "brilliant"){
                 $p2p_detail ="thinks it's brilliant";
-                $g_detail = "brilliant";
             }
 
             if($praise == "cheers"){
                 $p2p_detail = "toasted";
-                $g_detail = "toasted";
             }
 
             // If event already exists update it, if not, create one.
@@ -127,7 +123,6 @@ class UserPageController extends Controller
                 $data['to_id'] = $tip->sender_id;
                 $data['type'] = 'praise';
                 $data['p2p_event'] = $p2p_detail;
-                $data['global_event'] = $g_detail;
                 $data['created_at'] = Carbon::now();
                 DB::table('logs')->insert($data);
             }

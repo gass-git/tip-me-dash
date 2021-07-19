@@ -19,7 +19,7 @@ class TipController extends Controller
         
         $req->validate([
             'msg' => ['nullable','max:300'],
-            'name' => ['nullable','max:25'],
+            'name' => ['nullable','max:20'],
         ]);
 
         /* ---- Global variables ----------------------------------------- */
@@ -31,13 +31,10 @@ class TipController extends Controller
          * 
          * EXTRA VALIDATIONS
          *  1) It's not allowed to push the tip button more than 5 times per day - spam protection by IP.
-         *  2) It's not allowed to make more than two tips a day to the same user, 
-         *    this is validated by ID & IP if the user is logged in and by IP if it's a guest.   
-         * 
+         *  2) It's not allowed to make more than two tips a day to the same user, this is validated 
+         *     by ID & IP if the user is logged in and by IP if it's a guest (protect the user from been spammed).   
          *  3) The user needs to enter a wallet address to receive tips.
          *  4) The page owner cannot tip himself.
-         * 
-         * Note: Validation 2 is to protect a user for been spammed.
          * 
          */
         $btn_clicks_24h = Tip::where('sender_ip', $IP)
@@ -50,22 +47,22 @@ class TipController extends Controller
         }            
 
         if(Auth::user()){       
-            $tips_to_user_24h_ID = Tip::where('sender_id', auth::user()->id)
-                                ->where('recipient_id', $page_owner->id)
-                                ->where('status','confirmed')
-                                ->whereDate('created_at', Carbon::today())
-                                ->count();   
+            $by_ID = Tip::where('sender_id', auth::user()->id)
+                        ->where('recipient_id', $page_owner->id)
+                        ->where('status','confirmed')
+                        ->whereDate('created_at', Carbon::today())
+                        ->count();   
                           
-            $tips_to_user_24h = $tips_to_user_24h_ID;
+            $tips_to_user_24h = $by_ID;
 
-            $tips_to_user_24h_IP = Tip::where('sender_ip', $IP)
-                                ->where('recipient_id', $page_owner->id)
-                                ->where('status','confirmed')
-                                ->whereDate('created_at', Carbon::today())
-                                ->count();                    
+            $by_IP = Tip::where('sender_ip', $IP)
+                        ->where('recipient_id', $page_owner->id)
+                        ->where('status','confirmed')
+                        ->whereDate('created_at', Carbon::today())
+                        ->count();                    
 
-            if($tips_to_user_24h_ID <  $tips_to_user_24h_IP){
-                $tips_to_user_24h = $tips_to_user_24h_IP;
+            if($by_ID < $by_IP){
+                $tips_to_user_24h = $by_IP;
             }
 
             if($tips_to_user_24h >= 2){
@@ -114,7 +111,7 @@ class TipController extends Controller
          * 
          * Note: save sent_by name for registered tippers in case
          * in the future they delete their acc and the tip needs this name
-         * to fill up the sender info.
+         * to fill up the sender info on the tip boxes.
          * 
          */
         $data = array();
@@ -178,7 +175,6 @@ class TipController extends Controller
         $data['to_id'] = $tip->recipient_id;
         $data['type'] = 'tip';
         $data['p2p_event'] = 'sent you a tip';
-        $data['global_event'] = 'sent a tip';
         $data['created_at'] = Carbon::now();
         $data['updated_at'] = Carbon::now();
         DB::table('logs')->insert($data);
@@ -192,22 +188,26 @@ class TipController extends Controller
          * - Receives a tip from a new supporter (+10)
          * - Tips a recipient he has never tipped before (+$P)
          * 
-         * Note: $P is a dinamic variable to avoid users tip low amounts just to get points. It's a way
+         * Note one: $P is a dynamic variable to avoid users tip low amounts just to get points. It's a way
          * of preventing a bad incentive.
          * 
+         * Note two: it's more common for people to wait for support rather than 
+         * tip. Taking this into consideration, incentivizing to support more than to receive tips
+         * makes sense.
+         * 
          */
-        $amount = round($tip->usd_equivalent,1);
+        $amount = round($tip->usd_equivalent, 2);
         
         switch ($amount){
-            case ($amount < 0.5): $p = 1; 
+            case ($amount < 0.5): $p = 0; 
             break;
-            case (1 > $amount and $amount >= 0.5): $p = 4; 
+            case (1 > $amount and $amount >= 0.5): $p = rand(1, 2); 
             break;
-            case (3 > $amount and $amount >= 1): $p = 15; 
+            case (3 > $amount and $amount >= 1): $p = rand(4, 6); 
             break;
-            case (5 > $amount and $amount >= 3): $p = 25; 
+            case (6 > $amount and $amount >= 3): $p = rand(18, 25); 
             break;
-            case ($amount >= 5): $p = 30; 
+            case ($amount >= 6): $p = rand(50, 60); 
             break;
         }
 
@@ -223,33 +223,16 @@ class TipController extends Controller
             if($number_of_tips == 1){
 
                 if($regd_tipper){  
-                    
                     $regd_tipper->points += $p;
                     $regd_tipper->save();
 
                     $recipient->points += 10;
                     $recipient->save();
-
                 } 
             }        
         }
 
-        
-        /** @abstract
-         * 
-         * - Add one sent to the tipper if he is registered.
-         * - Add one received to the recipient.
-         * 
-         */
-        if($regd_tipper){ 
-            $regd_tipper->sent += 1;
-            $regd_tipper->save();
-        }
 
-        $recipient->received += 1;
-        $recipient->save();
-
-        
         /** @abstract
          * 
          * IMPORTANT: Disable notifications when testing on localhost, if not, the controller
@@ -272,7 +255,7 @@ class TipController extends Controller
                 $tipper_location = null;  // If the tipper is not logged in
             }
 
-          //  Notification::route('mail',$recipient->email)->notify(new TipReceived($recipient, $tipper_location));
+            Notification::route('mail',$recipient->email)->notify(new TipReceived($recipient, $tipper_location));
         }
 
         toast("Tip confirmed!",'success');

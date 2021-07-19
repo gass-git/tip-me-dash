@@ -21,11 +21,16 @@ class Controller extends BaseController
     }
 
     public function show_recent(){
+        
+        $tips_30_days = Tip::where('status','confirmed')
+                        ->whereDate('created_at', '>', Carbon::now()->subDays(30))
+                        ->count();
+
         $recent_tips = Tip::where('status','confirmed')
                     ->whereDate('created_at', '>', Carbon::now()->subDays(30))
                     ->orderBy('id','DESC')
                     ->paginate(10);
 
-        return view('recent',compact('recent_tips'));
+        return view('recent',compact('recent_tips','tips_30_days'));
     }
 }

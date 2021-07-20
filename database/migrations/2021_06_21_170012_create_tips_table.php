@@ -27,7 +27,7 @@ class CreateTipsTable extends Migration
             $table->unsignedBigInteger('recipient_id');
             $table->integer('sender_id')->nullable();
             $table->string('sender_ip');
-            $table->string('sender_email');
+            $table->string('sender_email')->nullable();
             $table->foreign('recipient_id')->references('id')->on('users')->onDelete('cascade');  
             $table->string('recipient_email');
             $table->float('usd_equivalent',10,8)->nullable();

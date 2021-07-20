@@ -122,12 +122,14 @@ class TipController extends Controller
 
         if(Auth::user()){
             $data['sender_id'] = Auth::user()->id;
+            $data['sender_email'] = Auth::user()->email;
         }
 
         $data['sent_by'] = $req->name;
         $data['message'] = $req->msg;
         $data['sender_ip'] = $IP;
         $data['recipient_id'] = $page_owner->id;
+        $data['recipient_email'] = $page_owner->email;
         $data['usd_equivalent'] = $usd_amount;
         $data['dash_amount'] = $dash_toSend;
         $data['dash_usd'] = $dash_usd;
@@ -184,14 +186,22 @@ class TipController extends Controller
          * 
          * Point rewards based on links between registered users.
          * 
-         * A user is rewarded when:
+         * A USER IS REWARDED WHEN:
          * - Receives a tip from a new supporter (+10)
          * - Tips a recipient he has never tipped before (+$P)
          * 
-         * Note one: $P is a dynamic variable to avoid users tip low amounts just to get points. It's a way
+         * POINT REWARDS VALIDATION MECHANICS:
+         * The amount of tips from the sender ID to the recipient ID has to be one. There is a case where
+         * a user deletes and creates an account multiple times with different ID's. It could be the 
+         * tipper or the recipient. Both can have an incentive to cheat and make points by sending and 
+         * receiving the same amount of Dash multiple times. To prevent this from happening if the count 
+         * of tips sent using the sender and recipient ID is smaller than the count by sender and recipient
+         * email then the number of tips to use for validation will be done with the email field.
+         * 
+         * NOTE ONE: $P is a dynamic variable to avoid users tip low amounts just to get points. It's a way
          * of preventing a bad incentive.
          * 
-         * Note two: it's more common for people to wait for support than to give.
+         * NOTE TWO: it's more common for people to wait for support than to give.
          * Taking this into consideration, incentivizing to support more than to receive support
          * makes sense.
          * 
@@ -215,10 +225,21 @@ class TipController extends Controller
 
         if($regd_tipper){
             
-            $number_of_tips = Tip::where('sender_id',$tip->sender_id)
+            $tips_by_ID = Tip::where('sender_id',$tip->sender_id)
                                 ->where('status','confirmed')
                                 ->where('recipient_id', $tip->recipient_id)
                                 ->count();   
+
+            $number_of_tips = $tips_by_ID;
+
+            $tips_by_email = Tip::where('sender_email',$tip->sender_email)
+                                ->where('status','confirmed')
+                                ->where('recipient_email', $tip->recipient_email)
+                                ->count();
+
+            if($tips_by_ID < $tips_by_email){
+                $number_of_tips = $tips_by_email;
+            }
 
             if($number_of_tips == 1){
 
@@ -255,7 +276,7 @@ class TipController extends Controller
                 $tipper_location = null;  // If the tipper is not logged in
             }
 
-            Notification::route('mail',$recipient->email)->notify(new TipReceived($recipient, $tipper_location));
+            // Notification::route('mail',$recipient->email)->notify(new TipReceived($recipient, $tipper_location));
         }
 
         toast("Tip confirmed!",'success');

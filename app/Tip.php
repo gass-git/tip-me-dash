@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Tip extends Model
 {
     protected $fillable = [
-        'recipient_id', 'sender_id', 'sender_ip', 'usd_equivalent', 'dash_amount', 
+        'recipient_id', 'recipient_email', 'sender_id', 'sender_ip', 'sender_email', 'usd_equivalent', 'dash_amount', 
         'sent_by', 'message', 'status', 'praise', 'stamp','dash_usd','private_msg'
     ];
 

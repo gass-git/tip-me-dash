@@ -94,6 +94,7 @@ class LoginController extends Controller
         if(!$registered_user){    
 
             User::create([ 
+                'ip' => request()->ip(),
                 'google_id' => $google_data->getId(),
                 'email' => $google_data->getEmail(),
                 'avatar_url' => "https://tipmedash.com/images/avatar-default-1.jpg",

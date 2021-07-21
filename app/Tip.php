@@ -8,7 +8,7 @@ class Tip extends Model
 {
     protected $fillable = [
         'recipient_id', 'recipient_email', 'sender_id', 'sender_ip', 'sender_email', 'usd_equivalent', 'dash_amount', 
-        'sent_by', 'message', 'status', 'praise', 'stamp','dash_usd','private_msg'
+        'sent_by', 'message', 'status', 'praise', 'stamp','dash_usd','private_msg','recipient_ip'
     ];
 
 

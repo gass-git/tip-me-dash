@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -66,6 +67,7 @@ class RegisterController extends Controller
     {
         // register directly on the website (without using google)
         return User::create([
+            'ip' =>  request()->ip(),
             'avatar_url' =>  'http://tipmedash.com/images/avatar-default-1.jpg',
             'username' => $data['username'],
             'email' => $data['email'],

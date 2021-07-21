@@ -126,10 +126,11 @@ class TipController extends Controller
         }
 
         $data['sent_by'] = $req->name;
-        $data['message'] = $req->msg;
         $data['sender_ip'] = $IP;
+        $data['message'] = $req->msg;
         $data['recipient_id'] = $page_owner->id;
         $data['recipient_email'] = $page_owner->email;
+        $data['recipient_ip'] = $page_owner->ip;
         $data['usd_equivalent'] = $usd_amount;
         $data['dash_amount'] = $dash_toSend;
         $data['dash_usd'] = $dash_usd;
@@ -241,6 +242,15 @@ class TipController extends Controller
                 $number_of_tips = $tips_by_email;
             }
 
+            $tips_by_ip = Tip::where('sender_ip',$tip->sender_ip)
+                                ->where('status','confirmed')
+                                ->where('recipient_ip', $tip->recipient_ip)
+                                ->count();
+
+            if($number_of_tips < $tips_by_ip){
+                $number_of_tips = $tips_by_ip;
+            }
+
             if($number_of_tips == 1){
 
                 if($regd_tipper){  
@@ -276,7 +286,7 @@ class TipController extends Controller
                 $tipper_location = null;  // If the tipper is not logged in
             }
 
-            Notification::route('mail',$recipient->email)->notify(new TipReceived($recipient, $tipper_location));
+           // Notification::route('mail',$recipient->email)->notify(new TipReceived($recipient, $tipper_location));
         }
 
         toast("Tip confirmed!",'success');

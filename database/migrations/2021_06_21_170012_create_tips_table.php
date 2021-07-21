@@ -29,6 +29,7 @@ class CreateTipsTable extends Migration
             $table->string('sender_ip');
             $table->string('sender_email')->nullable();
             $table->foreign('recipient_id')->references('id')->on('users')->onDelete('cascade');  
+            $table->string('recipient_ip');
             $table->string('recipient_email');
             $table->float('usd_equivalent',10,8)->nullable();
             $table->float('dash_amount',10,8)->nullable();

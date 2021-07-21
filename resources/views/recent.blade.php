@@ -4,7 +4,7 @@
             @include('layouts/components/navbar_one')
         </div>
 
-        <div class="container mx-auto mt-5" id="recent" style="max-width:600px;min-width:440px;">
+        <div class="container mx-auto mt-5" id="recent" style="max-width:650px;min-width:440px;">
 
             @if($tips_30_days < 1)
             <center style="color:grey; word-spacing:1px;">

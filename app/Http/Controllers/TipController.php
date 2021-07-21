@@ -28,22 +28,18 @@ class TipController extends Controller
         $UNR_IP = 'UNR: '.$IP; // UNR: user not registered 
         /* ---------------------------------------------------------------- */
 
+
         /** @abstract
          * 
-         * EXTRA VALIDATIONS
-         *  1) It's not allowed to push the tip button more than 5 times per day - spam protection by IP.
-         *  2) It's not allowed to make more than one tip a day to the same user, this is validated 
-         *     by ID & IP if the user is logged in and by $UNR_IP if it's a guest (protect the user from been spammed).   
-         *  3) The user needs to enter a wallet address to receive tips.
-         *  4) The page owner cannot tip himself.
+         * It's not allowed to push the tip button more than 5 times per day, mainly
+         * because API requests are limited.
          * 
-         *  NOTE: $IP and $UNR_IP have a different format, this means that a user could push the
-         *  tip button double the limit by combining the max amount allowed logged in and logged out. 
-         *  This case is rare and the user does not have incentives to do so. Also, there
-         *  are no downfalls related to this scenario.
+         * NOTE: $IP and $UNR_IP have a different format, this means that a visitor could push the
+         * tip button double the limit allowed by loggin in and loggin out.
+         * This case is rare and the user does not have incentives to do so. There
+         * are no downfalls related to this scenario.
          * 
          */
-
         if(Auth::user()){ 
         $btn_clicks_24h = Tip::where('sender_ip', $IP)
                             ->whereDate('created_at', Carbon::today())
@@ -59,8 +55,15 @@ class TipController extends Controller
             return back();
         }            
 
+        /** @abstract
+         * 
+         * SPAM PROTECTION
+         * It's not allowed to make more than one tip a day to the same user, this is validated 
+         * by ID & IP if the user is logged in, and by $UNR_IP if the tipper is a guest. 
+         * 
+         */
         if(Auth::user()){       
-            $by_ID = Tip::where('sender_id', auth::user()->id)
+            $by_ID = Tip::where('sender_id', Auth::user()->id)
                         ->where('recipient_id', $page_owner->id)
                         ->where('status','confirmed')
                         ->whereDate('created_at', Carbon::today())
@@ -97,6 +100,13 @@ class TipController extends Controller
             }
         }
        
+        /** @abstract
+         * 
+         * THE REGISTERED USER:
+         * 1) Needs to enter a wallet address to receive tips.
+         * 2) Cannot tip himself while he is logged in.
+         * 
+         */
         if(Auth::user() == $page_owner){
             toast('Why would you tip yourself?','info');
             return back();
@@ -126,10 +136,10 @@ class TipController extends Controller
          * in the future they delete their acc and the tip needs this name
          * to fill up the sender info on the tip boxes.
          * 
-         * NOTE TWO: if the tipper is not registered save the ip as "NR: IP" e.g NR: 127.0.0.1 and if
-         * the tipper is registered save it without the NR. Doing so, 
-         * will enable a registered user to make mesh points when he tips someone for the first
-         * time registered when he already did unregistered.
+         * NOTE TWO: if the tipper is not registered save the ip as "NR: IP" 
+         * e.g "NR: 127.0.0.1" and if the tipper is registered save it without the NR. 
+         * Doing so, will enable a registered user to make and give mesh points when 
+         * he tips someone for the first time registered, when he already did unregistered.
          * 
          */
         $data = array();
@@ -171,21 +181,21 @@ class TipController extends Controller
 
     function confirm_tip(Request $req){
         
-        /* ---- Global variables ----- */
+        /* --------- Global variables --------------------------------- */
         $tip = Tip::where('id',$req->tip_id)->first();
         $recipient = User::where('id',$tip->recipient_id)->first();
         $data = array();
-        /* --------------------------- */
+        /* ------------------------------------------------------------ */
 
-        /* ----- Update tip ------------------------- */
+        /* --------- Update tip --------------------------------------- */
         $tip->update([
             'status' => 'confirmed',
             'stamp' => $req->transaction_id,
             'updated_at' => Carbon::now()
         ]);
-        /* ------------------------------------------ */
+        /* ------------------------------------------------------------ */
 
-        /* --- Create a log of the confirmed tip --- */
+        /* --------- Create a log of the confirmed tip ---------------- */
         if($tip->sender_id){
             $data['from_id'] = $tip->sender_id;
         }elseif($tip->sent_by){
@@ -201,24 +211,28 @@ class TipController extends Controller
         $data['created_at'] = Carbon::now();
         $data['updated_at'] = Carbon::now();
         DB::table('logs')->insert($data);
-        /* ------------------------------------------ */
+        /* ----------------------------------------------------------- */
 
         /** @abstract
-         * 
-         * Point rewards based on links between registered users.
+         * -------------------------------------------------------------
+         * MESH POINT rewards based on links between REGISTERED users
+         * -------------------------------------------------------------
          * 
          * A USER IS REWARDED WHEN:
          * - Receives a tip from a new supporter (+10)
          * - Tips a recipient he has never tipped before (+$P)
          * 
          * POINT REWARDS VALIDATION MECHANICS:
-         * The amount of tips from the sender ID to the recipient ID has to be one for the recipient and the tipper to make points.
-         * There is a case where a user deletes and creates an account multiple times with different ID's. It could be the 
-         * tipper or the recipient. Both can have an incentive to cheat and make points by sending and 
-         * receiving the same amount of Dash multiple times. To prevent this from happening if the count 
-         * of tips sent using the sender and recipient ID is smaller than the count by sender and recipient
-         * email then the number of tips to use for validation will be done with the email field. And the third layer for this validation
-         * is by ip using the same logic.
+         * - The count() of tips made from one specific user to another has to be one in order for the tipper and the
+         *   recipient to make points. 
+         * 
+         * - There is a case where a user deletes and creates an account multiple times with different ID's.
+         *   It could be the tipper or the recipient. Both can have an incentive to cheat and make points by sending and 
+         *   receiving the same amount of Dash multiple times. To prevent this from happening, if the count() 
+         *   of tips sent using the id's of the sender and the recipient is smaller than the count() by using the
+         *   emails, then the count() to use for validation will be done with the email field. 
+         *   In case the count() by using emails or id's is smaller than using the ip's, the validation will be done using
+         *   the ip field.
          * 
          * NOTE ONE: $P is a dynamic variable to avoid users tip low amounts just to get points. It's a way
          * of preventing a bad incentive.
@@ -287,7 +301,7 @@ class TipController extends Controller
 
         /** @abstract
          * 
-         * IMPORTANT: Disable notifications when testing on localhost, if not, the controller
+         * IMPORTANT: disable notifications when testing on localhost, if not, the controller
          * will crash.
          *
          * - If the recipient changed email and it has not verified it, then skip this step.

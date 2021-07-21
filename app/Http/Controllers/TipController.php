@@ -25,6 +25,7 @@ class TipController extends Controller
         /* ---- Global variables ----------------------------------------- */
         $page_owner = User::where('username', $req->username)->first();
         $IP = request()->ip();
+        $UNR_IP = 'UNR: '.$IP; // user not registered IP
         /* ---------------------------------------------------------------- */
 
         /** @abstract
@@ -37,9 +38,16 @@ class TipController extends Controller
          *  4) The page owner cannot tip himself.
          * 
          */
+
+        if(Auth::user()){ 
         $btn_clicks_24h = Tip::where('sender_ip', $IP)
                             ->whereDate('created_at', Carbon::today())
                             ->count();
+        }else{
+            $btn_clicks_24h = Tip::where('sender_ip', $UNR_IP)
+                            ->whereDate('created_at', Carbon::today())
+                            ->count();
+        }
 
         if($btn_clicks_24h > 5){
             toast('You cannot send more tips for today','info');
@@ -72,7 +80,7 @@ class TipController extends Controller
 
         }else{
 
-            $tips_to_user_24h_IP = Tip::where('sender_ip', $IP)
+            $tips_to_user_24h_IP = Tip::where('sender_ip', $UNR_IP)
                                 ->where('recipient_id', $page_owner->id)
                                 ->where('status','confirmed')
                                 ->whereDate('created_at', Carbon::today())
@@ -109,9 +117,14 @@ class TipController extends Controller
          * 
          * INSERT DATA ON TIPS TABLE
          * 
-         * Note: save sent_by name for registered tippers in case
+         * NOTE ONE: save sent_by name for registered tippers in case
          * in the future they delete their acc and the tip needs this name
          * to fill up the sender info on the tip boxes.
+         * 
+         * NOTE TWO: if the tipper is not registered save the ip as "NR: IP" e.g NR: 127.0.0.1 and if
+         * the tipper is registered save it without the NR. Doing so, 
+         * will enable a registered user to make mesh points when he tips someone for the first
+         * time registered when he already did unregistered.
          * 
          */
         $data = array();
@@ -124,6 +137,8 @@ class TipController extends Controller
             $data['sender_id'] = Auth::user()->id;
             $data['sender_email'] = Auth::user()->email;
             $data['sender_ip'] = $IP;
+        }else{
+            $data['sender_ip'] = $UNR_IP;
         }
 
         $data['sent_by'] = $req->name;
@@ -286,7 +301,7 @@ class TipController extends Controller
                 $tipper_location = null;  // If the tipper is not logged in
             }
 
-           Notification::route('mail',$recipient->email)->notify(new TipReceived($recipient, $tipper_location));
+            Notification::route('mail',$recipient->email)->notify(new TipReceived($recipient, $tipper_location));
         }
 
         toast("Tip confirmed!",'success');

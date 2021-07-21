@@ -25,17 +25,22 @@ class TipController extends Controller
         /* ---- Global variables ----------------------------------------- */
         $page_owner = User::where('username', $req->username)->first();
         $IP = request()->ip();
-        $UNR_IP = 'UNR: '.$IP; // user not registered IP
+        $UNR_IP = 'UNR: '.$IP; // UNR: user not registered 
         /* ---------------------------------------------------------------- */
 
         /** @abstract
          * 
          * EXTRA VALIDATIONS
          *  1) It's not allowed to push the tip button more than 5 times per day - spam protection by IP.
-         *  2) It's not allowed to make more than two tips a day to the same user, this is validated 
-         *     by ID & IP if the user is logged in and by IP if it's a guest (protect the user from been spammed).   
+         *  2) It's not allowed to make more than one tip a day to the same user, this is validated 
+         *     by ID & IP if the user is logged in and by $UNR_IP if it's a guest (protect the user from been spammed).   
          *  3) The user needs to enter a wallet address to receive tips.
          *  4) The page owner cannot tip himself.
+         * 
+         *  NOTE: $IP and $UNR_IP have a different format, this means that a user could push the
+         *  tip button double the limit by combining the max amount allowed logged in and logged out. 
+         *  This case is rare and the user does not have incentives to do so. Also, there
+         *  are no downfalls related to this scenario.
          * 
          */
 
@@ -73,7 +78,7 @@ class TipController extends Controller
                 $tips_to_user_24h = $by_IP;
             }
 
-            if($tips_to_user_24h >= 2){
+            if($tips_to_user_24h >= 1){
                 toast("It's not allowed to make more than two tips a day to the same user.",'info');
                 return back();
             }
@@ -86,7 +91,7 @@ class TipController extends Controller
                                 ->whereDate('created_at', Carbon::today())
                                 ->count();
 
-            if($tips_to_user_24h_IP >= 2){
+            if($tips_to_user_24h_IP >= 1){
                 toast("It's not allowed to make more than two tips a day to the same user.",'info');
                 return back();
             }
@@ -207,12 +212,13 @@ class TipController extends Controller
          * - Tips a recipient he has never tipped before (+$P)
          * 
          * POINT REWARDS VALIDATION MECHANICS:
-         * The amount of tips from the sender ID to the recipient ID has to be one. There is a case where
-         * a user deletes and creates an account multiple times with different ID's. It could be the 
+         * The amount of tips from the sender ID to the recipient ID has to be one for the recipient and the tipper to make points.
+         * There is a case where a user deletes and creates an account multiple times with different ID's. It could be the 
          * tipper or the recipient. Both can have an incentive to cheat and make points by sending and 
          * receiving the same amount of Dash multiple times. To prevent this from happening if the count 
          * of tips sent using the sender and recipient ID is smaller than the count by sender and recipient
-         * email then the number of tips to use for validation will be done with the email field.
+         * email then the number of tips to use for validation will be done with the email field. And the third layer for this validation
+         * is by ip using the same logic.
          * 
          * NOTE ONE: $P is a dynamic variable to avoid users tip low amounts just to get points. It's a way
          * of preventing a bad incentive.

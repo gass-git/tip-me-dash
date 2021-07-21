@@ -123,10 +123,10 @@ class TipController extends Controller
         if(Auth::user()){
             $data['sender_id'] = Auth::user()->id;
             $data['sender_email'] = Auth::user()->email;
+            $data['sender_ip'] = $IP;
         }
 
         $data['sent_by'] = $req->name;
-        $data['sender_ip'] = $IP;
         $data['message'] = $req->msg;
         $data['recipient_id'] = $page_owner->id;
         $data['recipient_email'] = $page_owner->email;

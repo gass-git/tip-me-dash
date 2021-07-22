@@ -70,16 +70,33 @@
         });
         /* ----------------------------------------- */
 
-        /* --------- Random cover image ------------ */
+        /** @abstract
+        * 
+        * RANDOM COVER IMAGE
+        * 
+        * Important: gif covers enumaration must start after the last jpg cover.
+        * 
+        * Reminder: when adding or removing covers, the variables 'total_jpgs' and
+        * 'total_gifs' should be updated. 
+        * 
+        */
         $('.fa-random').click(function(){
 
             $('#loader').css('display','none');
 
             setTimeout(function(){$('#loader').css('display','block') }, 100);
+            
+            var total_jpgs = 40;
+            var total_gifs = 3;
+            var total_covers = total_jpgs + total_gifs;
+            let format = '.jpg';
 
-            var rand = Math.floor((Math.random() * 40) + 1);
-            var src = "http://tipmedash.com/images/covers/"+rand+".jpg";
-            var img_src = "url(http://tipmedash.com/images/covers/"+rand+".jpg)";
+            var rand = Math.floor((Math.random() * total_covers) + 1);
+
+            if(rand > total_jpgs){  format = '.gif' }
+
+            var src = "http://tipmedash.com/images/covers/"+rand+format;
+            var img_src = "url(http://tipmedash.com/images/covers/"+rand+format+")";
 
             $('.header-img').css('background-image',img_src);
             $('#rand-cover-input').attr('value',src);

@@ -85,8 +85,6 @@
 
         $('.fa-random').click(function(){
 
-            click_number++;
-
             $('#loader').css('display','none');
 
             setTimeout(function(){$('#loader').css('display','block') }, 100);
@@ -100,7 +98,7 @@
 
             // Reset array and click_number once all covers are shown    
             if(click_number >= total_covers){
-                click_number = 1;
+                click_number = 0;
                 memory.length = 0;
             }
 
@@ -123,6 +121,8 @@
             }
             
             memory[click_number] = rand; // Add this random number to memory array to avoid showing it again
+
+            click_number++;
 
             JSON.stringify(memory)
             console.log(memory)

@@ -80,18 +80,52 @@
         * 'total_gifs' should be updated. 
         * 
         */
+        const memory = [];            
+        var click_number = 0;
+
         $('.fa-random').click(function(){
+
+            click_number++;
 
             $('#loader').css('display','none');
 
             setTimeout(function(){$('#loader').css('display','block') }, 100);
-            
-            var total_jpgs = 40;
+
+            let repeated = true;
+            var total_jpgs = 29;
             var total_gifs = 3;
             var total_covers = total_jpgs + total_gifs;
             let format = '.jpg';
+            var rand = null;
 
-            var rand = Math.floor((Math.random() * total_covers) + 1);
+            // Reset array and click_number once all covers are shown    
+            if(click_number >= total_covers){
+                click_number = 1;
+                memory.length = 0;
+            }
+
+            while(repeated){
+                
+                rand = Math.floor((Math.random() * total_covers) + 1);
+
+                // Has this random cover been shown before?
+                for(let i = 1; i <= click_number; i++){
+                    
+                    if(memory[i] == rand){ 
+                        repeated = true;
+                        i = click_number;
+                    }else{
+                        repeated = false;   // If it's not been shown before escape the while
+                    }
+
+                }
+
+            }
+            
+            memory[click_number] = rand; // Add this random number to memory array to avoid showing it again
+
+            // JSON.stringify(memory)
+            // console.log(memory)
 
             if(rand > total_jpgs){  format = '.gif' }
 

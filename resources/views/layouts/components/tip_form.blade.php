@@ -10,12 +10,21 @@
         <div class="box1 pb-0">
             <!-- name input -->
             @auth
-                <input style="text-transform: capitalize;" 
-                        name="name" 
-                        type="text" 
-                        value="{{ Auth::user()->username }}" 
-                        class="form-control"
-                        readonly/>
+                @if(Auth::user()->username)
+                    <input style="text-transform: capitalize;" 
+                            name="name" 
+                            type="text" 
+                            value="{{ Auth::user()->username }}" 
+                            class="form-control"
+                            readonly/>
+                @else
+                    <input style="text-transform: capitalize;" 
+                            name="name" 
+                            type="text" 
+                            value="No username" 
+                            class="form-control"
+                            readonly/>
+                @endif
             @endauth
 
             @guest

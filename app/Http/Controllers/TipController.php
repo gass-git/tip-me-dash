@@ -22,6 +22,18 @@ class TipController extends Controller
             'name' => ['nullable','max:20'],
         ]);
 
+        /** @abstract
+         * 
+         * If the user signed up using Google it may be lacking a username when attempting
+         * to tip someone. In this case the tip form will fill the name input with the string
+         * 'No username', if so, inform the user that he should create a username before tipping.
+         * 
+         */
+        if($req->name == 'No username'){ 
+            toast('You must create a username first','info');
+            return back(); 
+        }
+
         /* ---- Global variables ----------------------------------------- */
         $page_owner = User::where('username', $req->username)->first();
         $IP = request()->ip();

@@ -124,8 +124,8 @@
             
             memory[click_number] = rand; // Add this random number to memory array to avoid showing it again
 
-            // JSON.stringify(memory)
-            // console.log(memory)
+            JSON.stringify(memory)
+            console.log(memory)
 
             if(rand > total_jpgs){  format = '.gif' }
 

@@ -124,9 +124,6 @@
 
             click_number++;
 
-            JSON.stringify(memory)
-            console.log(memory)
-
             if(rand > total_jpgs){  format = '.gif' }
 
             var src = "http://tipmedash.com/images/covers/"+rand+format;

@@ -109,7 +109,7 @@
                 rand = Math.floor((Math.random() * total_covers) + 1);
 
                 // Has this random cover been shown before?
-                for(let i = 1; i <= click_number; i++){
+                for(let i = 0; i <= click_number; i++){
                     
                     if(memory[i] == rand){ 
                         repeated = true;

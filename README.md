@@ -25,18 +25,18 @@ tipmedash.com uses DASH cryptocurrency for simplicity, ease of use, low fees and
 *   Help grow DASH awareness and network by sparking netizens curiousity.
 *   Present people a new and better option for sending tips through the internet.
 *   Educate crypto outsiders in a simple manner about Dash.
-*   Showcase Dash Advantages over other systems of money.
+*   Showcase Dash advantages over other systems of money.
 
 ### Examples of how people could use their tipmedash.com link:
 
-" If my answers helped you can tip me [Dash](http://tipmedash.com/gass)"
+" If my answers helped you can tip me [Dash](https://tipmedash.com/gass)"
 
-" In love with photography! Tips are welcome to pursue my passion and make it possible. Thank you! "
+" In love with photography! [Tips](https://tipmedash.com/gass) are welcome to pursue my passion and make it possible. Thank you! "
 
-" If this guide helped why not tip me some [digital cash](http://tipmedash.com/gass) ? “
+" If this guide helped why not tip me some [digital cash](https://tipmedash.com/gass) ? “
 
-" Support my work: http://tipmedash.com/gass “
+" Support my work: https://tipmedash.com/gass “
 
-" Donations: http://tipmedash.com/gass  “
+" Donations: https://tipmedash.com/gass  “
 
-" Like what I do? You can support by [tipping me Dash](http://tipmedash.com/gass) , any amount is appreciated. Thanks! "
+" Like what I do? You can support by [tipping me Dash](https://tipmedash.com/gass) , any amount is appreciated. Thanks! "

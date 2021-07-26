@@ -74,11 +74,15 @@
         * 
         * RANDOM COVER IMAGE
         * 
-        * Important: gif covers enumaration must start after the last jpg cover.
-        * 
-        * Reminder: when adding or removing covers, the variables 'total_jpgs' and
-        * 'total_gifs' should be updated. 
-        * 
+        * Reminder: 
+        * - When adding or removing covers, the variable 'total_gifs' should be updated. 
+        * - .gif covers enumaration must start after the last .jpg cover.
+        *
+        * Caution! 
+        * - This script interacts with the db, changes here could cause error and changes on users page.
+        * - Do not add more .jpg covers! adding more could lead to major problems with the script and
+        *   users chosed covers.
+        *
         */
         const memory = [];            
         var click_number = 0;
@@ -117,7 +121,6 @@
                     }
 
                 }
-
             }
             
             memory[click_number] = rand; // Add this random number to memory array to avoid showing it again

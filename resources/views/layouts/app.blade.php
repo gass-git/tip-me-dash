@@ -28,7 +28,7 @@
         <!-- bootstrap css -->
         <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
         <!-- main css -->
-        <link rel="stylesheet" href="{{ asset('css/main.css?70') }}">
+        <link rel="stylesheet" href="{{ asset('css/main.css?2') }}">
         <!-- font awesome css -->
         <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
         

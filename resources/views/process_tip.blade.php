@@ -16,19 +16,36 @@
                     </div> 
                 
                     <!-------- QR ------->
-                    <div id="qr_box">
+                    <div id="qr_box" 
+                         onclick="copyToClipboard('{{ $page_owner->wallet_address }}')"  
+                         data-toggle="tooltip" 
+                         data-placement="right"  
+                         title="ⓘ If you are using a desktop wallet click here to copy the address and send {{ $page_owner->username }} the exact amount.">
                         
-                        <img 
-                            data-toggle="tooltip" 
-                            data-placement="right" 
-                            title="Address: {{$page_owner->wallet_address}}"
-                            src="data:image/png;base64, {{ base64_encode(QrCode::color(1, 32, 96)->
+                        <img src="data:image/png;base64, {{ base64_encode(QrCode::color(1, 32, 96)->
                                   format('png')->
                                   errorCorrection('H')->
                                   size(350)->
                                   merge('images/qr-logo.png',0.22,true)->
-                                  generate($QRstring)) }}">
+                                  generate($QRstring)) }}">                 
 
+                        <script>
+                            function copyToClipboard(address) {
+                                var dummy = document.createElement("textarea");  
+                                document.body.appendChild(dummy);
+                                dummy.value = address;
+                                dummy.select();
+                                document.execCommand("copy");
+                                document.body.removeChild(dummy);
+
+                                var text = 'ⓘ If you are using a desktop wallet click here to copy the address and send {{ $page_owner->username }} the exact amount.';
+                                let box = $('#qr_box');
+                                box.attr('data-original-title','Address copied!');
+                                box.tooltip('show');
+                                setTimeout(function(){ box.tooltip('hide') }, 1000);
+                                setTimeout(function(){ box.attr('data-original-title', text) }, 1200);
+                            }
+                        </script>
                     </div>
                     <!------------------>        
 
@@ -39,7 +56,7 @@
                     </script>
 
                     <div class="note p-3">
-                        <b>Note:</b> this window will close once the tip has been found on the blockchain. Do not
+                        This window will close once the tip has been found on the blockchain. Do not
                         close or reload the page until then, doing so will prevent registering the tip.
                     </div> 
                     

@@ -1033,6 +1033,7 @@ PROCESS TIP MODAL
     vertical-align: middle;
 }
 #modal_QR #qr_box{
+    cursor:pointer;
     padding:50px;
     margin-top:20px;
     border-radius:4px; 
@@ -1040,8 +1041,8 @@ PROCESS TIP MODAL
     background-color:white;
 }
 #modal_QR .note{
-    font-size:15px;
-    text-align:justify;
+    font-size:16px;
+    text-align: justify;
 }
 .toggle-red{  
     color:var(--banana-yellow); /* clock toggle */

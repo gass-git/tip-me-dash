@@ -133,7 +133,7 @@
                     </span>
                     <img class="align-items-center" src="{{ asset('images/dash-icon.png') }}">
                 </div>
-                <div class="pt-2" id="style-three">Equivalent to US${{ $usd_30_days }}</div>
+                <div class="pt-2" id="style-three" title="At the moment of transfer">Equivalent to US${{ $usd_30_days }}</div>
                 <div class="pt-2" id="style-two">Last 30 Days</div>
             </div>
 
@@ -144,7 +144,7 @@
                     </span>
                     <img class="align-items-center" src="{{ asset('images/dash-icon.png') }}">
                 </div>
-                <div class="pt-2" id="style-three">Equivalent to US${{ $usd_all_time }}</div>
+                <div class="pt-2" id="style-three" title="At the moment of transfer">Equivalent to US${{ $usd_all_time }}</div>
                 <div class="pt-1" id="style-two">All Time</div>
             </div>
 

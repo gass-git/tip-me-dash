@@ -132,7 +132,7 @@
                             
                             <span style="font-size:13px"> ― </span> 
                             <span class="mr-1">Received on {{ \Carbon\Carbon::parse($tip->created_at)->isoFormat('MMM Do YYYY')}} - 
-                                <span style="cursor:help" data-toggle="tooltip" data-placement="top" title="Dash/usd exchange rate at the moment of transfer">DP ${{ $tip->dash_usd }}</span>
+                                <span style="cursor:help" data-toggle="tooltip" data-placement="top" title="ᕭash exchange rate at the moment of transfer">DP ${{ $tip->dash_usd }}</span>
                             </span>
                         
                             @if($praise === 'like')
@@ -162,7 +162,7 @@
 
                                 <span id="auth-tip-date" style="font-size:13px"> ― </span> 
                                 <span id="auth-tip-date" class="mr-1">Received on {{ \Carbon\Carbon::parse($tip->created_at)->isoFormat('MMM Do YYYY')}} - 
-                                    <span style="cursor:help" data-toggle="tooltip" data-placement="top" title="Dash/usd exchange rate at the moment of transfer">DP ${{ $tip->dash_usd }}</span>
+                                    <span style="cursor:help" data-toggle="tooltip" data-placement="top" title="ᕭash exchange rate at the moment of transfer">DP ${{ $tip->dash_usd }}</span>
                                 </span>
                                 
                             <span class="praise-icons" id="{{ $tip->id }}">

@@ -88,7 +88,7 @@
                                                 @guest
                                                     
                                                     <span class="show-msg" style="color:rgb(85, 85, 85);cursor:not-allowed;">
-                                                        <i class="ml-2 fas fa-envelope" title="private message" style="padding-bottom:0px;"></i>
+                                                        <i class="ml-2 fas fa-envelope" title="Private message" style="padding-bottom:0px;"></i>
                                                     </span>
                     
                                                 @endguest
@@ -98,13 +98,13 @@
                                                     @if(Auth::user()->id === $tip->recipient_id)
                     
                                                         <span id="{{ $tip->id }}" class="show-msg" style="color:rgb(85, 85, 85)">
-                                                            <i id="tip-msg-icon-{{ $tip->id }}" class="ml-2 fas fa-envelope" title="private message" style="padding-bottom:0px;"></i>
+                                                            <i id="tip-msg-icon-{{ $tip->id }}" class="ml-2 fas fa-envelope" title="Private message" style="padding-bottom:0px;"></i>
                                                         </span>
                     
                                                     @else
                     
                                                         <span class="show-msg" style="color:rgb(85, 85, 85);cursor:not-allowed;">
-                                                            <i class="ml-2 fas fa-envelope" title="private message" style="padding-bottom:0px;"></i>
+                                                            <i class="ml-2 fas fa-envelope" title="Private message" style="padding-bottom:0px;"></i>
                                                         </span>
                     
                                                     @endif
@@ -114,7 +114,7 @@
                                             @elseif($tip->message AND $tip->private_msg === null)
                                             
                                                 <span id="{{ $tip->id }}" class="show-msg">
-                                                    <i id="tip-msg-icon-{{ $tip->id }}" class="ml-2 fas fa-envelope" title="message" style="padding-bottom:0px;"></i>
+                                                    <i id="tip-msg-icon-{{ $tip->id }}" class="ml-2 fas fa-envelope" title="Public message" style="padding-bottom:0px;"></i>
                                                 </span>
                     
                                             @endif

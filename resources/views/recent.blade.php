@@ -160,7 +160,7 @@
                                                 </span>
                                             
                                                 @if($praise === 'like')
-                                                    ⁂<i class="fas fa-thumbs-up ml-2" style="color:var(--dash-blue);font-size:12px;"></i> Thanks! This is great
+                                                    ⁂<i class="fas fa-thumbs-up ml-2" style="color:var(--dash-blue);font-size:12px;"></i> Thanks!
                                                 @endif
                                                 
                                                 @if ($praise === 'love')
@@ -168,7 +168,7 @@
                                                 @endif
                     
                                                 @if ($praise === 'brilliant')
-                                                    ⁂<i class="fas fa-lightbulb ml-2" style="color:rgb(238, 204, 13);font-size:12px;"></i> This is brilliant
+                                                    ⁂<i class="fas fa-lightbulb ml-2" style="color:rgb(238, 204, 13);font-size:12px;"></i> Brilliant
                                                 @endif
                     
                                                 @if ($praise === 'cheers')

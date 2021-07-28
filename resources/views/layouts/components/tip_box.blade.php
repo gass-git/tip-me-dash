@@ -5,7 +5,7 @@
 
                 <div class="tip-body">
                     <p class="d-flex tip-title align-items-lg-center p-2">
-                        <i class="fas fa-donate ml-0 mr-1" data-toggle="tooltip" data-placement="top" style="color:var(--dark-yellow);font-size:18px;" title="equivalent to ${{ $tip->usd_equivalent }} usd at the moment of transfer"></i>
+                        <i class="fas fa-donate ml-0 mr-1" data-toggle="tooltip" data-placement="top" style="color:var(--dark-yellow);font-size:18px;" title="Equivalent to ${{ $tip->usd_equivalent }} usd at the moment of transfer"></i>
 
                         @php
 
@@ -132,7 +132,7 @@
                             
                             <span style="font-size:13px"> ― </span> 
                             <span class="mr-1">Received on {{ \Carbon\Carbon::parse($tip->created_at)->isoFormat('MMM Do YYYY')}} - 
-                                <span style="cursor:help" data-toggle="tooltip" data-placement="top" title="dash/usd exchange rate at the moment of transfer">DP ${{ $tip->dash_usd }}</span>
+                                <span style="cursor:help" data-toggle="tooltip" data-placement="top" title="Dash/usd exchange rate at the moment of transfer">DP ${{ $tip->dash_usd }}</span>
                             </span>
                         
                             @if($praise === 'like')
@@ -162,7 +162,7 @@
 
                                 <span id="auth-tip-date" style="font-size:13px"> ― </span> 
                                 <span id="auth-tip-date" class="mr-1">Received on {{ \Carbon\Carbon::parse($tip->created_at)->isoFormat('MMM Do YYYY')}} - 
-                                    <span style="cursor:help" data-toggle="tooltip" data-placement="top" title="dash/usd exchange rate at the moment of transfer">DP ${{ $tip->dash_usd }}</span>
+                                    <span style="cursor:help" data-toggle="tooltip" data-placement="top" title="Dash/usd exchange rate at the moment of transfer">DP ${{ $tip->dash_usd }}</span>
                                 </span>
                                 
                             <span class="praise-icons" id="{{ $tip->id }}">
@@ -200,7 +200,7 @@
                             
                                 <span style="font-size:13px"> ― </span> 
                                 <span class="mr-1">Received on {{ \Carbon\Carbon::parse($tip->created_at)->isoFormat('MMM Do YYYY')}} - 
-                                    <span style="cursor:help" data-toggle="tooltip" data-placement="top" title="dash/usd exchange rate at the moment of transfer">DP ${{ $tip->dash_usd }}</span>
+                                    <span style="cursor:help" data-toggle="tooltip" data-placement="top" title="Dash/usd exchange rate at the moment of transfer">DP ${{ $tip->dash_usd }}</span>
                                 </span>
                                 
                                 @if($praise === 'like')

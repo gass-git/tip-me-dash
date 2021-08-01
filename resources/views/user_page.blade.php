@@ -129,8 +129,8 @@
 
             if(rand > total_jpgs){  format = '.gif' }
 
-            var src = "http://tipmedash.com/images/covers/"+rand+format;
-            var img_src = "url(http://tipmedash.com/images/covers/"+rand+format+")";
+            var src = "https://tipmedash.com/images/covers/"+rand+format;
+            var img_src = "url(https://tipmedash.com/images/covers/"+rand+format+")";
 
             $('.header-img').css('background-image',img_src);
             $('#rand-cover-input').attr('value',src);

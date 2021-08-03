@@ -87,7 +87,6 @@
     
         $(window).on('load', (e) => { 
             e.preventDefault();
-<<<<<<< HEAD
             $('#modal_QR').modal('show'); // Show the modal as soon as the page loads
             const token = 'Dp6I6sXtcnpYiKZtvr5RlDw3WsBW8GQS';
             const txs_api = 'https://api.chainrider.io/v1/dash/main/txs?address={{ $page_owner->wallet_address }}&token=' + token;
@@ -122,24 +121,6 @@
                  * will have an starting delay equal to the time of the interval.
                  * 
                  */
-=======
-            $('#modal_QR').modal('show'); 
-            const txs_api = "https://api.chainrider.io/v1/dash/main/txs?address={{ $page_owner->wallet_address }}&token={{ env('CHAIN_RIDER_TOKEN') }}";
-            var id = @json($tip_id);                             
-            var requests_delay = 20000;                       
-            var requests_interval = 10000;                       
-            var seconds = 180;                                   
-            var min = (seconds/60).toFixed(1);                    
-            var timer_interval = setInterval(timer, 1000);                                    
-            var usd_amount = @json($usd_amount);                  
-            var dash_toSend = @json($dash_toSend);                
-            var dash_usd = @json($dash_usd);                      
-            $('#timer').html(min);
-                     
-            setTimeout(function(){
-                var interval = setInterval(process, requests_interval);               
-
->>>>>>> 5c3e98e2483759ce6f9f92305b936a2207dcae66
                 process(); 
                 function process(){
                     fetch(txs_api).then(response => response.json()).then(function(data) {
@@ -151,7 +132,6 @@
                             
                             for(var B = 0; B < array_length_two; B++){
                                 var amount = data.txs[A].vout[B].value;
-<<<<<<< HEAD
                                 /**@abstract
                                  * 
                                  *  Check if the amount entered by the user equals any of the
@@ -163,9 +143,6 @@
                                  *  2) Redirect back to the recipient user page.
                                  * 
                                  */
-=======
-                                
->>>>>>> 5c3e98e2483759ce6f9f92305b936a2207dcae66
                                 if(amount == dash_toSend){
                                     /* Get transaction id */
                                     var txid = data.txs[A].txid;
@@ -185,7 +162,6 @@
                                 }
                             }
                         }
-<<<<<<< HEAD
                     }) // End of dash_txs_api fetch 
                     /**@abstract
                      * 
@@ -195,9 +171,6 @@
                      * 3) Redirect back to the recipient user page.
                      * 
                      */
-=======
-                    })
->>>>>>> 5c3e98e2483759ce6f9f92305b936a2207dcae66
                 
                     if(seconds <= 5){ 
                         $.ajax({
@@ -214,7 +187,6 @@
                             error:function(){console.log('AJAX error')}
                         })
                     }        
-<<<<<<< HEAD
                 } // END of process function 
             }, requests_delay) // END of setTimeOut function 
             /**@abstract
@@ -224,11 +196,6 @@
              * amount.
              * 
              */ 
-=======
-                } 
-            }, requests_delay) 
-           
->>>>>>> 5c3e98e2483759ce6f9f92305b936a2207dcae66
             function timer(){
                 seconds--;
                 min = (seconds/60).toFixed(1);
@@ -240,12 +207,7 @@
                 else if(min >= 1.1 && min < 1.7){$('#timer').html('1.5')}
                 else if(min >= 1.7 && min < 2.2){$('#timer').html('2.0')}
                 else if(min >= 2.2 && min < 2.6){$('#timer').html('2.5')}        
-<<<<<<< HEAD
             } // END of timer function
         }) // END of windows on load jQuery method
-=======
-            } 
-        })
->>>>>>> 5c3e98e2483759ce6f9f92305b936a2207dcae66
 </script>
 @endsection

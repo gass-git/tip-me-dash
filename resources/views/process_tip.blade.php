@@ -37,7 +37,6 @@
                                 dummy.select();
                                 document.execCommand("copy");
                                 document.body.removeChild(dummy);
-
                                 var text = 'ⓘ If you are using a desktop wallet click here to copy the address and send {{ $page_owner->username }} the exact amount.';
                                 let box = $('#qr_box');
                                 box.attr('data-original-title','Address copied!');
@@ -84,8 +83,89 @@
     </div>
     <!-- END of modal QR --> 
 
-<script>
-$(window).on('load',(e)=>{e.preventDefault();$('#modal_QR').modal('show');var id = @json($tip_id);var requests_delay = 20000;var requests_interval = 10000;var seconds = 180;var min = (seconds/60).toFixed(1);var timer_interval = setInterval(timer, 1000);var usd_amount = @json($usd_amount);var dash_toSend = @json($dash_toSend);var dash_usd = @json($dash_usd);const txs = 'https://api.chainrider.io/v1/dash/main/txs?address={{ $page_owner->wallet_address }}&token={{ env('CHAIN_RIDER_TOKEN') }}';function timer(){seconds--,min=(seconds/60).toFixed(1);var t="width:"+seconds/180*100+"%;";$("#bar").attr("style",t),min>0&&min<.6?($("#timer").html("0.5"),$("#clock").toggleClass("toggle-yellow")):min>=.6&&min<1.1?$("#timer").html("1.0"):min>=1.1&&min<1.7?$("#timer").html("1.5"):min>=1.7&&min<2.2?$("#timer").html("2.0"):min>=2.2&&min<2.6&&$("#timer").html("2.5")}$("#timer").html(min),setTimeout(function(){var t=setInterval(e,requests_interval);function e(){fetch(txs).then(t=>t.json()).then(function(e){for(var n=e.txs.length,o=0;o<n;o++)for(var r=e.txs[o].vout.length,i=0;i<r;i++){if(e.txs[o].vout[i].value==dash_toSend){var s=e.txs[o].txid;$.ajax({method:"POST",url:"{{route('confirm_tip')}}",async:!1,data:{_token:"{{ csrf_token() }}",tip_id:id,transaction_id:s},success:function(){clearInterval(t),window.location.href="/{{ $page_owner->username }}"},error:function(){console.log("AJAX error")}})}}}),seconds<=5&&$.ajax({type:"post",async:!1,url:"{{ route('unconfirmed') }}",data:{_token:"{{ csrf_token() }}",tip_id:id},success:function(){clearInterval(t),window.location.href="/{{ $page_owner->username }}"},error:function(){console.log("AJAX error")}})}e()},requests_delay);})
-</script>
+    <script>
+    
+        $(window).on('load', (e) => { 
+            e.preventDefault();
+            $('#modal_QR').modal('show'); 
+            const txs_api = "https://api.chainrider.io/v1/dash/main/txs?address={{ $page_owner->wallet_address }}&token={{ env('CHAIN_RIDER_TOKEN') }}";
+            var id = @json($tip_id);                             
+            var requests_delay = 20000;                       
+            var requests_interval = 10000;                       
+            var seconds = 180;                                   
+            var min = (seconds/60).toFixed(1);                    
+            var timer_interval = setInterval(timer, 1000);                                    
+            var usd_amount = @json($usd_amount);                  
+            var dash_toSend = @json($dash_toSend);                
+            var dash_usd = @json($dash_usd);                      
+            $('#timer').html(min);
+                     
+            setTimeout(function(){
+                var interval = setInterval(process, requests_interval);               
 
+                process(); 
+                function process(){
+                    fetch(txs_api).then(response => response.json()).then(function(data) {
+                            
+                        var array_length_one = data.txs.length;
+                        for(var A = 0; A < array_length_one; A++){
+                            
+                            var array_length_two = data.txs[A].vout.length;
+                            
+                            for(var B = 0; B < array_length_two; B++){
+                                var amount = data.txs[A].vout[B].value;
+                                
+                                if(amount == dash_toSend){
+                                    /* Get transaction id */
+                                    var txid = data.txs[A].txid;
+                                    $.ajax({
+                                        method: 'POST',
+                                        url: "{{route('confirm_tip')}}",
+                                        async: false,
+                                        data: {
+                                            _token: '{{ csrf_token() }}', tip_id: id, transaction_id: txid
+                                        },
+                                        success:function(){
+                                            clearInterval(interval);
+                                            window.location.href = '/{{ $page_owner->username }}';
+                                        },
+                                        error:function(){console.log('AJAX error')}
+                                    })
+                                }
+                            }
+                        }
+                    })
+                
+                    if(seconds <= 5){ 
+                        $.ajax({
+                            type:'post',
+                            async: false,
+                            url:"{{ route('unconfirmed') }}",
+                            data:{
+                                _token: "{{ csrf_token() }}", tip_id: id
+                            },
+                            success:function(){
+                                clearInterval(interval);
+                                window.location.href = '/{{ $page_owner->username }}';
+                            },
+                            error:function(){console.log('AJAX error')}
+                        })
+                    }        
+                } 
+            }, requests_delay) 
+           
+            function timer(){
+                seconds--;
+                min = (seconds/60).toFixed(1);
+                var percentage = ((seconds/180)*100);
+                var width = 'width:' + percentage + '%;'
+                $('#bar').attr('style',width);
+                if(min > 0 && min < 0.6){$('#timer').html('0.5');  $("#clock").toggleClass('toggle-yellow')}
+                else if(min >= 0.6 && min < 1.1){$('#timer').html('1.0')}
+                else if(min >= 1.1 && min < 1.7){$('#timer').html('1.5')}
+                else if(min >= 1.7 && min < 2.2){$('#timer').html('2.0')}
+                else if(min >= 2.2 && min < 2.6){$('#timer').html('2.5')}        
+            } 
+        })
+</script>
 @endsection

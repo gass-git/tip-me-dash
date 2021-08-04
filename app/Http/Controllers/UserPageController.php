@@ -150,7 +150,7 @@ class UserPageController extends Controller
             $img = $req->file('image');
             $img_new_name = date('dmy_H_s_i').'_'.$user->id;
             $img->storeAs('header-pics',$img_new_name,'public');
-            $user->header_img_url = 'http://tipmedash.com/storage/header-pics/'.$img_new_name;
+            $user->header_img_url = 'https://tipmedash.com/storage/header-pics/'.$img_new_name;
             $user->header_img_name = $img_new_name;
         
         }elseif($rand_cover){

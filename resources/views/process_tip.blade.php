@@ -3,7 +3,6 @@
 @include('layouts/components/navbar_two')
 @include('layouts/user_page_body')
 
-
     <!-- Start of modal QR -->
     <div class="modal fade" id="modal_QR" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog modal-dialog-centered">
@@ -86,11 +85,12 @@
     <script>
     
         $(window).on('load', (e) => { 
+
             e.preventDefault();
+
             $('#modal_QR').modal('show'); // Show the modal as soon as the page loads
-            const token = 'Dp6I6sXtcnpYiKZtvr5RlDw3WsBW8GQS';
-            const txs_api = 'https://api.chainrider.io/v1/dash/main/txs?address={{ $page_owner->wallet_address }}&token=' + token;
-            
+
+            const txs_api = 'https://api.chainrider.io/v1/dash/main/txs?address={{ $page_owner->wallet_address }}&token=Dp6I6sXtcnpYiKZtvr5RlDw3WsBW8GQS';
             var id = @json($tip_id);                              // Tip id
             var requests_delay = 20000;                           // Timout before sending API requests (ms)
             var requests_interval = 10000;                        // Interval between API requests (ms)
@@ -100,17 +100,23 @@
             var usd_amount = @json($usd_amount);                  // USD amount entered
             var dash_toSend = @json($dash_toSend);                // DASH equivalent to send to recipient
             var dash_usd = @json($dash_usd);                      // DASH exchange rate in USD
+
             $('#timer').html(min); // Add the starting time inmidiately after showing modal
+            
+            
             /**@abstract
              * 
-             * The reason this Timeout is set is to use as minimum of requests
-             * as possible. There is a delay in between the QR code been showed and
-             * the user sending the amount.
+             * This Timeout is set to use as minimum of requests
+             * as possible. There is a delay between the QR code been showed and
+             * the user scanning it. The function will start requesting after
+             * request_delay + request_interval total amount of seconds.
              * 
              */             
-            
             setTimeout(function(){
+
                 var interval = setInterval(process, requests_interval);       // Set API requests interval                        
+                
+
                 /**@abstract
                  * 
                  * Check all amounts received and sent by the address
@@ -122,6 +128,7 @@
                  * 
                  */
                 process(); 
+
                 function process(){
                     fetch(txs_api).then(response => response.json()).then(function(data) {
                             
@@ -132,6 +139,8 @@
                             
                             for(var B = 0; B < array_length_two; B++){
                                 var amount = data.txs[A].vout[B].value;
+                                
+
                                 /**@abstract
                                  * 
                                  *  Check if the amount entered by the user equals any of the
@@ -163,6 +172,8 @@
                             }
                         }
                     }) // End of dash_txs_api fetch 
+                    
+
                     /**@abstract
                      * 
                      * If the user has run out of time:
@@ -171,7 +182,6 @@
                      * 3) Redirect back to the recipient user page.
                      * 
                      */
-                
                     if(seconds <= 5){ 
                         $.ajax({
                             type:'post',
@@ -189,25 +199,27 @@
                     }        
                 } // END of process function 
             }, requests_delay) // END of setTimeOut function 
+            
+
             /**@abstract
              * 
-             * This function shows the user the amount of 
-             * time available to scan the QR code and send the 
-             * amount.
+             * This function shows the time available to scan the QR code and send the tip.
              * 
              */ 
             function timer(){
                 seconds--;
                 min = (seconds/60).toFixed(1);
                 var percentage = ((seconds/180)*100);
-                var width = 'width:' + percentage + '%;'
+                var width = 'width:' + percentage + '%'
                 $('#bar').attr('style',width);
-                if(min > 0 && min < 0.6){$('#timer').html('0.5');  $("#clock").toggleClass('toggle-yellow')}
+                if(min > 0 && min < 0.6){$('#timer').html('0.5');  $("#clock").toggleClass('text-warning')}
                 else if(min >= 0.6 && min < 1.1){$('#timer').html('1.0')}
                 else if(min >= 1.1 && min < 1.7){$('#timer').html('1.5')}
                 else if(min >= 1.7 && min < 2.2){$('#timer').html('2.0')}
                 else if(min >= 2.2 && min < 2.6){$('#timer').html('2.5')}        
             } // END of timer function
+            
         }) // END of windows on load jQuery method
+
 </script>
 @endsection

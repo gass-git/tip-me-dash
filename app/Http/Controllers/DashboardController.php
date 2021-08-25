@@ -33,30 +33,39 @@ class DashboardController extends Controller
         if(Auth::user()->ip != $IP){
             User::find(Auth::user()->id)->update(['ip'=> $IP]);
         }
+        
+        $number_of_tips = Tip::where('recipient_id', Auth::user()->id)
+                            ->where('status','confirmed')
+                            ->count(); 
 
-        $confirmed_tips = Tip::where('recipient_id', Auth::user()->id)
-                            ->where('status','confirmed');
+        $dash_30_days = Tip::where('recipient_id', Auth::user()->id)
+                            ->where('status','confirmed')
+                            ->whereDate('created_at', '>', Carbon::now()
+                            ->subDays(30))
+                            ->sum('dash_amount');
         
-        $dash_30_days = $confirmed_tips
-                        ->whereDate('created_at', '>', Carbon::now()->subDays(30))
-                        ->sum('dash_amount');
-        
-        $usd_30_days = $confirmed_tips
-                        ->whereDate('created_at', '>', Carbon::now()->subDays(30))
-                        ->sum('usd_equivalent');
+        $usd_30_days = Tip::where('recipient_id', Auth::user()->id)
+                            ->where('status','confirmed')
+                            ->whereDate('created_at', '>', Carbon::now()
+                            ->subDays(30))
+                            ->sum('usd_equivalent');
 
-        $events = Log::where('to_id', Auth::user()->id)
-                    ->orderBy('id','DESC')
-                    ->paginate(10);
+        $events = Log::where('to_id', Auth::user()->id)->orderBy('id','DESC')->paginate(10);
         
-        $dash_all_time = $confirmed_tips->sum('dash_amount');
-        $usd_all_time = $confirmed_tips->sum('usd_equivalent');
+        $dash_all_time = Tip::where('recipient_id', Auth::user()->id)
+                            ->where('status','confirmed')
+                            ->sum('dash_amount');
+
+        $usd_all_time = Tip::where('recipient_id', Auth::user()->id)
+                            ->where('status','confirmed')
+                            ->sum('usd_equivalent');
+
         $number_of_events = Log::where('to_id', Auth::user()->id)->count();
         
         return view('dashboard',compact(
             'events',
             'number_of_events',
-            'confirmed_tips',
+            'number_of_tips',
             'dash_30_days',
             'usd_30_days',
             'dash_all_time',

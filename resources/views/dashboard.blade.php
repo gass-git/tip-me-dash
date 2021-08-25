@@ -122,7 +122,7 @@
         <div class="row p-3" id="tips-stats">
 
             <div class="col-sm-4">
-                <div class="pt-4" id="style-one">{{ $confirmed_tips->count() }}</div>
+                <div class="pt-4" id="style-one">{{ $number_of_tips }}</div>
                 <div class="pt-2" id="style-two">Tips Received</div>
             </div>
 

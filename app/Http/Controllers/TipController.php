@@ -333,7 +333,7 @@ class TipController extends Controller
                 $tipper_location = null;  // If the tipper is not logged in
             }
 
-            Notification::route('mail',$recipient->email)->notify(new TipReceived($recipient, $tipper_location));
+          Notification::route('mail',$recipient->email)->notify(new TipReceived($recipient, $tipper_location));
         }
 
         toast("Tip confirmed!",'success');

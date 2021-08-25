@@ -90,7 +90,7 @@
 
             $('#modal_QR').modal('show'); // Show the modal as soon as the page loads
 
-            const txs_api = 'https://api.chainrider.io/v1/dash/main/txs?address={{ $page_owner->wallet_address }}&token=Dp6I6sXtcnpYiKZtvr5RlDw3WsBW8GQS';
+            const txs_api = 'https://api.blockcypher.com/v1/dash/main/addrs/{{ $page_owner->wallet_address }}/full';
             var id = @json($tip_id);                              // Tip id
             var requests_delay = 20000;                           // Timout before sending API requests (ms)
             var requests_interval = 10000;                        // Interval between API requests (ms)
@@ -135,10 +135,10 @@
                         var array_length_one = data.txs.length;
                         for(var A = 0; A < array_length_one; A++){
                             
-                            var array_length_two = data.txs[A].vout.length;
+                            var array_length_two = data.txs[A].outputs.length;
                             
                             for(var B = 0; B < array_length_two; B++){
-                                var amount = data.txs[A].vout[B].value;
+                                var value = data.txs[A].outputs[B].value;
                                 
 
                                 /**@abstract
@@ -151,10 +151,16 @@
                                  *  1) Clear process() interval.
                                  *  2) Redirect back to the recipient user page.
                                  * 
+                                 *  Note: Blockcypher provides information in DUFF units, by consequence is neccessary to 
+                                 *  convert "dash_toSend" decimal number to DUFF by multiplying by 100.000.000
+                                 *  
                                  */
-                                if(amount == dash_toSend){
+
+                                let amount_to_send = dash_toSend * 100000000;
+
+                                if(value == amount_to_send){
                                     /* Get transaction id */
-                                    var txid = data.txs[A].txid;
+                                    var txid = data.txs[A].hash;
                                     $.ajax({
                                         method: 'POST',
                                         url: "{{route('confirm_tip')}}",

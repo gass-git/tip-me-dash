@@ -45,7 +45,7 @@ html {
     scrollbar-width: thin;
 }
 
-/* For all browsers exept firefox */
+/* For all browsers except firefox */
 body::-webkit-scrollbar {
     width: 0.5em;
     background-color: var(--deep-blue-2);

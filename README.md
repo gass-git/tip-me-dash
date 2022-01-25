@@ -11,7 +11,7 @@ tipmedash.com uses DASH cryptocurrency for simplicity, ease of use, low fees and
 ### Why use tipmedash.com over other options? (advantages)
 
 *   Transactions P2P without third parties involved.
-*   Due to transaction fees so low users can send amounts below one dollar. Sometimes is not so much about money, is about showing appreciation. For the creator, any tip is welcome even if they are cents, at the end of the day all sums up.
+*   Due to transaction fees so low users can send amounts below one dollar. Sometimes is not so much about money, is about showing appreciation. For the creator, any tip is welcome. At the end of the day all sums up.
 *   Money arrives instantly to the recipient, without the need for them to ask intermediaries permission to move it. Saving them time and unpleasant experiences.
 
 ### Target

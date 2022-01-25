@@ -16,7 +16,7 @@ tipmedash.com uses DASH cryptocurrency for simplicity, ease of use, low fees and
 
 ### Target
 
-*   People that are already using Dash but need a way to show their wallets to their followers.
+*   People that are already using Dash and are looking for a service that will allow them to receive tips from followers.
 *   People looking for an easy system to receive tips in exchange for their work (e.g photographers, artists, developers, bloggers, teachers and others)
 * People looking for an extra method to receive support online.
 

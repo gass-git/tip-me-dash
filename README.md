@@ -23,7 +23,7 @@ tipmedash.com uses DASH cryptocurrency for simplicity, ease of use, low fees and
 ### This project pretends to:
 
 *   Help grow DASH awareness and network by sparking netizens curiousity.
-*   Present people a new and better option for sending tips through the internet.
+*   Expose people a new and better option for sending tips through the internet.
 *   Educate crypto outsiders in a simple manner about Dash.
 *   Showcase Dash advantages over other systems of money.
 

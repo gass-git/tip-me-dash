@@ -44,7 +44,7 @@
     <!-- Number pills -->
     <div class="d-flex mt-2 pr-3 pt-2 pl-3 pb-2" style="height: 48px;">
         
-        <div class="views-pill flex-fill mr-1 pt-1 pr-2 pb-1 pl-2" title="page views">
+        <div class="views-pill flex-fill mr-1 pt-1 pr-2 pb-1 pl-2" title="unique visitors">
             
             <div class="d-flex">
                 <div class="m-0 pl-1" style="width:30%;">

@@ -4,7 +4,7 @@
 
     <!-- Tips sent --> {{-- Show if the user has tipped 5 different people or more --}}
     @if($people_tipped >= 5)
-        <div class="d-flex flex-row-reverse pr-2" style="height:40px;">
+        <div id="tips-record" class="d-flex flex-row-reverse justify-content-center" style="height:40px">
             
             @foreach ($tips_sent as $sent)
 

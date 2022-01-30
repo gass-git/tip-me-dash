@@ -11,19 +11,19 @@ tipmedash.com uses DASH cryptocurrency for simplicity, ease of use, low fees and
 ### Why use tipmedash.com over other options? (advantages)
 
 *   Transactions P2P without third parties involved.
-*   Due to transaction fees so low users can send amounts below one dollar. Sometimes is not so much about money, is about showing appreciation. For the creator, any tip is welcome even if they are cents, at the end of the day all sums up.
+*   Due to transaction fees so low users can send amounts below one dollar. Sometimes is not so much about money, is about showing appreciation. For the creator, any tip is welcome. At the end of the day all sums up.
 *   Money arrives instantly to the recipient, without the need for them to ask intermediaries permission to move it. Saving them time and unpleasant experiences.
 
 ### Target
 
-*   People that are already using Dash but need a way to show their wallets to their followers.
+*   People that are already using Dash and are looking for a service that will allow them to receive tips from followers.
 *   People looking for an easy system to receive tips in exchange for their work (e.g photographers, artists, developers, bloggers, teachers and others)
 * People looking for an extra method to receive support online.
 
 ### This project pretends to:
 
 *   Help grow DASH awareness and network by sparking netizens curiousity.
-*   Present people a new and better option for sending tips through the internet.
+*   Expose people a new and better option for sending tips through the internet.
 *   Educate crypto outsiders in a simple manner about Dash.
 *   Showcase Dash advantages over other systems of money.
 

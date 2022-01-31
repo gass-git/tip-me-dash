@@ -111,7 +111,7 @@
             <div class="row justify-content-center mb-5">
                 <div class="col-lg-8">
                     <div class="get-started-title">
-                        <h1><span>Get started,</span> is easy..</h1>
+                        <h1><span>Get started,</span> it's easy..</h1>
                     </div>
                 </div>
             </div>

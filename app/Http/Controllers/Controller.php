@@ -14,23 +14,25 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function show_welcome(){
-        $newcomers = User::whereNotNull('username')->orderBy('id','DESC')->get();
-        $ranks = User::orderBy('points','DESC')->get();
-        return view('welcome',compact('newcomers','ranks'));
+    public function show_welcome()
+    {
+        $newcomers = User::whereNotNull('username')->orderBy('id', 'DESC')->get();
+        $ranks = User::orderBy('points', 'DESC')->get();
+        return view('welcome', compact('newcomers', 'ranks'));
     }
 
-    public function show_recent(){
-        
-        $tips_30_days = Tip::where('status','confirmed')
-                        ->whereDate('created_at', '>', Carbon::now()->subDays(30))
-                        ->count();
+    public function show_recent()
+    {
 
-        $recent_tips = Tip::where('status','confirmed')
-                    ->whereDate('created_at', '>', Carbon::now()->subDays(30))
-                    ->orderBy('id','DESC')
-                    ->paginate(10);
+        $tips_year = Tip::where('status', 'confirmed')
+            ->whereDate('created_at', '>', Carbon::now()->subDays(365))
+            ->count();
 
-        return view('recent',compact('recent_tips','tips_30_days'));
+        $recent_tips = Tip::where('status', 'confirmed')
+            ->whereDate('created_at', '>', Carbon::now()->subDays(365))
+            ->orderBy('id', 'DESC')
+            ->paginate(10);
+
+        return view('recent', compact('recent_tips', 'tips_year'));
     }
 }

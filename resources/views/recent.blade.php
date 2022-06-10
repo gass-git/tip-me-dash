@@ -6,9 +6,9 @@
 
         <div class="container mx-auto mt-5" id="recent" style="max-width:650px;min-width:440px;">
 
-            @if($tips_30_days < 1)
+            @if($tips_year < 1)
             <center style="color:grey; word-spacing:1px;">
-                <span style="font-weight:200">There has not been any tips in the last 30 days.</span>
+                <span style="font-weight:200">Unfortunately there hasn't been any tip in the last year.</span>
             </center>
             @endif
 

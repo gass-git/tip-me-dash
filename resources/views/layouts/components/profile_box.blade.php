@@ -105,7 +105,7 @@
             <br>
             <p>
             <i class="fas fa-link mr-1"></i>
-            <a href="{{ $website_url }}" target="_blank">{{ $friendly_url }}</a>
+            <a href="https://{{ $friendly_url }}" target="_blank">{{ $friendly_url }}</a>
             </p>
         @endif
     </div>

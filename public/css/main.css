@@ -18,6 +18,7 @@ GLOBAL STYLE
     --roboto: "roboto", sans-serif;
     --sans-serif: sans-serif;
     --helvetica: "helvetica", sans-serif;
+    --dash-light-blue: #28a6f5;
     --dash-blue: #008de4;
     --light-gray-1: #f8f8f8;
     --light-gray-2: #ecece9;
@@ -48,12 +49,16 @@ html {
 
 /* For all browsers except firefox */
 body::-webkit-scrollbar {
-    width: 0.5em;
+    width: 1em;
     background-color: var(--deep-blue-2);
 }
 
 body::-webkit-scrollbar-thumb {
     background-color: var(--dash-blue);
+}
+
+body::-webkit-scrollbar-thumb:active {
+    background-color: var(--dash-light-blue);
 }
 
 /* ---------------------------------------------------- */

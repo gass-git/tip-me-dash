@@ -33,22 +33,23 @@ class LoginController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::DASHBOARD;
 
-    public function showLoginForm(){
-        
-        if(!session()->has('url.intended')){
-      
+    public function showLoginForm()
+    {
+
+        if (!session()->has('url.intended')) {
+
             $prev = url()->previous();
-            $url_one = 'https://tipmedash.com/';         
-            $url_two = 'http://tipmedash.test/';
-      
-            if($prev == $url_one OR $prev == $url_two){
-                   session(['url.intended' => 'dashboard']);
-               }else{
-                   session(['url.intended' => url()->previous()]);
+            $url_one = 'https://tipmedash.com/';
+            $url_two = 'https://tipmedash.test/';
+
+            if ($prev == $url_one or $prev == $url_two) {
+                session(['url.intended' => 'dashboard']);
+            } else {
+                session(['url.intended' => url()->previous()]);
             }
         }
         return view('auth.login');
-      }
+    }
 
     /**
      * Create a new controller instance.
@@ -67,8 +68,8 @@ class LoginController extends Controller
      */
 
     public function redirectToProvider()
-    {   
-       return Socialite::driver('google')->redirect();
+    {
+        return Socialite::driver('google')->redirect();
     }
 
     /**
@@ -77,23 +78,24 @@ class LoginController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function handleProviderCallback(Request $request){
+    public function handleProviderCallback(Request $request)
+    {
 
         // If the user denise permission on google to provide login information, redirect to login page.
-        if($request->get('error')){     
+        if ($request->get('error')) {
             return redirect()->route('login');
         }
 
         $google_data = Socialite::driver('google')->user();  // Request data from Google
-        
+
         $registered_user = User::where('google_id', $google_data->getId())  // Search for user with Google id or email.
-                                ->orwhere('email',$google_data->email)
-                                ->first();
+            ->orwhere('email', $google_data->email)
+            ->first();
 
         /* ---- Create user with requested data if it's not registered ---- */
-        if(!$registered_user){    
+        if (!$registered_user) {
 
-            User::create([ 
+            User::create([
                 'ip' => request()->ip(),
                 'google_id' => $google_data->getId(),
                 'email' => $google_data->getEmail(),
@@ -115,12 +117,12 @@ class LoginController extends Controller
          * 2) The user is registered with google email or id, but his email is not verified.
          * 
          */
-        if($registered_user->google_id == null){
+        if ($registered_user->google_id == null) {
             $registered_user->google_id = $google_data->getId();
             $registered_user->save();
         }
-        
-        if($registered_user->email_verified_at == null){
+
+        if ($registered_user->email_verified_at == null) {
             $registered_user->email_verified_at = Carbon::now();
             $registered_user->save();
         }

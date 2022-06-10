@@ -96,7 +96,7 @@
         @if($website_url = $page_owner->website)
             @php
                 $input = $website_url;
-                $input = trim($website_url, '/');
+                // $input = trim($website_url, '/');
                 if (!preg_match('#^http(s)?://#', $input)) {$input = 'http://' . $input;}
                 $urlParts = parse_url($input);
                 $friendly_url = preg_replace('/^www\./', '', $urlParts['host']); 

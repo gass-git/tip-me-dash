@@ -7,7 +7,7 @@
                  <!-- dash powered logo -->
                  <div class="col-md-12 d-flex justify-content-center">
                      <div class="powered">
-                         <a href="http://www.dash.org" target="_blank"><img src="{{ asset('images/dashpowered.png') }}"></a>
+                         <a href="https://www.dash.org" target="_blank"><img src="{{ asset('images/dashpowered.png') }}"></a>
                      </div>
                  </div>
                  <!----------------------->

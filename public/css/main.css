@@ -44,7 +44,7 @@ html {
     /* For Firefox */
     overflow-y: scroll;
     scrollbar-color: var(--dash-blue) var(--deep-blue-2);
-    scrollbar-width: auto;
+    scrollbar-width: thin;
 }
 
 /* For all browsers except firefox */

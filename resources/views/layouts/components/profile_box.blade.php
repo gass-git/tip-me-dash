@@ -97,7 +97,7 @@
             @php
                 $input = $website_url;
                 // $input = trim($website_url, '/');
-                if (!preg_match('#^http(s)?://#', $input)) {$input = 'http://' . $input;}
+                if (!preg_match('#^http(s)?://#', $input)) {$input_modified = 'https://' . $input;}
                 $urlParts = parse_url($input);
                 $friendly_url = preg_replace('/^www\./', '', $urlParts['host']); 
             @endphp
@@ -105,7 +105,7 @@
             <br>
             <p>
             <i class="fas fa-link mr-1"></i>
-            <a href="https://{{ $friendly_url }}" target="_blank">{{ $friendly_url }}</a>
+            <a href="{{ $modified }}" target="_blank">{{ $friendly_url }}</a>
             </p>
         @endif
     </div>

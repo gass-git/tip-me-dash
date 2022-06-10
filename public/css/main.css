@@ -12,6 +12,7 @@ GLOBAL STYLE
     padding: 0;
     outline: none !important;
 }
+
 :root {
     --montserrat: "Montserrat", sans-serif;
     --roboto: "roboto", sans-serif;
@@ -42,7 +43,7 @@ html {
     /* For Firefox */
     overflow-y: scroll;
     scrollbar-color: var(--dash-blue) var(--deep-blue-2);
-    scrollbar-width: thin;
+    scrollbar-width: auto;
 }
 
 /* For all browsers except firefox */
@@ -50,9 +51,11 @@ body::-webkit-scrollbar {
     width: 0.5em;
     background-color: var(--deep-blue-2);
 }
+
 body::-webkit-scrollbar-thumb {
     background-color: var(--dash-blue);
 }
+
 /* ---------------------------------------------------- */
 
 /* Remove number arrows on inputs */
@@ -61,6 +64,7 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+
 input[type="number"] {
     -moz-appearance: textfield;
 }
@@ -78,9 +82,11 @@ body {
     background-size: cover;
     /* CREDITS - background by SVGBackgrounds.com */
 }
+
 .blue-gradient {
     background-image: var(--blue-gradient-1);
 }
+
 .btn-1 {
     padding: 10px 15px;
     font-family: "montserrat", sans-serif;
@@ -92,28 +98,34 @@ body {
     font-weight: 500;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
+
 .btn-1 i {
     font-size: 17px;
 }
+
 .btn-1:hover {
     color: rgb(255, 255, 255, 1);
     transition: all 1s ease;
     background-color: #15a5ff;
     animation: pulse 2s ease infinite;
 }
+
 .btn-2 {
     font-weight: 600;
     font-size: 13px;
     margin: 8px 0 0 0;
 }
+
 .btn-2:hover {
     color: #007bff;
     background-color: #fcfafa;
 }
+
 .btn-2:active {
     background-color: #e4e4e4 !important;
     color: var(--deep-blue-1) !important;
 }
+
 .title-1 {
     text-align: center;
     font-family: var(--montserrat);
@@ -121,6 +133,7 @@ body {
     font-size: 17px;
     font-weight: 600;
 }
+
 .accordion-card-header {
     padding: 4px 0px 10px 10px;
     height: 45px;
@@ -129,6 +142,7 @@ body {
     border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
     border-radius: 3px !important;
 }
+
 .accordion-header-btn {
     font-weight: 500;
     color: white;
@@ -137,15 +151,18 @@ body {
     font-family: "montserrat", sans-serif;
     font-size: 15px;
 }
+
 .accordion-header-btn:hover {
     opacity: 1;
     color: white;
     font-weight: 500;
 }
+
 .accordion-header-btn:focus {
     outline: none !important;
     box-shadow: none !important;
 }
+
 .visitor-username {
     text-decoration: none !important;
     text-transform: capitalize;
@@ -153,10 +170,12 @@ body {
     font-weight: bold;
     color: var(--dash-blue);
 }
+
 .dropdown-menu {
     font-family: "montserrat", sans-serif;
     font-size: 14px;
 }
+
 /*-----------------
 MEDIA
 -------------------*/
@@ -164,10 +183,12 @@ MEDIA
     .welcome-text p {
         padding-right: 50px !important;
     }
+
     /* Stamps below profile picture */
-    #tips-record{
-        display:none!important;
+    #tips-record {
+        display: none !important;
     }
+
     /* About wrapper */
     .about-wrapper {
         background-image: none !important;
@@ -179,9 +200,11 @@ MEDIA
         padding-left: 30px !important;
         padding-right: 10px !important;
     }
+
     .user-page .right-col {
         padding-left: 10px !important;
     }
+
     .user-page .profile-box {
         margin-right: 10px;
     }
@@ -200,10 +223,12 @@ MEDIA
     .user-page .col-md-3 {
         display: none;
     }
+
     .user-page {
         padding-left: 40px !important;
         padding-right: 40px !important;
     }
+
     .user-page .right-col #mobile-avatar {
         display: block !important;
     }
@@ -216,6 +241,7 @@ MEDIA
     .dashboard #tips-stats .col-sm-4 {
         border-left: 0px solid transparent !important;
     }
+
     .dashboard #page-link {
         padding: 25px 25px 25px 55px !important;
     }
@@ -226,6 +252,7 @@ MEDIA
         padding-left: 20px !important;
         padding-right: 20px !important;
     }
+
     #recent .stamp {
         display: none !important;
     }
@@ -241,6 +268,7 @@ MEDIA
     #recent #fa-tip-icon {
         display: none !important;
     }
+
     #recent {
         padding: 8px !important;
     }
@@ -249,12 +277,15 @@ MEDIA
         padding-left: 10px !important;
         padding-right: 5px !important;
     }
+
     .user-page #lock-style {
         right: 110px !important;
     }
+
     .user-page #auth-tip-date {
         display: none !important;
     }
+
     #input-btn {
         display: none !important;
     }
@@ -263,23 +294,29 @@ MEDIA
     #separator-one {
         display: none;
     }
+
     #separator-two {
         display: block;
     }
+
     .tip-btn {
         font-size: 18px !important;
         padding: 5px 10px !important;
         width: 50px !important;
     }
+
     .navbar .navbar-brand {
         margin-left: 5px !important;
     }
+
     .navbar .brand-text {
         display: none;
     }
+
     .navbar #auth-links {
         margin-right: 15px !important;
     }
+
     .navbar #logged-in {
         margin-right: 20px !important;
     }
@@ -288,12 +325,15 @@ MEDIA
     #community-btn {
         display: none;
     }
+
     #start-btn {
         margin-left: 0px !important;
     }
+
     .welcome-image {
         margin-top: 20px;
     }
+
     .welcome-text h1 {
         font-size: 45px !important;
     }
@@ -301,6 +341,7 @@ MEDIA
     .dashboard #date-span {
         display: none;
     }
+
     .dashboard #page-link {
         padding: 25px 25px 25px 25px !important;
     }
@@ -315,19 +356,24 @@ MEDIA
 }
 
 @media screen and (max-width: 390px) {
+
     /* welcome page */
     .welcome-text h1 {
         font-size: 40px !important;
     }
+
     .catchy-title h1 {
         font-size: 32px !important;
     }
+
     .catchy-2-title h1 {
         font-size: 32px !important;
     }
+
     .features-title h1 {
         font-size: 35px !important;
     }
+
     .get-started-title h1 {
         font-size: 32px !important;
     }
@@ -341,6 +387,7 @@ MEDIA
         margin-right: 8px !important;
         margin-left: 8px !important;
     }
+
     .user-page .form-wrapper input[type="number"] {
         font-size: 20px !important;
     }
@@ -349,9 +396,11 @@ MEDIA
     #mug {
         display: none;
     }
+
     #copyright-one {
         display: none;
     }
+
     #separator-one {
         display: none;
     }
@@ -364,6 +413,7 @@ MEDIA
         width: 250px !important;
     }
 }
+
 /*------------------
 ANIMATIONS
 -------------------*/
@@ -372,46 +422,55 @@ ANIMATIONS
         transform: scale(0.98);
         box-shadow: 0 0 0 0 rgba(105, 207, 255, 1);
     }
+
     70% {
         transform: scale(1);
         box-shadow: 0 0 0 12px rgba(105, 207, 255, 0);
     }
+
     100% {
         transform: scale(0.98);
         box-shadow: 0 0 0 0 rgba(105, 207, 255, 0);
     }
 }
+
 /*------------------
 NAVBAR
 -------------------*/
 .navbar {
     height: 50px;
 }
+
 .navbar .btn {
     font-family: "montserrat" sans-serif;
     font-size: 14px;
     font-weight: 500;
 }
+
 .navbar .user-avatar {
     width: 35px;
     height: 35px;
     border-radius: 50%;
 }
+
 .navbar-brand {
     margin-top: 0px;
 }
+
 .brand-text-one {
     font-family: "Montserrat", sans-serif;
     color: rgb(255, 255, 255);
     font-size: 18px;
     font-weight: 500;
 }
+
 .brand-text-two {
     font-family: "Montserrat", sans-serif;
     color: rgb(0, 0, 0);
     font-size: 18px;
     font-weight: 500;
 }
+
 /*-----------------------------
 WELCOME PAGE: HEADER SECTION
 ------------------------------*/
@@ -422,10 +481,12 @@ WELCOME PAGE: HEADER SECTION
     z-index: 1;
     border-radius: 0 0 150px 0;
 }
+
 .welcome-image img {
     max-width: 350px;
     width: 100%;
 }
+
 .welcome-text h1 {
     font-family: "montserrat", sans-serif;
     color: var(--dash-blue);
@@ -433,9 +494,11 @@ WELCOME PAGE: HEADER SECTION
     font-size: 52px;
     margin-bottom: 20px;
 }
+
 .welcome-text h1 span {
     color: #003091;
 }
+
 .welcome-text p {
     font-family: "Roboto", sans-serif;
     font-size: 18px;
@@ -444,9 +507,11 @@ WELCOME PAGE: HEADER SECTION
     color: var(--text-color-1);
     padding-right: 150px;
 }
+
 .header .buttons-wrapper {
     margin-top: 40px;
 }
+
 .play-btn {
     background-color: #003091;
     border: none;
@@ -461,13 +526,16 @@ WELCOME PAGE: HEADER SECTION
     animation: pulse 2s ease infinite;
     margin-left: 17px;
 }
+
 .play-btn i {
     line-height: 32px;
 }
+
 .play-btn:hover {
     transition: all 1s ease;
     color: rgb(255, 255, 255, 1);
 }
+
 /*------------------
 WELCOME PAGE: CATCHY SECTION
 -------------------*/
@@ -475,16 +543,20 @@ WELCOME PAGE: CATCHY SECTION
     padding-top: 110px;
     padding-bottom: 110px;
 }
+
 .catchy a {
     color: var(--banana-yellow);
 }
+
 .catchy a:hover {
     text-decoration: none;
     color: var(--bright-yellow-1);
 }
+
 .catchy-title {
     margin-bottom: 40px;
 }
+
 .catchy-title h1 {
     font-family: "montserrat", sans-serif;
     color: #ffffff;
@@ -494,10 +566,12 @@ WELCOME PAGE: CATCHY SECTION
     text-align: center;
     font-style: italic;
 }
+
 .catchy-title h1 span {
     font-weight: 500;
     font-style: italic;
 }
+
 .catchy-text p {
     font-family: "Roboto", sans-serif;
     font-size: 17px;
@@ -507,6 +581,7 @@ WELCOME PAGE: CATCHY SECTION
     text-align: center;
     margin: 0;
 }
+
 /*------------------------------
 WELCOME PAGE: FEATURES SECTION
 -------------------------------*/
@@ -515,6 +590,7 @@ WELCOME PAGE: FEATURES SECTION
     padding-top: 100px;
     padding-bottom: 120px;
 }
+
 .features-title h1 {
     font-family: "montserrat", sans-serif;
     color: var(--dash-blue);
@@ -524,9 +600,11 @@ WELCOME PAGE: FEATURES SECTION
     text-align: center;
     font-style: italic;
 }
+
 .features-title h1 span {
     color: #003091;
 }
+
 .features .card {
     border: none;
     border-radius: var(--border-radius-7);
@@ -534,11 +612,13 @@ WELCOME PAGE: FEATURES SECTION
     text-align: center;
     color: var(--text-color-1);
 }
+
 .features h5 {
     font: 22px "helvetica", sans-serif;
     font-weight: 600;
     color: #003091;
 }
+
 /*--------------------------------
 WELCOME PAGE: GET STARTED SECTION
 ----------------------------------*/
@@ -549,6 +629,7 @@ WELCOME PAGE: GET STARTED SECTION
     position: relative;
     z-index: 1;
 }
+
 .get-started-title h1 {
     font-family: "montserrat", sans-serif;
     color: #fff;
@@ -558,21 +639,26 @@ WELCOME PAGE: GET STARTED SECTION
     text-align: center;
     font-style: italic;
 }
+
 .get-started-title h1 span {
     color: #fff;
     font-weight: 700;
 }
+
 .get-started a {
     color: var(--banana-yellow);
 }
+
 .get-started a:hover {
     text-decoration: none;
     color: var(--bright-yellow-1);
 }
+
 .how-it-works-item {
     padding: 30px;
     text-align: center;
 }
+
 .how-it-works-item .line-right::before {
     content: "";
     position: absolute;
@@ -583,6 +669,7 @@ WELCOME PAGE: GET STARTED SECTION
     background-color: var(--dash-blue);
     z-index: -1;
 }
+
 .how-it-works-item .step {
     display: inline-block;
     height: 60px;
@@ -596,12 +683,14 @@ WELCOME PAGE: GET STARTED SECTION
     color: white;
     margin: 0 0 15px;
 }
+
 .how-it-works-item h5 {
     margin: 20px 0;
     font-weight: 600;
     color: #fff;
     text-transform: capitalize;
 }
+
 .how-it-works-item p {
     font-size: 14px;
     font-weight: 300;
@@ -618,9 +707,11 @@ WELCOME PAGE: CATCHY SECTION 2
     padding-bottom: 110px;
     background-color: white;
 }
+
 .catchy-2-title {
     margin-bottom: 40px;
 }
+
 .catchy-2-title h1 {
     font-family: "montserrat", sans-serif;
     color: var(--dash-blue);
@@ -630,11 +721,13 @@ WELCOME PAGE: CATCHY SECTION 2
     text-align: center;
     font-style: italic;
 }
+
 .catchy-2-title h1 span {
     font-weight: 500;
     font-style: italic;
     color: #003091;
 }
+
 .catchy-2-text p {
     font-family: "Roboto", sans-serif;
     font-size: 18px;
@@ -644,13 +737,16 @@ WELCOME PAGE: CATCHY SECTION 2
     text-align: center;
     margin: 0;
 }
+
 .catchy-2-text a {
     font-weight: 500;
 }
+
 .catchy-2-text a:hover {
     text-decoration: unset;
     color: var(--dash-blue);
 }
+
 /*------------------
 stats sections
 -------------------*/
@@ -658,9 +754,11 @@ stats sections
     padding-top: 110px;
     padding-bottom: 110px;
 }
+
 .stats-title {
     margin-bottom: 40px;
 }
+
 .stats-title h1 {
     font-family: "montserrat", sans-serif;
     color: #ffffff;
@@ -670,64 +768,79 @@ stats sections
     text-align: center;
     font-style: italic;
 }
+
 #join-date {
     font-size: 14px;
 }
+
 #points-info {
     font-size: 14px;
 }
+
 #points-info #score {
     color: var(--deep-blue-1);
     font-weight: 600;
 }
+
 .stats #avatar {
     width: 25px !important;
     height: 25px !important;
     border-radius: 50%;
 }
+
 .stats .username {
     text-transform: capitalize;
     color: #008de4;
     font-weight: 600;
     font-size: 15px;
 }
+
 /*------------------
 FOOTER
 -------------------*/
 .footer {
     background-color: rgb(0, 0, 0, 0.2);
 }
+
 .powered img {
     opacity: 0.8;
     transition: 1s ease;
 }
+
 .powered img:hover {
     opacity: 1;
 }
+
 .footer-info {
     font-size: 13px;
     border-top: 1px solid rgb(255, 255, 255, 0.1);
 }
+
 .footer-info a {
     color: white;
     opacity: 0.5;
     text-decoration: none !important;
     transition: 2s ease;
 }
+
 .footer-info a:hover {
     opacity: 0.9;
 }
+
 .footer-info span {
     color: rgb(255, 255, 255, 0.5);
     font-size: 16px;
 }
+
 #copyright-one i {
     font-size: 14px;
 }
+
 #repository-link i {
     font-size: 20px;
     margin-top: -1px;
 }
+
 /*------------------
 LOGIN PAGE
 -------------------*/
@@ -736,27 +849,33 @@ LOGIN PAGE
     margin-top: 35%;
     padding: 0;
 }
+
 .login-form .user-img {
     margin-top: -60px;
     margin-bottom: 35px;
 }
+
 .login-form .user-img img {
     width: 120px;
     height: 120px;
     border-radius: 50%;
 }
+
 .login-form .modal-content {
     background-color: rgb(255, 255, 255, 0.8) !important;
     padding: 0 20px;
     border-radius: var(--border-radius-7);
 }
+
 .login-form .login-btn {
     margin-top: -40px !important;
     width: 100%;
 }
+
 .login-form .google-btn {
     width: 100%;
 }
+
 .login-form .form-group input {
     height: 42px;
     font-size: 15px;
@@ -764,12 +883,14 @@ LOGIN PAGE
     padding-right: 5px;
     border-radius: 5px;
 }
+
 .login-form .email-icon {
     position: absolute;
     left: 25px;
     top: 5px;
     display: flex;
 }
+
 .login-form .password-icon {
     width: 32px;
     height: 32px;
@@ -779,20 +900,25 @@ LOGIN PAGE
     display: flex;
     margin: 0;
 }
+
 .login-form .forgot-password {
     padding: 20px;
 }
+
 .login-form .forgot-password a {
     font-size: 16px;
     text-decoration: none;
     color: #0d97ec;
 }
+
 .login-form .forgot-password a:hover {
     color: #76cbff;
 }
+
 .login-form .invalid-feedback {
     color: #4dbbff;
 }
+
 /*------------------
 SIGN UP PAGE
 -------------------*/
@@ -801,35 +927,42 @@ SIGN UP PAGE
     margin-top: 35%;
     padding: 0;
 }
+
 .register-form .user-img {
     margin-top: -60px;
     margin-bottom: 35px;
 }
+
 .register-form .user-img img {
     width: 120px;
     height: 120px;
     border-radius: 50%;
 }
+
 .register-form .modal-content {
     background-color: rgb(255, 255, 255, 0.8) !important;
     padding: 0 20px;
     border-radius: var(--border-radius-7);
 }
+
 .register-form .register-btn {
     margin-top: 20px;
     width: 100%;
 }
+
 .register-form .google-btn {
     width: 100%;
     margin-top: 13px;
     margin-bottom: 40px;
 }
+
 .register-form .form-group input {
     height: 42px;
     font-size: 15px;
     padding-left: 14px;
     border-radius: 5px;
 }
+
 .register-form .invalid-feedback {
     color: #4dbbff;
 }
@@ -841,36 +974,44 @@ edit profile
     max-width: 800px;
     padding-top: 57px;
 }
+
 .settings-section .wrapper {
     border-radius: 7px;
     padding: 4px;
     background-color: rgb(255, 255, 255, 0.8);
 }
+
 .settings-section .card {
     border: none !important;
     background-color: transparent !important;
 }
+
 .settings-section label {
     color: #003091;
     font-weight: 400px;
     font-size: 15px;
 }
+
 .settings-section input {
     font-weight: 400px;
     font-size: 15px;
 }
+
 .settings-section span {
     color: #003091;
     font-weight: 400px;
     font-size: 15px;
 }
+
 .change-avatar-box {
     width: 100%;
     text-align: center;
 }
+
 .change-avatar-box input[type="file"] {
     display: none;
 }
+
 .avatar-figure {
     position: relative;
     max-width: 130px;
@@ -878,6 +1019,7 @@ edit profile
     border-radius: 100%;
     border: 7px solid var(--light-gray-2);
 }
+
 .current-avatar {
     cursor: pointer;
     width: 116px;
@@ -887,6 +1029,7 @@ edit profile
     background-size: cover;
     transition: all ease-in-out 0.3s;
 }
+
 .preview-new-avatar {
     display: none;
     width: 116px;
@@ -895,6 +1038,7 @@ edit profile
     background-position: center center;
     background-size: cover;
 }
+
 .personal-figcaption {
     cursor: pointer;
     position: absolute;
@@ -906,40 +1050,49 @@ edit profile
     background-color: rgba(0, 0, 0, 0.5);
     transition: all ease-in-out 0.3s;
 }
+
 .personal-figcaption:hover {
     opacity: 1;
     background-color: rgba(0, 0, 0, 0.5);
 }
-.personal-figcaption > img {
+
+.personal-figcaption>img {
     margin-top: 35px;
     width: 50px;
     height: 50px;
 }
+
 .settings-section .save-changes-btn {
     font-weight: 600;
     font-size: 13px;
     margin: 8px 0 0 0;
     font-family: "montserrat", sans-serif !important;
 }
+
 .settings-section .save-changes-btn:hover {
     color: #007bff;
     background-color: #fcfafa;
 }
+
 .settings-section .save-changes-btn:active {
     background-color: #fcfafa !important;
     color: var(--light-deep-blue) !important;
 }
+
 .settings-section .save-changes-btn i {
     font-size: 16px;
 }
+
 .settings-section textarea {
     font-size: 15px;
 }
+
 #other-settings-btns {
     font-family: "montserrat", sans-serif;
     font-size: 13px;
     font-weight: 500;
 }
+
 /*------------------
 dashboard-section
 -------------------*/
@@ -952,18 +1105,21 @@ dashboard-section
     padding-right: 40px;
     padding-left: 40px;
 }
+
 .dashboard #first-box {
     background-color: rgb(255, 255, 255, 0.5);
     border: 1px solid #c2ccfa;
     border-radius: 5px;
     min-height: 198px;
 }
+
 /* avatar */
 .dashboard #first-box img {
     width: 150px;
     height: 150px;
     border-radius: 5px;
 }
+
 .dashboard #welcome {
     font-family: "montserrat", sans-serif;
     color: #008de4;
@@ -971,58 +1127,70 @@ dashboard-section
     font-size: 25px;
     margin-bottom: 20px;
 }
+
 .dashboard #welcome #username {
     text-transform: capitalize;
     color: #174093;
 }
+
 .dashboard #page-link {
     width: 100%;
     height: 150px;
     padding: 25px 25px 25px 25px;
     border-radius: 5px;
 }
+
 .dashboard #tips-stats {
     border: 1px solid #c2ccfa;
     border-radius: 5px;
     background-color: rgb(255, 255, 255, 0.5);
 }
+
 .dashboard #tips-stats #style-one {
     text-align: center;
     width: 100%;
     font-size: 30px;
 }
+
 .dashboard #tips-stats #style-two {
     text-align: center;
     width: 100%;
     font-size: 15px;
 }
+
 .dashboard #tips-stats #style-three {
     text-align: center;
     width: 100%;
     font-size: 11px;
 }
+
 .dashboard #address-box {
     border: 1px solid #c2ccfa;
     border-radius: 5px;
     background-image: linear-gradient(to right, #037ac4, #0a51a7);
 }
+
 .dashboard input {
     outline: none !important;
     box-shadow: none !important;
 }
+
 .dashboard #dropdown-btn {
     outline: none !important;
     box-shadow: none !important;
 }
+
 .dashboard #date-span {
     color: rgb(0, 0, 0, 0.8);
     float: right;
 }
+
 .dashboard .no-activity-box {
     background-color: rgb(255, 255, 255, 0.5);
     border: 1px solid #c2ccfa;
     border-radius: 5px;
 }
+
 /* --------------------
 PROCESS TIP MODAL
 --------------------- */
@@ -1031,26 +1199,33 @@ PROCESS TIP MODAL
     background-color: transparent;
     border: none;
 }
+
 #modal_QR .modal-body {
     color: rgb(251, 251, 251, 0.9);
 }
+
 #modal_QR {
     font-family: var(--montserrat);
 }
+
 #modal_QR #title {
     max-width: 450px;
     font-size: 20px;
     font-weight: 500;
 }
+
 #modal_QR span {
     vertical-align: middle;
 }
+
 #modal_QR b {
     text-transform: capitalize;
 }
+
 #modal_QR img {
     vertical-align: middle;
 }
+
 #modal_QR #qr_box {
     cursor: pointer;
     padding: 50px;
@@ -1059,12 +1234,15 @@ PROCESS TIP MODAL
     display: inline-block;
     background-color: white;
 }
+
 #modal_QR .note {
     font-size: 16px;
     text-align: justify;
 }
+
 .toggle-red {
-    color: var(--banana-yellow); /* clock toggle */
+    color: var(--banana-yellow);
+    /* clock toggle */
 }
 
 /* --------------------------
@@ -1081,12 +1259,14 @@ USER PAGE BODY LAYOUT
     padding-right: 50px;
     padding-left: 50px;
 }
+
 .header-img {
     background-position: fixed;
     background-size: cover;
     background-position: center;
     height: 200px;
 }
+
 .cover-icons {
     z-index: 3;
     position: absolute;
@@ -1096,6 +1276,7 @@ USER PAGE BODY LAYOUT
     opacity: 0.8;
     transition: 100ms;
 }
+
 .user-page .username {
     margin-bottom: 0;
     font-size: 35px;
@@ -1103,6 +1284,7 @@ USER PAGE BODY LAYOUT
     line-height: 23px;
     font-weight: 400;
 }
+
 .user-page .location {
     padding-left: 2px;
     word-spacing: 1.5px;
@@ -1111,6 +1293,7 @@ USER PAGE BODY LAYOUT
     font-family: var(--roboto);
     font-weight: 100;
 }
+
 .user-page .profile-box {
     min-width: 190px;
     margin-top: -100px;
@@ -1119,6 +1302,7 @@ USER PAGE BODY LAYOUT
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
         rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
 }
+
 .user-page .profile-box .avatar {
     width: 100%;
     height: 295px;
@@ -1126,18 +1310,22 @@ USER PAGE BODY LAYOUT
     background-size: cover;
     border-radius: 4px 4px 0 0;
 }
+
 .user-page .small-stamp {
     opacity: 0.7;
 }
+
 .user-page .small-stamp:hover {
     opacity: 1;
 }
+
 .user-page .views-pill {
     width: 50%;
     border-radius: 3px;
     border: 1px solid rgb(64, 193, 233);
     background-color: rgb(0, 141, 228, 0.1);
 }
+
 .user-page .score-pill {
     width: 50%;
     text-align: center;
@@ -1145,30 +1333,36 @@ USER PAGE BODY LAYOUT
     background-color: rgb(240, 201, 41, 0.4);
     border: 1px solid rgb(249, 178, 8, 0.8);
 }
+
 .user-page .profile-box h5 {
     font-family: var(--montserrat);
     font-weight: 600;
     font-size: 16px;
     color: black;
 }
+
 .user-page .profile-box p {
     font-size: 14px;
     font-weight: 400;
     font-family: var(--roboto);
     color: rgb(156, 156, 156) !important;
 }
+
 .user-page .profile-box b {
     font-size: 14px;
     color: var(--dash-blue);
 }
+
 .user-page .profile-box a {
     text-decoration: none;
     color: rgb(156, 156, 156) !important;
 }
+
 .user-page .right-col {
     margin-top: -63px;
     padding-left: 30px;
 }
+
 .user-page .right-col #mobile-avatar {
     border: 3px solid rgb(255, 255, 255, 0.4);
     display: none;
@@ -1176,6 +1370,7 @@ USER PAGE BODY LAYOUT
     border-radius: 4px;
     width: 70px;
 }
+
 .user-page .form-wrapper {
     padding: 15px 25px 0px 25px;
     margin: 45px 0 35px 0;
@@ -1186,10 +1381,12 @@ USER PAGE BODY LAYOUT
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
+
 .user-page .form-wrapper .box1 {
     padding: 10px 10px 10px 0px;
     line-height: 30px;
 }
+
 .user-page .form-wrapper .box2 {
     width: 100%;
     max-width: 350px;
@@ -1198,11 +1395,13 @@ USER PAGE BODY LAYOUT
     padding-right: 10px;
     height: 100%;
 }
+
 .user-page .form-wrapper .box3 {
     width: 100px;
     height: 120px;
     padding: 10px 0 10px 0;
 }
+
 .user-page .form-wrapper input[type="text"] {
     font-family: "Roboto", sans-serif;
     font-size: 14px;
@@ -1216,6 +1415,7 @@ USER PAGE BODY LAYOUT
     background-color: rgb(0, 141, 228, 0.1);
     color: grey;
 }
+
 .user-page .form-wrapper input[type="text"]:focus {
     outline: none !important;
     box-shadow: none !important;
@@ -1243,6 +1443,7 @@ USER PAGE BODY LAYOUT
     box-shadow: none !important;
     background-color: rgb(0, 141, 228, 0.2);
 }
+
 .tip-btn {
     background-color: rgb(1, 32, 96);
     font-size: 20px;
@@ -1257,6 +1458,7 @@ USER PAGE BODY LAYOUT
     background-image: linear-gradient(180deg, #404c91, #333d78);
     outline: none;
 }
+
 .tip-btn:active {
     background-image: linear-gradient(0deg, #404c91, #333d78);
 }
@@ -1270,34 +1472,41 @@ USER PAGE BODY LAYOUT
     background-color: var(--box-bg-1);
     border: var(--box-border-1);
 }
+
 .tips-wrapper #profile {
     text-align: center;
     width: 50px;
     height: 50px;
 }
+
 .tips-wrapper #profile #incognito {
     font-size: 40px;
     color: #646464;
 }
+
 .tips-wrapper #profile #with-name {
     font-size: 40px;
     color: #008de4;
 }
+
 .tips-wrapper .name {
     color: #646464;
     font-family: "Roboto", sans-serif;
 }
+
 .tip-title {
     font-family: var(--montserrat);
     font-weight: 700;
     font-size: 15px;
     height: 30px;
 }
+
 .tip-title span {
     color: var(--dash-blue);
     font-family: var(--montserrat);
     font-size: 15px;
 }
+
 .tip-body {
     margin-left: 20px;
     margin-right: 10px;
@@ -1311,6 +1520,7 @@ USER PAGE BODY LAYOUT
     font-size: 14px;
     width: 100%;
 }
+
 .tips-wrapper .tip-without-msg {
     color: #ffffff;
     padding: 12px 20px 12px 20px;
@@ -1320,12 +1530,14 @@ USER PAGE BODY LAYOUT
     border-radius: 10px;
     word-spacing: 2px;
 }
+
 .tip-username {
     font-family: "Roboto", sans-serif;
     font-size: 14px;
     text-transform: capitalize;
     font-weight: 500;
 }
+
 .tip-box {
     min-height: 110px;
     border-radius: 3px;
@@ -1333,6 +1545,7 @@ USER PAGE BODY LAYOUT
     border: 1px solid rgba(218, 218, 218, 0.8);
     background-color: rgba(255, 255, 255, 0.4);
 }
+
 .tip-msg {
     color: grey;
     font-weight: 400;
@@ -1343,21 +1556,26 @@ USER PAGE BODY LAYOUT
     margin-left: 5px;
     margin-right: 10px;
 }
+
 .user-page .praise-icons {
     color: #c5ab84;
     margin-left: 30px;
 }
+
 .user-page .show-msg {
     cursor: pointer;
     color: var(--light-deep-blue);
 }
+
 .user-page .stamp {
     opacity: 0.7;
     transition: 300ms ease-in-out;
 }
+
 .stamp:hover {
     opacity: 1;
 }
+
 /*-------------------
 RECENT 
 ---------------------*/
@@ -1365,9 +1583,11 @@ RECENT
     opacity: 0.7;
     transition: 300ms ease-in-out;
 }
+
 #recent .stamp:hover {
     opacity: 1;
 }
+
 #recent .show-msg {
     cursor: pointer;
     color: var(--light-deep-blue);

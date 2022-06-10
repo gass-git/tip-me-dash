@@ -172,7 +172,7 @@
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item" href="#" onclick="copy_address()">Copy</a>
                                     <a class="dropdown-item" target="_blank" href="https://www.walletvalidator.com/dash-wallet-validator/{{ Auth::user()->wallet_address }}">Check address</a>
-                                    <a class="dropdown-item" target="_blank" href="https://explorer.mydashwallet.org/address/{{ Auth::user()->wallet_address }}">Address details</a>
+                                    <a class="dropdown-item" target="_blank" href="https://explorer.dash.org/insight/address/{{ Auth::user()->wallet_address }}">Address details</a>
                                 </div>
                             </div>
                         </div>   

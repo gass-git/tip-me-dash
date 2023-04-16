@@ -9,11 +9,13 @@
 
     @guest
     <!-- authentication Links -->
+    <!--
     <form id="auth-links" class="form-inline mr-5 p-0">
         <a class="btn btn-outline-light ml-0 my-2 my-sm-0 mr-2" href="{{ route('login') }}">Login</a>
         <a class="btn btn-primary" href="{{ route('register') }}">Sign up</a>
     </form> 
-    
+    -->
+
     @else
     <!-- navbar dropdown right section -->
     <ul id="logged-in" class="form-inline p-0 my-2 my-lg-0 mr-5">

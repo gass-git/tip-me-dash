@@ -9,16 +9,36 @@
             <div class="row align-items-center">
                 <div class="col-md-8 mt-4 pt-3 pb-4 pr-0">
                     <div class="welcome-text">
-                        <h1 class="pr-5"><span>An easy way</span> to give thanks online</h1>
+                        
+                        <h1 class="pr-5 ml-1"><span>An easy way</span> to give thanks online</h1>
+
+                        <div class="alert alert-info mr-5 mt-3" role="alert">
+                            <h4 class="alert-heading">Hi there 👋 the site is currently inactive</h4>
+                            <p>We're awaiting approval or refusal from the <a href="https://dash.org" target="_blank">Dash</a> community regarding our proposal. 
+                                If the proposal is approved, the site will be activated with all its features.   
+                        </p>
+                            <hr>
+                            <p class="mb-0">If you want to know more about it click 👉  <a href="https://www.dash.org/forum/index.php?threads/pre-proposal-tipmedash-com-a-fast-fun-way-to-tip-online.53610/" target="_blank">here</a></p>
+                        </div>
+                        <!--
                         <p>Receive tips instantly from followers directly to your pocket, without third parties involved.
                         Give fans a new way to show appreciation for your work.
                         </p>
+                        -->
+                        
+
+                        
                         <div class="buttons-wrapper mr-0 ml-0 mb-4">
+                            <!--
                             <a id="community-btn" href="{{ url('recent') }}" class="btn btn-1 bg-primary"><i class="far fa-comments mr-2"></i>Latest donations</a>
                             <a id="start-btn" href="{{ route('register') }}" class="btn btn-1 bg-primary ml-3"><i class="fas fa-rocket mr-2"></i>Start my page</a>
+                            -->
+                            <a id="community-btn" href="#myModal" data-toggle="modal" type="button" class="btn btn-1 bg-primary"><i class="fas fa-play mr-2"></i> Get Inspired </a> 
+                            <!--
                             <button href="#myModal" data-toggle="modal" type="button" class="btn play-btn">
-                                <i class="fas fa-play"></i> 
+                               get inspired 
                             </button>
+                            -->
                         </div>
                     </div>
                 </div>
@@ -120,7 +140,11 @@
                     <div class="how-it-works-item">
                         <div class="step">1</div>
                         <h5>Sign up</h5>
+                        <!--
                         <p><a href="{{ route('register') }}">Registering</a> won't take you more than a minute. You can 
+                    use your Google acc. </p>
+                        -->
+                        <p>Registering won't take you more than a minute. You can 
                     use your Google acc. </p>
                     </div>
                 </div>
@@ -177,7 +201,9 @@
     </section>
     <!-- sub header 2 -->
     
+    <!--
     @include('layouts/components/stats')
+    -->
     @include('layouts/components/footer_one')
 
     <!-- Modal HTML -->

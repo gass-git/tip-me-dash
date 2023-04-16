@@ -17,8 +17,15 @@
                      <div class="d-flex justify-content-center flex-wrap mt-2" style="color:">
 
                          <!-- design and built -->
+                         <!--
                          <div id="copyright-one" class="mr-1  p-1">
                              <a href="https://tipmedash.com/gass" target="_blank">
+                                 <i class="fas fa-coffee mr-2"></i>Designed & built in Budapest by Gass
+                             </a>    
+                         </div>
+                        -->
+                        <div id="copyright-one" class="mr-1  p-1">
+                             <a href="https://gass.dev" target="_blank">
                                  <i class="fas fa-coffee mr-2"></i>Designed & built in Budapest by Gass
                              </a>    
                          </div>

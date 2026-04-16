@@ -8,7 +8,7 @@ Most of the current online donation’s systems are tedious, they require credit
 
 tipmedash.com uses DASH cryptocurrency for simplicity, ease of use, low fees and speed.
 
-[showcase 1](showcase/1.png)
+![showcase 1](showcase/1.png)
 
 ### Why use tipmedash.com over other options? (advantages)
 
@@ -45,8 +45,8 @@ tipmedash.com uses DASH cryptocurrency for simplicity, ease of use, low fees and
 
 ### Showcase
 
-[showcase 2](showcase/2.png)
-[showcase 3](showcase/3.png)
-[showcase 4](showcase/4.png)
-[showcase 5](showcase/5.png)
-[showcase 6](showcase/6.png)
+![showcase 2](showcase/2.png)
+![showcase 3](showcase/3.png)
+![showcase 4](showcase/4.png)
+![showcase 5](showcase/5.png)
+![showcase 6](showcase/6.png)
